@@ -1,6 +1,6 @@
 {
   "name": "@bitquery/ide-graph",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Graph-type widgets library for ide",
   "main": "dist/graphs.min.js",
   "module": "dist/graphs.min.js",
