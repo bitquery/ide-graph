@@ -100,7 +100,6 @@ export function query(query) {
 
 export function address_graph(selector, dataSource, displayedData, options) {
   const g = {}
-  selector = '#' + selector
   g.container = document.querySelector(selector)
   const jqContainer = $(g.container)
 
@@ -692,7 +691,6 @@ export function address_graph(selector, dataSource, displayedData, options) {
 
 export function address_sankey(selector, dataSource, displayedData, options) {
   const g = {}
-  selector = '#' + selector
   g.container = document.querySelector(selector)
   const jqContainer = $(g.container)
 
@@ -1518,7 +1516,6 @@ export function address_sankey(selector, dataSource, displayedData, options) {
 }
 
 export function addControls(selector, query, options) {
-  selector = '#' + selector
   const controls = {}
   const jqContainer = $(selector)
   const jqWrapper = jqContainer.parent('.wrapper')

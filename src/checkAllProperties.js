@@ -26,6 +26,6 @@ export default function checkAllProperties(props, model) {
     }
     return true
 	}
-	console.log(availableProps)
+
   return isSuperset(availableProps, new Set(props))
 }
