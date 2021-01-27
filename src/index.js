@@ -16,7 +16,7 @@ class SankeyPlugin {
 			let isLack = false
       let coinpaths = []
 
-      if (!key.includes('.')) {
+      if (!key.includes('.') && model[key].selectionSet) {
         coinpaths.push(...model[key].selectionSet.selections)
       } else if (
         model[key].typeInfo.toString()[0] === '[' &&
@@ -72,7 +72,7 @@ class GraphPlugin {
 			let isLack = false
       let coinpaths = []
 
-      if (!key.includes('.')) {
+      if (!key.includes('.') && model[key].selectionSet) {
         coinpaths.push(...model[key].selectionSet.selections)
       } else if (
         model[key].typeInfo.toString()[0] === '[' &&
