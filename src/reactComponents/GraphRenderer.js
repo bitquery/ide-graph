@@ -16,10 +16,10 @@ function GraphRenderer({ el, config, dataSource, displayedData, children }) {
   }, [JSON.stringify(config), JSON.stringify(dataSource)])
   if (!dataSource) return <div></div>
   return (
-    <>
+    <div className="widget-display" >
       {children}
       <div style={{ width: '100%', overflowY: 'hidden' }} id={el} key={el} />
-    </>
+    </div>
   )
 }
 
