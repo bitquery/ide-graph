@@ -15,7 +15,7 @@ import { addModalJS } from './addModalJS'
 import { addModalGraphQL } from './addModalGraphQL'
 
 import * as d3 from 'd3'
-import * as d3Sankey from '../../d3-sankey-circular/dist/d3-sankey-circular'
+import * as d3Sankey from '@bitquery/d3-sankey-circular'
 import * as d3PathArrows from 'd3-path-arrows'
 import uid from './util/uid'
 
