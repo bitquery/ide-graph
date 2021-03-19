@@ -11,11 +11,13 @@ module.exports = {
   mode: 'production',
 
   entry: {
-    main: './src/index.js',
+    index: './src/index.js',
+    graphRenderer: './src/reactComponents/graphRenderer.js',
+    sankeyRenderer: './src/reactComponents/sankeyRenderer.js',
   },
 
   output: {
-    filename: 'graphs.min.js',
+    filename: '[name].js',
     // path: path.resolve(__dirname, '../widgets/dist'),
     // path: path.resolve(__dirname, '../explorer/app/javascript/packs'),
     path: path.resolve(__dirname, 'dist'),
@@ -110,8 +112,8 @@ module.exports = {
   },
 
   optimization: {
-    // minimize: false,
-    minimize: true,
+    minimize: false,
+    // minimize: true,
     minimizer: [
       new TerserPlugin({
         parallel: true,

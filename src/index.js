@@ -1,7 +1,7 @@
 import SankeyEditor from './reactComponents/SankeyEditor'
-import SankeyRenderer from './reactComponents/SankeyRenderer'
+import sankeyRenderer from './reactComponents/sankeyRenderer'
 import GraphEditor from './reactComponents/GraphEditor'
-import GraphRenderer from './reactComponents/GraphRenderer'
+import graphRenderer from './reactComponents/graphRenderer'
 import checkAllProperties from './checkAllProperties'
 
 class SankeyPlugin {
@@ -9,7 +9,8 @@ class SankeyPlugin {
     this.id = 'sankey'
     this.name = 'Sankey'
     this.editor = SankeyEditor
-    this.renderer = SankeyRenderer
+    this.renderer = sankeyRenderer
+    this.dependencies = ['https://cdn.jsdelivr.net/npm/@bitquery/ide-graph@2.0.0/dist/sankeyRenderer.js']
   }
   supportsModel(model) {
     for (let key in model) {
@@ -31,19 +32,9 @@ class SankeyPlugin {
         'sender',
         'sender.address',
         'sender.annotation',
-        // 'sender.smartContract',
-        // 'sender.smartContract.contractType',
-        // 'sender.smartContract.currency',
-        // 'sender.smartContract.currency.symbol',
-        // 'sender.smartContract.currency.name',
         'receiver',
         'receiver.address',
         'receiver.annotation',
-        // 'receiver.smartContract',
-        // 'receiver.smartContract.contractType',
-        // 'receiver.smartContract.currency',
-        // 'receiver.smartContract.currency.symbol',
-        // 'receiver.smartContract.currency.name',
         'amount',
         'currency',
         'currency.symbol',
@@ -65,7 +56,8 @@ class GraphPlugin {
     this.id = 'graph'
     this.name = 'Graph'
     this.editor = GraphEditor
-    this.renderer = GraphRenderer
+    this.renderer = graphRenderer
+    this.dependencies = ['https://cdn.jsdelivr.net/npm/@bitquery/ide-graph@2.0.0/dist/graphRenderer.js']
   }
   supportsModel(model) {
     for (let key in model) {
@@ -86,19 +78,9 @@ class GraphPlugin {
         'sender',
         'sender.address',
         'sender.annotation',
-        // 'sender.smartContract',
-        // 'sender.smartContract.contractType',
-        // 'sender.smartContract.currency',
-        // 'sender.smartContract.currency.symbol',
-        // 'sender.smartContract.currency.name',
         'receiver',
         'receiver.address',
         'receiver.annotation',
-        // 'receiver.smartContract',
-        // 'receiver.smartContract.contractType',
-        // 'receiver.smartContract.currency',
-        // 'receiver.smartContract.currency.symbol',
-        // 'receiver.smartContract.currency.name',
         'amount',
         'currency',
         'currency.symbol',
