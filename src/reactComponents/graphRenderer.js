@@ -2,17 +2,26 @@ import _ from 'lodash'
 import _n from 'numeral'
 import { Network, DataSet } from '../../node_modules/vis'
 import { lightenOrDarkenColor } from '../util/lightenOrDarkenColor'
+import regeneratorRuntime from "regenerator-runtime"
 
-export default function graphRenderer(dataSource, options, selector) {
+export default async function graphRenderer(dataSource, options, selector) {
 	const g = {}
 	g.container = document.querySelector(`#${selector}`)
 	const jqContainer = $(g.container)
   
-	  const values = Array.isArray(dataSource.values)
+	let value = undefined
+	if (!dataSource.values) {
+		const data = await dataSource.fetcher()
+		const json = await data.json()
+		value = dataSource.setupData(json)
+	} else {
+		value = dataSource.values
+	}
+	  const values = Array.isArray(value)
 	  ? {
-		  [dataSource.displayed_data.split('.')[1]]: dataSource.values,
+		  [dataSource.displayed_data.split('.')[1]]: value,
 		}
-	  : Object.assign({}, dataSource.values)
+	  : Object.assign({}, value)
   
   
 	if (
@@ -23,7 +32,7 @@ export default function graphRenderer(dataSource, options, selector) {
 	  return
 	}
   
-	const queryVariables = JSON.parse(dataSource.variables)
+	const queryVariables = typeof dataSource.variables === 'object' ? dataSource.variables : JSON.parse(dataSource.variables)
 	const currency =
 	  (values.inbound &&
 		values.inbound.length > 0 &&

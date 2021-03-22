@@ -10,7 +10,10 @@ class SankeyPlugin {
     this.name = 'Sankey'
     this.editor = SankeyEditor
     this.renderer = sankeyRenderer
-    this.dependencies = ['https://cdn.jsdelivr.net/npm/@bitquery/ide-graph@2.0.0/dist/sankeyRenderer.js']
+    this.dependencies = [
+      'https://cdn.jsdelivr.net/npm/@bitquery/ide-graph@2.0.1/dist/sankeyRenderer.js',
+      'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'
+    ]
   }
   supportsModel(model) {
     for (let key in model) {
@@ -57,7 +60,11 @@ class GraphPlugin {
     this.name = 'Graph'
     this.editor = GraphEditor
     this.renderer = graphRenderer
-    this.dependencies = ['https://cdn.jsdelivr.net/npm/@bitquery/ide-graph@2.0.0/dist/graphRenderer.js']
+    this.dependencies = [
+      'https://cdn.jsdelivr.net/npm/@bitquery/ide-graph@2.0.1/dist/graphRenderer.js',
+      'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
+      'https://kit.fontawesome.com/fcc9f09153.js'
+    ]
   }
   supportsModel(model) {
     for (let key in model) {

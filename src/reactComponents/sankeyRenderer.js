@@ -4,17 +4,26 @@ import * as d3 from 'd3'
 import * as d3Sankey from '@bitquery/d3-sankey-circular'
 import * as d3PathArrows from 'd3-path-arrows'
 import uid from '../util/uid'
+import regeneratorRuntime from "regenerator-runtime"
 
-export default function sankeyRenderer(dataSource, options, selector) {
+export default async function sankeyRenderer(dataSource, options, selector) {
 	const g = {}
 	g.container = document.querySelector(`#${selector}`)
 	const jqContainer = $(g.container)
   
-	const values = Array.isArray(dataSource.values)
+	let value = undefined
+	if (!dataSource.values) {
+		const data = await dataSource.fetcher()
+		const json = await data.json()
+		value = dataSource.setupData(json)
+	} else {
+		value = dataSource.values
+	}
+	  const values = Array.isArray(value)
 	  ? {
-		  [dataSource.displayed_data.split('.')[1]]: dataSource.values,
+		  [dataSource.displayed_data.split('.')[1]]: value,
 		}
-	  : Object.assign({}, dataSource.values)
+	  : Object.assign({}, value)
   
 	console.log(values)
   
@@ -26,7 +35,7 @@ export default function sankeyRenderer(dataSource, options, selector) {
 	  return
 	}
   
-	const queryVariables = JSON.parse(dataSource.variables)
+	const queryVariables = typeof dataSource.variables === 'object' ? dataSource.variables : JSON.parse(dataSource.variables)
 	const currency =
 	  (values.inbound &&
 		values.inbound.length > 0 &&

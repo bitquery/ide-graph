@@ -91,7 +91,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 101);
+/******/ 	return __webpack_require__(__webpack_require__.s = 102);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -17253,7 +17253,7 @@ return /******/ (function(modules) { // webpackBootstrap
   else {}
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(43), __webpack_require__(44)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(44), __webpack_require__(45)(module)))
 
 /***/ }),
 
@@ -17264,10014 +17264,7 @@ module.exports = __WEBPACK_EXTERNAL_MODULE__1__;
 
 /***/ }),
 
-/***/ 101:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "graphPlugins", function() { return /* binding */ graphPlugins; });
-
-// EXTERNAL MODULE: external {"root":"React","commonjs2":"react","commonjs":"react","amd":"react","umd":"react"}
-var external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_ = __webpack_require__(1);
-var external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default = /*#__PURE__*/__webpack_require__.n(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_);
-
-// CONCATENATED MODULE: ./src/util/useFirstUpdate.js
-
-var useFirstUpdate_useFirstUpdate = function useFirstUpdate(func, deps) {
-  var didMount = Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useRef"])(false);
-  Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useEffect"])(function () {
-    if (didMount.current) func();else didMount.current = true;
-  }, deps);
-};
-// CONCATENATED MODULE: ./src/reactComponents/WidgetOptions.js
-
-
-function WidgetOptions(_ref) {
-  var model = _ref.model,
-      condition = _ref.condition,
-      value = _ref.value,
-      setValue = _ref.setValue,
-      title = _ref.title;
-  Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useEffect"])(function () {
-    if (model) {
-      var list = Object.keys(model).filter(condition);
-      if (!value) setValue(list[0]);
-    }
-  }, [JSON.stringify(model)]);
-  return /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", {
-    className: "widget-option"
-  }, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("label", null, title), /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("select", {
-    className: "custom-select",
-    value: value,
-    onChange: function onChange(e) {
-      return setValue(e.target.value);
-    }
-  }, Object.keys(model).length ? Object.keys(model).map(function (node, i) {
-    return condition(node) ? /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("option", {
-      key: i,
-      value: node
-    }, node.split('.').slice(-1)) : null;
-  }) : value ? /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("option", {
-    value: value
-  }, value.split('.').slice(-1)) : null));
-}
-
-/* harmony default export */ var reactComponents_WidgetOptions = (WidgetOptions);
-// CONCATENATED MODULE: ./src/reactComponents/SankeyEditor.js
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-function SankeyEditor(_ref) {
-  var model = _ref.model,
-      config = _ref.config,
-      setConfig = _ref.setConfig,
-      displayedData = _ref.displayedData;
-
-  var _useState = Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useState"])(''),
-      _useState2 = _slicedToArray(_useState, 2),
-      theme = _useState2[0],
-      setTheme = _useState2[1];
-
-  var themeOptions = {
-    light: 'light',
-    dark: 'dark'
-  };
-
-  var themeFunc = function themeFunc() {
-    return true;
-  };
-
-  Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useEffect"])(function () {
-    setTheme('light');
-  }, []);
-  useFirstUpdate_useFirstUpdate(function () {
-    if (model) {
-      var cfg = {
-        data: displayedData,
-        theme: theme
-      };
-      setConfig(cfg);
-    }
-  }, [theme, displayedData]);
-  return /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", {
-    className: "widget"
-  }, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", {
-    className: "widget-editor"
-  }, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(reactComponents_WidgetOptions, {
-    value: theme,
-    setValue: setTheme,
-    condition: themeFunc,
-    title: 'Theme',
-    model: themeOptions
-  })));
-}
-
-/* harmony default export */ var reactComponents_SankeyEditor = (SankeyEditor);
-// EXTERNAL MODULE: ./src/reactComponents/sankeyRenderer.js + 169 modules
-var sankeyRenderer = __webpack_require__(47);
-
-// CONCATENATED MODULE: ./src/reactComponents/GraphEditor.js
-function GraphEditor_slicedToArray(arr, i) { return GraphEditor_arrayWithHoles(arr) || GraphEditor_iterableToArrayLimit(arr, i) || GraphEditor_unsupportedIterableToArray(arr, i) || GraphEditor_nonIterableRest(); }
-
-function GraphEditor_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function GraphEditor_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return GraphEditor_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return GraphEditor_arrayLikeToArray(o, minLen); }
-
-function GraphEditor_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function GraphEditor_iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function GraphEditor_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-
-
-
-
-function GraphEditor(_ref) {
-  var model = _ref.model,
-      config = _ref.config,
-      setConfig = _ref.setConfig,
-      displayedData = _ref.displayedData;
-
-  var _useState = Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useState"])(''),
-      _useState2 = GraphEditor_slicedToArray(_useState, 2),
-      theme = _useState2[0],
-      setTheme = _useState2[1];
-
-  var themeOptions = {
-    light: 'light',
-    dark: 'dark'
-  };
-
-  var themeFunc = function themeFunc() {
-    return true;
-  };
-
-  Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useEffect"])(function () {
-    setTheme('light');
-  }, []);
-  useFirstUpdate_useFirstUpdate(function () {
-    if (model) {
-      var cfg = {
-        data: displayedData,
-        theme: theme
-      };
-      setConfig(cfg);
-    }
-  }, [theme, displayedData]);
-  return /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", {
-    className: "widget"
-  }, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", {
-    className: "widget-editor"
-  }, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(reactComponents_WidgetOptions, {
-    value: theme,
-    setValue: setTheme,
-    condition: themeFunc,
-    title: 'Theme',
-    model: themeOptions
-  })));
-}
-
-/* harmony default export */ var reactComponents_GraphEditor = (GraphEditor);
-// EXTERNAL MODULE: ./src/reactComponents/graphRenderer.js + 1 modules
-var graphRenderer = __webpack_require__(48);
-
-// CONCATENATED MODULE: ./src/checkAllProperties.js
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = checkAllProperties_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function checkAllProperties_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return checkAllProperties_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return checkAllProperties_arrayLikeToArray(o, minLen); }
-
-function checkAllProperties_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function checkAllProperties(props, model) {
-  var availableProps = new Set();
-
-  function addProp(pre, item) {
-    if (item.selectionSet) {
-      item.selectionSet.selections.forEach(function (i) {
-        var start = pre ? pre + '.' : '';
-        availableProps.add(start + item.name.value);
-        addProp(start + item.name.value, i);
-      });
-    } else {
-      var start = pre ? pre + '.' : '';
-      availableProps.add(start + item.name.value);
-    }
-  }
-
-  if (model.selectionSet) {
-    model.selectionSet.selections.forEach(function (item) {
-      addProp('', item);
-    });
-  }
-
-  function isSuperset(set, subset) {
-    var _iterator = _createForOfIteratorHelper(subset),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var elem = _step.value;
-
-        if (!set.has(elem)) {
-          return false;
-        }
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-
-    return true;
-  }
-
-  return isSuperset(availableProps, new Set(props));
-}
-// CONCATENATED MODULE: ./src/index.js
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || src_unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function src_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return src_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return src_arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return src_arrayLikeToArray(arr); }
-
-function src_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-
-
-
-var src_SankeyPlugin = /*#__PURE__*/function () {
-  function SankeyPlugin() {
-    _classCallCheck(this, SankeyPlugin);
-
-    this.id = 'sankey';
-    this.name = 'Sankey';
-    this.editor = reactComponents_SankeyEditor;
-    this.renderer = sankeyRenderer["default"];
-    this.dependencies = ['https://cdn.jsdelivr.net/npm/@bitquery/ide-graph@v2.0.0/dist/sankeyRenderer.js'];
-  }
-
-  _createClass(SankeyPlugin, [{
-    key: "supportsModel",
-    value: function supportsModel(model) {
-      var _loop = function _loop(key) {
-        var isLack = false;
-        var coinpaths = [];
-
-        if (!key.includes('.') && model[key].selectionSet) {
-          coinpaths.push.apply(coinpaths, _toConsumableArray(model[key].selectionSet.selections));
-        } else if (model[key].typeInfo.toString()[0] === '[' && model[key].typeInfo.toString().slice(-2, -1) !== '0') {
-          coinpaths.push(model[key]);
-        } else {
-          return {
-            v: false
-          };
-        }
-
-        var properties = ['sender', 'sender.address', 'sender.annotation', 'receiver', 'receiver.address', 'receiver.annotation', 'amount', 'currency', 'currency.symbol', 'depth', 'count'];
-        coinpaths.forEach(function (item) {
-          if (!checkAllProperties(properties, item)) isLack = true;
-        });
-        return {
-          v: !isLack
-        };
-      };
-
-      for (var key in model) {
-        var _ret = _loop(key);
-
-        if (_typeof(_ret) === "object") return _ret.v;
-      }
-    }
-  }]);
-
-  return SankeyPlugin;
-}();
-
-var src_GraphPlugin = /*#__PURE__*/function () {
-  function GraphPlugin() {
-    _classCallCheck(this, GraphPlugin);
-
-    this.id = 'graph';
-    this.name = 'Graph';
-    this.editor = reactComponents_GraphEditor;
-    this.renderer = graphRenderer["default"];
-    this.dependencies = ['https://cdn.jsdelivr.net/npm/@bitquery/ide-graph@v2.0.0/dist/graphRenderer.js'];
-  }
-
-  _createClass(GraphPlugin, [{
-    key: "supportsModel",
-    value: function supportsModel(model) {
-      var _loop2 = function _loop2(key) {
-        var isLack = false;
-        var coinpaths = [];
-
-        if (!key.includes('.') && model[key].selectionSet) {
-          coinpaths.push.apply(coinpaths, _toConsumableArray(model[key].selectionSet.selections));
-        } else if (model[key].typeInfo.toString()[0] === '[' && model[key].typeInfo.toString().slice(-2, -1) !== '0') {
-          coinpaths.push(model[key]);
-        } else {
-          return {
-            v: false
-          };
-        }
-
-        var properties = ['sender', 'sender.address', 'sender.annotation', 'receiver', 'receiver.address', 'receiver.annotation', 'amount', 'currency', 'currency.symbol', 'depth', 'count'];
-        coinpaths.forEach(function (item) {
-          if (!checkAllProperties(properties, item)) isLack = true;
-        });
-        return {
-          v: !isLack
-        };
-      };
-
-      for (var key in model) {
-        var _ret2 = _loop2(key);
-
-        if (_typeof(_ret2) === "object") return _ret2.v;
-      }
-    }
-  }]);
-
-  return GraphPlugin;
-}();
-
-var graphPlugins = [new src_SankeyPlugin(), new src_GraphPlugin()];
-
-/***/ }),
-
-/***/ 3:
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! @preserve
- * numeral.js
- * version : 2.0.6
- * author : Adam Draper
- * license : MIT
- * http://adamwdraper.github.com/Numeral-js/
- */
-
-(function (global, factory) {
-    if (true) {
-        !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
-				__WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-    } else {}
-}(this, function () {
-    /************************************
-        Variables
-    ************************************/
-
-    var numeral,
-        _,
-        VERSION = '2.0.6',
-        formats = {},
-        locales = {},
-        defaults = {
-            currentLocale: 'en',
-            zeroFormat: null,
-            nullFormat: null,
-            defaultFormat: '0,0',
-            scalePercentBy100: true
-        },
-        options = {
-            currentLocale: defaults.currentLocale,
-            zeroFormat: defaults.zeroFormat,
-            nullFormat: defaults.nullFormat,
-            defaultFormat: defaults.defaultFormat,
-            scalePercentBy100: defaults.scalePercentBy100
-        };
-
-
-    /************************************
-        Constructors
-    ************************************/
-
-    // Numeral prototype object
-    function Numeral(input, number) {
-        this._input = input;
-
-        this._value = number;
-    }
-
-    numeral = function(input) {
-        var value,
-            kind,
-            unformatFunction,
-            regexp;
-
-        if (numeral.isNumeral(input)) {
-            value = input.value();
-        } else if (input === 0 || typeof input === 'undefined') {
-            value = 0;
-        } else if (input === null || _.isNaN(input)) {
-            value = null;
-        } else if (typeof input === 'string') {
-            if (options.zeroFormat && input === options.zeroFormat) {
-                value = 0;
-            } else if (options.nullFormat && input === options.nullFormat || !input.replace(/[^0-9]+/g, '').length) {
-                value = null;
-            } else {
-                for (kind in formats) {
-                    regexp = typeof formats[kind].regexps.unformat === 'function' ? formats[kind].regexps.unformat() : formats[kind].regexps.unformat;
-
-                    if (regexp && input.match(regexp)) {
-                        unformatFunction = formats[kind].unformat;
-
-                        break;
-                    }
-                }
-
-                unformatFunction = unformatFunction || numeral._.stringToNumber;
-
-                value = unformatFunction(input);
-            }
-        } else {
-            value = Number(input)|| null;
-        }
-
-        return new Numeral(input, value);
-    };
-
-    // version number
-    numeral.version = VERSION;
-
-    // compare numeral object
-    numeral.isNumeral = function(obj) {
-        return obj instanceof Numeral;
-    };
-
-    // helper functions
-    numeral._ = _ = {
-        // formats numbers separators, decimals places, signs, abbreviations
-        numberToFormat: function(value, format, roundingFunction) {
-            var locale = locales[numeral.options.currentLocale],
-                negP = false,
-                optDec = false,
-                leadingCount = 0,
-                abbr = '',
-                trillion = 1000000000000,
-                billion = 1000000000,
-                million = 1000000,
-                thousand = 1000,
-                decimal = '',
-                neg = false,
-                abbrForce, // force abbreviation
-                abs,
-                min,
-                max,
-                power,
-                int,
-                precision,
-                signed,
-                thousands,
-                output;
-
-            // make sure we never format a null value
-            value = value || 0;
-
-            abs = Math.abs(value);
-
-            // see if we should use parentheses for negative number or if we should prefix with a sign
-            // if both are present we default to parentheses
-            if (numeral._.includes(format, '(')) {
-                negP = true;
-                format = format.replace(/[\(|\)]/g, '');
-            } else if (numeral._.includes(format, '+') || numeral._.includes(format, '-')) {
-                signed = numeral._.includes(format, '+') ? format.indexOf('+') : value < 0 ? format.indexOf('-') : -1;
-                format = format.replace(/[\+|\-]/g, '');
-            }
-
-            // see if abbreviation is wanted
-            if (numeral._.includes(format, 'a')) {
-                abbrForce = format.match(/a(k|m|b|t)?/);
-
-                abbrForce = abbrForce ? abbrForce[1] : false;
-
-                // check for space before abbreviation
-                if (numeral._.includes(format, ' a')) {
-                    abbr = ' ';
-                }
-
-                format = format.replace(new RegExp(abbr + 'a[kmbt]?'), '');
-
-                if (abs >= trillion && !abbrForce || abbrForce === 't') {
-                    // trillion
-                    abbr += locale.abbreviations.trillion;
-                    value = value / trillion;
-                } else if (abs < trillion && abs >= billion && !abbrForce || abbrForce === 'b') {
-                    // billion
-                    abbr += locale.abbreviations.billion;
-                    value = value / billion;
-                } else if (abs < billion && abs >= million && !abbrForce || abbrForce === 'm') {
-                    // million
-                    abbr += locale.abbreviations.million;
-                    value = value / million;
-                } else if (abs < million && abs >= thousand && !abbrForce || abbrForce === 'k') {
-                    // thousand
-                    abbr += locale.abbreviations.thousand;
-                    value = value / thousand;
-                }
-            }
-
-            // check for optional decimals
-            if (numeral._.includes(format, '[.]')) {
-                optDec = true;
-                format = format.replace('[.]', '.');
-            }
-
-            // break number and format
-            int = value.toString().split('.')[0];
-            precision = format.split('.')[1];
-            thousands = format.indexOf(',');
-            leadingCount = (format.split('.')[0].split(',')[0].match(/0/g) || []).length;
-
-            if (precision) {
-                if (numeral._.includes(precision, '[')) {
-                    precision = precision.replace(']', '');
-                    precision = precision.split('[');
-                    decimal = numeral._.toFixed(value, (precision[0].length + precision[1].length), roundingFunction, precision[1].length);
-                } else {
-                    decimal = numeral._.toFixed(value, precision.length, roundingFunction);
-                }
-
-                int = decimal.split('.')[0];
-
-                if (numeral._.includes(decimal, '.')) {
-                    decimal = locale.delimiters.decimal + decimal.split('.')[1];
-                } else {
-                    decimal = '';
-                }
-
-                if (optDec && Number(decimal.slice(1)) === 0) {
-                    decimal = '';
-                }
-            } else {
-                int = numeral._.toFixed(value, 0, roundingFunction);
-            }
-
-            // check abbreviation again after rounding
-            if (abbr && !abbrForce && Number(int) >= 1000 && abbr !== locale.abbreviations.trillion) {
-                int = String(Number(int) / 1000);
-
-                switch (abbr) {
-                    case locale.abbreviations.thousand:
-                        abbr = locale.abbreviations.million;
-                        break;
-                    case locale.abbreviations.million:
-                        abbr = locale.abbreviations.billion;
-                        break;
-                    case locale.abbreviations.billion:
-                        abbr = locale.abbreviations.trillion;
-                        break;
-                }
-            }
-
-
-            // format number
-            if (numeral._.includes(int, '-')) {
-                int = int.slice(1);
-                neg = true;
-            }
-
-            if (int.length < leadingCount) {
-                for (var i = leadingCount - int.length; i > 0; i--) {
-                    int = '0' + int;
-                }
-            }
-
-            if (thousands > -1) {
-                int = int.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + locale.delimiters.thousands);
-            }
-
-            if (format.indexOf('.') === 0) {
-                int = '';
-            }
-
-            output = int + decimal + (abbr ? abbr : '');
-
-            if (negP) {
-                output = (negP && neg ? '(' : '') + output + (negP && neg ? ')' : '');
-            } else {
-                if (signed >= 0) {
-                    output = signed === 0 ? (neg ? '-' : '+') + output : output + (neg ? '-' : '+');
-                } else if (neg) {
-                    output = '-' + output;
-                }
-            }
-
-            return output;
-        },
-        // unformats numbers separators, decimals places, signs, abbreviations
-        stringToNumber: function(string) {
-            var locale = locales[options.currentLocale],
-                stringOriginal = string,
-                abbreviations = {
-                    thousand: 3,
-                    million: 6,
-                    billion: 9,
-                    trillion: 12
-                },
-                abbreviation,
-                value,
-                i,
-                regexp;
-
-            if (options.zeroFormat && string === options.zeroFormat) {
-                value = 0;
-            } else if (options.nullFormat && string === options.nullFormat || !string.replace(/[^0-9]+/g, '').length) {
-                value = null;
-            } else {
-                value = 1;
-
-                if (locale.delimiters.decimal !== '.') {
-                    string = string.replace(/\./g, '').replace(locale.delimiters.decimal, '.');
-                }
-
-                for (abbreviation in abbreviations) {
-                    regexp = new RegExp('[^a-zA-Z]' + locale.abbreviations[abbreviation] + '(?:\\)|(\\' + locale.currency.symbol + ')?(?:\\))?)?$');
-
-                    if (stringOriginal.match(regexp)) {
-                        value *= Math.pow(10, abbreviations[abbreviation]);
-                        break;
-                    }
-                }
-
-                // check for negative number
-                value *= (string.split('-').length + Math.min(string.split('(').length - 1, string.split(')').length - 1)) % 2 ? 1 : -1;
-
-                // remove non numbers
-                string = string.replace(/[^0-9\.]+/g, '');
-
-                value *= Number(string);
-            }
-
-            return value;
-        },
-        isNaN: function(value) {
-            return typeof value === 'number' && isNaN(value);
-        },
-        includes: function(string, search) {
-            return string.indexOf(search) !== -1;
-        },
-        insert: function(string, subString, start) {
-            return string.slice(0, start) + subString + string.slice(start);
-        },
-        reduce: function(array, callback /*, initialValue*/) {
-            if (this === null) {
-                throw new TypeError('Array.prototype.reduce called on null or undefined');
-            }
-
-            if (typeof callback !== 'function') {
-                throw new TypeError(callback + ' is not a function');
-            }
-
-            var t = Object(array),
-                len = t.length >>> 0,
-                k = 0,
-                value;
-
-            if (arguments.length === 3) {
-                value = arguments[2];
-            } else {
-                while (k < len && !(k in t)) {
-                    k++;
-                }
-
-                if (k >= len) {
-                    throw new TypeError('Reduce of empty array with no initial value');
-                }
-
-                value = t[k++];
-            }
-            for (; k < len; k++) {
-                if (k in t) {
-                    value = callback(value, t[k], k, t);
-                }
-            }
-            return value;
-        },
-        /**
-         * Computes the multiplier necessary to make x >= 1,
-         * effectively eliminating miscalculations caused by
-         * finite precision.
-         */
-        multiplier: function (x) {
-            var parts = x.toString().split('.');
-
-            return parts.length < 2 ? 1 : Math.pow(10, parts[1].length);
-        },
-        /**
-         * Given a variable number of arguments, returns the maximum
-         * multiplier that must be used to normalize an operation involving
-         * all of them.
-         */
-        correctionFactor: function () {
-            var args = Array.prototype.slice.call(arguments);
-
-            return args.reduce(function(accum, next) {
-                var mn = _.multiplier(next);
-                return accum > mn ? accum : mn;
-            }, 1);
-        },
-        /**
-         * Implementation of toFixed() that treats floats more like decimals
-         *
-         * Fixes binary rounding issues (eg. (0.615).toFixed(2) === '0.61') that present
-         * problems for accounting- and finance-related software.
-         */
-        toFixed: function(value, maxDecimals, roundingFunction, optionals) {
-            var splitValue = value.toString().split('.'),
-                minDecimals = maxDecimals - (optionals || 0),
-                boundedPrecision,
-                optionalsRegExp,
-                power,
-                output;
-
-            // Use the smallest precision value possible to avoid errors from floating point representation
-            if (splitValue.length === 2) {
-              boundedPrecision = Math.min(Math.max(splitValue[1].length, minDecimals), maxDecimals);
-            } else {
-              boundedPrecision = minDecimals;
-            }
-
-            power = Math.pow(10, boundedPrecision);
-
-            // Multiply up by precision, round accurately, then divide and use native toFixed():
-            output = (roundingFunction(value + 'e+' + boundedPrecision) / power).toFixed(boundedPrecision);
-
-            if (optionals > maxDecimals - boundedPrecision) {
-                optionalsRegExp = new RegExp('\\.?0{1,' + (optionals - (maxDecimals - boundedPrecision)) + '}$');
-                output = output.replace(optionalsRegExp, '');
-            }
-
-            return output;
-        }
-    };
-
-    // avaliable options
-    numeral.options = options;
-
-    // avaliable formats
-    numeral.formats = formats;
-
-    // avaliable formats
-    numeral.locales = locales;
-
-    // This function sets the current locale.  If
-    // no arguments are passed in, it will simply return the current global
-    // locale key.
-    numeral.locale = function(key) {
-        if (key) {
-            options.currentLocale = key.toLowerCase();
-        }
-
-        return options.currentLocale;
-    };
-
-    // This function provides access to the loaded locale data.  If
-    // no arguments are passed in, it will simply return the current
-    // global locale object.
-    numeral.localeData = function(key) {
-        if (!key) {
-            return locales[options.currentLocale];
-        }
-
-        key = key.toLowerCase();
-
-        if (!locales[key]) {
-            throw new Error('Unknown locale : ' + key);
-        }
-
-        return locales[key];
-    };
-
-    numeral.reset = function() {
-        for (var property in defaults) {
-            options[property] = defaults[property];
-        }
-    };
-
-    numeral.zeroFormat = function(format) {
-        options.zeroFormat = typeof(format) === 'string' ? format : null;
-    };
-
-    numeral.nullFormat = function (format) {
-        options.nullFormat = typeof(format) === 'string' ? format : null;
-    };
-
-    numeral.defaultFormat = function(format) {
-        options.defaultFormat = typeof(format) === 'string' ? format : '0.0';
-    };
-
-    numeral.register = function(type, name, format) {
-        name = name.toLowerCase();
-
-        if (this[type + 's'][name]) {
-            throw new TypeError(name + ' ' + type + ' already registered.');
-        }
-
-        this[type + 's'][name] = format;
-
-        return format;
-    };
-
-
-    numeral.validate = function(val, culture) {
-        var _decimalSep,
-            _thousandSep,
-            _currSymbol,
-            _valArray,
-            _abbrObj,
-            _thousandRegEx,
-            localeData,
-            temp;
-
-        //coerce val to string
-        if (typeof val !== 'string') {
-            val += '';
-
-            if (console.warn) {
-                console.warn('Numeral.js: Value is not string. It has been co-erced to: ', val);
-            }
-        }
-
-        //trim whitespaces from either sides
-        val = val.trim();
-
-        //if val is just digits return true
-        if (!!val.match(/^\d+$/)) {
-            return true;
-        }
-
-        //if val is empty return false
-        if (val === '') {
-            return false;
-        }
-
-        //get the decimal and thousands separator from numeral.localeData
-        try {
-            //check if the culture is understood by numeral. if not, default it to current locale
-            localeData = numeral.localeData(culture);
-        } catch (e) {
-            localeData = numeral.localeData(numeral.locale());
-        }
-
-        //setup the delimiters and currency symbol based on culture/locale
-        _currSymbol = localeData.currency.symbol;
-        _abbrObj = localeData.abbreviations;
-        _decimalSep = localeData.delimiters.decimal;
-        if (localeData.delimiters.thousands === '.') {
-            _thousandSep = '\\.';
-        } else {
-            _thousandSep = localeData.delimiters.thousands;
-        }
-
-        // validating currency symbol
-        temp = val.match(/^[^\d]+/);
-        if (temp !== null) {
-            val = val.substr(1);
-            if (temp[0] !== _currSymbol) {
-                return false;
-            }
-        }
-
-        //validating abbreviation symbol
-        temp = val.match(/[^\d]+$/);
-        if (temp !== null) {
-            val = val.slice(0, -1);
-            if (temp[0] !== _abbrObj.thousand && temp[0] !== _abbrObj.million && temp[0] !== _abbrObj.billion && temp[0] !== _abbrObj.trillion) {
-                return false;
-            }
-        }
-
-        _thousandRegEx = new RegExp(_thousandSep + '{2}');
-
-        if (!val.match(/[^\d.,]/g)) {
-            _valArray = val.split(_decimalSep);
-            if (_valArray.length > 2) {
-                return false;
-            } else {
-                if (_valArray.length < 2) {
-                    return ( !! _valArray[0].match(/^\d+.*\d$/) && !_valArray[0].match(_thousandRegEx));
-                } else {
-                    if (_valArray[0].length === 1) {
-                        return ( !! _valArray[0].match(/^\d+$/) && !_valArray[0].match(_thousandRegEx) && !! _valArray[1].match(/^\d+$/));
-                    } else {
-                        return ( !! _valArray[0].match(/^\d+.*\d$/) && !_valArray[0].match(_thousandRegEx) && !! _valArray[1].match(/^\d+$/));
-                    }
-                }
-            }
-        }
-
-        return false;
-    };
-
-
-    /************************************
-        Numeral Prototype
-    ************************************/
-
-    numeral.fn = Numeral.prototype = {
-        clone: function() {
-            return numeral(this);
-        },
-        format: function(inputString, roundingFunction) {
-            var value = this._value,
-                format = inputString || options.defaultFormat,
-                kind,
-                output,
-                formatFunction;
-
-            // make sure we have a roundingFunction
-            roundingFunction = roundingFunction || Math.round;
-
-            // format based on value
-            if (value === 0 && options.zeroFormat !== null) {
-                output = options.zeroFormat;
-            } else if (value === null && options.nullFormat !== null) {
-                output = options.nullFormat;
-            } else {
-                for (kind in formats) {
-                    if (format.match(formats[kind].regexps.format)) {
-                        formatFunction = formats[kind].format;
-
-                        break;
-                    }
-                }
-
-                formatFunction = formatFunction || numeral._.numberToFormat;
-
-                output = formatFunction(value, format, roundingFunction);
-            }
-
-            return output;
-        },
-        value: function() {
-            return this._value;
-        },
-        input: function() {
-            return this._input;
-        },
-        set: function(value) {
-            this._value = Number(value);
-
-            return this;
-        },
-        add: function(value) {
-            var corrFactor = _.correctionFactor.call(null, this._value, value);
-
-            function cback(accum, curr, currI, O) {
-                return accum + Math.round(corrFactor * curr);
-            }
-
-            this._value = _.reduce([this._value, value], cback, 0) / corrFactor;
-
-            return this;
-        },
-        subtract: function(value) {
-            var corrFactor = _.correctionFactor.call(null, this._value, value);
-
-            function cback(accum, curr, currI, O) {
-                return accum - Math.round(corrFactor * curr);
-            }
-
-            this._value = _.reduce([value], cback, Math.round(this._value * corrFactor)) / corrFactor;
-
-            return this;
-        },
-        multiply: function(value) {
-            function cback(accum, curr, currI, O) {
-                var corrFactor = _.correctionFactor(accum, curr);
-                return Math.round(accum * corrFactor) * Math.round(curr * corrFactor) / Math.round(corrFactor * corrFactor);
-            }
-
-            this._value = _.reduce([this._value, value], cback, 1);
-
-            return this;
-        },
-        divide: function(value) {
-            function cback(accum, curr, currI, O) {
-                var corrFactor = _.correctionFactor(accum, curr);
-                return Math.round(accum * corrFactor) / Math.round(curr * corrFactor);
-            }
-
-            this._value = _.reduce([this._value, value], cback);
-
-            return this;
-        },
-        difference: function(value) {
-            return Math.abs(numeral(this._value).subtract(value).value());
-        }
-    };
-
-    /************************************
-        Default Locale && Format
-    ************************************/
-
-    numeral.register('locale', 'en', {
-        delimiters: {
-            thousands: ',',
-            decimal: '.'
-        },
-        abbreviations: {
-            thousand: 'k',
-            million: 'm',
-            billion: 'b',
-            trillion: 't'
-        },
-        ordinal: function(number) {
-            var b = number % 10;
-            return (~~(number % 100 / 10) === 1) ? 'th' :
-                (b === 1) ? 'st' :
-                (b === 2) ? 'nd' :
-                (b === 3) ? 'rd' : 'th';
-        },
-        currency: {
-            symbol: '$'
-        }
-    });
-
-    
-
-(function() {
-        numeral.register('format', 'bps', {
-            regexps: {
-                format: /(BPS)/,
-                unformat: /(BPS)/
-            },
-            format: function(value, format, roundingFunction) {
-                var space = numeral._.includes(format, ' BPS') ? ' ' : '',
-                    output;
-
-                value = value * 10000;
-
-                // check for space before BPS
-                format = format.replace(/\s?BPS/, '');
-
-                output = numeral._.numberToFormat(value, format, roundingFunction);
-
-                if (numeral._.includes(output, ')')) {
-                    output = output.split('');
-
-                    output.splice(-1, 0, space + 'BPS');
-
-                    output = output.join('');
-                } else {
-                    output = output + space + 'BPS';
-                }
-
-                return output;
-            },
-            unformat: function(string) {
-                return +(numeral._.stringToNumber(string) * 0.0001).toFixed(15);
-            }
-        });
-})();
-
-
-(function() {
-        var decimal = {
-            base: 1000,
-            suffixes: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-        },
-        binary = {
-            base: 1024,
-            suffixes: ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
-        };
-
-    var allSuffixes =  decimal.suffixes.concat(binary.suffixes.filter(function (item) {
-            return decimal.suffixes.indexOf(item) < 0;
-        }));
-        var unformatRegex = allSuffixes.join('|');
-        // Allow support for BPS (http://www.investopedia.com/terms/b/basispoint.asp)
-        unformatRegex = '(' + unformatRegex.replace('B', 'B(?!PS)') + ')';
-
-    numeral.register('format', 'bytes', {
-        regexps: {
-            format: /([0\s]i?b)/,
-            unformat: new RegExp(unformatRegex)
-        },
-        format: function(value, format, roundingFunction) {
-            var output,
-                bytes = numeral._.includes(format, 'ib') ? binary : decimal,
-                suffix = numeral._.includes(format, ' b') || numeral._.includes(format, ' ib') ? ' ' : '',
-                power,
-                min,
-                max;
-
-            // check for space before
-            format = format.replace(/\s?i?b/, '');
-
-            for (power = 0; power <= bytes.suffixes.length; power++) {
-                min = Math.pow(bytes.base, power);
-                max = Math.pow(bytes.base, power + 1);
-
-                if (value === null || value === 0 || value >= min && value < max) {
-                    suffix += bytes.suffixes[power];
-
-                    if (min > 0) {
-                        value = value / min;
-                    }
-
-                    break;
-                }
-            }
-
-            output = numeral._.numberToFormat(value, format, roundingFunction);
-
-            return output + suffix;
-        },
-        unformat: function(string) {
-            var value = numeral._.stringToNumber(string),
-                power,
-                bytesMultiplier;
-
-            if (value) {
-                for (power = decimal.suffixes.length - 1; power >= 0; power--) {
-                    if (numeral._.includes(string, decimal.suffixes[power])) {
-                        bytesMultiplier = Math.pow(decimal.base, power);
-
-                        break;
-                    }
-
-                    if (numeral._.includes(string, binary.suffixes[power])) {
-                        bytesMultiplier = Math.pow(binary.base, power);
-
-                        break;
-                    }
-                }
-
-                value *= (bytesMultiplier || 1);
-            }
-
-            return value;
-        }
-    });
-})();
-
-
-(function() {
-        numeral.register('format', 'currency', {
-        regexps: {
-            format: /(\$)/
-        },
-        format: function(value, format, roundingFunction) {
-            var locale = numeral.locales[numeral.options.currentLocale],
-                symbols = {
-                    before: format.match(/^([\+|\-|\(|\s|\$]*)/)[0],
-                    after: format.match(/([\+|\-|\)|\s|\$]*)$/)[0]
-                },
-                output,
-                symbol,
-                i;
-
-            // strip format of spaces and $
-            format = format.replace(/\s?\$\s?/, '');
-
-            // format the number
-            output = numeral._.numberToFormat(value, format, roundingFunction);
-
-            // update the before and after based on value
-            if (value >= 0) {
-                symbols.before = symbols.before.replace(/[\-\(]/, '');
-                symbols.after = symbols.after.replace(/[\-\)]/, '');
-            } else if (value < 0 && (!numeral._.includes(symbols.before, '-') && !numeral._.includes(symbols.before, '('))) {
-                symbols.before = '-' + symbols.before;
-            }
-
-            // loop through each before symbol
-            for (i = 0; i < symbols.before.length; i++) {
-                symbol = symbols.before[i];
-
-                switch (symbol) {
-                    case '$':
-                        output = numeral._.insert(output, locale.currency.symbol, i);
-                        break;
-                    case ' ':
-                        output = numeral._.insert(output, ' ', i + locale.currency.symbol.length - 1);
-                        break;
-                }
-            }
-
-            // loop through each after symbol
-            for (i = symbols.after.length - 1; i >= 0; i--) {
-                symbol = symbols.after[i];
-
-                switch (symbol) {
-                    case '$':
-                        output = i === symbols.after.length - 1 ? output + locale.currency.symbol : numeral._.insert(output, locale.currency.symbol, -(symbols.after.length - (1 + i)));
-                        break;
-                    case ' ':
-                        output = i === symbols.after.length - 1 ? output + ' ' : numeral._.insert(output, ' ', -(symbols.after.length - (1 + i) + locale.currency.symbol.length - 1));
-                        break;
-                }
-            }
-
-
-            return output;
-        }
-    });
-})();
-
-
-(function() {
-        numeral.register('format', 'exponential', {
-        regexps: {
-            format: /(e\+|e-)/,
-            unformat: /(e\+|e-)/
-        },
-        format: function(value, format, roundingFunction) {
-            var output,
-                exponential = typeof value === 'number' && !numeral._.isNaN(value) ? value.toExponential() : '0e+0',
-                parts = exponential.split('e');
-
-            format = format.replace(/e[\+|\-]{1}0/, '');
-
-            output = numeral._.numberToFormat(Number(parts[0]), format, roundingFunction);
-
-            return output + 'e' + parts[1];
-        },
-        unformat: function(string) {
-            var parts = numeral._.includes(string, 'e+') ? string.split('e+') : string.split('e-'),
-                value = Number(parts[0]),
-                power = Number(parts[1]);
-
-            power = numeral._.includes(string, 'e-') ? power *= -1 : power;
-
-            function cback(accum, curr, currI, O) {
-                var corrFactor = numeral._.correctionFactor(accum, curr),
-                    num = (accum * corrFactor) * (curr * corrFactor) / (corrFactor * corrFactor);
-                return num;
-            }
-
-            return numeral._.reduce([value, Math.pow(10, power)], cback, 1);
-        }
-    });
-})();
-
-
-(function() {
-        numeral.register('format', 'ordinal', {
-        regexps: {
-            format: /(o)/
-        },
-        format: function(value, format, roundingFunction) {
-            var locale = numeral.locales[numeral.options.currentLocale],
-                output,
-                ordinal = numeral._.includes(format, ' o') ? ' ' : '';
-
-            // check for space before
-            format = format.replace(/\s?o/, '');
-
-            ordinal += locale.ordinal(value);
-
-            output = numeral._.numberToFormat(value, format, roundingFunction);
-
-            return output + ordinal;
-        }
-    });
-})();
-
-
-(function() {
-        numeral.register('format', 'percentage', {
-        regexps: {
-            format: /(%)/,
-            unformat: /(%)/
-        },
-        format: function(value, format, roundingFunction) {
-            var space = numeral._.includes(format, ' %') ? ' ' : '',
-                output;
-
-            if (numeral.options.scalePercentBy100) {
-                value = value * 100;
-            }
-
-            // check for space before %
-            format = format.replace(/\s?\%/, '');
-
-            output = numeral._.numberToFormat(value, format, roundingFunction);
-
-            if (numeral._.includes(output, ')')) {
-                output = output.split('');
-
-                output.splice(-1, 0, space + '%');
-
-                output = output.join('');
-            } else {
-                output = output + space + '%';
-            }
-
-            return output;
-        },
-        unformat: function(string) {
-            var number = numeral._.stringToNumber(string);
-            if (numeral.options.scalePercentBy100) {
-                return number * 0.01;
-            }
-            return number;
-        }
-    });
-})();
-
-
-(function() {
-        numeral.register('format', 'time', {
-        regexps: {
-            format: /(:)/,
-            unformat: /(:)/
-        },
-        format: function(value, format, roundingFunction) {
-            var hours = Math.floor(value / 60 / 60),
-                minutes = Math.floor((value - (hours * 60 * 60)) / 60),
-                seconds = Math.round(value - (hours * 60 * 60) - (minutes * 60));
-
-            return hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
-        },
-        unformat: function(string) {
-            var timeArray = string.split(':'),
-                seconds = 0;
-
-            // turn hours and minutes into seconds and add them all up
-            if (timeArray.length === 3) {
-                // hours
-                seconds = seconds + (Number(timeArray[0]) * 60 * 60);
-                // minutes
-                seconds = seconds + (Number(timeArray[1]) * 60);
-                // seconds
-                seconds = seconds + Number(timeArray[2]);
-            } else if (timeArray.length === 2) {
-                // minutes
-                seconds = seconds + (Number(timeArray[0]) * 60);
-                // seconds
-                seconds = seconds + Number(timeArray[1]);
-            }
-            return Number(seconds);
-        }
-    });
-})();
-
-return numeral;
-}));
-
-
-/***/ }),
-
-/***/ 43:
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 44:
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-
-/***/ 45:
-/***/ (function(module, exports, __webpack_require__) {
-
-var tarjan = __webpack_require__(95);
-
-module.exports = function findCircuits(edges, cb) {
-    var circuits = []; // Output
-
-    var stack = [];
-    var blocked = [];
-    var B = {};
-    var Ak = [];
-    var s;
-
-    function unblock(u) {
-        blocked[u] = false;
-        if(B.hasOwnProperty(u)) {
-            Object.keys(B[u]).forEach(function(w) {
-                delete B[u][w];
-                if(blocked[w]) {unblock(w);}
-            });
-        }
-    }
-
-    function circuit(v) {
-        var found = false;
-
-        stack.push(v);
-        blocked[v] = true;
-
-        // L1
-        var i;
-        var w;
-        for(i = 0; i < Ak[v].length; i++) {
-            w = Ak[v][i];
-            if(w === s) {
-                output(s, stack);
-                found = true;
-            } else if(!blocked[w]) {
-                found = circuit(w);
-            }
-        }
-
-        // L2
-        if(found) {
-            unblock(v);
-        } else {
-            for(i = 0; i < Ak[v].length; i++) {
-                w = Ak[v][i];
-                var entry = B[w];
-
-                if(!entry) {
-                    entry = {};
-                    B[w] = entry;
-                }
-
-                entry[w] = true;
-            }
-        }
-        stack.pop();
-        return found;
-    }
-
-    function output(start, stack) {
-        var cycle = [].concat(stack).concat(start);
-        if(cb) {
-            cb(circuit);
-        } else {
-            circuits.push(cycle);
-        }
-    }
-
-    function subgraph(minId) {
-      // Remove edges with indice smaller than minId
-        for(var i = 0; i < edges.length; i++) {
-            if(i < minId) edges[i] = [];
-            edges[i] = edges[i].filter(function(i) {
-                return i >= minId;
-            });
-        }
-    }
-
-    function adjacencyStructureSCC(from) {
-        // Make subgraph starting from vertex minId
-        subgraph(from);
-        var g = edges;
-
-        // Find strongly connected components using Tarjan algorithm
-        var sccs = tarjan(g);
-
-        // Filter out trivial connected components (ie. made of one node)
-        var ccs = sccs.components.filter(function(scc) {
-            return scc.length > 1;
-        });
-
-        // Find least vertex
-        var leastVertex = Infinity;
-        var leastVertexComponent;
-        for(var i = 0; i < ccs.length; i++) {
-            for(var j = 0; j < ccs[i].length; j++) {
-                if(ccs[i][j] < leastVertex) {
-                    leastVertex = ccs[i][j];
-                    leastVertexComponent = i;
-                }
-            }
-        }
-
-        var cc = ccs[leastVertexComponent];
-
-        if(!cc) return false;
-
-        // Return the adjacency list of first component
-        var adjList = edges.map(function(l, index) {
-            if(cc.indexOf(index) === -1) return [];
-            return l.filter(function(i) {
-                return cc.indexOf(i) !== -1;
-            });
-        });
-
-        return {
-            leastVertex: leastVertex,
-            adjList: adjList
-        };
-    }
-
-    s = 0;
-    var n = edges.length;
-    while(s < n) {
-        // find strong component with least vertex in
-        // subgraph starting from vertex `s`
-        var p = adjacencyStructureSCC(s);
-
-        // Its least vertex
-        s = p.leastVertex;
-        // Its adjacency list
-        Ak = p.adjList;
-
-        if(Ak) {
-            for(var i = 0; i < Ak.length; i++) {
-                for(var j = 0; j < Ak[i].length; j++) {
-                    var vertexId = Ak[i][j];
-                    blocked[+vertexId] = false;
-                    B[vertexId] = {};
-                }
-            }
-            circuit(s);
-            s = s + 1;
-        } else {
-            s = n;
-        }
-
-    }
-
-    if(cb) {
-        return;
-    } else {
-        return circuits;
-    }
-};
-
-
-/***/ }),
-
-/***/ 46:
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _pathArrows = __webpack_require__(96);
-
-Object.defineProperty(exports, "pathArrows", {
-  enumerable: true,
-  get: function () {
-    return _interopRequireDefault(_pathArrows).default;
-  }
-});
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-/***/ }),
-
-/***/ 47:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ sankeyRenderer; });
-
-// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
-var lodash = __webpack_require__(0);
-var lodash_default = /*#__PURE__*/__webpack_require__.n(lodash);
-
-// EXTERNAL MODULE: ./node_modules/numeral/numeral.js
-var numeral = __webpack_require__(3);
-var numeral_default = /*#__PURE__*/__webpack_require__.n(numeral);
-
-// CONCATENATED MODULE: ./node_modules/d3/dist/package.js
-var package_name = "d3";
-var version = "6.2.0";
-var description = "Data-Driven Documents";
-var keywords = ["dom","visualization","svg","animation","canvas"];
-var homepage = "https://d3js.org";
-var license = "BSD-3-Clause";
-var author = {"name":"Mike Bostock","url":"https://bost.ocks.org/mike"};
-var main = "dist/d3.node.js";
-var unpkg = "dist/d3.min.js";
-var jsdelivr = "dist/d3.min.js";
-var package_module = "index.js";
-var repository = {"type":"git","url":"https://github.com/d3/d3.git"};
-var files = ["dist/**/*.js","index.js"];
-var scripts = {"pretest":"rimraf dist && mkdir dist && json2module package.json > dist/package.js && rollup -c","test":"tape 'test/**/*-test.js'","prepublishOnly":"yarn test","postpublish":"git push && git push --tags && cd ../d3.github.com && git pull && cp ../d3/dist/d3.js d3.v${npm_package_version%%.*}.js && cp ../d3/dist/d3.min.js d3.v${npm_package_version%%.*}.min.js && git add d3.v${npm_package_version%%.*}.js d3.v${npm_package_version%%.*}.min.js && git commit -m \"d3 ${npm_package_version}\" && git push && cd - && zip -j dist/d3.zip -- LICENSE README.md API.md CHANGES.md dist/d3.js dist/d3.min.js"};
-var devDependencies = {"json2module":"0.0","rimraf":"3","rollup":"2","rollup-plugin-ascii":"0.0","rollup-plugin-node-resolve":"5","rollup-plugin-terser":"7","tape":"4","tape-await":"0.1"};
-var dependencies = {"d3-array":"2","d3-axis":"2","d3-brush":"2","d3-chord":"2","d3-color":"2","d3-contour":"2","d3-delaunay":"5","d3-dispatch":"2","d3-drag":"2","d3-dsv":"2","d3-ease":"2","d3-fetch":"2","d3-force":"2","d3-format":"2","d3-geo":"2","d3-hierarchy":"2","d3-interpolate":"2","d3-path":"2","d3-polygon":"2","d3-quadtree":"2","d3-random":"2","d3-scale":"3","d3-scale-chromatic":"2","d3-selection":"2","d3-shape":"2","d3-time":"2","d3-time-format":"3","d3-timer":"2","d3-transition":"2","d3-zoom":"2"};
-
-// CONCATENATED MODULE: ./node_modules/d3-dispatch/src/dispatch.js
-var noop = {value: () => {}};
-
-function dispatch() {
-  for (var i = 0, n = arguments.length, _ = {}, t; i < n; ++i) {
-    if (!(t = arguments[i] + "") || (t in _) || /[\s.]/.test(t)) throw new Error("illegal type: " + t);
-    _[t] = [];
-  }
-  return new Dispatch(_);
-}
-
-function Dispatch(_) {
-  this._ = _;
-}
-
-function parseTypenames(typenames, types) {
-  return typenames.trim().split(/^|\s+/).map(function(t) {
-    var name = "", i = t.indexOf(".");
-    if (i >= 0) name = t.slice(i + 1), t = t.slice(0, i);
-    if (t && !types.hasOwnProperty(t)) throw new Error("unknown type: " + t);
-    return {type: t, name: name};
-  });
-}
-
-Dispatch.prototype = dispatch.prototype = {
-  constructor: Dispatch,
-  on: function(typename, callback) {
-    var _ = this._,
-        T = parseTypenames(typename + "", _),
-        t,
-        i = -1,
-        n = T.length;
-
-    // If no callback was specified, return the callback of the given type and name.
-    if (arguments.length < 2) {
-      while (++i < n) if ((t = (typename = T[i]).type) && (t = get(_[t], typename.name))) return t;
-      return;
-    }
-
-    // If a type was specified, set the callback for the given type and name.
-    // Otherwise, if a null callback was specified, remove callbacks of the given name.
-    if (callback != null && typeof callback !== "function") throw new Error("invalid callback: " + callback);
-    while (++i < n) {
-      if (t = (typename = T[i]).type) _[t] = set(_[t], typename.name, callback);
-      else if (callback == null) for (t in _) _[t] = set(_[t], typename.name, null);
-    }
-
-    return this;
-  },
-  copy: function() {
-    var copy = {}, _ = this._;
-    for (var t in _) copy[t] = _[t].slice();
-    return new Dispatch(copy);
-  },
-  call: function(type, that) {
-    if ((n = arguments.length - 2) > 0) for (var args = new Array(n), i = 0, n, t; i < n; ++i) args[i] = arguments[i + 2];
-    if (!this._.hasOwnProperty(type)) throw new Error("unknown type: " + type);
-    for (t = this._[type], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
-  },
-  apply: function(type, that, args) {
-    if (!this._.hasOwnProperty(type)) throw new Error("unknown type: " + type);
-    for (var t = this._[type], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
-  }
-};
-
-function get(type, name) {
-  for (var i = 0, n = type.length, c; i < n; ++i) {
-    if ((c = type[i]).name === name) {
-      return c.value;
-    }
-  }
-}
-
-function set(type, name, callback) {
-  for (var i = 0, n = type.length; i < n; ++i) {
-    if (type[i].name === name) {
-      type[i] = noop, type = type.slice(0, i).concat(type.slice(i + 1));
-      break;
-    }
-  }
-  if (callback != null) type.push({name: name, value: callback});
-  return type;
-}
-
-/* harmony default export */ var src_dispatch = (dispatch);
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selector.js
-function none() {}
-
-/* harmony default export */ var src_selector = (function(selector) {
-  return selector == null ? none : function() {
-    return this.querySelector(selector);
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/select.js
-
-
-
-/* harmony default export */ var selection_select = (function(select) {
-  if (typeof select !== "function") select = src_selector(select);
-
-  for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
-    for (var group = groups[j], n = group.length, subgroup = subgroups[j] = new Array(n), node, subnode, i = 0; i < n; ++i) {
-      if ((node = group[i]) && (subnode = select.call(node, node.__data__, i, group))) {
-        if ("__data__" in node) subnode.__data__ = node.__data__;
-        subgroup[i] = subnode;
-      }
-    }
-  }
-
-  return new Selection(subgroups, this._parents);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/array.js
-/* harmony default export */ var src_array = (function(x) {
-  return typeof x === "object" && "length" in x
-    ? x // Array, TypedArray, NodeList, array-like
-    : Array.from(x); // Map, Set, iterable, string, or anything else
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selectorAll.js
-function selectorAll_empty() {
-  return [];
-}
-
-/* harmony default export */ var selectorAll = (function(selector) {
-  return selector == null ? selectorAll_empty : function() {
-    return this.querySelectorAll(selector);
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/selectAll.js
-
-
-
-
-function arrayAll(select) {
-  return function() {
-    var group = select.apply(this, arguments);
-    return group == null ? [] : src_array(group);
-  };
-}
-
-/* harmony default export */ var selectAll = (function(select) {
-  if (typeof select === "function") select = arrayAll(select);
-  else select = selectorAll(select);
-
-  for (var groups = this._groups, m = groups.length, subgroups = [], parents = [], j = 0; j < m; ++j) {
-    for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
-      if (node = group[i]) {
-        subgroups.push(select.call(node, node.__data__, i, group));
-        parents.push(node);
-      }
-    }
-  }
-
-  return new Selection(subgroups, parents);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/matcher.js
-/* harmony default export */ var matcher = (function(selector) {
-  return function() {
-    return this.matches(selector);
-  };
-});
-
-function childMatcher(selector) {
-  return function(node) {
-    return node.matches(selector);
-  };
-}
-
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/selectChild.js
-
-
-var find = Array.prototype.find;
-
-function childFind(match) {
-  return function() {
-    return find.call(this.children, match);
-  };
-}
-
-function childFirst() {
-  return this.firstElementChild;
-}
-
-/* harmony default export */ var selectChild = (function(match) {
-  return this.select(match == null ? childFirst
-      : childFind(typeof match === "function" ? match : childMatcher(match)));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/selectChildren.js
-
-
-var selectChildren_filter = Array.prototype.filter;
-
-function selectChildren_children() {
-  return this.children;
-}
-
-function childrenFilter(match) {
-  return function() {
-    return selectChildren_filter.call(this.children, match);
-  };
-}
-
-/* harmony default export */ var selectChildren = (function(match) {
-  return this.selectAll(match == null ? selectChildren_children
-      : childrenFilter(typeof match === "function" ? match : childMatcher(match)));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/filter.js
-
-
-
-/* harmony default export */ var selection_filter = (function(match) {
-  if (typeof match !== "function") match = matcher(match);
-
-  for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
-    for (var group = groups[j], n = group.length, subgroup = subgroups[j] = [], node, i = 0; i < n; ++i) {
-      if ((node = group[i]) && match.call(node, node.__data__, i, group)) {
-        subgroup.push(node);
-      }
-    }
-  }
-
-  return new Selection(subgroups, this._parents);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/sparse.js
-/* harmony default export */ var sparse = (function(update) {
-  return new Array(update.length);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/enter.js
-
-
-
-/* harmony default export */ var selection_enter = (function() {
-  return new Selection(this._enter || this._groups.map(sparse), this._parents);
-});
-
-function EnterNode(parent, datum) {
-  this.ownerDocument = parent.ownerDocument;
-  this.namespaceURI = parent.namespaceURI;
-  this._next = null;
-  this._parent = parent;
-  this.__data__ = datum;
-}
-
-EnterNode.prototype = {
-  constructor: EnterNode,
-  appendChild: function(child) { return this._parent.insertBefore(child, this._next); },
-  insertBefore: function(child, next) { return this._parent.insertBefore(child, next); },
-  querySelector: function(selector) { return this._parent.querySelector(selector); },
-  querySelectorAll: function(selector) { return this._parent.querySelectorAll(selector); }
-};
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/constant.js
-/* harmony default export */ var constant = (function(x) {
-  return function() {
-    return x;
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/data.js
-
-
-
-
-
-function bindIndex(parent, group, enter, update, exit, data) {
-  var i = 0,
-      node,
-      groupLength = group.length,
-      dataLength = data.length;
-
-  // Put any non-null nodes that fit into update.
-  // Put any null nodes into enter.
-  // Put any remaining data into enter.
-  for (; i < dataLength; ++i) {
-    if (node = group[i]) {
-      node.__data__ = data[i];
-      update[i] = node;
-    } else {
-      enter[i] = new EnterNode(parent, data[i]);
-    }
-  }
-
-  // Put any non-null nodes that don’t fit into exit.
-  for (; i < groupLength; ++i) {
-    if (node = group[i]) {
-      exit[i] = node;
-    }
-  }
-}
-
-function bindKey(parent, group, enter, update, exit, data, key) {
-  var i,
-      node,
-      nodeByKeyValue = new Map,
-      groupLength = group.length,
-      dataLength = data.length,
-      keyValues = new Array(groupLength),
-      keyValue;
-
-  // Compute the key for each node.
-  // If multiple nodes have the same key, the duplicates are added to exit.
-  for (i = 0; i < groupLength; ++i) {
-    if (node = group[i]) {
-      keyValues[i] = keyValue = key.call(node, node.__data__, i, group) + "";
-      if (nodeByKeyValue.has(keyValue)) {
-        exit[i] = node;
-      } else {
-        nodeByKeyValue.set(keyValue, node);
-      }
-    }
-  }
-
-  // Compute the key for each datum.
-  // If there a node associated with this key, join and add it to update.
-  // If there is not (or the key is a duplicate), add it to enter.
-  for (i = 0; i < dataLength; ++i) {
-    keyValue = key.call(parent, data[i], i, data) + "";
-    if (node = nodeByKeyValue.get(keyValue)) {
-      update[i] = node;
-      node.__data__ = data[i];
-      nodeByKeyValue.delete(keyValue);
-    } else {
-      enter[i] = new EnterNode(parent, data[i]);
-    }
-  }
-
-  // Add any remaining nodes that were not bound to data to exit.
-  for (i = 0; i < groupLength; ++i) {
-    if ((node = group[i]) && (nodeByKeyValue.get(keyValues[i]) === node)) {
-      exit[i] = node;
-    }
-  }
-}
-
-function datum(node) {
-  return node.__data__;
-}
-
-/* harmony default export */ var selection_data = (function(value, key) {
-  if (!arguments.length) return Array.from(this, datum);
-
-  var bind = key ? bindKey : bindIndex,
-      parents = this._parents,
-      groups = this._groups;
-
-  if (typeof value !== "function") value = constant(value);
-
-  for (var m = groups.length, update = new Array(m), enter = new Array(m), exit = new Array(m), j = 0; j < m; ++j) {
-    var parent = parents[j],
-        group = groups[j],
-        groupLength = group.length,
-        data = src_array(value.call(parent, parent && parent.__data__, j, parents)),
-        dataLength = data.length,
-        enterGroup = enter[j] = new Array(dataLength),
-        updateGroup = update[j] = new Array(dataLength),
-        exitGroup = exit[j] = new Array(groupLength);
-
-    bind(parent, group, enterGroup, updateGroup, exitGroup, data, key);
-
-    // Now connect the enter nodes to their following update node, such that
-    // appendChild can insert the materialized enter node before this node,
-    // rather than at the end of the parent node.
-    for (var i0 = 0, i1 = 0, previous, next; i0 < dataLength; ++i0) {
-      if (previous = enterGroup[i0]) {
-        if (i0 >= i1) i1 = i0 + 1;
-        while (!(next = updateGroup[i1]) && ++i1 < dataLength);
-        previous._next = next || null;
-      }
-    }
-  }
-
-  update = new Selection(update, parents);
-  update._enter = enter;
-  update._exit = exit;
-  return update;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/exit.js
-
-
-
-/* harmony default export */ var selection_exit = (function() {
-  return new Selection(this._exit || this._groups.map(sparse), this._parents);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/join.js
-/* harmony default export */ var join = (function(onenter, onupdate, onexit) {
-  var enter = this.enter(), update = this, exit = this.exit();
-  enter = typeof onenter === "function" ? onenter(enter) : enter.append(onenter + "");
-  if (onupdate != null) update = onupdate(update);
-  if (onexit == null) exit.remove(); else onexit(exit);
-  return enter && update ? enter.merge(update).order() : update;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/merge.js
-
-
-/* harmony default export */ var selection_merge = (function(selection) {
-  if (!(selection instanceof Selection)) throw new Error("invalid merge");
-
-  for (var groups0 = this._groups, groups1 = selection._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
-    for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge = merges[j] = new Array(n), node, i = 0; i < n; ++i) {
-      if (node = group0[i] || group1[i]) {
-        merge[i] = node;
-      }
-    }
-  }
-
-  for (; j < m0; ++j) {
-    merges[j] = groups0[j];
-  }
-
-  return new Selection(merges, this._parents);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/order.js
-/* harmony default export */ var order = (function() {
-
-  for (var groups = this._groups, j = -1, m = groups.length; ++j < m;) {
-    for (var group = groups[j], i = group.length - 1, next = group[i], node; --i >= 0;) {
-      if (node = group[i]) {
-        if (next && node.compareDocumentPosition(next) ^ 4) next.parentNode.insertBefore(node, next);
-        next = node;
-      }
-    }
-  }
-
-  return this;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/sort.js
-
-
-/* harmony default export */ var sort = (function(compare) {
-  if (!compare) compare = ascending;
-
-  function compareNode(a, b) {
-    return a && b ? compare(a.__data__, b.__data__) : !a - !b;
-  }
-
-  for (var groups = this._groups, m = groups.length, sortgroups = new Array(m), j = 0; j < m; ++j) {
-    for (var group = groups[j], n = group.length, sortgroup = sortgroups[j] = new Array(n), node, i = 0; i < n; ++i) {
-      if (node = group[i]) {
-        sortgroup[i] = node;
-      }
-    }
-    sortgroup.sort(compareNode);
-  }
-
-  return new Selection(sortgroups, this._parents).order();
-});
-
-function ascending(a, b) {
-  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/call.js
-/* harmony default export */ var call = (function() {
-  var callback = arguments[0];
-  arguments[0] = this;
-  callback.apply(null, arguments);
-  return this;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/nodes.js
-/* harmony default export */ var selection_nodes = (function() {
-  return Array.from(this);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/node.js
-/* harmony default export */ var selection_node = (function() {
-
-  for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j) {
-    for (var group = groups[j], i = 0, n = group.length; i < n; ++i) {
-      var node = group[i];
-      if (node) return node;
-    }
-  }
-
-  return null;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/size.js
-/* harmony default export */ var selection_size = (function() {
-  let size = 0;
-  for (const node of this) ++size; // eslint-disable-line no-unused-vars
-  return size;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/empty.js
-/* harmony default export */ var selection_empty = (function() {
-  return !this.node();
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/each.js
-/* harmony default export */ var each = (function(callback) {
-
-  for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j) {
-    for (var group = groups[j], i = 0, n = group.length, node; i < n; ++i) {
-      if (node = group[i]) callback.call(node, node.__data__, i, group);
-    }
-  }
-
-  return this;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/namespaces.js
-var xhtml = "http://www.w3.org/1999/xhtml";
-
-/* harmony default export */ var namespaces = ({
-  svg: "http://www.w3.org/2000/svg",
-  xhtml: xhtml,
-  xlink: "http://www.w3.org/1999/xlink",
-  xml: "http://www.w3.org/XML/1998/namespace",
-  xmlns: "http://www.w3.org/2000/xmlns/"
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/namespace.js
-
-
-/* harmony default export */ var namespace = (function(name) {
-  var prefix = name += "", i = prefix.indexOf(":");
-  if (i >= 0 && (prefix = name.slice(0, i)) !== "xmlns") name = name.slice(i + 1);
-  return namespaces.hasOwnProperty(prefix) ? {space: namespaces[prefix], local: name} : name; // eslint-disable-line no-prototype-builtins
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/attr.js
-
-
-function attrRemove(name) {
-  return function() {
-    this.removeAttribute(name);
-  };
-}
-
-function attrRemoveNS(fullname) {
-  return function() {
-    this.removeAttributeNS(fullname.space, fullname.local);
-  };
-}
-
-function attrConstant(name, value) {
-  return function() {
-    this.setAttribute(name, value);
-  };
-}
-
-function attrConstantNS(fullname, value) {
-  return function() {
-    this.setAttributeNS(fullname.space, fullname.local, value);
-  };
-}
-
-function attrFunction(name, value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    if (v == null) this.removeAttribute(name);
-    else this.setAttribute(name, v);
-  };
-}
-
-function attrFunctionNS(fullname, value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    if (v == null) this.removeAttributeNS(fullname.space, fullname.local);
-    else this.setAttributeNS(fullname.space, fullname.local, v);
-  };
-}
-
-/* harmony default export */ var attr = (function(name, value) {
-  var fullname = namespace(name);
-
-  if (arguments.length < 2) {
-    var node = this.node();
-    return fullname.local
-        ? node.getAttributeNS(fullname.space, fullname.local)
-        : node.getAttribute(fullname);
-  }
-
-  return this.each((value == null
-      ? (fullname.local ? attrRemoveNS : attrRemove) : (typeof value === "function"
-      ? (fullname.local ? attrFunctionNS : attrFunction)
-      : (fullname.local ? attrConstantNS : attrConstant)))(fullname, value));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/window.js
-/* harmony default export */ var src_window = (function(node) {
-  return (node.ownerDocument && node.ownerDocument.defaultView) // node is a Node
-      || (node.document && node) // node is a Window
-      || node.defaultView; // node is a Document
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/style.js
-
-
-function styleRemove(name) {
-  return function() {
-    this.style.removeProperty(name);
-  };
-}
-
-function styleConstant(name, value, priority) {
-  return function() {
-    this.style.setProperty(name, value, priority);
-  };
-}
-
-function styleFunction(name, value, priority) {
-  return function() {
-    var v = value.apply(this, arguments);
-    if (v == null) this.style.removeProperty(name);
-    else this.style.setProperty(name, v, priority);
-  };
-}
-
-/* harmony default export */ var style = (function(name, value, priority) {
-  return arguments.length > 1
-      ? this.each((value == null
-            ? styleRemove : typeof value === "function"
-            ? styleFunction
-            : styleConstant)(name, value, priority == null ? "" : priority))
-      : styleValue(this.node(), name);
-});
-
-function styleValue(node, name) {
-  return node.style.getPropertyValue(name)
-      || src_window(node).getComputedStyle(node, null).getPropertyValue(name);
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/property.js
-function propertyRemove(name) {
-  return function() {
-    delete this[name];
-  };
-}
-
-function propertyConstant(name, value) {
-  return function() {
-    this[name] = value;
-  };
-}
-
-function propertyFunction(name, value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    if (v == null) delete this[name];
-    else this[name] = v;
-  };
-}
-
-/* harmony default export */ var property = (function(name, value) {
-  return arguments.length > 1
-      ? this.each((value == null
-          ? propertyRemove : typeof value === "function"
-          ? propertyFunction
-          : propertyConstant)(name, value))
-      : this.node()[name];
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/classed.js
-function classArray(string) {
-  return string.trim().split(/^|\s+/);
-}
-
-function classList(node) {
-  return node.classList || new ClassList(node);
-}
-
-function ClassList(node) {
-  this._node = node;
-  this._names = classArray(node.getAttribute("class") || "");
-}
-
-ClassList.prototype = {
-  add: function(name) {
-    var i = this._names.indexOf(name);
-    if (i < 0) {
-      this._names.push(name);
-      this._node.setAttribute("class", this._names.join(" "));
-    }
-  },
-  remove: function(name) {
-    var i = this._names.indexOf(name);
-    if (i >= 0) {
-      this._names.splice(i, 1);
-      this._node.setAttribute("class", this._names.join(" "));
-    }
-  },
-  contains: function(name) {
-    return this._names.indexOf(name) >= 0;
-  }
-};
-
-function classedAdd(node, names) {
-  var list = classList(node), i = -1, n = names.length;
-  while (++i < n) list.add(names[i]);
-}
-
-function classedRemove(node, names) {
-  var list = classList(node), i = -1, n = names.length;
-  while (++i < n) list.remove(names[i]);
-}
-
-function classedTrue(names) {
-  return function() {
-    classedAdd(this, names);
-  };
-}
-
-function classedFalse(names) {
-  return function() {
-    classedRemove(this, names);
-  };
-}
-
-function classedFunction(names, value) {
-  return function() {
-    (value.apply(this, arguments) ? classedAdd : classedRemove)(this, names);
-  };
-}
-
-/* harmony default export */ var classed = (function(name, value) {
-  var names = classArray(name + "");
-
-  if (arguments.length < 2) {
-    var list = classList(this.node()), i = -1, n = names.length;
-    while (++i < n) if (!list.contains(names[i])) return false;
-    return true;
-  }
-
-  return this.each((typeof value === "function"
-      ? classedFunction : value
-      ? classedTrue
-      : classedFalse)(names, value));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/text.js
-function textRemove() {
-  this.textContent = "";
-}
-
-function textConstant(value) {
-  return function() {
-    this.textContent = value;
-  };
-}
-
-function textFunction(value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    this.textContent = v == null ? "" : v;
-  };
-}
-
-/* harmony default export */ var selection_text = (function(value) {
-  return arguments.length
-      ? this.each(value == null
-          ? textRemove : (typeof value === "function"
-          ? textFunction
-          : textConstant)(value))
-      : this.node().textContent;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/html.js
-function htmlRemove() {
-  this.innerHTML = "";
-}
-
-function htmlConstant(value) {
-  return function() {
-    this.innerHTML = value;
-  };
-}
-
-function htmlFunction(value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    this.innerHTML = v == null ? "" : v;
-  };
-}
-
-/* harmony default export */ var html = (function(value) {
-  return arguments.length
-      ? this.each(value == null
-          ? htmlRemove : (typeof value === "function"
-          ? htmlFunction
-          : htmlConstant)(value))
-      : this.node().innerHTML;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/raise.js
-function raise() {
-  if (this.nextSibling) this.parentNode.appendChild(this);
-}
-
-/* harmony default export */ var selection_raise = (function() {
-  return this.each(raise);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/lower.js
-function lower() {
-  if (this.previousSibling) this.parentNode.insertBefore(this, this.parentNode.firstChild);
-}
-
-/* harmony default export */ var selection_lower = (function() {
-  return this.each(lower);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/creator.js
-
-
-
-function creatorInherit(name) {
-  return function() {
-    var document = this.ownerDocument,
-        uri = this.namespaceURI;
-    return uri === xhtml && document.documentElement.namespaceURI === xhtml
-        ? document.createElement(name)
-        : document.createElementNS(uri, name);
-  };
-}
-
-function creatorFixed(fullname) {
-  return function() {
-    return this.ownerDocument.createElementNS(fullname.space, fullname.local);
-  };
-}
-
-/* harmony default export */ var creator = (function(name) {
-  var fullname = namespace(name);
-  return (fullname.local
-      ? creatorFixed
-      : creatorInherit)(fullname);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/append.js
-
-
-/* harmony default export */ var append = (function(name) {
-  var create = typeof name === "function" ? name : creator(name);
-  return this.select(function() {
-    return this.appendChild(create.apply(this, arguments));
-  });
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/insert.js
-
-
-
-function constantNull() {
-  return null;
-}
-
-/* harmony default export */ var insert = (function(name, before) {
-  var create = typeof name === "function" ? name : creator(name),
-      select = before == null ? constantNull : typeof before === "function" ? before : src_selector(before);
-  return this.select(function() {
-    return this.insertBefore(create.apply(this, arguments), select.apply(this, arguments) || null);
-  });
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/remove.js
-function remove_remove() {
-  var parent = this.parentNode;
-  if (parent) parent.removeChild(this);
-}
-
-/* harmony default export */ var selection_remove = (function() {
-  return this.each(remove_remove);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/clone.js
-function selection_cloneShallow() {
-  var clone = this.cloneNode(false), parent = this.parentNode;
-  return parent ? parent.insertBefore(clone, this.nextSibling) : clone;
-}
-
-function selection_cloneDeep() {
-  var clone = this.cloneNode(true), parent = this.parentNode;
-  return parent ? parent.insertBefore(clone, this.nextSibling) : clone;
-}
-
-/* harmony default export */ var clone = (function(deep) {
-  return this.select(deep ? selection_cloneDeep : selection_cloneShallow);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/datum.js
-/* harmony default export */ var selection_datum = (function(value) {
-  return arguments.length
-      ? this.property("__data__", value)
-      : this.node().__data__;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/on.js
-function contextListener(listener) {
-  return function(event) {
-    listener.call(this, event, this.__data__);
-  };
-}
-
-function on_parseTypenames(typenames) {
-  return typenames.trim().split(/^|\s+/).map(function(t) {
-    var name = "", i = t.indexOf(".");
-    if (i >= 0) name = t.slice(i + 1), t = t.slice(0, i);
-    return {type: t, name: name};
-  });
-}
-
-function onRemove(typename) {
-  return function() {
-    var on = this.__on;
-    if (!on) return;
-    for (var j = 0, i = -1, m = on.length, o; j < m; ++j) {
-      if (o = on[j], (!typename.type || o.type === typename.type) && o.name === typename.name) {
-        this.removeEventListener(o.type, o.listener, o.options);
-      } else {
-        on[++i] = o;
-      }
-    }
-    if (++i) on.length = i;
-    else delete this.__on;
-  };
-}
-
-function onAdd(typename, value, options) {
-  return function() {
-    var on = this.__on, o, listener = contextListener(value);
-    if (on) for (var j = 0, m = on.length; j < m; ++j) {
-      if ((o = on[j]).type === typename.type && o.name === typename.name) {
-        this.removeEventListener(o.type, o.listener, o.options);
-        this.addEventListener(o.type, o.listener = listener, o.options = options);
-        o.value = value;
-        return;
-      }
-    }
-    this.addEventListener(typename.type, listener, options);
-    o = {type: typename.type, name: typename.name, value: value, listener: listener, options: options};
-    if (!on) this.__on = [o];
-    else on.push(o);
-  };
-}
-
-/* harmony default export */ var selection_on = (function(typename, value, options) {
-  var typenames = on_parseTypenames(typename + ""), i, n = typenames.length, t;
-
-  if (arguments.length < 2) {
-    var on = this.node().__on;
-    if (on) for (var j = 0, m = on.length, o; j < m; ++j) {
-      for (i = 0, o = on[j]; i < n; ++i) {
-        if ((t = typenames[i]).type === o.type && t.name === o.name) {
-          return o.value;
-        }
-      }
-    }
-    return;
-  }
-
-  on = value ? onAdd : onRemove;
-  for (i = 0; i < n; ++i) this.each(on(typenames[i], value, options));
-  return this;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/dispatch.js
-
-
-function dispatchEvent(node, type, params) {
-  var window = src_window(node),
-      event = window.CustomEvent;
-
-  if (typeof event === "function") {
-    event = new event(type, params);
-  } else {
-    event = window.document.createEvent("Event");
-    if (params) event.initEvent(type, params.bubbles, params.cancelable), event.detail = params.detail;
-    else event.initEvent(type, false, false);
-  }
-
-  node.dispatchEvent(event);
-}
-
-function dispatchConstant(type, params) {
-  return function() {
-    return dispatchEvent(this, type, params);
-  };
-}
-
-function dispatchFunction(type, params) {
-  return function() {
-    return dispatchEvent(this, type, params.apply(this, arguments));
-  };
-}
-
-/* harmony default export */ var selection_dispatch = (function(type, params) {
-  return this.each((typeof params === "function"
-      ? dispatchFunction
-      : dispatchConstant)(type, params));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/iterator.js
-/* harmony default export */ var iterator = (function*() {
-  for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j) {
-    for (var group = groups[j], i = 0, n = group.length, node; i < n; ++i) {
-      if (node = group[i]) yield node;
-    }
-  }
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var selection_root = [null];
-
-function Selection(groups, parents) {
-  this._groups = groups;
-  this._parents = parents;
-}
-
-function selection_selection() {
-  return new Selection([[document.documentElement]], selection_root);
-}
-
-function selection_selection_selection() {
-  return this;
-}
-
-Selection.prototype = selection_selection.prototype = {
-  constructor: Selection,
-  select: selection_select,
-  selectAll: selectAll,
-  selectChild: selectChild,
-  selectChildren: selectChildren,
-  filter: selection_filter,
-  data: selection_data,
-  enter: selection_enter,
-  exit: selection_exit,
-  join: join,
-  merge: selection_merge,
-  selection: selection_selection_selection,
-  order: order,
-  sort: sort,
-  call: call,
-  nodes: selection_nodes,
-  node: selection_node,
-  size: selection_size,
-  empty: selection_empty,
-  each: each,
-  attr: attr,
-  style: style,
-  property: property,
-  classed: classed,
-  text: selection_text,
-  html: html,
-  raise: selection_raise,
-  lower: selection_lower,
-  append: append,
-  insert: insert,
-  remove: selection_remove,
-  clone: clone,
-  datum: selection_datum,
-  on: selection_on,
-  dispatch: selection_dispatch,
-  [Symbol.iterator]: iterator
-};
-
-/* harmony default export */ var src_selection = (selection_selection);
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/select.js
-
-
-/* harmony default export */ var src_select = (function(selector) {
-  return typeof selector === "string"
-      ? new Selection([[document.querySelector(selector)]], [document.documentElement])
-      : new Selection([[selector]], selection_root);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-drag/src/noevent.js
-function nopropagation(event) {
-  event.stopImmediatePropagation();
-}
-
-/* harmony default export */ var noevent = (function(event) {
-  event.preventDefault();
-  event.stopImmediatePropagation();
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-drag/src/nodrag.js
-
-
-
-/* harmony default export */ var nodrag = (function(view) {
-  var root = view.document.documentElement,
-      selection = src_select(view).on("dragstart.drag", noevent, true);
-  if ("onselectstart" in root) {
-    selection.on("selectstart.drag", noevent, true);
-  } else {
-    root.__noselect = root.style.MozUserSelect;
-    root.style.MozUserSelect = "none";
-  }
-});
-
-function yesdrag(view, noclick) {
-  var root = view.document.documentElement,
-      selection = src_select(view).on("dragstart.drag", null);
-  if (noclick) {
-    selection.on("click.drag", noevent, true);
-    setTimeout(function() { selection.on("click.drag", null); }, 0);
-  }
-  if ("onselectstart" in root) {
-    selection.on("selectstart.drag", null);
-  } else {
-    root.style.MozUserSelect = root.__noselect;
-    delete root.__noselect;
-  }
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-color/src/define.js
-/* harmony default export */ var define = (function(constructor, factory, prototype) {
-  constructor.prototype = factory.prototype = prototype;
-  prototype.constructor = constructor;
-});
-
-function extend(parent, definition) {
-  var prototype = Object.create(parent.prototype);
-  for (var key in definition) prototype[key] = definition[key];
-  return prototype;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-color/src/color.js
-
-
-function Color() {}
-
-var darker = 0.7;
-var brighter = 1 / darker;
-
-var reI = "\\s*([+-]?\\d+)\\s*",
-    reN = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*",
-    reP = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)%\\s*",
-    reHex = /^#([0-9a-f]{3,8})$/,
-    reRgbInteger = new RegExp("^rgb\\(" + [reI, reI, reI] + "\\)$"),
-    reRgbPercent = new RegExp("^rgb\\(" + [reP, reP, reP] + "\\)$"),
-    reRgbaInteger = new RegExp("^rgba\\(" + [reI, reI, reI, reN] + "\\)$"),
-    reRgbaPercent = new RegExp("^rgba\\(" + [reP, reP, reP, reN] + "\\)$"),
-    reHslPercent = new RegExp("^hsl\\(" + [reN, reP, reP] + "\\)$"),
-    reHslaPercent = new RegExp("^hsla\\(" + [reN, reP, reP, reN] + "\\)$");
-
-var named = {
-  aliceblue: 0xf0f8ff,
-  antiquewhite: 0xfaebd7,
-  aqua: 0x00ffff,
-  aquamarine: 0x7fffd4,
-  azure: 0xf0ffff,
-  beige: 0xf5f5dc,
-  bisque: 0xffe4c4,
-  black: 0x000000,
-  blanchedalmond: 0xffebcd,
-  blue: 0x0000ff,
-  blueviolet: 0x8a2be2,
-  brown: 0xa52a2a,
-  burlywood: 0xdeb887,
-  cadetblue: 0x5f9ea0,
-  chartreuse: 0x7fff00,
-  chocolate: 0xd2691e,
-  coral: 0xff7f50,
-  cornflowerblue: 0x6495ed,
-  cornsilk: 0xfff8dc,
-  crimson: 0xdc143c,
-  cyan: 0x00ffff,
-  darkblue: 0x00008b,
-  darkcyan: 0x008b8b,
-  darkgoldenrod: 0xb8860b,
-  darkgray: 0xa9a9a9,
-  darkgreen: 0x006400,
-  darkgrey: 0xa9a9a9,
-  darkkhaki: 0xbdb76b,
-  darkmagenta: 0x8b008b,
-  darkolivegreen: 0x556b2f,
-  darkorange: 0xff8c00,
-  darkorchid: 0x9932cc,
-  darkred: 0x8b0000,
-  darksalmon: 0xe9967a,
-  darkseagreen: 0x8fbc8f,
-  darkslateblue: 0x483d8b,
-  darkslategray: 0x2f4f4f,
-  darkslategrey: 0x2f4f4f,
-  darkturquoise: 0x00ced1,
-  darkviolet: 0x9400d3,
-  deeppink: 0xff1493,
-  deepskyblue: 0x00bfff,
-  dimgray: 0x696969,
-  dimgrey: 0x696969,
-  dodgerblue: 0x1e90ff,
-  firebrick: 0xb22222,
-  floralwhite: 0xfffaf0,
-  forestgreen: 0x228b22,
-  fuchsia: 0xff00ff,
-  gainsboro: 0xdcdcdc,
-  ghostwhite: 0xf8f8ff,
-  gold: 0xffd700,
-  goldenrod: 0xdaa520,
-  gray: 0x808080,
-  green: 0x008000,
-  greenyellow: 0xadff2f,
-  grey: 0x808080,
-  honeydew: 0xf0fff0,
-  hotpink: 0xff69b4,
-  indianred: 0xcd5c5c,
-  indigo: 0x4b0082,
-  ivory: 0xfffff0,
-  khaki: 0xf0e68c,
-  lavender: 0xe6e6fa,
-  lavenderblush: 0xfff0f5,
-  lawngreen: 0x7cfc00,
-  lemonchiffon: 0xfffacd,
-  lightblue: 0xadd8e6,
-  lightcoral: 0xf08080,
-  lightcyan: 0xe0ffff,
-  lightgoldenrodyellow: 0xfafad2,
-  lightgray: 0xd3d3d3,
-  lightgreen: 0x90ee90,
-  lightgrey: 0xd3d3d3,
-  lightpink: 0xffb6c1,
-  lightsalmon: 0xffa07a,
-  lightseagreen: 0x20b2aa,
-  lightskyblue: 0x87cefa,
-  lightslategray: 0x778899,
-  lightslategrey: 0x778899,
-  lightsteelblue: 0xb0c4de,
-  lightyellow: 0xffffe0,
-  lime: 0x00ff00,
-  limegreen: 0x32cd32,
-  linen: 0xfaf0e6,
-  magenta: 0xff00ff,
-  maroon: 0x800000,
-  mediumaquamarine: 0x66cdaa,
-  mediumblue: 0x0000cd,
-  mediumorchid: 0xba55d3,
-  mediumpurple: 0x9370db,
-  mediumseagreen: 0x3cb371,
-  mediumslateblue: 0x7b68ee,
-  mediumspringgreen: 0x00fa9a,
-  mediumturquoise: 0x48d1cc,
-  mediumvioletred: 0xc71585,
-  midnightblue: 0x191970,
-  mintcream: 0xf5fffa,
-  mistyrose: 0xffe4e1,
-  moccasin: 0xffe4b5,
-  navajowhite: 0xffdead,
-  navy: 0x000080,
-  oldlace: 0xfdf5e6,
-  olive: 0x808000,
-  olivedrab: 0x6b8e23,
-  orange: 0xffa500,
-  orangered: 0xff4500,
-  orchid: 0xda70d6,
-  palegoldenrod: 0xeee8aa,
-  palegreen: 0x98fb98,
-  paleturquoise: 0xafeeee,
-  palevioletred: 0xdb7093,
-  papayawhip: 0xffefd5,
-  peachpuff: 0xffdab9,
-  peru: 0xcd853f,
-  pink: 0xffc0cb,
-  plum: 0xdda0dd,
-  powderblue: 0xb0e0e6,
-  purple: 0x800080,
-  rebeccapurple: 0x663399,
-  red: 0xff0000,
-  rosybrown: 0xbc8f8f,
-  royalblue: 0x4169e1,
-  saddlebrown: 0x8b4513,
-  salmon: 0xfa8072,
-  sandybrown: 0xf4a460,
-  seagreen: 0x2e8b57,
-  seashell: 0xfff5ee,
-  sienna: 0xa0522d,
-  silver: 0xc0c0c0,
-  skyblue: 0x87ceeb,
-  slateblue: 0x6a5acd,
-  slategray: 0x708090,
-  slategrey: 0x708090,
-  snow: 0xfffafa,
-  springgreen: 0x00ff7f,
-  steelblue: 0x4682b4,
-  tan: 0xd2b48c,
-  teal: 0x008080,
-  thistle: 0xd8bfd8,
-  tomato: 0xff6347,
-  turquoise: 0x40e0d0,
-  violet: 0xee82ee,
-  wheat: 0xf5deb3,
-  white: 0xffffff,
-  whitesmoke: 0xf5f5f5,
-  yellow: 0xffff00,
-  yellowgreen: 0x9acd32
-};
-
-define(Color, color_color, {
-  copy: function(channels) {
-    return Object.assign(new this.constructor, this, channels);
-  },
-  displayable: function() {
-    return this.rgb().displayable();
-  },
-  hex: color_formatHex, // Deprecated! Use color.formatHex.
-  formatHex: color_formatHex,
-  formatHsl: color_formatHsl,
-  formatRgb: color_formatRgb,
-  toString: color_formatRgb
-});
-
-function color_formatHex() {
-  return this.rgb().formatHex();
-}
-
-function color_formatHsl() {
-  return hslConvert(this).formatHsl();
-}
-
-function color_formatRgb() {
-  return this.rgb().formatRgb();
-}
-
-function color_color(format) {
-  var m, l;
-  format = (format + "").trim().toLowerCase();
-  return (m = reHex.exec(format)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) // #ff0000
-      : l === 3 ? new Rgb((m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), ((m & 0xf) << 4) | (m & 0xf), 1) // #f00
-      : l === 8 ? rgba(m >> 24 & 0xff, m >> 16 & 0xff, m >> 8 & 0xff, (m & 0xff) / 0xff) // #ff000000
-      : l === 4 ? rgba((m >> 12 & 0xf) | (m >> 8 & 0xf0), (m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), (((m & 0xf) << 4) | (m & 0xf)) / 0xff) // #f000
-      : null) // invalid hex
-      : (m = reRgbInteger.exec(format)) ? new Rgb(m[1], m[2], m[3], 1) // rgb(255, 0, 0)
-      : (m = reRgbPercent.exec(format)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) // rgb(100%, 0%, 0%)
-      : (m = reRgbaInteger.exec(format)) ? rgba(m[1], m[2], m[3], m[4]) // rgba(255, 0, 0, 1)
-      : (m = reRgbaPercent.exec(format)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) // rgb(100%, 0%, 0%, 1)
-      : (m = reHslPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) // hsl(120, 50%, 50%)
-      : (m = reHslaPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) // hsla(120, 50%, 50%, 1)
-      : named.hasOwnProperty(format) ? rgbn(named[format]) // eslint-disable-line no-prototype-builtins
-      : format === "transparent" ? new Rgb(NaN, NaN, NaN, 0)
-      : null;
-}
-
-function rgbn(n) {
-  return new Rgb(n >> 16 & 0xff, n >> 8 & 0xff, n & 0xff, 1);
-}
-
-function rgba(r, g, b, a) {
-  if (a <= 0) r = g = b = NaN;
-  return new Rgb(r, g, b, a);
-}
-
-function rgbConvert(o) {
-  if (!(o instanceof Color)) o = color_color(o);
-  if (!o) return new Rgb;
-  o = o.rgb();
-  return new Rgb(o.r, o.g, o.b, o.opacity);
-}
-
-function color_rgb(r, g, b, opacity) {
-  return arguments.length === 1 ? rgbConvert(r) : new Rgb(r, g, b, opacity == null ? 1 : opacity);
-}
-
-function Rgb(r, g, b, opacity) {
-  this.r = +r;
-  this.g = +g;
-  this.b = +b;
-  this.opacity = +opacity;
-}
-
-define(Rgb, color_rgb, extend(Color, {
-  brighter: function(k) {
-    k = k == null ? brighter : Math.pow(brighter, k);
-    return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
-  },
-  darker: function(k) {
-    k = k == null ? darker : Math.pow(darker, k);
-    return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
-  },
-  rgb: function() {
-    return this;
-  },
-  displayable: function() {
-    return (-0.5 <= this.r && this.r < 255.5)
-        && (-0.5 <= this.g && this.g < 255.5)
-        && (-0.5 <= this.b && this.b < 255.5)
-        && (0 <= this.opacity && this.opacity <= 1);
-  },
-  hex: rgb_formatHex, // Deprecated! Use color.formatHex.
-  formatHex: rgb_formatHex,
-  formatRgb: rgb_formatRgb,
-  toString: rgb_formatRgb
-}));
-
-function rgb_formatHex() {
-  return "#" + hex(this.r) + hex(this.g) + hex(this.b);
-}
-
-function rgb_formatRgb() {
-  var a = this.opacity; a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
-  return (a === 1 ? "rgb(" : "rgba(")
-      + Math.max(0, Math.min(255, Math.round(this.r) || 0)) + ", "
-      + Math.max(0, Math.min(255, Math.round(this.g) || 0)) + ", "
-      + Math.max(0, Math.min(255, Math.round(this.b) || 0))
-      + (a === 1 ? ")" : ", " + a + ")");
-}
-
-function hex(value) {
-  value = Math.max(0, Math.min(255, Math.round(value) || 0));
-  return (value < 16 ? "0" : "") + value.toString(16);
-}
-
-function hsla(h, s, l, a) {
-  if (a <= 0) h = s = l = NaN;
-  else if (l <= 0 || l >= 1) h = s = NaN;
-  else if (s <= 0) h = NaN;
-  return new Hsl(h, s, l, a);
-}
-
-function hslConvert(o) {
-  if (o instanceof Hsl) return new Hsl(o.h, o.s, o.l, o.opacity);
-  if (!(o instanceof Color)) o = color_color(o);
-  if (!o) return new Hsl;
-  if (o instanceof Hsl) return o;
-  o = o.rgb();
-  var r = o.r / 255,
-      g = o.g / 255,
-      b = o.b / 255,
-      min = Math.min(r, g, b),
-      max = Math.max(r, g, b),
-      h = NaN,
-      s = max - min,
-      l = (max + min) / 2;
-  if (s) {
-    if (r === max) h = (g - b) / s + (g < b) * 6;
-    else if (g === max) h = (b - r) / s + 2;
-    else h = (r - g) / s + 4;
-    s /= l < 0.5 ? max + min : 2 - max - min;
-    h *= 60;
-  } else {
-    s = l > 0 && l < 1 ? 0 : h;
-  }
-  return new Hsl(h, s, l, o.opacity);
-}
-
-function hsl(h, s, l, opacity) {
-  return arguments.length === 1 ? hslConvert(h) : new Hsl(h, s, l, opacity == null ? 1 : opacity);
-}
-
-function Hsl(h, s, l, opacity) {
-  this.h = +h;
-  this.s = +s;
-  this.l = +l;
-  this.opacity = +opacity;
-}
-
-define(Hsl, hsl, extend(Color, {
-  brighter: function(k) {
-    k = k == null ? brighter : Math.pow(brighter, k);
-    return new Hsl(this.h, this.s, this.l * k, this.opacity);
-  },
-  darker: function(k) {
-    k = k == null ? darker : Math.pow(darker, k);
-    return new Hsl(this.h, this.s, this.l * k, this.opacity);
-  },
-  rgb: function() {
-    var h = this.h % 360 + (this.h < 0) * 360,
-        s = isNaN(h) || isNaN(this.s) ? 0 : this.s,
-        l = this.l,
-        m2 = l + (l < 0.5 ? l : 1 - l) * s,
-        m1 = 2 * l - m2;
-    return new Rgb(
-      hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2),
-      hsl2rgb(h, m1, m2),
-      hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2),
-      this.opacity
-    );
-  },
-  displayable: function() {
-    return (0 <= this.s && this.s <= 1 || isNaN(this.s))
-        && (0 <= this.l && this.l <= 1)
-        && (0 <= this.opacity && this.opacity <= 1);
-  },
-  formatHsl: function() {
-    var a = this.opacity; a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
-    return (a === 1 ? "hsl(" : "hsla(")
-        + (this.h || 0) + ", "
-        + (this.s || 0) * 100 + "%, "
-        + (this.l || 0) * 100 + "%"
-        + (a === 1 ? ")" : ", " + a + ")");
-  }
-}));
-
-/* From FvD 13.37, CSS Color Module Level 3 */
-function hsl2rgb(h, m1, m2) {
-  return (h < 60 ? m1 + (m2 - m1) * h / 60
-      : h < 180 ? m2
-      : h < 240 ? m1 + (m2 - m1) * (240 - h) / 60
-      : m1) * 255;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/basis.js
-function basis(t1, v0, v1, v2, v3) {
-  var t2 = t1 * t1, t3 = t2 * t1;
-  return ((1 - 3 * t1 + 3 * t2 - t3) * v0
-      + (4 - 6 * t2 + 3 * t3) * v1
-      + (1 + 3 * t1 + 3 * t2 - 3 * t3) * v2
-      + t3 * v3) / 6;
-}
-
-/* harmony default export */ var src_basis = (function(values) {
-  var n = values.length - 1;
-  return function(t) {
-    var i = t <= 0 ? (t = 0) : t >= 1 ? (t = 1, n - 1) : Math.floor(t * n),
-        v1 = values[i],
-        v2 = values[i + 1],
-        v0 = i > 0 ? values[i - 1] : 2 * v1 - v2,
-        v3 = i < n - 1 ? values[i + 2] : 2 * v2 - v1;
-    return basis((t - i / n) * n, v0, v1, v2, v3);
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/basisClosed.js
-
-
-/* harmony default export */ var basisClosed = (function(values) {
-  var n = values.length;
-  return function(t) {
-    var i = Math.floor(((t %= 1) < 0 ? ++t : t) * n),
-        v0 = values[(i + n - 1) % n],
-        v1 = values[i % n],
-        v2 = values[(i + 1) % n],
-        v3 = values[(i + 2) % n];
-    return basis((t - i / n) * n, v0, v1, v2, v3);
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/constant.js
-/* harmony default export */ var src_constant = (x => () => x);
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/color.js
-
-
-function linear(a, d) {
-  return function(t) {
-    return a + t * d;
-  };
-}
-
-function exponential(a, b, y) {
-  return a = Math.pow(a, y), b = Math.pow(b, y) - a, y = 1 / y, function(t) {
-    return Math.pow(a + t * b, y);
-  };
-}
-
-function hue(a, b) {
-  var d = b - a;
-  return d ? linear(a, d > 180 || d < -180 ? d - 360 * Math.round(d / 360) : d) : src_constant(isNaN(a) ? b : a);
-}
-
-function gamma(y) {
-  return (y = +y) === 1 ? nogamma : function(a, b) {
-    return b - a ? exponential(a, b, y) : src_constant(isNaN(a) ? b : a);
-  };
-}
-
-function nogamma(a, b) {
-  var d = b - a;
-  return d ? linear(a, d) : src_constant(isNaN(a) ? b : a);
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/rgb.js
-
-
-
-
-
-/* harmony default export */ var src_rgb = ((function rgbGamma(y) {
-  var color = gamma(y);
-
-  function rgb(start, end) {
-    var r = color((start = color_rgb(start)).r, (end = color_rgb(end)).r),
-        g = color(start.g, end.g),
-        b = color(start.b, end.b),
-        opacity = nogamma(start.opacity, end.opacity);
-    return function(t) {
-      start.r = r(t);
-      start.g = g(t);
-      start.b = b(t);
-      start.opacity = opacity(t);
-      return start + "";
-    };
-  }
-
-  rgb.gamma = rgbGamma;
-
-  return rgb;
-})(1));
-
-function rgbSpline(spline) {
-  return function(colors) {
-    var n = colors.length,
-        r = new Array(n),
-        g = new Array(n),
-        b = new Array(n),
-        i, color;
-    for (i = 0; i < n; ++i) {
-      color = color_rgb(colors[i]);
-      r[i] = color.r || 0;
-      g[i] = color.g || 0;
-      b[i] = color.b || 0;
-    }
-    r = spline(r);
-    g = spline(g);
-    b = spline(b);
-    color.opacity = 1;
-    return function(t) {
-      color.r = r(t);
-      color.g = g(t);
-      color.b = b(t);
-      return color + "";
-    };
-  };
-}
-
-var rgbBasis = rgbSpline(src_basis);
-var rgbBasisClosed = rgbSpline(basisClosed);
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/numberArray.js
-/* harmony default export */ var numberArray = (function(a, b) {
-  if (!b) b = [];
-  var n = a ? Math.min(b.length, a.length) : 0,
-      c = b.slice(),
-      i;
-  return function(t) {
-    for (i = 0; i < n; ++i) c[i] = a[i] * (1 - t) + b[i] * t;
-    return c;
-  };
-});
-
-function isNumberArray(x) {
-  return ArrayBuffer.isView(x) && !(x instanceof DataView);
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/array.js
-
-
-
-/* harmony default export */ var d3_interpolate_src_array = (function(a, b) {
-  return (isNumberArray(b) ? numberArray : genericArray)(a, b);
-});
-
-function genericArray(a, b) {
-  var nb = b ? b.length : 0,
-      na = a ? Math.min(nb, a.length) : 0,
-      x = new Array(na),
-      c = new Array(nb),
-      i;
-
-  for (i = 0; i < na; ++i) x[i] = src_value(a[i], b[i]);
-  for (; i < nb; ++i) c[i] = b[i];
-
-  return function(t) {
-    for (i = 0; i < na; ++i) c[i] = x[i](t);
-    return c;
-  };
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/date.js
-/* harmony default export */ var date = (function(a, b) {
-  var d = new Date;
-  return a = +a, b = +b, function(t) {
-    return d.setTime(a * (1 - t) + b * t), d;
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/number.js
-/* harmony default export */ var number = (function(a, b) {
-  return a = +a, b = +b, function(t) {
-    return a * (1 - t) + b * t;
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/object.js
-
-
-/* harmony default export */ var object = (function(a, b) {
-  var i = {},
-      c = {},
-      k;
-
-  if (a === null || typeof a !== "object") a = {};
-  if (b === null || typeof b !== "object") b = {};
-
-  for (k in b) {
-    if (k in a) {
-      i[k] = src_value(a[k], b[k]);
-    } else {
-      c[k] = b[k];
-    }
-  }
-
-  return function(t) {
-    for (k in i) c[k] = i[k](t);
-    return c;
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/string.js
-
-
-var reA = /[-+]?(?:\d+\.?\d*|\.?\d+)(?:[eE][-+]?\d+)?/g,
-    reB = new RegExp(reA.source, "g");
-
-function zero(b) {
-  return function() {
-    return b;
-  };
-}
-
-function one(b) {
-  return function(t) {
-    return b(t) + "";
-  };
-}
-
-/* harmony default export */ var string = (function(a, b) {
-  var bi = reA.lastIndex = reB.lastIndex = 0, // scan index for next number in b
-      am, // current match in a
-      bm, // current match in b
-      bs, // string preceding current number in b, if any
-      i = -1, // index in s
-      s = [], // string constants and placeholders
-      q = []; // number interpolators
-
-  // Coerce inputs to strings.
-  a = a + "", b = b + "";
-
-  // Interpolate pairs of numbers in a & b.
-  while ((am = reA.exec(a))
-      && (bm = reB.exec(b))) {
-    if ((bs = bm.index) > bi) { // a string precedes the next number in b
-      bs = b.slice(bi, bs);
-      if (s[i]) s[i] += bs; // coalesce with previous string
-      else s[++i] = bs;
-    }
-    if ((am = am[0]) === (bm = bm[0])) { // numbers in a & b match
-      if (s[i]) s[i] += bm; // coalesce with previous string
-      else s[++i] = bm;
-    } else { // interpolate non-matching numbers
-      s[++i] = null;
-      q.push({i: i, x: number(am, bm)});
-    }
-    bi = reB.lastIndex;
-  }
-
-  // Add remains of b.
-  if (bi < b.length) {
-    bs = b.slice(bi);
-    if (s[i]) s[i] += bs; // coalesce with previous string
-    else s[++i] = bs;
-  }
-
-  // Special optimization for only a single match.
-  // Otherwise, interpolate each of the numbers and rejoin the string.
-  return s.length < 2 ? (q[0]
-      ? one(q[0].x)
-      : zero(b))
-      : (b = q.length, function(t) {
-          for (var i = 0, o; i < b; ++i) s[(o = q[i]).i] = o.x(t);
-          return s.join("");
-        });
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/value.js
-
-
-
-
-
-
-
-
-
-
-/* harmony default export */ var src_value = (function(a, b) {
-  var t = typeof b, c;
-  return b == null || t === "boolean" ? src_constant(b)
-      : (t === "number" ? number
-      : t === "string" ? ((c = color_color(b)) ? (b = c, src_rgb) : string)
-      : b instanceof color_color ? src_rgb
-      : b instanceof Date ? date
-      : isNumberArray(b) ? numberArray
-      : Array.isArray(b) ? genericArray
-      : typeof b.valueOf !== "function" && typeof b.toString !== "function" || isNaN(b) ? object
-      : number)(a, b);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/sourceEvent.js
-/* harmony default export */ var sourceEvent = (function(event) {
-  let sourceEvent;
-  while (sourceEvent = event.sourceEvent) event = sourceEvent;
-  return event;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/pointer.js
-
-
-/* harmony default export */ var pointer = (function(event, node) {
-  event = sourceEvent(event);
-  if (node === undefined) node = event.currentTarget;
-  if (node) {
-    var svg = node.ownerSVGElement || node;
-    if (svg.createSVGPoint) {
-      var point = svg.createSVGPoint();
-      point.x = event.clientX, point.y = event.clientY;
-      point = point.matrixTransform(node.getScreenCTM().inverse());
-      return [point.x, point.y];
-    }
-    if (node.getBoundingClientRect) {
-      var rect = node.getBoundingClientRect();
-      return [event.clientX - rect.left - node.clientLeft, event.clientY - rect.top - node.clientTop];
-    }
-  }
-  return [event.pageX, event.pageY];
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-timer/src/timer.js
-var timer_frame = 0, // is an animation frame pending?
-    timeout = 0, // is a timeout pending?
-    interval = 0, // are any timers active?
-    pokeDelay = 1000, // how frequently we check for clock skew
-    taskHead,
-    taskTail,
-    clockLast = 0,
-    clockNow = 0,
-    clockSkew = 0,
-    clock = typeof performance === "object" && performance.now ? performance : Date,
-    setFrame = typeof window === "object" && window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : function(f) { setTimeout(f, 17); };
-
-function now() {
-  return clockNow || (setFrame(clearNow), clockNow = clock.now() + clockSkew);
-}
-
-function clearNow() {
-  clockNow = 0;
-}
-
-function Timer() {
-  this._call =
-  this._time =
-  this._next = null;
-}
-
-Timer.prototype = timer.prototype = {
-  constructor: Timer,
-  restart: function(callback, delay, time) {
-    if (typeof callback !== "function") throw new TypeError("callback is not a function");
-    time = (time == null ? now() : +time) + (delay == null ? 0 : +delay);
-    if (!this._next && taskTail !== this) {
-      if (taskTail) taskTail._next = this;
-      else taskHead = this;
-      taskTail = this;
-    }
-    this._call = callback;
-    this._time = time;
-    sleep();
-  },
-  stop: function() {
-    if (this._call) {
-      this._call = null;
-      this._time = Infinity;
-      sleep();
-    }
-  }
-};
-
-function timer(callback, delay, time) {
-  var t = new Timer;
-  t.restart(callback, delay, time);
-  return t;
-}
-
-function timerFlush() {
-  now(); // Get the current time, if not already set.
-  ++timer_frame; // Pretend we’ve set an alarm, if we haven’t already.
-  var t = taskHead, e;
-  while (t) {
-    if ((e = clockNow - t._time) >= 0) t._call.call(null, e);
-    t = t._next;
-  }
-  --timer_frame;
-}
-
-function wake() {
-  clockNow = (clockLast = clock.now()) + clockSkew;
-  timer_frame = timeout = 0;
-  try {
-    timerFlush();
-  } finally {
-    timer_frame = 0;
-    nap();
-    clockNow = 0;
-  }
-}
-
-function poke() {
-  var now = clock.now(), delay = now - clockLast;
-  if (delay > pokeDelay) clockSkew -= delay, clockLast = now;
-}
-
-function nap() {
-  var t0, t1 = taskHead, t2, time = Infinity;
-  while (t1) {
-    if (t1._call) {
-      if (time > t1._time) time = t1._time;
-      t0 = t1, t1 = t1._next;
-    } else {
-      t2 = t1._next, t1._next = null;
-      t1 = t0 ? t0._next = t2 : taskHead = t2;
-    }
-  }
-  taskTail = t0;
-  sleep(time);
-}
-
-function sleep(time) {
-  if (timer_frame) return; // Soonest alarm already set, or will be.
-  if (timeout) timeout = clearTimeout(timeout);
-  var delay = time - clockNow; // Strictly less than if we recomputed clockNow.
-  if (delay > 24) {
-    if (time < Infinity) timeout = setTimeout(wake, time - clock.now() - clockSkew);
-    if (interval) interval = clearInterval(interval);
-  } else {
-    if (!interval) clockLast = clock.now(), interval = setInterval(poke, pokeDelay);
-    timer_frame = 1, setFrame(wake);
-  }
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-timer/src/timeout.js
-
-
-/* harmony default export */ var src_timeout = (function(callback, delay, time) {
-  var t = new Timer;
-  delay = delay == null ? 0 : +delay;
-  t.restart(elapsed => {
-    t.stop();
-    callback(elapsed + delay);
-  }, delay, time);
-  return t;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/schedule.js
-
-
-
-var emptyOn = src_dispatch("start", "end", "cancel", "interrupt");
-var emptyTween = [];
-
-var CREATED = 0;
-var SCHEDULED = 1;
-var STARTING = 2;
-var STARTED = 3;
-var RUNNING = 4;
-var ENDING = 5;
-var ENDED = 6;
-
-/* harmony default export */ var transition_schedule = (function(node, name, id, index, group, timing) {
-  var schedules = node.__transition;
-  if (!schedules) node.__transition = {};
-  else if (id in schedules) return;
-  schedule_create(node, id, {
-    name: name,
-    index: index, // For context during callback.
-    group: group, // For context during callback.
-    on: emptyOn,
-    tween: emptyTween,
-    time: timing.time,
-    delay: timing.delay,
-    duration: timing.duration,
-    ease: timing.ease,
-    timer: null,
-    state: CREATED
-  });
-});
-
-function init(node, id) {
-  var schedule = schedule_get(node, id);
-  if (schedule.state > CREATED) throw new Error("too late; already scheduled");
-  return schedule;
-}
-
-function schedule_set(node, id) {
-  var schedule = schedule_get(node, id);
-  if (schedule.state > STARTED) throw new Error("too late; already running");
-  return schedule;
-}
-
-function schedule_get(node, id) {
-  var schedule = node.__transition;
-  if (!schedule || !(schedule = schedule[id])) throw new Error("transition not found");
-  return schedule;
-}
-
-function schedule_create(node, id, self) {
-  var schedules = node.__transition,
-      tween;
-
-  // Initialize the self timer when the transition is created.
-  // Note the actual delay is not known until the first callback!
-  schedules[id] = self;
-  self.timer = timer(schedule, 0, self.time);
-
-  function schedule(elapsed) {
-    self.state = SCHEDULED;
-    self.timer.restart(start, self.delay, self.time);
-
-    // If the elapsed delay is less than our first sleep, start immediately.
-    if (self.delay <= elapsed) start(elapsed - self.delay);
-  }
-
-  function start(elapsed) {
-    var i, j, n, o;
-
-    // If the state is not SCHEDULED, then we previously errored on start.
-    if (self.state !== SCHEDULED) return stop();
-
-    for (i in schedules) {
-      o = schedules[i];
-      if (o.name !== self.name) continue;
-
-      // While this element already has a starting transition during this frame,
-      // defer starting an interrupting transition until that transition has a
-      // chance to tick (and possibly end); see d3/d3-transition#54!
-      if (o.state === STARTED) return src_timeout(start);
-
-      // Interrupt the active transition, if any.
-      if (o.state === RUNNING) {
-        o.state = ENDED;
-        o.timer.stop();
-        o.on.call("interrupt", node, node.__data__, o.index, o.group);
-        delete schedules[i];
-      }
-
-      // Cancel any pre-empted transitions.
-      else if (+i < id) {
-        o.state = ENDED;
-        o.timer.stop();
-        o.on.call("cancel", node, node.__data__, o.index, o.group);
-        delete schedules[i];
-      }
-    }
-
-    // Defer the first tick to end of the current frame; see d3/d3#1576.
-    // Note the transition may be canceled after start and before the first tick!
-    // Note this must be scheduled before the start event; see d3/d3-transition#16!
-    // Assuming this is successful, subsequent callbacks go straight to tick.
-    src_timeout(function() {
-      if (self.state === STARTED) {
-        self.state = RUNNING;
-        self.timer.restart(tick, self.delay, self.time);
-        tick(elapsed);
-      }
-    });
-
-    // Dispatch the start event.
-    // Note this must be done before the tween are initialized.
-    self.state = STARTING;
-    self.on.call("start", node, node.__data__, self.index, self.group);
-    if (self.state !== STARTING) return; // interrupted
-    self.state = STARTED;
-
-    // Initialize the tween, deleting null tween.
-    tween = new Array(n = self.tween.length);
-    for (i = 0, j = -1; i < n; ++i) {
-      if (o = self.tween[i].value.call(node, node.__data__, self.index, self.group)) {
-        tween[++j] = o;
-      }
-    }
-    tween.length = j + 1;
-  }
-
-  function tick(elapsed) {
-    var t = elapsed < self.duration ? self.ease.call(null, elapsed / self.duration) : (self.timer.restart(stop), self.state = ENDING, 1),
-        i = -1,
-        n = tween.length;
-
-    while (++i < n) {
-      tween[i].call(node, t);
-    }
-
-    // Dispatch the end event.
-    if (self.state === ENDING) {
-      self.on.call("end", node, node.__data__, self.index, self.group);
-      stop();
-    }
-  }
-
-  function stop() {
-    self.state = ENDED;
-    self.timer.stop();
-    delete schedules[id];
-    for (var i in schedules) return; // eslint-disable-line no-unused-vars
-    delete node.__transition;
-  }
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/interrupt.js
-
-
-/* harmony default export */ var interrupt = (function(node, name) {
-  var schedules = node.__transition,
-      schedule,
-      active,
-      empty = true,
-      i;
-
-  if (!schedules) return;
-
-  name = name == null ? null : name + "";
-
-  for (i in schedules) {
-    if ((schedule = schedules[i]).name !== name) { empty = false; continue; }
-    active = schedule.state > STARTING && schedule.state < ENDING;
-    schedule.state = ENDED;
-    schedule.timer.stop();
-    schedule.on.call(active ? "interrupt" : "cancel", node, node.__data__, schedule.index, schedule.group);
-    delete schedules[i];
-  }
-
-  if (empty) delete node.__transition;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/selection/interrupt.js
-
-
-/* harmony default export */ var selection_interrupt = (function(name) {
-  return this.each(function() {
-    interrupt(this, name);
-  });
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/transform/decompose.js
-var degrees = 180 / Math.PI;
-
-var identity = {
-  translateX: 0,
-  translateY: 0,
-  rotate: 0,
-  skewX: 0,
-  scaleX: 1,
-  scaleY: 1
-};
-
-/* harmony default export */ var decompose = (function(a, b, c, d, e, f) {
-  var scaleX, scaleY, skewX;
-  if (scaleX = Math.sqrt(a * a + b * b)) a /= scaleX, b /= scaleX;
-  if (skewX = a * c + b * d) c -= a * skewX, d -= b * skewX;
-  if (scaleY = Math.sqrt(c * c + d * d)) c /= scaleY, d /= scaleY, skewX /= scaleY;
-  if (a * d < b * c) a = -a, b = -b, skewX = -skewX, scaleX = -scaleX;
-  return {
-    translateX: e,
-    translateY: f,
-    rotate: Math.atan2(b, a) * degrees,
-    skewX: Math.atan(skewX) * degrees,
-    scaleX: scaleX,
-    scaleY: scaleY
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/transform/parse.js
-
-
-var svgNode;
-
-/* eslint-disable no-undef */
-function parseCss(value) {
-  const m = new (typeof DOMMatrix === "function" ? DOMMatrix : WebKitCSSMatrix)(value + "");
-  return m.isIdentity ? identity : decompose(m.a, m.b, m.c, m.d, m.e, m.f);
-}
-
-function parseSvg(value) {
-  if (value == null) return identity;
-  if (!svgNode) svgNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
-  svgNode.setAttribute("transform", value);
-  if (!(value = svgNode.transform.baseVal.consolidate())) return identity;
-  value = value.matrix;
-  return decompose(value.a, value.b, value.c, value.d, value.e, value.f);
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/transform/index.js
-
-
-
-function interpolateTransform(parse, pxComma, pxParen, degParen) {
-
-  function pop(s) {
-    return s.length ? s.pop() + " " : "";
-  }
-
-  function translate(xa, ya, xb, yb, s, q) {
-    if (xa !== xb || ya !== yb) {
-      var i = s.push("translate(", null, pxComma, null, pxParen);
-      q.push({i: i - 4, x: number(xa, xb)}, {i: i - 2, x: number(ya, yb)});
-    } else if (xb || yb) {
-      s.push("translate(" + xb + pxComma + yb + pxParen);
-    }
-  }
-
-  function rotate(a, b, s, q) {
-    if (a !== b) {
-      if (a - b > 180) b += 360; else if (b - a > 180) a += 360; // shortest path
-      q.push({i: s.push(pop(s) + "rotate(", null, degParen) - 2, x: number(a, b)});
-    } else if (b) {
-      s.push(pop(s) + "rotate(" + b + degParen);
-    }
-  }
-
-  function skewX(a, b, s, q) {
-    if (a !== b) {
-      q.push({i: s.push(pop(s) + "skewX(", null, degParen) - 2, x: number(a, b)});
-    } else if (b) {
-      s.push(pop(s) + "skewX(" + b + degParen);
-    }
-  }
-
-  function scale(xa, ya, xb, yb, s, q) {
-    if (xa !== xb || ya !== yb) {
-      var i = s.push(pop(s) + "scale(", null, ",", null, ")");
-      q.push({i: i - 4, x: number(xa, xb)}, {i: i - 2, x: number(ya, yb)});
-    } else if (xb !== 1 || yb !== 1) {
-      s.push(pop(s) + "scale(" + xb + "," + yb + ")");
-    }
-  }
-
-  return function(a, b) {
-    var s = [], // string constants and placeholders
-        q = []; // number interpolators
-    a = parse(a), b = parse(b);
-    translate(a.translateX, a.translateY, b.translateX, b.translateY, s, q);
-    rotate(a.rotate, b.rotate, s, q);
-    skewX(a.skewX, b.skewX, s, q);
-    scale(a.scaleX, a.scaleY, b.scaleX, b.scaleY, s, q);
-    a = b = null; // gc
-    return function(t) {
-      var i = -1, n = q.length, o;
-      while (++i < n) s[(o = q[i]).i] = o.x(t);
-      return s.join("");
-    };
-  };
-}
-
-var interpolateTransformCss = interpolateTransform(parseCss, "px, ", "px)", "deg)");
-var interpolateTransformSvg = interpolateTransform(parseSvg, ", ", ")", ")");
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/tween.js
-
-
-function tweenRemove(id, name) {
-  var tween0, tween1;
-  return function() {
-    var schedule = schedule_set(this, id),
-        tween = schedule.tween;
-
-    // If this node shared tween with the previous node,
-    // just assign the updated shared tween and we’re done!
-    // Otherwise, copy-on-write.
-    if (tween !== tween0) {
-      tween1 = tween0 = tween;
-      for (var i = 0, n = tween1.length; i < n; ++i) {
-        if (tween1[i].name === name) {
-          tween1 = tween1.slice();
-          tween1.splice(i, 1);
-          break;
-        }
-      }
-    }
-
-    schedule.tween = tween1;
-  };
-}
-
-function tweenFunction(id, name, value) {
-  var tween0, tween1;
-  if (typeof value !== "function") throw new Error;
-  return function() {
-    var schedule = schedule_set(this, id),
-        tween = schedule.tween;
-
-    // If this node shared tween with the previous node,
-    // just assign the updated shared tween and we’re done!
-    // Otherwise, copy-on-write.
-    if (tween !== tween0) {
-      tween1 = (tween0 = tween).slice();
-      for (var t = {name: name, value: value}, i = 0, n = tween1.length; i < n; ++i) {
-        if (tween1[i].name === name) {
-          tween1[i] = t;
-          break;
-        }
-      }
-      if (i === n) tween1.push(t);
-    }
-
-    schedule.tween = tween1;
-  };
-}
-
-/* harmony default export */ var transition_tween = (function(name, value) {
-  var id = this._id;
-
-  name += "";
-
-  if (arguments.length < 2) {
-    var tween = schedule_get(this.node(), id).tween;
-    for (var i = 0, n = tween.length, t; i < n; ++i) {
-      if ((t = tween[i]).name === name) {
-        return t.value;
-      }
-    }
-    return null;
-  }
-
-  return this.each((value == null ? tweenRemove : tweenFunction)(id, name, value));
-});
-
-function tweenValue(transition, name, value) {
-  var id = transition._id;
-
-  transition.each(function() {
-    var schedule = schedule_set(this, id);
-    (schedule.value || (schedule.value = {}))[name] = value.apply(this, arguments);
-  });
-
-  return function(node) {
-    return schedule_get(node, id).value[name];
-  };
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/interpolate.js
-
-
-
-/* harmony default export */ var transition_interpolate = (function(a, b) {
-  var c;
-  return (typeof b === "number" ? number
-      : b instanceof color_color ? src_rgb
-      : (c = color_color(b)) ? (b = c, src_rgb)
-      : string)(a, b);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/attr.js
-
-
-
-
-
-function attr_attrRemove(name) {
-  return function() {
-    this.removeAttribute(name);
-  };
-}
-
-function attr_attrRemoveNS(fullname) {
-  return function() {
-    this.removeAttributeNS(fullname.space, fullname.local);
-  };
-}
-
-function attr_attrConstant(name, interpolate, value1) {
-  var string00,
-      string1 = value1 + "",
-      interpolate0;
-  return function() {
-    var string0 = this.getAttribute(name);
-    return string0 === string1 ? null
-        : string0 === string00 ? interpolate0
-        : interpolate0 = interpolate(string00 = string0, value1);
-  };
-}
-
-function attr_attrConstantNS(fullname, interpolate, value1) {
-  var string00,
-      string1 = value1 + "",
-      interpolate0;
-  return function() {
-    var string0 = this.getAttributeNS(fullname.space, fullname.local);
-    return string0 === string1 ? null
-        : string0 === string00 ? interpolate0
-        : interpolate0 = interpolate(string00 = string0, value1);
-  };
-}
-
-function attr_attrFunction(name, interpolate, value) {
-  var string00,
-      string10,
-      interpolate0;
-  return function() {
-    var string0, value1 = value(this), string1;
-    if (value1 == null) return void this.removeAttribute(name);
-    string0 = this.getAttribute(name);
-    string1 = value1 + "";
-    return string0 === string1 ? null
-        : string0 === string00 && string1 === string10 ? interpolate0
-        : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
-  };
-}
-
-function attr_attrFunctionNS(fullname, interpolate, value) {
-  var string00,
-      string10,
-      interpolate0;
-  return function() {
-    var string0, value1 = value(this), string1;
-    if (value1 == null) return void this.removeAttributeNS(fullname.space, fullname.local);
-    string0 = this.getAttributeNS(fullname.space, fullname.local);
-    string1 = value1 + "";
-    return string0 === string1 ? null
-        : string0 === string00 && string1 === string10 ? interpolate0
-        : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
-  };
-}
-
-/* harmony default export */ var transition_attr = (function(name, value) {
-  var fullname = namespace(name), i = fullname === "transform" ? interpolateTransformSvg : transition_interpolate;
-  return this.attrTween(name, typeof value === "function"
-      ? (fullname.local ? attr_attrFunctionNS : attr_attrFunction)(fullname, i, tweenValue(this, "attr." + name, value))
-      : value == null ? (fullname.local ? attr_attrRemoveNS : attr_attrRemove)(fullname)
-      : (fullname.local ? attr_attrConstantNS : attr_attrConstant)(fullname, i, value));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/attrTween.js
-
-
-function attrInterpolate(name, i) {
-  return function(t) {
-    this.setAttribute(name, i.call(this, t));
-  };
-}
-
-function attrInterpolateNS(fullname, i) {
-  return function(t) {
-    this.setAttributeNS(fullname.space, fullname.local, i.call(this, t));
-  };
-}
-
-function attrTweenNS(fullname, value) {
-  var t0, i0;
-  function tween() {
-    var i = value.apply(this, arguments);
-    if (i !== i0) t0 = (i0 = i) && attrInterpolateNS(fullname, i);
-    return t0;
-  }
-  tween._value = value;
-  return tween;
-}
-
-function attrTween(name, value) {
-  var t0, i0;
-  function tween() {
-    var i = value.apply(this, arguments);
-    if (i !== i0) t0 = (i0 = i) && attrInterpolate(name, i);
-    return t0;
-  }
-  tween._value = value;
-  return tween;
-}
-
-/* harmony default export */ var transition_attrTween = (function(name, value) {
-  var key = "attr." + name;
-  if (arguments.length < 2) return (key = this.tween(key)) && key._value;
-  if (value == null) return this.tween(key, null);
-  if (typeof value !== "function") throw new Error;
-  var fullname = namespace(name);
-  return this.tween(key, (fullname.local ? attrTweenNS : attrTween)(fullname, value));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/delay.js
-
-
-function delayFunction(id, value) {
-  return function() {
-    init(this, id).delay = +value.apply(this, arguments);
-  };
-}
-
-function delayConstant(id, value) {
-  return value = +value, function() {
-    init(this, id).delay = value;
-  };
-}
-
-/* harmony default export */ var transition_delay = (function(value) {
-  var id = this._id;
-
-  return arguments.length
-      ? this.each((typeof value === "function"
-          ? delayFunction
-          : delayConstant)(id, value))
-      : schedule_get(this.node(), id).delay;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/duration.js
-
-
-function durationFunction(id, value) {
-  return function() {
-    schedule_set(this, id).duration = +value.apply(this, arguments);
-  };
-}
-
-function durationConstant(id, value) {
-  return value = +value, function() {
-    schedule_set(this, id).duration = value;
-  };
-}
-
-/* harmony default export */ var transition_duration = (function(value) {
-  var id = this._id;
-
-  return arguments.length
-      ? this.each((typeof value === "function"
-          ? durationFunction
-          : durationConstant)(id, value))
-      : schedule_get(this.node(), id).duration;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/ease.js
-
-
-function easeConstant(id, value) {
-  if (typeof value !== "function") throw new Error;
-  return function() {
-    schedule_set(this, id).ease = value;
-  };
-}
-
-/* harmony default export */ var ease = (function(value) {
-  var id = this._id;
-
-  return arguments.length
-      ? this.each(easeConstant(id, value))
-      : schedule_get(this.node(), id).ease;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/easeVarying.js
-
-
-function easeVarying(id, value) {
-  return function() {
-    var v = value.apply(this, arguments);
-    if (typeof v !== "function") throw new Error;
-    schedule_set(this, id).ease = v;
-  };
-}
-
-/* harmony default export */ var transition_easeVarying = (function(value) {
-  if (typeof value !== "function") throw new Error;
-  return this.each(easeVarying(this._id, value));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/filter.js
-
-
-
-/* harmony default export */ var transition_filter = (function(match) {
-  if (typeof match !== "function") match = matcher(match);
-
-  for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
-    for (var group = groups[j], n = group.length, subgroup = subgroups[j] = [], node, i = 0; i < n; ++i) {
-      if ((node = group[i]) && match.call(node, node.__data__, i, group)) {
-        subgroup.push(node);
-      }
-    }
-  }
-
-  return new Transition(subgroups, this._parents, this._name, this._id);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/merge.js
-
-
-/* harmony default export */ var transition_merge = (function(transition) {
-  if (transition._id !== this._id) throw new Error;
-
-  for (var groups0 = this._groups, groups1 = transition._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
-    for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge = merges[j] = new Array(n), node, i = 0; i < n; ++i) {
-      if (node = group0[i] || group1[i]) {
-        merge[i] = node;
-      }
-    }
-  }
-
-  for (; j < m0; ++j) {
-    merges[j] = groups0[j];
-  }
-
-  return new Transition(merges, this._parents, this._name, this._id);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/on.js
-
-
-function on_start(name) {
-  return (name + "").trim().split(/^|\s+/).every(function(t) {
-    var i = t.indexOf(".");
-    if (i >= 0) t = t.slice(0, i);
-    return !t || t === "start";
-  });
-}
-
-function onFunction(id, name, listener) {
-  var on0, on1, sit = on_start(name) ? init : schedule_set;
-  return function() {
-    var schedule = sit(this, id),
-        on = schedule.on;
-
-    // If this node shared a dispatch with the previous node,
-    // just assign the updated shared dispatch and we’re done!
-    // Otherwise, copy-on-write.
-    if (on !== on0) (on1 = (on0 = on).copy()).on(name, listener);
-
-    schedule.on = on1;
-  };
-}
-
-/* harmony default export */ var transition_on = (function(name, listener) {
-  var id = this._id;
-
-  return arguments.length < 2
-      ? schedule_get(this.node(), id).on.on(name)
-      : this.each(onFunction(id, name, listener));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/remove.js
-function removeFunction(id) {
-  return function() {
-    var parent = this.parentNode;
-    for (var i in this.__transition) if (+i !== id) return;
-    if (parent) parent.removeChild(this);
-  };
-}
-
-/* harmony default export */ var transition_remove = (function() {
-  return this.on("end.remove", removeFunction(this._id));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/select.js
-
-
-
-
-/* harmony default export */ var transition_select = (function(select) {
-  var name = this._name,
-      id = this._id;
-
-  if (typeof select !== "function") select = src_selector(select);
-
-  for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
-    for (var group = groups[j], n = group.length, subgroup = subgroups[j] = new Array(n), node, subnode, i = 0; i < n; ++i) {
-      if ((node = group[i]) && (subnode = select.call(node, node.__data__, i, group))) {
-        if ("__data__" in node) subnode.__data__ = node.__data__;
-        subgroup[i] = subnode;
-        transition_schedule(subgroup[i], name, id, i, subgroup, schedule_get(node, id));
-      }
-    }
-  }
-
-  return new Transition(subgroups, this._parents, name, id);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/selectAll.js
-
-
-
-
-/* harmony default export */ var transition_selectAll = (function(select) {
-  var name = this._name,
-      id = this._id;
-
-  if (typeof select !== "function") select = selectorAll(select);
-
-  for (var groups = this._groups, m = groups.length, subgroups = [], parents = [], j = 0; j < m; ++j) {
-    for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
-      if (node = group[i]) {
-        for (var children = select.call(node, node.__data__, i, group), child, inherit = schedule_get(node, id), k = 0, l = children.length; k < l; ++k) {
-          if (child = children[k]) {
-            transition_schedule(child, name, id, k, children, inherit);
-          }
-        }
-        subgroups.push(children);
-        parents.push(node);
-      }
-    }
-  }
-
-  return new Transition(subgroups, parents, name, id);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/selection.js
-
-
-var selection_Selection = src_selection.prototype.constructor;
-
-/* harmony default export */ var transition_selection = (function() {
-  return new selection_Selection(this._groups, this._parents);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/style.js
-
-
-
-
-
-
-function styleNull(name, interpolate) {
-  var string00,
-      string10,
-      interpolate0;
-  return function() {
-    var string0 = styleValue(this, name),
-        string1 = (this.style.removeProperty(name), styleValue(this, name));
-    return string0 === string1 ? null
-        : string0 === string00 && string1 === string10 ? interpolate0
-        : interpolate0 = interpolate(string00 = string0, string10 = string1);
-  };
-}
-
-function style_styleRemove(name) {
-  return function() {
-    this.style.removeProperty(name);
-  };
-}
-
-function style_styleConstant(name, interpolate, value1) {
-  var string00,
-      string1 = value1 + "",
-      interpolate0;
-  return function() {
-    var string0 = styleValue(this, name);
-    return string0 === string1 ? null
-        : string0 === string00 ? interpolate0
-        : interpolate0 = interpolate(string00 = string0, value1);
-  };
-}
-
-function style_styleFunction(name, interpolate, value) {
-  var string00,
-      string10,
-      interpolate0;
-  return function() {
-    var string0 = styleValue(this, name),
-        value1 = value(this),
-        string1 = value1 + "";
-    if (value1 == null) string1 = value1 = (this.style.removeProperty(name), styleValue(this, name));
-    return string0 === string1 ? null
-        : string0 === string00 && string1 === string10 ? interpolate0
-        : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
-  };
-}
-
-function styleMaybeRemove(id, name) {
-  var on0, on1, listener0, key = "style." + name, event = "end." + key, remove;
-  return function() {
-    var schedule = schedule_set(this, id),
-        on = schedule.on,
-        listener = schedule.value[key] == null ? remove || (remove = style_styleRemove(name)) : undefined;
-
-    // If this node shared a dispatch with the previous node,
-    // just assign the updated shared dispatch and we’re done!
-    // Otherwise, copy-on-write.
-    if (on !== on0 || listener0 !== listener) (on1 = (on0 = on).copy()).on(event, listener0 = listener);
-
-    schedule.on = on1;
-  };
-}
-
-/* harmony default export */ var transition_style = (function(name, value, priority) {
-  var i = (name += "") === "transform" ? interpolateTransformCss : transition_interpolate;
-  return value == null ? this
-      .styleTween(name, styleNull(name, i))
-      .on("end.style." + name, style_styleRemove(name))
-    : typeof value === "function" ? this
-      .styleTween(name, style_styleFunction(name, i, tweenValue(this, "style." + name, value)))
-      .each(styleMaybeRemove(this._id, name))
-    : this
-      .styleTween(name, style_styleConstant(name, i, value), priority)
-      .on("end.style." + name, null);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/styleTween.js
-function styleInterpolate(name, i, priority) {
-  return function(t) {
-    this.style.setProperty(name, i.call(this, t), priority);
-  };
-}
-
-function styleTween(name, value, priority) {
-  var t, i0;
-  function tween() {
-    var i = value.apply(this, arguments);
-    if (i !== i0) t = (i0 = i) && styleInterpolate(name, i, priority);
-    return t;
-  }
-  tween._value = value;
-  return tween;
-}
-
-/* harmony default export */ var transition_styleTween = (function(name, value, priority) {
-  var key = "style." + (name += "");
-  if (arguments.length < 2) return (key = this.tween(key)) && key._value;
-  if (value == null) return this.tween(key, null);
-  if (typeof value !== "function") throw new Error;
-  return this.tween(key, styleTween(name, value, priority == null ? "" : priority));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/text.js
-
-
-function text_textConstant(value) {
-  return function() {
-    this.textContent = value;
-  };
-}
-
-function text_textFunction(value) {
-  return function() {
-    var value1 = value(this);
-    this.textContent = value1 == null ? "" : value1;
-  };
-}
-
-/* harmony default export */ var transition_text = (function(value) {
-  return this.tween("text", typeof value === "function"
-      ? text_textFunction(tweenValue(this, "text", value))
-      : text_textConstant(value == null ? "" : value + ""));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/textTween.js
-function textInterpolate(i) {
-  return function(t) {
-    this.textContent = i.call(this, t);
-  };
-}
-
-function textTween(value) {
-  var t0, i0;
-  function tween() {
-    var i = value.apply(this, arguments);
-    if (i !== i0) t0 = (i0 = i) && textInterpolate(i);
-    return t0;
-  }
-  tween._value = value;
-  return tween;
-}
-
-/* harmony default export */ var transition_textTween = (function(value) {
-  var key = "text";
-  if (arguments.length < 1) return (key = this.tween(key)) && key._value;
-  if (value == null) return this.tween(key, null);
-  if (typeof value !== "function") throw new Error;
-  return this.tween(key, textTween(value));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/transition.js
-
-
-
-/* harmony default export */ var transition_transition = (function() {
-  var name = this._name,
-      id0 = this._id,
-      id1 = newId();
-
-  for (var groups = this._groups, m = groups.length, j = 0; j < m; ++j) {
-    for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
-      if (node = group[i]) {
-        var inherit = schedule_get(node, id0);
-        transition_schedule(node, name, id1, i, group, {
-          time: inherit.time + inherit.delay + inherit.duration,
-          delay: 0,
-          duration: inherit.duration,
-          ease: inherit.ease
-        });
-      }
-    }
-  }
-
-  return new Transition(groups, this._parents, name, id1);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/end.js
-
-
-/* harmony default export */ var transition_end = (function() {
-  var on0, on1, that = this, id = that._id, size = that.size();
-  return new Promise(function(resolve, reject) {
-    var cancel = {value: reject},
-        end = {value: function() { if (--size === 0) resolve(); }};
-
-    that.each(function() {
-      var schedule = schedule_set(this, id),
-          on = schedule.on;
-
-      // If this node shared a dispatch with the previous node,
-      // just assign the updated shared dispatch and we’re done!
-      // Otherwise, copy-on-write.
-      if (on !== on0) {
-        on1 = (on0 = on).copy();
-        on1._.cancel.push(cancel);
-        on1._.interrupt.push(cancel);
-        on1._.end.push(end);
-      }
-
-      schedule.on = on1;
-    });
-
-    // The selection was empty, resolve end immediately
-    if (size === 0) resolve();
-  });
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var transition_id = 0;
-
-function Transition(groups, parents, name, id) {
-  this._groups = groups;
-  this._parents = parents;
-  this._name = name;
-  this._id = id;
-}
-
-function src_transition_transition(name) {
-  return src_selection().transition(name);
-}
-
-function newId() {
-  return ++transition_id;
-}
-
-var selection_prototype = src_selection.prototype;
-
-Transition.prototype = src_transition_transition.prototype = {
-  constructor: Transition,
-  select: transition_select,
-  selectAll: transition_selectAll,
-  filter: transition_filter,
-  merge: transition_merge,
-  selection: transition_selection,
-  transition: transition_transition,
-  call: selection_prototype.call,
-  nodes: selection_prototype.nodes,
-  node: selection_prototype.node,
-  size: selection_prototype.size,
-  empty: selection_prototype.empty,
-  each: selection_prototype.each,
-  on: transition_on,
-  attr: transition_attr,
-  attrTween: transition_attrTween,
-  style: transition_style,
-  styleTween: transition_styleTween,
-  text: transition_text,
-  textTween: transition_textTween,
-  remove: transition_remove,
-  tween: transition_tween,
-  delay: transition_delay,
-  duration: transition_duration,
-  ease: ease,
-  easeVarying: transition_easeVarying,
-  end: transition_end,
-  [Symbol.iterator]: selection_prototype[Symbol.iterator]
-};
-
-// CONCATENATED MODULE: ./node_modules/d3-ease/src/cubic.js
-function cubicIn(t) {
-  return t * t * t;
-}
-
-function cubicOut(t) {
-  return --t * t * t + 1;
-}
-
-function cubicInOut(t) {
-  return ((t *= 2) <= 1 ? t * t * t : (t -= 2) * t * t + 2) / 2;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/selection/transition.js
-
-
-
-
-
-var defaultTiming = {
-  time: null, // Set on use.
-  delay: 0,
-  duration: 250,
-  ease: cubicInOut
-};
-
-function transition_inherit(node, id) {
-  var timing;
-  while (!(timing = node.__transition) || !(timing = timing[id])) {
-    if (!(node = node.parentNode)) {
-      throw new Error(`transition ${id} not found`);
-    }
-  }
-  return timing;
-}
-
-/* harmony default export */ var selection_transition = (function(name) {
-  var id,
-      timing;
-
-  if (name instanceof Transition) {
-    id = name._id, name = name._name;
-  } else {
-    id = newId(), (timing = defaultTiming).time = now(), name = name == null ? null : name + "";
-  }
-
-  for (var groups = this._groups, m = groups.length, j = 0; j < m; ++j) {
-    for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
-      if (node = group[i]) {
-        transition_schedule(node, name, id, i, group, timing || transition_inherit(node, id));
-      }
-    }
-  }
-
-  return new Transition(groups, this._parents, name, id);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/selection/index.js
-
-
-
-
-src_selection.prototype.interrupt = selection_interrupt;
-src_selection.prototype.transition = selection_transition;
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/active.js
-
-
-
-var active_root = [null];
-
-/* harmony default export */ var src_active = (function(node, name) {
-  var schedules = node.__transition,
-      schedule,
-      i;
-
-  if (schedules) {
-    name = name == null ? null : name + "";
-    for (i in schedules) {
-      if ((schedule = schedules[i]).state > SCHEDULED && schedule.name === name) {
-        return new Transition([[node]], active_root, name, +i);
-      }
-    }
-  }
-
-  return null;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-transition/src/index.js
-
-
-
-
-
-// CONCATENATED MODULE: ./node_modules/d3-brush/src/constant.js
-/* harmony default export */ var d3_brush_src_constant = (x => () => x);
-
-// CONCATENATED MODULE: ./node_modules/d3-brush/src/event.js
-function BrushEvent(type, {
-  sourceEvent,
-  target,
-  selection,
-  mode,
-  dispatch
-}) {
-  Object.defineProperties(this, {
-    type: {value: type, enumerable: true, configurable: true},
-    sourceEvent: {value: sourceEvent, enumerable: true, configurable: true},
-    target: {value: target, enumerable: true, configurable: true},
-    selection: {value: selection, enumerable: true, configurable: true},
-    mode: {value: mode, enumerable: true, configurable: true},
-    _: {value: dispatch}
-  });
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-brush/src/noevent.js
-function noevent_nopropagation(event) {
-  event.stopImmediatePropagation();
-}
-
-/* harmony default export */ var src_noevent = (function(event) {
-  event.preventDefault();
-  event.stopImmediatePropagation();
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-brush/src/brush.js
-
-
-
-
-
-
-
-
-
-var MODE_DRAG = {name: "drag"},
-    MODE_SPACE = {name: "space"},
-    MODE_HANDLE = {name: "handle"},
-    MODE_CENTER = {name: "center"};
-
-const {abs, max: brush_max, min: brush_min} = Math;
-
-function number1(e) {
-  return [+e[0], +e[1]];
-}
-
-function number2(e) {
-  return [number1(e[0]), number1(e[1])];
-}
-
-var X = {
-  name: "x",
-  handles: ["w", "e"].map(brush_type),
-  input: function(x, e) { return x == null ? null : [[+x[0], e[0][1]], [+x[1], e[1][1]]]; },
-  output: function(xy) { return xy && [xy[0][0], xy[1][0]]; }
-};
-
-var Y = {
-  name: "y",
-  handles: ["n", "s"].map(brush_type),
-  input: function(y, e) { return y == null ? null : [[e[0][0], +y[0]], [e[1][0], +y[1]]]; },
-  output: function(xy) { return xy && [xy[0][1], xy[1][1]]; }
-};
-
-var XY = {
-  name: "xy",
-  handles: ["n", "w", "e", "s", "nw", "ne", "sw", "se"].map(brush_type),
-  input: function(xy) { return xy == null ? null : number2(xy); },
-  output: function(xy) { return xy; }
-};
-
-var cursors = {
-  overlay: "crosshair",
-  selection: "move",
-  n: "ns-resize",
-  e: "ew-resize",
-  s: "ns-resize",
-  w: "ew-resize",
-  nw: "nwse-resize",
-  ne: "nesw-resize",
-  se: "nwse-resize",
-  sw: "nesw-resize"
-};
-
-var flipX = {
-  e: "w",
-  w: "e",
-  nw: "ne",
-  ne: "nw",
-  se: "sw",
-  sw: "se"
-};
-
-var flipY = {
-  n: "s",
-  s: "n",
-  nw: "sw",
-  ne: "se",
-  se: "ne",
-  sw: "nw"
-};
-
-var signsX = {
-  overlay: +1,
-  selection: +1,
-  n: null,
-  e: +1,
-  s: null,
-  w: -1,
-  nw: -1,
-  ne: +1,
-  se: +1,
-  sw: -1
-};
-
-var signsY = {
-  overlay: +1,
-  selection: +1,
-  n: -1,
-  e: null,
-  s: +1,
-  w: null,
-  nw: -1,
-  ne: -1,
-  se: +1,
-  sw: +1
-};
-
-function brush_type(t) {
-  return {type: t};
-}
-
-// Ignore right-click, since that should open the context menu.
-function defaultFilter(event) {
-  return !event.ctrlKey && !event.button;
-}
-
-function defaultExtent() {
-  var svg = this.ownerSVGElement || this;
-  if (svg.hasAttribute("viewBox")) {
-    svg = svg.viewBox.baseVal;
-    return [[svg.x, svg.y], [svg.x + svg.width, svg.y + svg.height]];
-  }
-  return [[0, 0], [svg.width.baseVal.value, svg.height.baseVal.value]];
-}
-
-function defaultTouchable() {
-  return navigator.maxTouchPoints || ("ontouchstart" in this);
-}
-
-// Like d3.local, but with the name “__brush” rather than auto-generated.
-function local(node) {
-  while (!node.__brush) if (!(node = node.parentNode)) return;
-  return node.__brush;
-}
-
-function brush_empty(extent) {
-  return extent[0][0] === extent[1][0]
-      || extent[0][1] === extent[1][1];
-}
-
-function brushSelection(node) {
-  var state = node.__brush;
-  return state ? state.dim.output(state.selection) : null;
-}
-
-function brushX() {
-  return brush_brush(X);
-}
-
-function brushY() {
-  return brush_brush(Y);
-}
-
-/* harmony default export */ var src_brush = (function() {
-  return brush_brush(XY);
-});
-
-function brush_brush(dim) {
-  var extent = defaultExtent,
-      filter = defaultFilter,
-      touchable = defaultTouchable,
-      keys = true,
-      listeners = src_dispatch("start", "brush", "end"),
-      handleSize = 6,
-      touchending;
-
-  function brush(group) {
-    var overlay = group
-        .property("__brush", initialize)
-      .selectAll(".overlay")
-      .data([brush_type("overlay")]);
-
-    overlay.enter().append("rect")
-        .attr("class", "overlay")
-        .attr("pointer-events", "all")
-        .attr("cursor", cursors.overlay)
-      .merge(overlay)
-        .each(function() {
-          var extent = local(this).extent;
-          src_select(this)
-              .attr("x", extent[0][0])
-              .attr("y", extent[0][1])
-              .attr("width", extent[1][0] - extent[0][0])
-              .attr("height", extent[1][1] - extent[0][1]);
-        });
-
-    group.selectAll(".selection")
-      .data([brush_type("selection")])
-      .enter().append("rect")
-        .attr("class", "selection")
-        .attr("cursor", cursors.selection)
-        .attr("fill", "#777")
-        .attr("fill-opacity", 0.3)
-        .attr("stroke", "#fff")
-        .attr("shape-rendering", "crispEdges");
-
-    var handle = group.selectAll(".handle")
-      .data(dim.handles, function(d) { return d.type; });
-
-    handle.exit().remove();
-
-    handle.enter().append("rect")
-        .attr("class", function(d) { return "handle handle--" + d.type; })
-        .attr("cursor", function(d) { return cursors[d.type]; });
-
-    group
-        .each(redraw)
-        .attr("fill", "none")
-        .attr("pointer-events", "all")
-        .on("mousedown.brush", started)
-      .filter(touchable)
-        .on("touchstart.brush", started)
-        .on("touchmove.brush", touchmoved)
-        .on("touchend.brush touchcancel.brush", touchended)
-        .style("touch-action", "none")
-        .style("-webkit-tap-highlight-color", "rgba(0,0,0,0)");
-  }
-
-  brush.move = function(group, selection) {
-    if (group.tween) {
-      group
-          .on("start.brush", function(event) { emitter(this, arguments).beforestart().start(event); })
-          .on("interrupt.brush end.brush", function(event) { emitter(this, arguments).end(event); })
-          .tween("brush", function() {
-            var that = this,
-                state = that.__brush,
-                emit = emitter(that, arguments),
-                selection0 = state.selection,
-                selection1 = dim.input(typeof selection === "function" ? selection.apply(this, arguments) : selection, state.extent),
-                i = src_value(selection0, selection1);
-
-            function tween(t) {
-              state.selection = t === 1 && selection1 === null ? null : i(t);
-              redraw.call(that);
-              emit.brush();
-            }
-
-            return selection0 !== null && selection1 !== null ? tween : tween(1);
-          });
-    } else {
-      group
-          .each(function() {
-            var that = this,
-                args = arguments,
-                state = that.__brush,
-                selection1 = dim.input(typeof selection === "function" ? selection.apply(that, args) : selection, state.extent),
-                emit = emitter(that, args).beforestart();
-
-            interrupt(that);
-            state.selection = selection1 === null ? null : selection1;
-            redraw.call(that);
-            emit.start().brush().end();
-          });
-    }
-  };
-
-  brush.clear = function(group) {
-    brush.move(group, null);
-  };
-
-  function redraw() {
-    var group = src_select(this),
-        selection = local(this).selection;
-
-    if (selection) {
-      group.selectAll(".selection")
-          .style("display", null)
-          .attr("x", selection[0][0])
-          .attr("y", selection[0][1])
-          .attr("width", selection[1][0] - selection[0][0])
-          .attr("height", selection[1][1] - selection[0][1]);
-
-      group.selectAll(".handle")
-          .style("display", null)
-          .attr("x", function(d) { return d.type[d.type.length - 1] === "e" ? selection[1][0] - handleSize / 2 : selection[0][0] - handleSize / 2; })
-          .attr("y", function(d) { return d.type[0] === "s" ? selection[1][1] - handleSize / 2 : selection[0][1] - handleSize / 2; })
-          .attr("width", function(d) { return d.type === "n" || d.type === "s" ? selection[1][0] - selection[0][0] + handleSize : handleSize; })
-          .attr("height", function(d) { return d.type === "e" || d.type === "w" ? selection[1][1] - selection[0][1] + handleSize : handleSize; });
-    }
-
-    else {
-      group.selectAll(".selection,.handle")
-          .style("display", "none")
-          .attr("x", null)
-          .attr("y", null)
-          .attr("width", null)
-          .attr("height", null);
-    }
-  }
-
-  function emitter(that, args, clean) {
-    var emit = that.__brush.emitter;
-    return emit && (!clean || !emit.clean) ? emit : new Emitter(that, args, clean);
-  }
-
-  function Emitter(that, args, clean) {
-    this.that = that;
-    this.args = args;
-    this.state = that.__brush;
-    this.active = 0;
-    this.clean = clean;
-  }
-
-  Emitter.prototype = {
-    beforestart: function() {
-      if (++this.active === 1) this.state.emitter = this, this.starting = true;
-      return this;
-    },
-    start: function(event, mode) {
-      if (this.starting) this.starting = false, this.emit("start", event, mode);
-      else this.emit("brush", event);
-      return this;
-    },
-    brush: function(event, mode) {
-      this.emit("brush", event, mode);
-      return this;
-    },
-    end: function(event, mode) {
-      if (--this.active === 0) delete this.state.emitter, this.emit("end", event, mode);
-      return this;
-    },
-    emit: function(type, event, mode) {
-      var d = src_select(this.that).datum();
-      listeners.call(
-        type,
-        this.that,
-        new BrushEvent(type, {
-          sourceEvent: event,
-          target: brush,
-          selection: dim.output(this.state.selection),
-          mode,
-          dispatch: listeners
-        }),
-        d
-      );
-    }
-  };
-
-  function started(event) {
-    if (touchending && !event.touches) return;
-    if (!filter.apply(this, arguments)) return;
-
-    var that = this,
-        type = event.target.__data__.type,
-        mode = (keys && event.metaKey ? type = "overlay" : type) === "selection" ? MODE_DRAG : (keys && event.altKey ? MODE_CENTER : MODE_HANDLE),
-        signX = dim === Y ? null : signsX[type],
-        signY = dim === X ? null : signsY[type],
-        state = local(that),
-        extent = state.extent,
-        selection = state.selection,
-        W = extent[0][0], w0, w1,
-        N = extent[0][1], n0, n1,
-        E = extent[1][0], e0, e1,
-        S = extent[1][1], s0, s1,
-        dx = 0,
-        dy = 0,
-        moving,
-        shifting = signX && signY && keys && event.shiftKey,
-        lockX,
-        lockY,
-        points = Array.from(event.touches || [event], t => {
-          const i = t.identifier;
-          t = pointer(t, that);
-          t.point0 = t.slice();
-          t.identifier = i;
-          return t;
-        });
-
-    if (type === "overlay") {
-      if (selection) moving = true;
-      const pts = [points[0], points[1] || points[0]];
-      state.selection = selection = [[
-          w0 = dim === Y ? W : brush_min(pts[0][0], pts[1][0]),
-          n0 = dim === X ? N : brush_min(pts[0][1], pts[1][1])
-        ], [
-          e0 = dim === Y ? E : brush_max(pts[0][0], pts[1][0]),
-          s0 = dim === X ? S : brush_max(pts[0][1], pts[1][1])
-        ]];
-      if (points.length > 1) move();
-    } else {
-      w0 = selection[0][0];
-      n0 = selection[0][1];
-      e0 = selection[1][0];
-      s0 = selection[1][1];
-    }
-
-    w1 = w0;
-    n1 = n0;
-    e1 = e0;
-    s1 = s0;
-
-    var group = src_select(that)
-        .attr("pointer-events", "none");
-
-    var overlay = group.selectAll(".overlay")
-        .attr("cursor", cursors[type]);
-
-    interrupt(that);
-    var emit = emitter(that, arguments, true).beforestart();
-
-    if (event.touches) {
-      emit.moved = moved;
-      emit.ended = ended;
-    } else {
-      var view = src_select(event.view)
-          .on("mousemove.brush", moved, true)
-          .on("mouseup.brush", ended, true);
-      if (keys) view
-          .on("keydown.brush", keydowned, true)
-          .on("keyup.brush", keyupped, true)
-
-      nodrag(event.view);
-    }
-
-    redraw.call(that);
-    emit.start(event, mode.name);
-
-    function moved(event) {
-      for (const p of event.changedTouches || [event]) {
-        for (const d of points)
-          if (d.identifier === p.identifier) d.cur = pointer(p, that);
-      }
-      if (shifting && !lockX && !lockY && points.length === 1) {
-        const point = points[0];
-        if (abs(point.cur[0] - point[0]) > abs(point.cur[1] - point[1]))
-          lockY = true;
-        else
-          lockX = true;
-      }
-      for (const point of points)
-        if (point.cur) point[0] = point.cur[0], point[1] = point.cur[1];
-      moving = true;
-      src_noevent(event);
-      move(event);
-    }
-
-    function move(event) {
-      const point = points[0], point0 = point.point0;
-      var t;
-
-      dx = point[0] - point0[0];
-      dy = point[1] - point0[1];
-
-      switch (mode) {
-        case MODE_SPACE:
-        case MODE_DRAG: {
-          if (signX) dx = brush_max(W - w0, brush_min(E - e0, dx)), w1 = w0 + dx, e1 = e0 + dx;
-          if (signY) dy = brush_max(N - n0, brush_min(S - s0, dy)), n1 = n0 + dy, s1 = s0 + dy;
-          break;
-        }
-        case MODE_HANDLE: {
-          if (points[1]) {
-            if (signX) w1 = brush_max(W, brush_min(E, points[0][0])), e1 = brush_max(W, brush_min(E, points[1][0])), signX = 1;
-            if (signY) n1 = brush_max(N, brush_min(S, points[0][1])), s1 = brush_max(N, brush_min(S, points[1][1])), signY = 1;
-          } else {
-            if (signX < 0) dx = brush_max(W - w0, brush_min(E - w0, dx)), w1 = w0 + dx, e1 = e0;
-            else if (signX > 0) dx = brush_max(W - e0, brush_min(E - e0, dx)), w1 = w0, e1 = e0 + dx;
-            if (signY < 0) dy = brush_max(N - n0, brush_min(S - n0, dy)), n1 = n0 + dy, s1 = s0;
-            else if (signY > 0) dy = brush_max(N - s0, brush_min(S - s0, dy)), n1 = n0, s1 = s0 + dy;
-          }
-          break;
-        }
-        case MODE_CENTER: {
-          if (signX) w1 = brush_max(W, brush_min(E, w0 - dx * signX)), e1 = brush_max(W, brush_min(E, e0 + dx * signX));
-          if (signY) n1 = brush_max(N, brush_min(S, n0 - dy * signY)), s1 = brush_max(N, brush_min(S, s0 + dy * signY));
-          break;
-        }
-      }
-
-      if (e1 < w1) {
-        signX *= -1;
-        t = w0, w0 = e0, e0 = t;
-        t = w1, w1 = e1, e1 = t;
-        if (type in flipX) overlay.attr("cursor", cursors[type = flipX[type]]);
-      }
-
-      if (s1 < n1) {
-        signY *= -1;
-        t = n0, n0 = s0, s0 = t;
-        t = n1, n1 = s1, s1 = t;
-        if (type in flipY) overlay.attr("cursor", cursors[type = flipY[type]]);
-      }
-
-      if (state.selection) selection = state.selection; // May be set by brush.move!
-      if (lockX) w1 = selection[0][0], e1 = selection[1][0];
-      if (lockY) n1 = selection[0][1], s1 = selection[1][1];
-
-      if (selection[0][0] !== w1
-          || selection[0][1] !== n1
-          || selection[1][0] !== e1
-          || selection[1][1] !== s1) {
-        state.selection = [[w1, n1], [e1, s1]];
-        redraw.call(that);
-        emit.brush(event, mode.name);
-      }
-    }
-
-    function ended(event) {
-      noevent_nopropagation(event);
-      if (event.touches) {
-        if (event.touches.length) return;
-        if (touchending) clearTimeout(touchending);
-        touchending = setTimeout(function() { touchending = null; }, 500); // Ghost clicks are delayed!
-      } else {
-        yesdrag(event.view, moving);
-        view.on("keydown.brush keyup.brush mousemove.brush mouseup.brush", null);
-      }
-      group.attr("pointer-events", "all");
-      overlay.attr("cursor", cursors.overlay);
-      if (state.selection) selection = state.selection; // May be set by brush.move (on start)!
-      if (brush_empty(selection)) state.selection = null, redraw.call(that);
-      emit.end(event, mode.name);
-    }
-
-    function keydowned(event) {
-      switch (event.keyCode) {
-        case 16: { // SHIFT
-          shifting = signX && signY;
-          break;
-        }
-        case 18: { // ALT
-          if (mode === MODE_HANDLE) {
-            if (signX) e0 = e1 - dx * signX, w0 = w1 + dx * signX;
-            if (signY) s0 = s1 - dy * signY, n0 = n1 + dy * signY;
-            mode = MODE_CENTER;
-            move();
-          }
-          break;
-        }
-        case 32: { // SPACE; takes priority over ALT
-          if (mode === MODE_HANDLE || mode === MODE_CENTER) {
-            if (signX < 0) e0 = e1 - dx; else if (signX > 0) w0 = w1 - dx;
-            if (signY < 0) s0 = s1 - dy; else if (signY > 0) n0 = n1 - dy;
-            mode = MODE_SPACE;
-            overlay.attr("cursor", cursors.selection);
-            move();
-          }
-          break;
-        }
-        default: return;
-      }
-      src_noevent(event);
-    }
-
-    function keyupped(event) {
-      switch (event.keyCode) {
-        case 16: { // SHIFT
-          if (shifting) {
-            lockX = lockY = shifting = false;
-            move();
-          }
-          break;
-        }
-        case 18: { // ALT
-          if (mode === MODE_CENTER) {
-            if (signX < 0) e0 = e1; else if (signX > 0) w0 = w1;
-            if (signY < 0) s0 = s1; else if (signY > 0) n0 = n1;
-            mode = MODE_HANDLE;
-            move();
-          }
-          break;
-        }
-        case 32: { // SPACE
-          if (mode === MODE_SPACE) {
-            if (event.altKey) {
-              if (signX) e0 = e1 - dx * signX, w0 = w1 + dx * signX;
-              if (signY) s0 = s1 - dy * signY, n0 = n1 + dy * signY;
-              mode = MODE_CENTER;
-            } else {
-              if (signX < 0) e0 = e1; else if (signX > 0) w0 = w1;
-              if (signY < 0) s0 = s1; else if (signY > 0) n0 = n1;
-              mode = MODE_HANDLE;
-            }
-            overlay.attr("cursor", cursors[type]);
-            move();
-          }
-          break;
-        }
-        default: return;
-      }
-      src_noevent(event);
-    }
-  }
-
-  function touchmoved(event) {
-    emitter(this, arguments).moved(event);
-  }
-
-  function touchended(event) {
-    emitter(this, arguments).ended(event);
-  }
-
-  function initialize() {
-    var state = this.__brush || {selection: null};
-    state.extent = number2(extent.apply(this, arguments));
-    state.dim = dim;
-    return state;
-  }
-
-  brush.extent = function(_) {
-    return arguments.length ? (extent = typeof _ === "function" ? _ : d3_brush_src_constant(number2(_)), brush) : extent;
-  };
-
-  brush.filter = function(_) {
-    return arguments.length ? (filter = typeof _ === "function" ? _ : d3_brush_src_constant(!!_), brush) : filter;
-  };
-
-  brush.touchable = function(_) {
-    return arguments.length ? (touchable = typeof _ === "function" ? _ : d3_brush_src_constant(!!_), brush) : touchable;
-  };
-
-  brush.handleSize = function(_) {
-    return arguments.length ? (handleSize = +_, brush) : handleSize;
-  };
-
-  brush.keyModifiers = function(_) {
-    return arguments.length ? (keys = !!_, brush) : keys;
-  };
-
-  brush.on = function() {
-    var value = listeners.on.apply(listeners, arguments);
-    return value === listeners ? brush : value;
-  };
-
-  return brush;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-brush/src/index.js
-
-
-// CONCATENATED MODULE: ./node_modules/d3-scale/src/init.js
-function initRange(domain, range) {
-  switch (arguments.length) {
-    case 0: break;
-    case 1: this.range(domain); break;
-    default: this.range(range).domain(domain); break;
-  }
-  return this;
-}
-
-function initInterpolator(domain, interpolator) {
-  switch (arguments.length) {
-    case 0: break;
-    case 1: {
-      if (typeof domain === "function") this.interpolator(domain);
-      else this.range(domain);
-      break;
-    }
-    default: {
-      this.domain(domain);
-      if (typeof interpolator === "function") this.interpolator(interpolator);
-      else this.range(interpolator);
-      break;
-    }
-  }
-  return this;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-scale/src/ordinal.js
-
-
-const implicit = Symbol("implicit");
-
-function ordinal() {
-  var index = new Map(),
-      domain = [],
-      range = [],
-      unknown = implicit;
-
-  function scale(d) {
-    var key = d + "", i = index.get(key);
-    if (!i) {
-      if (unknown !== implicit) return unknown;
-      index.set(key, i = domain.push(d));
-    }
-    return range[(i - 1) % range.length];
-  }
-
-  scale.domain = function(_) {
-    if (!arguments.length) return domain.slice();
-    domain = [], index = new Map();
-    for (const value of _) {
-      const key = value + "";
-      if (index.has(key)) continue;
-      index.set(key, domain.push(value));
-    }
-    return scale;
-  };
-
-  scale.range = function(_) {
-    return arguments.length ? (range = Array.from(_), scale) : range.slice();
-  };
-
-  scale.unknown = function(_) {
-    return arguments.length ? (unknown = _, scale) : unknown;
-  };
-
-  scale.copy = function() {
-    return ordinal(domain, range).unknown(unknown);
-  };
-
-  initRange.apply(scale, arguments);
-
-  return scale;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-scale/src/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// CONCATENATED MODULE: ./node_modules/d3-scale-chromatic/src/colors.js
-/* harmony default export */ var src_colors = (function(specifier) {
-  var n = specifier.length / 6 | 0, colors = new Array(n), i = 0;
-  while (i < n) colors[i] = "#" + specifier.slice(i * 6, ++i * 6);
-  return colors;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-scale-chromatic/src/categorical/category10.js
-
-
-/* harmony default export */ var category10 = (src_colors("1f77b4ff7f0e2ca02cd627289467bd8c564be377c27f7f7fbcbd2217becf"));
-
-// CONCATENATED MODULE: ./node_modules/d3-scale-chromatic/src/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/selectAll.js
-
-
-
-/* harmony default export */ var src_selectAll = (function(selector) {
-  return typeof selector === "string"
-      ? new Selection([document.querySelectorAll(selector)], [document.documentElement])
-      : new Selection([selector == null ? [] : src_array(selector)], selection_root);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-selection/src/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/zoom.js
-var epsilon2 = 1e-12;
-
-function cosh(x) {
-  return ((x = Math.exp(x)) + 1 / x) / 2;
-}
-
-function sinh(x) {
-  return ((x = Math.exp(x)) - 1 / x) / 2;
-}
-
-function tanh(x) {
-  return ((x = Math.exp(2 * x)) - 1) / (x + 1);
-}
-
-/* harmony default export */ var src_zoom = ((function zoomRho(rho, rho2, rho4) {
-
-  // p0 = [ux0, uy0, w0]
-  // p1 = [ux1, uy1, w1]
-  function zoom(p0, p1) {
-    var ux0 = p0[0], uy0 = p0[1], w0 = p0[2],
-        ux1 = p1[0], uy1 = p1[1], w1 = p1[2],
-        dx = ux1 - ux0,
-        dy = uy1 - uy0,
-        d2 = dx * dx + dy * dy,
-        i,
-        S;
-
-    // Special case for u0 ≅ u1.
-    if (d2 < epsilon2) {
-      S = Math.log(w1 / w0) / rho;
-      i = function(t) {
-        return [
-          ux0 + t * dx,
-          uy0 + t * dy,
-          w0 * Math.exp(rho * t * S)
-        ];
-      }
-    }
-
-    // General case.
-    else {
-      var d1 = Math.sqrt(d2),
-          b0 = (w1 * w1 - w0 * w0 + rho4 * d2) / (2 * w0 * rho2 * d1),
-          b1 = (w1 * w1 - w0 * w0 - rho4 * d2) / (2 * w1 * rho2 * d1),
-          r0 = Math.log(Math.sqrt(b0 * b0 + 1) - b0),
-          r1 = Math.log(Math.sqrt(b1 * b1 + 1) - b1);
-      S = (r1 - r0) / rho;
-      i = function(t) {
-        var s = t * S,
-            coshr0 = cosh(r0),
-            u = w0 / (rho2 * d1) * (coshr0 * tanh(rho * s + r0) - sinh(r0));
-        return [
-          ux0 + u * dx,
-          uy0 + u * dy,
-          w0 * coshr0 / cosh(rho * s + r0)
-        ];
-      }
-    }
-
-    i.duration = S * 1000 * rho / Math.SQRT2;
-
-    return i;
-  }
-
-  zoom.rho = function(_) {
-    var _1 = Math.max(1e-3, +_), _2 = _1 * _1, _4 = _2 * _2;
-    return zoomRho(_1, _2, _4);
-  };
-
-  return zoom;
-})(Math.SQRT2, 2, 4));
-
-// CONCATENATED MODULE: ./node_modules/d3-zoom/src/constant.js
-/* harmony default export */ var d3_zoom_src_constant = (x => () => x);
-
-// CONCATENATED MODULE: ./node_modules/d3-zoom/src/event.js
-function ZoomEvent(type, {
-  sourceEvent,
-  target,
-  transform,
-  dispatch
-}) {
-  Object.defineProperties(this, {
-    type: {value: type, enumerable: true, configurable: true},
-    sourceEvent: {value: sourceEvent, enumerable: true, configurable: true},
-    target: {value: target, enumerable: true, configurable: true},
-    transform: {value: transform, enumerable: true, configurable: true},
-    _: {value: dispatch}
-  });
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-zoom/src/transform.js
-function Transform(k, x, y) {
-  this.k = k;
-  this.x = x;
-  this.y = y;
-}
-
-Transform.prototype = {
-  constructor: Transform,
-  scale: function(k) {
-    return k === 1 ? this : new Transform(this.k * k, this.x, this.y);
-  },
-  translate: function(x, y) {
-    return x === 0 & y === 0 ? this : new Transform(this.k, this.x + this.k * x, this.y + this.k * y);
-  },
-  apply: function(point) {
-    return [point[0] * this.k + this.x, point[1] * this.k + this.y];
-  },
-  applyX: function(x) {
-    return x * this.k + this.x;
-  },
-  applyY: function(y) {
-    return y * this.k + this.y;
-  },
-  invert: function(location) {
-    return [(location[0] - this.x) / this.k, (location[1] - this.y) / this.k];
-  },
-  invertX: function(x) {
-    return (x - this.x) / this.k;
-  },
-  invertY: function(y) {
-    return (y - this.y) / this.k;
-  },
-  rescaleX: function(x) {
-    return x.copy().domain(x.range().map(this.invertX, this).map(x.invert, x));
-  },
-  rescaleY: function(y) {
-    return y.copy().domain(y.range().map(this.invertY, this).map(y.invert, y));
-  },
-  toString: function() {
-    return "translate(" + this.x + "," + this.y + ") scale(" + this.k + ")";
-  }
-};
-
-var transform_identity = new Transform(1, 0, 0);
-
-transform_transform.prototype = Transform.prototype;
-
-function transform_transform(node) {
-  while (!node.__zoom) if (!(node = node.parentNode)) return transform_identity;
-  return node.__zoom;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-zoom/src/noevent.js
-function src_noevent_nopropagation(event) {
-  event.stopImmediatePropagation();
-}
-
-/* harmony default export */ var d3_zoom_src_noevent = (function(event) {
-  event.preventDefault();
-  event.stopImmediatePropagation();
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-zoom/src/zoom.js
-
-
-
-
-
-
-
-
-
-
-// Ignore right-click, since that should open the context menu.
-// except for pinch-to-zoom, which is sent as a wheel+ctrlKey event
-function zoom_defaultFilter(event) {
-  return (!event.ctrlKey || event.type === 'wheel') && !event.button;
-}
-
-function zoom_defaultExtent() {
-  var e = this;
-  if (e instanceof SVGElement) {
-    e = e.ownerSVGElement || e;
-    if (e.hasAttribute("viewBox")) {
-      e = e.viewBox.baseVal;
-      return [[e.x, e.y], [e.x + e.width, e.y + e.height]];
-    }
-    return [[0, 0], [e.width.baseVal.value, e.height.baseVal.value]];
-  }
-  return [[0, 0], [e.clientWidth, e.clientHeight]];
-}
-
-function defaultTransform() {
-  return this.__zoom || transform_identity;
-}
-
-function defaultWheelDelta(event) {
-  return -event.deltaY * (event.deltaMode === 1 ? 0.05 : event.deltaMode ? 1 : 0.002) * (event.ctrlKey ? 10 : 1);
-}
-
-function zoom_defaultTouchable() {
-  return navigator.maxTouchPoints || ("ontouchstart" in this);
-}
-
-function defaultConstrain(transform, extent, translateExtent) {
-  var dx0 = transform.invertX(extent[0][0]) - translateExtent[0][0],
-      dx1 = transform.invertX(extent[1][0]) - translateExtent[1][0],
-      dy0 = transform.invertY(extent[0][1]) - translateExtent[0][1],
-      dy1 = transform.invertY(extent[1][1]) - translateExtent[1][1];
-  return transform.translate(
-    dx1 > dx0 ? (dx0 + dx1) / 2 : Math.min(0, dx0) || Math.max(0, dx1),
-    dy1 > dy0 ? (dy0 + dy1) / 2 : Math.min(0, dy0) || Math.max(0, dy1)
-  );
-}
-
-/* harmony default export */ var d3_zoom_src_zoom = (function() {
-  var filter = zoom_defaultFilter,
-      extent = zoom_defaultExtent,
-      constrain = defaultConstrain,
-      wheelDelta = defaultWheelDelta,
-      touchable = zoom_defaultTouchable,
-      scaleExtent = [0, Infinity],
-      translateExtent = [[-Infinity, -Infinity], [Infinity, Infinity]],
-      duration = 250,
-      interpolate = src_zoom,
-      listeners = src_dispatch("start", "zoom", "end"),
-      touchstarting,
-      touchfirst,
-      touchending,
-      touchDelay = 500,
-      wheelDelay = 150,
-      clickDistance2 = 0,
-      tapDistance = 10;
-
-  function zoom(selection) {
-    selection
-        .property("__zoom", defaultTransform)
-        .on("wheel.zoom", wheeled)
-        .on("mousedown.zoom", mousedowned)
-        .on("dblclick.zoom", dblclicked)
-      .filter(touchable)
-        .on("touchstart.zoom", touchstarted)
-        .on("touchmove.zoom", touchmoved)
-        .on("touchend.zoom touchcancel.zoom", touchended)
-        .style("-webkit-tap-highlight-color", "rgba(0,0,0,0)");
-  }
-
-  zoom.transform = function(collection, transform, point, event) {
-    var selection = collection.selection ? collection.selection() : collection;
-    selection.property("__zoom", defaultTransform);
-    if (collection !== selection) {
-      schedule(collection, transform, point, event);
-    } else {
-      selection.interrupt().each(function() {
-        gesture(this, arguments)
-          .event(event)
-          .start()
-          .zoom(null, typeof transform === "function" ? transform.apply(this, arguments) : transform)
-          .end();
-      });
-    }
-  };
-
-  zoom.scaleBy = function(selection, k, p, event) {
-    zoom.scaleTo(selection, function() {
-      var k0 = this.__zoom.k,
-          k1 = typeof k === "function" ? k.apply(this, arguments) : k;
-      return k0 * k1;
-    }, p, event);
-  };
-
-  zoom.scaleTo = function(selection, k, p, event) {
-    zoom.transform(selection, function() {
-      var e = extent.apply(this, arguments),
-          t0 = this.__zoom,
-          p0 = p == null ? centroid(e) : typeof p === "function" ? p.apply(this, arguments) : p,
-          p1 = t0.invert(p0),
-          k1 = typeof k === "function" ? k.apply(this, arguments) : k;
-      return constrain(translate(scale(t0, k1), p0, p1), e, translateExtent);
-    }, p, event);
-  };
-
-  zoom.translateBy = function(selection, x, y, event) {
-    zoom.transform(selection, function() {
-      return constrain(this.__zoom.translate(
-        typeof x === "function" ? x.apply(this, arguments) : x,
-        typeof y === "function" ? y.apply(this, arguments) : y
-      ), extent.apply(this, arguments), translateExtent);
-    }, null, event);
-  };
-
-  zoom.translateTo = function(selection, x, y, p, event) {
-    zoom.transform(selection, function() {
-      var e = extent.apply(this, arguments),
-          t = this.__zoom,
-          p0 = p == null ? centroid(e) : typeof p === "function" ? p.apply(this, arguments) : p;
-      return constrain(transform_identity.translate(p0[0], p0[1]).scale(t.k).translate(
-        typeof x === "function" ? -x.apply(this, arguments) : -x,
-        typeof y === "function" ? -y.apply(this, arguments) : -y
-      ), e, translateExtent);
-    }, p, event);
-  };
-
-  function scale(transform, k) {
-    k = Math.max(scaleExtent[0], Math.min(scaleExtent[1], k));
-    return k === transform.k ? transform : new Transform(k, transform.x, transform.y);
-  }
-
-  function translate(transform, p0, p1) {
-    var x = p0[0] - p1[0] * transform.k, y = p0[1] - p1[1] * transform.k;
-    return x === transform.x && y === transform.y ? transform : new Transform(transform.k, x, y);
-  }
-
-  function centroid(extent) {
-    return [(+extent[0][0] + +extent[1][0]) / 2, (+extent[0][1] + +extent[1][1]) / 2];
-  }
-
-  function schedule(transition, transform, point, event) {
-    transition
-        .on("start.zoom", function() { gesture(this, arguments).event(event).start(); })
-        .on("interrupt.zoom end.zoom", function() { gesture(this, arguments).event(event).end(); })
-        .tween("zoom", function() {
-          var that = this,
-              args = arguments,
-              g = gesture(that, args).event(event),
-              e = extent.apply(that, args),
-              p = point == null ? centroid(e) : typeof point === "function" ? point.apply(that, args) : point,
-              w = Math.max(e[1][0] - e[0][0], e[1][1] - e[0][1]),
-              a = that.__zoom,
-              b = typeof transform === "function" ? transform.apply(that, args) : transform,
-              i = interpolate(a.invert(p).concat(w / a.k), b.invert(p).concat(w / b.k));
-          return function(t) {
-            if (t === 1) t = b; // Avoid rounding error on end.
-            else { var l = i(t), k = w / l[2]; t = new Transform(k, p[0] - l[0] * k, p[1] - l[1] * k); }
-            g.zoom(null, t);
-          };
-        });
-  }
-
-  function gesture(that, args, clean) {
-    return (!clean && that.__zooming) || new Gesture(that, args);
-  }
-
-  function Gesture(that, args) {
-    this.that = that;
-    this.args = args;
-    this.active = 0;
-    this.sourceEvent = null;
-    this.extent = extent.apply(that, args);
-    this.taps = 0;
-  }
-
-  Gesture.prototype = {
-    event: function(event) {
-      if (event) this.sourceEvent = event;
-      return this;
-    },
-    start: function() {
-      if (++this.active === 1) {
-        this.that.__zooming = this;
-        this.emit("start");
-      }
-      return this;
-    },
-    zoom: function(key, transform) {
-      if (this.mouse && key !== "mouse") this.mouse[1] = transform.invert(this.mouse[0]);
-      if (this.touch0 && key !== "touch") this.touch0[1] = transform.invert(this.touch0[0]);
-      if (this.touch1 && key !== "touch") this.touch1[1] = transform.invert(this.touch1[0]);
-      this.that.__zoom = transform;
-      this.emit("zoom");
-      return this;
-    },
-    end: function() {
-      if (--this.active === 0) {
-        delete this.that.__zooming;
-        this.emit("end");
-      }
-      return this;
-    },
-    emit: function(type) {
-      var d = src_select(this.that).datum();
-      listeners.call(
-        type,
-        this.that,
-        new ZoomEvent(type, {
-          sourceEvent: this.sourceEvent,
-          target: zoom,
-          type,
-          transform: this.that.__zoom,
-          dispatch: listeners
-        }),
-        d
-      );
-    }
-  };
-
-  function wheeled(event, ...args) {
-    if (!filter.apply(this, arguments)) return;
-    var g = gesture(this, args).event(event),
-        t = this.__zoom,
-        k = Math.max(scaleExtent[0], Math.min(scaleExtent[1], t.k * Math.pow(2, wheelDelta.apply(this, arguments)))),
-        p = pointer(event);
-
-    // If the mouse is in the same location as before, reuse it.
-    // If there were recent wheel events, reset the wheel idle timeout.
-    if (g.wheel) {
-      if (g.mouse[0][0] !== p[0] || g.mouse[0][1] !== p[1]) {
-        g.mouse[1] = t.invert(g.mouse[0] = p);
-      }
-      clearTimeout(g.wheel);
-    }
-
-    // If this wheel event won’t trigger a transform change, ignore it.
-    else if (t.k === k) return;
-
-    // Otherwise, capture the mouse point and location at the start.
-    else {
-      g.mouse = [p, t.invert(p)];
-      interrupt(this);
-      g.start();
-    }
-
-    d3_zoom_src_noevent(event);
-    g.wheel = setTimeout(wheelidled, wheelDelay);
-    g.zoom("mouse", constrain(translate(scale(t, k), g.mouse[0], g.mouse[1]), g.extent, translateExtent));
-
-    function wheelidled() {
-      g.wheel = null;
-      g.end();
-    }
-  }
-
-  function mousedowned(event, ...args) {
-    if (touchending || !filter.apply(this, arguments)) return;
-    var g = gesture(this, args, true).event(event),
-        v = src_select(event.view).on("mousemove.zoom", mousemoved, true).on("mouseup.zoom", mouseupped, true),
-        p = pointer(event, currentTarget),
-        currentTarget = event.currentTarget,
-        x0 = event.clientX,
-        y0 = event.clientY;
-
-    nodrag(event.view);
-    src_noevent_nopropagation(event);
-    g.mouse = [p, this.__zoom.invert(p)];
-    interrupt(this);
-    g.start();
-
-    function mousemoved(event) {
-      d3_zoom_src_noevent(event);
-      if (!g.moved) {
-        var dx = event.clientX - x0, dy = event.clientY - y0;
-        g.moved = dx * dx + dy * dy > clickDistance2;
-      }
-      g.event(event)
-       .zoom("mouse", constrain(translate(g.that.__zoom, g.mouse[0] = pointer(event, currentTarget), g.mouse[1]), g.extent, translateExtent));
-    }
-
-    function mouseupped(event) {
-      v.on("mousemove.zoom mouseup.zoom", null);
-      yesdrag(event.view, g.moved);
-      d3_zoom_src_noevent(event);
-      g.event(event).end();
-    }
-  }
-
-  function dblclicked(event, ...args) {
-    if (!filter.apply(this, arguments)) return;
-    var t0 = this.__zoom,
-        p0 = pointer(event.changedTouches ? event.changedTouches[0] : event, this),
-        p1 = t0.invert(p0),
-        k1 = t0.k * (event.shiftKey ? 0.5 : 2),
-        t1 = constrain(translate(scale(t0, k1), p0, p1), extent.apply(this, args), translateExtent);
-
-    d3_zoom_src_noevent(event);
-    if (duration > 0) src_select(this).transition().duration(duration).call(schedule, t1, p0, event);
-    else src_select(this).call(zoom.transform, t1, p0, event);
-  }
-
-  function touchstarted(event, ...args) {
-    if (!filter.apply(this, arguments)) return;
-    var touches = event.touches,
-        n = touches.length,
-        g = gesture(this, args, event.changedTouches.length === n).event(event),
-        started, i, t, p;
-
-    src_noevent_nopropagation(event);
-    for (i = 0; i < n; ++i) {
-      t = touches[i], p = pointer(t, this);
-      p = [p, this.__zoom.invert(p), t.identifier];
-      if (!g.touch0) g.touch0 = p, started = true, g.taps = 1 + !!touchstarting;
-      else if (!g.touch1 && g.touch0[2] !== p[2]) g.touch1 = p, g.taps = 0;
-    }
-
-    if (touchstarting) touchstarting = clearTimeout(touchstarting);
-
-    if (started) {
-      if (g.taps < 2) touchfirst = p[0], touchstarting = setTimeout(function() { touchstarting = null; }, touchDelay);
-      interrupt(this);
-      g.start();
-    }
-  }
-
-  function touchmoved(event, ...args) {
-    if (!this.__zooming) return;
-    var g = gesture(this, args).event(event),
-        touches = event.changedTouches,
-        n = touches.length, i, t, p, l;
-
-    d3_zoom_src_noevent(event);
-    for (i = 0; i < n; ++i) {
-      t = touches[i], p = pointer(t, this);
-      if (g.touch0 && g.touch0[2] === t.identifier) g.touch0[0] = p;
-      else if (g.touch1 && g.touch1[2] === t.identifier) g.touch1[0] = p;
-    }
-    t = g.that.__zoom;
-    if (g.touch1) {
-      var p0 = g.touch0[0], l0 = g.touch0[1],
-          p1 = g.touch1[0], l1 = g.touch1[1],
-          dp = (dp = p1[0] - p0[0]) * dp + (dp = p1[1] - p0[1]) * dp,
-          dl = (dl = l1[0] - l0[0]) * dl + (dl = l1[1] - l0[1]) * dl;
-      t = scale(t, Math.sqrt(dp / dl));
-      p = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2];
-      l = [(l0[0] + l1[0]) / 2, (l0[1] + l1[1]) / 2];
-    }
-    else if (g.touch0) p = g.touch0[0], l = g.touch0[1];
-    else return;
-
-    g.zoom("touch", constrain(translate(t, p, l), g.extent, translateExtent));
-  }
-
-  function touchended(event, ...args) {
-    if (!this.__zooming) return;
-    var g = gesture(this, args).event(event),
-        touches = event.changedTouches,
-        n = touches.length, i, t;
-
-    src_noevent_nopropagation(event);
-    if (touchending) clearTimeout(touchending);
-    touchending = setTimeout(function() { touchending = null; }, touchDelay);
-    for (i = 0; i < n; ++i) {
-      t = touches[i];
-      if (g.touch0 && g.touch0[2] === t.identifier) delete g.touch0;
-      else if (g.touch1 && g.touch1[2] === t.identifier) delete g.touch1;
-    }
-    if (g.touch1 && !g.touch0) g.touch0 = g.touch1, delete g.touch1;
-    if (g.touch0) g.touch0[1] = this.__zoom.invert(g.touch0[0]);
-    else {
-      g.end();
-      // If this was a dbltap, reroute to the (optional) dblclick.zoom handler.
-      if (g.taps === 2) {
-        t = pointer(t, this);
-        if (Math.hypot(touchfirst[0] - t[0], touchfirst[1] - t[1]) < tapDistance) {
-          var p = src_select(this).on("dblclick.zoom");
-          if (p) p.apply(this, arguments);
-        }
-      }
-    }
-  }
-
-  zoom.wheelDelta = function(_) {
-    return arguments.length ? (wheelDelta = typeof _ === "function" ? _ : d3_zoom_src_constant(+_), zoom) : wheelDelta;
-  };
-
-  zoom.filter = function(_) {
-    return arguments.length ? (filter = typeof _ === "function" ? _ : d3_zoom_src_constant(!!_), zoom) : filter;
-  };
-
-  zoom.touchable = function(_) {
-    return arguments.length ? (touchable = typeof _ === "function" ? _ : d3_zoom_src_constant(!!_), zoom) : touchable;
-  };
-
-  zoom.extent = function(_) {
-    return arguments.length ? (extent = typeof _ === "function" ? _ : d3_zoom_src_constant([[+_[0][0], +_[0][1]], [+_[1][0], +_[1][1]]]), zoom) : extent;
-  };
-
-  zoom.scaleExtent = function(_) {
-    return arguments.length ? (scaleExtent[0] = +_[0], scaleExtent[1] = +_[1], zoom) : [scaleExtent[0], scaleExtent[1]];
-  };
-
-  zoom.translateExtent = function(_) {
-    return arguments.length ? (translateExtent[0][0] = +_[0][0], translateExtent[1][0] = +_[1][0], translateExtent[0][1] = +_[0][1], translateExtent[1][1] = +_[1][1], zoom) : [[translateExtent[0][0], translateExtent[0][1]], [translateExtent[1][0], translateExtent[1][1]]];
-  };
-
-  zoom.constrain = function(_) {
-    return arguments.length ? (constrain = _, zoom) : constrain;
-  };
-
-  zoom.duration = function(_) {
-    return arguments.length ? (duration = +_, zoom) : duration;
-  };
-
-  zoom.interpolate = function(_) {
-    return arguments.length ? (interpolate = _, zoom) : interpolate;
-  };
-
-  zoom.on = function() {
-    var value = listeners.on.apply(listeners, arguments);
-    return value === listeners ? zoom : value;
-  };
-
-  zoom.clickDistance = function(_) {
-    return arguments.length ? (clickDistance2 = (_ = +_) * _, zoom) : Math.sqrt(clickDistance2);
-  };
-
-  zoom.tapDistance = function(_) {
-    return arguments.length ? (tapDistance = +_, zoom) : tapDistance;
-  };
-
-  return zoom;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-zoom/src/index.js
-
-
-
-// CONCATENATED MODULE: ./node_modules/d3/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/ascending.js
-/* harmony default export */ var src_ascending = (function(a, b) {
-  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/bisector.js
-
-
-/* harmony default export */ var bisector = (function(compare) {
-  if (compare.length === 1) compare = ascendingComparator(compare);
-  return {
-    left: function(a, x, lo, hi) {
-      if (lo == null) lo = 0;
-      if (hi == null) hi = a.length;
-      while (lo < hi) {
-        var mid = lo + hi >>> 1;
-        if (compare(a[mid], x) < 0) lo = mid + 1;
-        else hi = mid;
-      }
-      return lo;
-    },
-    right: function(a, x, lo, hi) {
-      if (lo == null) lo = 0;
-      if (hi == null) hi = a.length;
-      while (lo < hi) {
-        var mid = lo + hi >>> 1;
-        if (compare(a[mid], x) > 0) hi = mid;
-        else lo = mid + 1;
-      }
-      return lo;
-    }
-  };
-});
-
-function ascendingComparator(f) {
-  return function(d, x) {
-    return src_ascending(f(d), x);
-  };
-}
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/bisect.js
-
-
-
-var ascendingBisect = bisector(src_ascending);
-var bisectRight = ascendingBisect.right;
-var bisectLeft = ascendingBisect.left;
-/* harmony default export */ var bisect = (bisectRight);
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/pairs.js
-/* harmony default export */ var pairs = (function(array, f) {
-  if (f == null) f = pair;
-  var i = 0, n = array.length - 1, p = array[0], pairs = new Array(n < 0 ? 0 : n);
-  while (i < n) pairs[i] = f(p, p = array[++i]);
-  return pairs;
-});
-
-function pair(a, b) {
-  return [a, b];
-}
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/cross.js
-
-
-/* harmony default export */ var cross = (function(values0, values1, reduce) {
-  var n0 = values0.length,
-      n1 = values1.length,
-      values = new Array(n0 * n1),
-      i0,
-      i1,
-      i,
-      value0;
-
-  if (reduce == null) reduce = pair;
-
-  for (i0 = i = 0; i0 < n0; ++i0) {
-    for (value0 = values0[i0], i1 = 0; i1 < n1; ++i1, ++i) {
-      values[i] = reduce(value0, values1[i1]);
-    }
-  }
-
-  return values;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/descending.js
-/* harmony default export */ var descending = (function(a, b) {
-  return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/number.js
-/* harmony default export */ var src_number = (function(x) {
-  return x === null ? NaN : +x;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/variance.js
-
-
-/* harmony default export */ var variance = (function(values, valueof) {
-  var n = values.length,
-      m = 0,
-      i = -1,
-      mean = 0,
-      value,
-      delta,
-      sum = 0;
-
-  if (valueof == null) {
-    while (++i < n) {
-      if (!isNaN(value = src_number(values[i]))) {
-        delta = value - mean;
-        mean += delta / ++m;
-        sum += delta * (value - mean);
-      }
-    }
-  }
-
-  else {
-    while (++i < n) {
-      if (!isNaN(value = src_number(valueof(values[i], i, values)))) {
-        delta = value - mean;
-        mean += delta / ++m;
-        sum += delta * (value - mean);
-      }
-    }
-  }
-
-  if (m > 1) return sum / (m - 1);
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/deviation.js
-
-
-/* harmony default export */ var deviation = (function(array, f) {
-  var v = variance(array, f);
-  return v ? Math.sqrt(v) : v;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/extent.js
-/* harmony default export */ var src_extent = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      min,
-      max;
-
-  if (valueof == null) {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = values[i]) != null && value >= value) {
-        min = max = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = values[i]) != null) {
-            if (min > value) min = value;
-            if (max < value) max = value;
-          }
-        }
-      }
-    }
-  }
-
-  else {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = valueof(values[i], i, values)) != null && value >= value) {
-        min = max = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = valueof(values[i], i, values)) != null) {
-            if (min > value) min = value;
-            if (max < value) max = value;
-          }
-        }
-      }
-    }
-  }
-
-  return [min, max];
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/array.js
-var array_array = Array.prototype;
-
-var slice = array_array.slice;
-var map = array_array.map;
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/constant.js
-/* harmony default export */ var d3_array_src_constant = (function(x) {
-  return function() {
-    return x;
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/identity.js
-/* harmony default export */ var src_identity = (function(x) {
-  return x;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/range.js
-/* harmony default export */ var src_range = (function(start, stop, step) {
-  start = +start, stop = +stop, step = (n = arguments.length) < 2 ? (stop = start, start = 0, 1) : n < 3 ? 1 : +step;
-
-  var i = -1,
-      n = Math.max(0, Math.ceil((stop - start) / step)) | 0,
-      range = new Array(n);
-
-  while (++i < n) {
-    range[i] = start + i * step;
-  }
-
-  return range;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/ticks.js
-var e10 = Math.sqrt(50),
-    e5 = Math.sqrt(10),
-    e2 = Math.sqrt(2);
-
-/* harmony default export */ var ticks = (function(start, stop, count) {
-  var reverse,
-      i = -1,
-      n,
-      ticks,
-      step;
-
-  stop = +stop, start = +start, count = +count;
-  if (start === stop && count > 0) return [start];
-  if (reverse = stop < start) n = start, start = stop, stop = n;
-  if ((step = tickIncrement(start, stop, count)) === 0 || !isFinite(step)) return [];
-
-  if (step > 0) {
-    start = Math.ceil(start / step);
-    stop = Math.floor(stop / step);
-    ticks = new Array(n = Math.ceil(stop - start + 1));
-    while (++i < n) ticks[i] = (start + i) * step;
-  } else {
-    start = Math.floor(start * step);
-    stop = Math.ceil(stop * step);
-    ticks = new Array(n = Math.ceil(start - stop + 1));
-    while (++i < n) ticks[i] = (start - i) / step;
-  }
-
-  if (reverse) ticks.reverse();
-
-  return ticks;
-});
-
-function tickIncrement(start, stop, count) {
-  var step = (stop - start) / Math.max(0, count),
-      power = Math.floor(Math.log(step) / Math.LN10),
-      error = step / Math.pow(10, power);
-  return power >= 0
-      ? (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1) * Math.pow(10, power)
-      : -Math.pow(10, -power) / (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1);
-}
-
-function tickStep(start, stop, count) {
-  var step0 = Math.abs(stop - start) / Math.max(0, count),
-      step1 = Math.pow(10, Math.floor(Math.log(step0) / Math.LN10)),
-      error = step0 / step1;
-  if (error >= e10) step1 *= 10;
-  else if (error >= e5) step1 *= 5;
-  else if (error >= e2) step1 *= 2;
-  return stop < start ? -step1 : step1;
-}
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/threshold/sturges.js
-/* harmony default export */ var sturges = (function(values) {
-  return Math.ceil(Math.log(values.length) / Math.LN2) + 1;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/histogram.js
-
-
-
-
-
-
-
-
-
-/* harmony default export */ var src_histogram = (function() {
-  var value = src_identity,
-      domain = src_extent,
-      threshold = sturges;
-
-  function histogram(data) {
-    var i,
-        n = data.length,
-        x,
-        values = new Array(n);
-
-    for (i = 0; i < n; ++i) {
-      values[i] = value(data[i], i, data);
-    }
-
-    var xz = domain(values),
-        x0 = xz[0],
-        x1 = xz[1],
-        tz = threshold(values, x0, x1);
-
-    // Convert number of thresholds into uniform thresholds.
-    if (!Array.isArray(tz)) {
-      tz = tickStep(x0, x1, tz);
-      tz = src_range(Math.ceil(x0 / tz) * tz, x1, tz); // exclusive
-    }
-
-    // Remove any thresholds outside the domain.
-    var m = tz.length;
-    while (tz[0] <= x0) tz.shift(), --m;
-    while (tz[m - 1] > x1) tz.pop(), --m;
-
-    var bins = new Array(m + 1),
-        bin;
-
-    // Initialize bins.
-    for (i = 0; i <= m; ++i) {
-      bin = bins[i] = [];
-      bin.x0 = i > 0 ? tz[i - 1] : x0;
-      bin.x1 = i < m ? tz[i] : x1;
-    }
-
-    // Assign data to bins by value, ignoring any outside the domain.
-    for (i = 0; i < n; ++i) {
-      x = values[i];
-      if (x0 <= x && x <= x1) {
-        bins[bisect(tz, x, 0, m)].push(data[i]);
-      }
-    }
-
-    return bins;
-  }
-
-  histogram.value = function(_) {
-    return arguments.length ? (value = typeof _ === "function" ? _ : d3_array_src_constant(_), histogram) : value;
-  };
-
-  histogram.domain = function(_) {
-    return arguments.length ? (domain = typeof _ === "function" ? _ : d3_array_src_constant([_[0], _[1]]), histogram) : domain;
-  };
-
-  histogram.thresholds = function(_) {
-    return arguments.length ? (threshold = typeof _ === "function" ? _ : Array.isArray(_) ? d3_array_src_constant(slice.call(_)) : d3_array_src_constant(_), histogram) : threshold;
-  };
-
-  return histogram;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/quantile.js
-
-
-/* harmony default export */ var quantile = (function(values, p, valueof) {
-  if (valueof == null) valueof = src_number;
-  if (!(n = values.length)) return;
-  if ((p = +p) <= 0 || n < 2) return +valueof(values[0], 0, values);
-  if (p >= 1) return +valueof(values[n - 1], n - 1, values);
-  var n,
-      i = (n - 1) * p,
-      i0 = Math.floor(i),
-      value0 = +valueof(values[i0], i0, values),
-      value1 = +valueof(values[i0 + 1], i0 + 1, values);
-  return value0 + (value1 - value0) * (i - i0);
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/threshold/freedmanDiaconis.js
-
-
-
-
-
-/* harmony default export */ var freedmanDiaconis = (function(values, min, max) {
-  values = map.call(values, src_number).sort(src_ascending);
-  return Math.ceil((max - min) / (2 * (quantile(values, 0.75) - quantile(values, 0.25)) * Math.pow(values.length, -1 / 3)));
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/threshold/scott.js
-
-
-/* harmony default export */ var scott = (function(values, min, max) {
-  return Math.ceil((max - min) / (3.5 * deviation(values) * Math.pow(values.length, -1 / 3)));
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/max.js
-/* harmony default export */ var src_max = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      max;
-
-  if (valueof == null) {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = values[i]) != null && value >= value) {
-        max = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = values[i]) != null && value > max) {
-            max = value;
-          }
-        }
-      }
-    }
-  }
-
-  else {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = valueof(values[i], i, values)) != null && value >= value) {
-        max = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = valueof(values[i], i, values)) != null && value > max) {
-            max = value;
-          }
-        }
-      }
-    }
-  }
-
-  return max;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/mean.js
-
-
-/* harmony default export */ var src_mean = (function(values, valueof) {
-  var n = values.length,
-      m = n,
-      i = -1,
-      value,
-      sum = 0;
-
-  if (valueof == null) {
-    while (++i < n) {
-      if (!isNaN(value = src_number(values[i]))) sum += value;
-      else --m;
-    }
-  }
-
-  else {
-    while (++i < n) {
-      if (!isNaN(value = src_number(valueof(values[i], i, values)))) sum += value;
-      else --m;
-    }
-  }
-
-  if (m) return sum / m;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/median.js
-
-
-
-
-/* harmony default export */ var median = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      numbers = [];
-
-  if (valueof == null) {
-    while (++i < n) {
-      if (!isNaN(value = src_number(values[i]))) {
-        numbers.push(value);
-      }
-    }
-  }
-
-  else {
-    while (++i < n) {
-      if (!isNaN(value = src_number(valueof(values[i], i, values)))) {
-        numbers.push(value);
-      }
-    }
-  }
-
-  return quantile(numbers.sort(src_ascending), 0.5);
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/merge.js
-/* harmony default export */ var src_merge = (function(arrays) {
-  var n = arrays.length,
-      m,
-      i = -1,
-      j = 0,
-      merged,
-      array;
-
-  while (++i < n) j += arrays[i].length;
-  merged = new Array(j);
-
-  while (--n >= 0) {
-    array = arrays[n];
-    m = array.length;
-    while (--m >= 0) {
-      merged[--j] = array[m];
-    }
-  }
-
-  return merged;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/min.js
-/* harmony default export */ var src_min = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      min;
-
-  if (valueof == null) {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = values[i]) != null && value >= value) {
-        min = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = values[i]) != null && min > value) {
-            min = value;
-          }
-        }
-      }
-    }
-  }
-
-  else {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = valueof(values[i], i, values)) != null && value >= value) {
-        min = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = valueof(values[i], i, values)) != null && min > value) {
-            min = value;
-          }
-        }
-      }
-    }
-  }
-
-  return min;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/permute.js
-/* harmony default export */ var permute = (function(array, indexes) {
-  var i = indexes.length, permutes = new Array(i);
-  while (i--) permutes[i] = array[indexes[i]];
-  return permutes;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/scan.js
-
-
-/* harmony default export */ var scan = (function(values, compare) {
-  if (!(n = values.length)) return;
-  var n,
-      i = 0,
-      j = 0,
-      xi,
-      xj = values[j];
-
-  if (compare == null) compare = src_ascending;
-
-  while (++i < n) {
-    if (compare(xi = values[i], xj) < 0 || compare(xj, xj) !== 0) {
-      xj = xi, j = i;
-    }
-  }
-
-  if (compare(xj, xj) === 0) return j;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/shuffle.js
-/* harmony default export */ var shuffle = (function(array, i0, i1) {
-  var m = (i1 == null ? array.length : i1) - (i0 = i0 == null ? 0 : +i0),
-      t,
-      i;
-
-  while (m) {
-    i = Math.random() * m-- | 0;
-    t = array[m + i0];
-    array[m + i0] = array[i + i0];
-    array[i + i0] = t;
-  }
-
-  return array;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/sum.js
-/* harmony default export */ var src_sum = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      sum = 0;
-
-  if (valueof == null) {
-    while (++i < n) {
-      if (value = +values[i]) sum += value; // Note: zero and null are equivalent.
-    }
-  }
-
-  else {
-    while (++i < n) {
-      if (value = +valueof(values[i], i, values)) sum += value;
-    }
-  }
-
-  return sum;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/transpose.js
-
-
-/* harmony default export */ var src_transpose = (function(matrix) {
-  if (!(n = matrix.length)) return [];
-  for (var i = -1, m = src_min(matrix, transpose_length), transpose = new Array(m); ++i < m;) {
-    for (var j = -1, n, row = transpose[i] = new Array(n); ++j < n;) {
-      row[j] = matrix[j][i];
-    }
-  }
-  return transpose;
-});
-
-function transpose_length(d) {
-  return d.length;
-}
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/zip.js
-
-
-/* harmony default export */ var zip = (function() {
-  return src_transpose(arguments);
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// CONCATENATED MODULE: ./node_modules/d3-collection/src/map.js
-var map_prefix = "$";
-
-function map_Map() {}
-
-map_Map.prototype = map_map.prototype = {
-  constructor: map_Map,
-  has: function(key) {
-    return (map_prefix + key) in this;
-  },
-  get: function(key) {
-    return this[map_prefix + key];
-  },
-  set: function(key, value) {
-    this[map_prefix + key] = value;
-    return this;
-  },
-  remove: function(key) {
-    var property = map_prefix + key;
-    return property in this && delete this[property];
-  },
-  clear: function() {
-    for (var property in this) if (property[0] === map_prefix) delete this[property];
-  },
-  keys: function() {
-    var keys = [];
-    for (var property in this) if (property[0] === map_prefix) keys.push(property.slice(1));
-    return keys;
-  },
-  values: function() {
-    var values = [];
-    for (var property in this) if (property[0] === map_prefix) values.push(this[property]);
-    return values;
-  },
-  entries: function() {
-    var entries = [];
-    for (var property in this) if (property[0] === map_prefix) entries.push({key: property.slice(1), value: this[property]});
-    return entries;
-  },
-  size: function() {
-    var size = 0;
-    for (var property in this) if (property[0] === map_prefix) ++size;
-    return size;
-  },
-  empty: function() {
-    for (var property in this) if (property[0] === map_prefix) return false;
-    return true;
-  },
-  each: function(f) {
-    for (var property in this) if (property[0] === map_prefix) f(this[property], property.slice(1), this);
-  }
-};
-
-function map_map(object, f) {
-  var map = new map_Map;
-
-  // Copy constructor.
-  if (object instanceof map_Map) object.each(function(value, key) { map.set(key, value); });
-
-  // Index array by numeric index or specified key function.
-  else if (Array.isArray(object)) {
-    var i = -1,
-        n = object.length,
-        o;
-
-    if (f == null) while (++i < n) map.set(i, object[i]);
-    else while (++i < n) map.set(f(o = object[i], i, object), o);
-  }
-
-  // Convert object to map.
-  else if (object) for (var key in object) map.set(key, object[key]);
-
-  return map;
-}
-
-/* harmony default export */ var src_map = (map_map);
-
-// CONCATENATED MODULE: ./node_modules/d3-collection/src/nest.js
-
-
-/* harmony default export */ var src_nest = (function() {
-  var keys = [],
-      sortKeys = [],
-      sortValues,
-      rollup,
-      nest;
-
-  function apply(array, depth, createResult, setResult) {
-    if (depth >= keys.length) {
-      if (sortValues != null) array.sort(sortValues);
-      return rollup != null ? rollup(array) : array;
-    }
-
-    var i = -1,
-        n = array.length,
-        key = keys[depth++],
-        keyValue,
-        value,
-        valuesByKey = src_map(),
-        values,
-        result = createResult();
-
-    while (++i < n) {
-      if (values = valuesByKey.get(keyValue = key(value = array[i]) + "")) {
-        values.push(value);
-      } else {
-        valuesByKey.set(keyValue, [value]);
-      }
-    }
-
-    valuesByKey.each(function(values, key) {
-      setResult(result, key, apply(values, depth, createResult, setResult));
-    });
-
-    return result;
-  }
-
-  function entries(map, depth) {
-    if (++depth > keys.length) return map;
-    var array, sortKey = sortKeys[depth - 1];
-    if (rollup != null && depth >= keys.length) array = map.entries();
-    else array = [], map.each(function(v, k) { array.push({key: k, values: entries(v, depth)}); });
-    return sortKey != null ? array.sort(function(a, b) { return sortKey(a.key, b.key); }) : array;
-  }
-
-  return nest = {
-    object: function(array) { return apply(array, 0, createObject, setObject); },
-    map: function(array) { return apply(array, 0, createMap, setMap); },
-    entries: function(array) { return entries(apply(array, 0, createMap, setMap), 0); },
-    key: function(d) { keys.push(d); return nest; },
-    sortKeys: function(order) { sortKeys[keys.length - 1] = order; return nest; },
-    sortValues: function(order) { sortValues = order; return nest; },
-    rollup: function(f) { rollup = f; return nest; }
-  };
-});
-
-function createObject() {
-  return {};
-}
-
-function setObject(object, key, value) {
-  object[key] = value;
-}
-
-function createMap() {
-  return src_map();
-}
-
-function setMap(map, key, value) {
-  map.set(key, value);
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-collection/src/set.js
-
-
-function Set() {}
-
-var proto = src_map.prototype;
-
-Set.prototype = set_set.prototype = {
-  constructor: Set,
-  has: proto.has,
-  add: function(value) {
-    value += "";
-    this[map_prefix + value] = value;
-    return this;
-  },
-  remove: proto.remove,
-  clear: proto.clear,
-  values: proto.keys,
-  size: proto.size,
-  empty: proto.empty,
-  each: proto.each
-};
-
-function set_set(object, f) {
-  var set = new Set;
-
-  // Copy constructor.
-  if (object instanceof Set) object.each(function(value) { set.add(value); });
-
-  // Otherwise, assume it’s an array.
-  else if (object) {
-    var i = -1, n = object.length;
-    if (f == null) while (++i < n) set.add(object[i]);
-    else while (++i < n) set.add(f(object[i], i, object));
-  }
-
-  return set;
-}
-
-/* harmony default export */ var src_set = (set_set);
-
-// CONCATENATED MODULE: ./node_modules/d3-collection/src/keys.js
-/* harmony default export */ var src_keys = (function(map) {
-  var keys = [];
-  for (var key in map) keys.push(key);
-  return keys;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-collection/src/values.js
-/* harmony default export */ var src_values = (function(map) {
-  var values = [];
-  for (var key in map) values.push(map[key]);
-  return values;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-collection/src/entries.js
-/* harmony default export */ var src_entries = (function(map) {
-  var entries = [];
-  for (var key in map) entries.push({key: key, value: map[key]});
-  return entries;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-collection/src/index.js
-
-
-
-
-
-
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-path/src/path.js
-var pi = Math.PI,
-    tau = 2 * pi,
-    epsilon = 1e-6,
-    tauEpsilon = tau - epsilon;
-
-function Path() {
-  this._x0 = this._y0 = // start of current subpath
-  this._x1 = this._y1 = null; // end of current subpath
-  this._ = "";
-}
-
-function path_path() {
-  return new Path;
-}
-
-Path.prototype = path_path.prototype = {
-  constructor: Path,
-  moveTo: function(x, y) {
-    this._ += "M" + (this._x0 = this._x1 = +x) + "," + (this._y0 = this._y1 = +y);
-  },
-  closePath: function() {
-    if (this._x1 !== null) {
-      this._x1 = this._x0, this._y1 = this._y0;
-      this._ += "Z";
-    }
-  },
-  lineTo: function(x, y) {
-    this._ += "L" + (this._x1 = +x) + "," + (this._y1 = +y);
-  },
-  quadraticCurveTo: function(x1, y1, x, y) {
-    this._ += "Q" + (+x1) + "," + (+y1) + "," + (this._x1 = +x) + "," + (this._y1 = +y);
-  },
-  bezierCurveTo: function(x1, y1, x2, y2, x, y) {
-    this._ += "C" + (+x1) + "," + (+y1) + "," + (+x2) + "," + (+y2) + "," + (this._x1 = +x) + "," + (this._y1 = +y);
-  },
-  arcTo: function(x1, y1, x2, y2, r) {
-    x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2, r = +r;
-    var x0 = this._x1,
-        y0 = this._y1,
-        x21 = x2 - x1,
-        y21 = y2 - y1,
-        x01 = x0 - x1,
-        y01 = y0 - y1,
-        l01_2 = x01 * x01 + y01 * y01;
-
-    // Is the radius negative? Error.
-    if (r < 0) throw new Error("negative radius: " + r);
-
-    // Is this path empty? Move to (x1,y1).
-    if (this._x1 === null) {
-      this._ += "M" + (this._x1 = x1) + "," + (this._y1 = y1);
-    }
-
-    // Or, is (x1,y1) coincident with (x0,y0)? Do nothing.
-    else if (!(l01_2 > epsilon));
-
-    // Or, are (x0,y0), (x1,y1) and (x2,y2) collinear?
-    // Equivalently, is (x1,y1) coincident with (x2,y2)?
-    // Or, is the radius zero? Line to (x1,y1).
-    else if (!(Math.abs(y01 * x21 - y21 * x01) > epsilon) || !r) {
-      this._ += "L" + (this._x1 = x1) + "," + (this._y1 = y1);
-    }
-
-    // Otherwise, draw an arc!
-    else {
-      var x20 = x2 - x0,
-          y20 = y2 - y0,
-          l21_2 = x21 * x21 + y21 * y21,
-          l20_2 = x20 * x20 + y20 * y20,
-          l21 = Math.sqrt(l21_2),
-          l01 = Math.sqrt(l01_2),
-          l = r * Math.tan((pi - Math.acos((l21_2 + l01_2 - l20_2) / (2 * l21 * l01))) / 2),
-          t01 = l / l01,
-          t21 = l / l21;
-
-      // If the start tangent is not coincident with (x0,y0), line to.
-      if (Math.abs(t01 - 1) > epsilon) {
-        this._ += "L" + (x1 + t01 * x01) + "," + (y1 + t01 * y01);
-      }
-
-      this._ += "A" + r + "," + r + ",0,0," + (+(y01 * x20 > x01 * y20)) + "," + (this._x1 = x1 + t21 * x21) + "," + (this._y1 = y1 + t21 * y21);
-    }
-  },
-  arc: function(x, y, r, a0, a1, ccw) {
-    x = +x, y = +y, r = +r, ccw = !!ccw;
-    var dx = r * Math.cos(a0),
-        dy = r * Math.sin(a0),
-        x0 = x + dx,
-        y0 = y + dy,
-        cw = 1 ^ ccw,
-        da = ccw ? a0 - a1 : a1 - a0;
-
-    // Is the radius negative? Error.
-    if (r < 0) throw new Error("negative radius: " + r);
-
-    // Is this path empty? Move to (x0,y0).
-    if (this._x1 === null) {
-      this._ += "M" + x0 + "," + y0;
-    }
-
-    // Or, is (x0,y0) not coincident with the previous point? Line to (x0,y0).
-    else if (Math.abs(this._x1 - x0) > epsilon || Math.abs(this._y1 - y0) > epsilon) {
-      this._ += "L" + x0 + "," + y0;
-    }
-
-    // Is this arc empty? We’re done.
-    if (!r) return;
-
-    // Does the angle go the wrong way? Flip the direction.
-    if (da < 0) da = da % tau + tau;
-
-    // Is this a complete circle? Draw two arcs to complete the circle.
-    if (da > tauEpsilon) {
-      this._ += "A" + r + "," + r + ",0,1," + cw + "," + (x - dx) + "," + (y - dy) + "A" + r + "," + r + ",0,1," + cw + "," + (this._x1 = x0) + "," + (this._y1 = y0);
-    }
-
-    // Is this arc non-empty? Draw an arc!
-    else if (da > epsilon) {
-      this._ += "A" + r + "," + r + ",0," + (+(da >= pi)) + "," + cw + "," + (this._x1 = x + r * Math.cos(a1)) + "," + (this._y1 = y + r * Math.sin(a1));
-    }
-  },
-  rect: function(x, y, w, h) {
-    this._ += "M" + (this._x0 = this._x1 = +x) + "," + (this._y0 = this._y1 = +y) + "h" + (+w) + "v" + (+h) + "h" + (-w) + "Z";
-  },
-  toString: function() {
-    return this._;
-  }
-};
-
-/* harmony default export */ var src_path = (path_path);
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/array.js
-var array_slice = Array.prototype.slice;
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/constant.js
-/* harmony default export */ var d3_shape_src_constant = (function(x) {
-  return function constant() {
-    return x;
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/point.js
-function point_x(p) {
-  return p[0];
-}
-
-function point_y(p) {
-  return p[1];
-}
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/pointRadial.js
-/* harmony default export */ var pointRadial = (function(x, y) {
-  return [(y = +y) * Math.cos(x -= Math.PI / 2), y * Math.sin(x)];
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/link/index.js
-
-
-
-
-
-
-function linkSource(d) {
-  return d.source;
-}
-
-function linkTarget(d) {
-  return d.target;
-}
-
-function link_link(curve) {
-  var source = linkSource,
-      target = linkTarget,
-      x = point_x,
-      y = point_y,
-      context = null;
-
-  function link() {
-    var buffer, argv = array_slice.call(arguments), s = source.apply(this, argv), t = target.apply(this, argv);
-    if (!context) context = buffer = src_path();
-    curve(context, +x.apply(this, (argv[0] = s, argv)), +y.apply(this, argv), +x.apply(this, (argv[0] = t, argv)), +y.apply(this, argv));
-    if (buffer) return context = null, buffer + "" || null;
-  }
-
-  link.source = function(_) {
-    return arguments.length ? (source = _, link) : source;
-  };
-
-  link.target = function(_) {
-    return arguments.length ? (target = _, link) : target;
-  };
-
-  link.x = function(_) {
-    return arguments.length ? (x = typeof _ === "function" ? _ : d3_shape_src_constant(+_), link) : x;
-  };
-
-  link.y = function(_) {
-    return arguments.length ? (y = typeof _ === "function" ? _ : d3_shape_src_constant(+_), link) : y;
-  };
-
-  link.context = function(_) {
-    return arguments.length ? ((context = _ == null ? null : _), link) : context;
-  };
-
-  return link;
-}
-
-function curveHorizontal(context, x0, y0, x1, y1) {
-  context.moveTo(x0, y0);
-  context.bezierCurveTo(x0 = (x0 + x1) / 2, y0, x0, y1, x1, y1);
-}
-
-function curveVertical(context, x0, y0, x1, y1) {
-  context.moveTo(x0, y0);
-  context.bezierCurveTo(x0, y0 = (y0 + y1) / 2, x1, y0, x1, y1);
-}
-
-function curveRadial(context, x0, y0, x1, y1) {
-  var p0 = pointRadial(x0, y0),
-      p1 = pointRadial(x0, y0 = (y0 + y1) / 2),
-      p2 = pointRadial(x1, y0),
-      p3 = pointRadial(x1, y1);
-  context.moveTo(p0[0], p0[1]);
-  context.bezierCurveTo(p1[0], p1[1], p2[0], p2[1], p3[0], p3[1]);
-}
-
-function linkHorizontal() {
-  return link_link(curveHorizontal);
-}
-
-function linkVertical() {
-  return link_link(curveVertical);
-}
-
-function linkRadial() {
-  var l = link_link(curveRadial);
-  l.angle = l.x, delete l.x;
-  l.radius = l.y, delete l.y;
-  return l;
-}
-
-// EXTERNAL MODULE: ./node_modules/elementary-circuits-directed-graph/johnson.js
-var johnson = __webpack_require__(45);
-var johnson_default = /*#__PURE__*/__webpack_require__.n(johnson);
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/dist/d3-sankey-circular.es.js
-
-
-
-
-
-// For a given link, return the target node's depth
-function targetDepth(d) {
-  return d.target.depth;
-}
-
-// The depth of a node when the nodeAlign (align) is set to 'left'
-function left(node) {
-  return node.depth;
-}
-
-// The depth of a node when the nodeAlign (align) is set to 'right'
-function right(node, n) {
-  return n - 1 - node.height;
-}
-
-// The depth of a node when the nodeAlign (align) is set to 'justify'
-function justify(node, n) {
-  return node.sourceLinks.length ? node.depth : n - 1;
-}
-
-// The depth of a node when the nodeAlign (align) is set to 'center'
-function center(node) {
-  return node.targetLinks.length ? node.depth : node.sourceLinks.length ? src_min(node.sourceLinks, targetDepth) - 1 : 0;
-}
-
-function fixed(node, n, minDepth) {
-  return node.depthLevel - minDepth;
-}
-
-// returns a function, using the parameter given to the sankey setting
-function d3_sankey_circular_es_constant(x) {
-  return function () {
-    return x;
-  };
-}
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
-  return typeof obj;
-} : function (obj) {
-  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-};
-
-/// https://github.com/tomshanley/d3-sankeyCircular-circular
-
-// sort links' breadth (ie top to bottom in a column), based on their source nodes' breadths
-function ascendingSourceBreadth(a, b) {
-  return ascendingBreadth(a.source, b.source) || a.index - b.index;
-}
-
-// sort links' breadth (ie top to bottom in a column), based on their target nodes' breadths
-function ascendingTargetBreadth(a, b) {
-  return ascendingBreadth(a.target, b.target) || a.index - b.index;
-}
-
-// sort nodes' breadth (ie top to bottom in a column)
-// if both nodes have circular links, or both don't have circular links, then sort by the top (y0) of the node
-// else push nodes that have top circular links to the top, and nodes that have bottom circular links to the bottom
-function ascendingBreadth(a, b) {
-  if (a.partOfCycle === b.partOfCycle) {
-    return a.y0 - b.y0;
-  } else {
-    if (a.circularLinkType === 'top' || b.circularLinkType === 'bottom') {
-      return -1;
-    } else {
-      return 1;
-    }
-  }
-}
-
-// return the value of a node or link
-function d3_sankey_circular_es_value(d) {
-  return d.value;
-}
-
-// return the vertical center of a node
-function nodeCenter(node) {
-  return (node.y0 + node.y1) / 2;
-}
-
-// return the vertical center of a link's source node
-function linkSourceCenter(link) {
-  return nodeCenter(link.source);
-}
-
-// return the vertical center of a link's target node
-function linkTargetCenter(link) {
-  return nodeCenter(link.target);
-}
-
-// Return the default value for ID for node, d.index
-function defaultId(d) {
-  return d.index;
-}
-
-// Return the default object the graph's nodes, graph.nodes
-function defaultNodes(graph) {
-  return graph.nodes;
-}
-
-// Return the default object the graph's nodes, graph.links
-function defaultLinks(graph) {
-  return graph.links;
-}
-
-// Return the node from the collection that matches the provided ID, or throw an error if no match
-function d3_sankey_circular_es_find(nodeById, id) {
-  var node = nodeById.get(id);
-  if (!node) throw new Error('missing: ' + id);
-  return node;
-}
-
-function getNodeID(node, id) {
-  return id(node);
-}
-
-// The main sankeyCircular functions
-
-// Some constants for circular link calculations
-var verticalMargin = 25;
-var baseRadius = 10;
-// var scale = 0.3 //Possibly let user control this, although anything over 0.5 starts to get too cramped
-
-var d3_sankey_circular_es_scale = 0.15;
-
-function d3_sankey_circular_es_sankeyCircular () {
-  // Set the default values
-  var x0 = 0,
-      y0 = 0,
-      x1 = 1,
-      y1 = 1,
-      // extent
-  dx = 24,
-      // nodeWidth
-  py,
-      // nodePadding, for vertical postioning
-  id = defaultId,
-      align = justify,
-      nodes = defaultNodes,
-      links = defaultLinks,
-      iterations = 32,
-      circularLinkGap = 2,
-      paddingRatio,
-      sortNodes = null;
-
-  function sankeyCircular() {
-    var graph = {
-      nodes: nodes.apply(null, arguments),
-      links: links.apply(null, arguments)
-
-      // Process the graph's nodes and links, setting their positions
-
-      // 1.  Associate the nodes with their respective links, and vice versa
-    };computeNodeLinks(graph);
-
-    // 2.  Determine which links result in a circular path in the graph
-    identifyCircles(graph, id, sortNodes);
-
-    // 4. Calculate the nodes' values, based on the values of the incoming and outgoing links
-    computeNodeValues(graph);
-
-    // 5.  Calculate the nodes' depth based on the incoming and outgoing links
-    //     Sets the nodes':
-    //     - depth:  the depth in the graph
-    //     - column: the depth (0, 1, 2, etc), as is relates to visual position from left to right
-    //     - x0, x1: the x coordinates, as is relates to visual position from left to right
-    computeNodeDepths(graph);
-
-    // 3.  Determine how the circular links will be drawn,
-    //     either travelling back above the main chart ("top")
-    //     or below the main chart ("bottom")
-    selectCircularLinkTypes(graph, id);
-
-    // 6.  Calculate the nodes' and links' vertical position within their respective column
-    //     Also readjusts sankeyCircular size if circular links are needed, and node x's
-    computeNodeBreadths(graph, iterations, id);
-    computeLinkBreadths(graph);
-
-    // 7.  Sort links per node, based on the links' source/target nodes' breadths
-    // 8.  Adjust nodes that overlap links that span 2+ columns
-    var linkSortingIterations = 4; //Possibly let user control this number, like the iterations over node placement
-    for (var iteration = 0; iteration < linkSortingIterations; iteration++) {
-      sortSourceLinks(graph, y1, id);
-      sortTargetLinks(graph, y1, id);
-      resolveNodeLinkOverlaps(graph, y0, y1, id);
-      sortSourceLinks(graph, y1, id);
-      sortTargetLinks(graph, y1, id);
-    }
-
-    // 8.1  Adjust node and link positions back to fill height of chart area if compressed
-    fillHeight(graph, y0, y1);
-
-    // 9. Calculate visually appealling path for the circular paths, and create the "d" string
-    addCircularPathData(graph, circularLinkGap, y1, id);
-
-    return graph;
-  } // end of sankeyCircular function
-
-  // Set the sankeyCircular parameters
-  // nodeID, nodeAlign, nodeWidth, nodePadding, nodes, links, size, extent, iterations, nodePaddingRatio, circularLinkGap
-  sankeyCircular.nodeId = function (_) {
-    return arguments.length ? (id = typeof _ === 'function' ? _ : d3_sankey_circular_es_constant(_), sankeyCircular) : id;
-  };
-
-  sankeyCircular.nodeAlign = function (_) {
-    return arguments.length ? (align = typeof _ === 'function' ? _ : d3_sankey_circular_es_constant(_), sankeyCircular) : align;
-  };
-
-  sankeyCircular.nodeWidth = function (_) {
-    return arguments.length ? (dx = +_, sankeyCircular) : dx;
-  };
-
-  sankeyCircular.nodePadding = function (_) {
-    return arguments.length ? (py = +_, sankeyCircular) : py;
-  };
-
-  sankeyCircular.nodes = function (_) {
-    return arguments.length ? (nodes = typeof _ === 'function' ? _ : d3_sankey_circular_es_constant(_), sankeyCircular) : nodes;
-  };
-
-  sankeyCircular.links = function (_) {
-    return arguments.length ? (links = typeof _ === 'function' ? _ : d3_sankey_circular_es_constant(_), sankeyCircular) : links;
-  };
-
-  sankeyCircular.size = function (_) {
-    return arguments.length ? (x0 = y0 = 0, x1 = +_[0], y1 = +_[1], sankeyCircular) : [x1 - x0, y1 - y0];
-  };
-
-  sankeyCircular.extent = function (_) {
-    return arguments.length ? (x0 = +_[0][0], x1 = +_[1][0], y0 = +_[0][1], y1 = +_[1][1], sankeyCircular) : [[x0, y0], [x1, y1]];
-  };
-
-  sankeyCircular.iterations = function (_) {
-    return arguments.length ? (iterations = +_, sankeyCircular) : iterations;
-  };
-
-  sankeyCircular.circularLinkGap = function (_) {
-    return arguments.length ? (circularLinkGap = +_, sankeyCircular) : circularLinkGap;
-  };
-
-  sankeyCircular.nodePaddingRatio = function (_) {
-    return arguments.length ? (paddingRatio = +_, sankeyCircular) : paddingRatio;
-  };
-
-  sankeyCircular.sortNodes = function (_) {
-    return arguments.length ? (sortNodes = _, sankeyCircular) : sortNodes;
-  };
-
-  sankeyCircular.update = function (graph) {
-    // 5.  Calculate the nodes' depth based on the incoming and outgoing links
-    //     Sets the nodes':
-    //     - depth:  the depth in the graph
-    //     - column: the depth (0, 1, 2, etc), as is relates to visual position from left to right
-    //     - x0, x1: the x coordinates, as is relates to visual position from left to right
-    // computeNodeDepths(graph)
-
-    // 3.  Determine how the circular links will be drawn,
-    //     either travelling back above the main chart ("top")
-    //     or below the main chart ("bottom")
-    selectCircularLinkTypes(graph, id);
-
-    // 6.  Calculate the nodes' and links' vertical position within their respective column
-    //     Also readjusts sankeyCircular size if circular links are needed, and node x's
-    // computeNodeBreadths(graph, iterations, id)
-    computeLinkBreadths(graph);
-
-    // Force position of circular link type based on position
-    graph.links.forEach(function (link) {
-      if (link.circular) {
-        link.circularLinkType = link.y0 + link.y1 < y1 ? 'top' : 'bottom';
-
-        link.source.circularLinkType = link.circularLinkType;
-        link.target.circularLinkType = link.circularLinkType;
-      }
-    });
-
-    sortSourceLinks(graph, y1, id, false); // Sort links but do not move nodes
-    sortTargetLinks(graph, y1, id);
-
-    // 7.  Sort links per node, based on the links' source/target nodes' breadths
-    // 8.  Adjust nodes that overlap links that span 2+ columns
-    // var linkSortingIterations = 4; //Possibly let user control this number, like the iterations over node placement
-    // for (var iteration = 0; iteration < linkSortingIterations; iteration++) {
-    //
-    //   sortSourceLinks(graph, y1, id)
-    //   sortTargetLinks(graph, y1, id)
-    //   resolveNodeLinkOverlaps(graph, y0, y1, id)
-    //   sortSourceLinks(graph, y1, id)
-    //   sortTargetLinks(graph, y1, id)
-    //
-    // }
-
-    // 8.1  Adjust node and link positions back to fill height of chart area if compressed
-    // fillHeight(graph, y0, y1)
-
-    // 9. Calculate visually appealling path for the circular paths, and create the "d" string
-    addCircularPathData(graph, circularLinkGap, y1, id);
-    return graph;
-  };
-
-  // Populate the sourceLinks and targetLinks for each node.
-  // Also, if the source and target are not objects, assume they are indices.
-  function computeNodeLinks(graph) {
-    graph.nodes.forEach(function (node, i) {
-      node.index = i;
-      node.sourceLinks = [];
-      node.targetLinks = [];
-    });
-    var nodeById = src_map(graph.nodes, id);
-    graph.links.forEach(function (link, i) {
-      link.index = i;
-      var source = link.source;
-      var target = link.target;
-      if ((typeof source === 'undefined' ? 'undefined' : _typeof(source)) !== 'object') {
-        source = link.source = d3_sankey_circular_es_find(nodeById, source);
-      }
-      if ((typeof target === 'undefined' ? 'undefined' : _typeof(target)) !== 'object') {
-        target = link.target = d3_sankey_circular_es_find(nodeById, target);
-      }
-      source.sourceLinks.push(link);
-      target.targetLinks.push(link);
-    });
-    return graph;
-  }
-
-  // Compute the value (size) and cycleness of each node by summing the associated links.
-  function computeNodeValues(graph) {
-    graph.nodes.forEach(function (node) {
-      node.partOfCycle = false;
-      node.value = Math.max(src_sum(node.sourceLinks, d3_sankey_circular_es_value), src_sum(node.targetLinks, d3_sankey_circular_es_value));
-      node.sourceLinks.forEach(function (link) {
-        if (link.circular) {
-          node.partOfCycle = true;
-          node.circularLinkType = link.circularLinkType;
-        }
-      });
-      node.targetLinks.forEach(function (link) {
-        if (link.circular) {
-          node.partOfCycle = true;
-          node.circularLinkType = link.circularLinkType;
-        }
-      });
-    });
-  }
-
-  function getCircleMargins(graph) {
-    var totalTopLinksWidth = 0,
-        totalBottomLinksWidth = 0,
-        totalRightLinksWidth = 0,
-        totalLeftLinksWidth = 0;
-
-    var maxColumn = src_max(graph.nodes, function (node) {
-      return node.column;
-    });
-
-    graph.links.forEach(function (link) {
-      if (link.circular) {
-        if (link.circularLinkType == 'top') {
-          totalTopLinksWidth = totalTopLinksWidth + link.width;
-        } else {
-          totalBottomLinksWidth = totalBottomLinksWidth + link.width;
-        }
-
-        if (link.target.column == 0) {
-          totalLeftLinksWidth = totalLeftLinksWidth + link.width;
-        }
-
-        if (link.source.column == maxColumn) {
-          totalRightLinksWidth = totalRightLinksWidth + link.width;
-        }
-      }
-    });
-
-    //account for radius of curves and padding between links
-    totalTopLinksWidth = totalTopLinksWidth > 0 ? totalTopLinksWidth + verticalMargin + baseRadius : totalTopLinksWidth;
-    totalBottomLinksWidth = totalBottomLinksWidth > 0 ? totalBottomLinksWidth + verticalMargin + baseRadius : totalBottomLinksWidth;
-    totalRightLinksWidth = totalRightLinksWidth > 0 ? totalRightLinksWidth + verticalMargin + baseRadius : totalRightLinksWidth;
-    totalLeftLinksWidth = totalLeftLinksWidth > 0 ? totalLeftLinksWidth + verticalMargin + baseRadius : totalLeftLinksWidth;
-
-    return {
-      top: totalTopLinksWidth,
-      bottom: totalBottomLinksWidth,
-      left: totalLeftLinksWidth,
-      right: totalRightLinksWidth
-    };
-  }
-
-  // Update the x0, y0, x1 and y1 for the sankeyCircular, to allow space for any circular links
-  function scaleSankeySize(graph, margin) {
-    var maxColumn = src_max(graph.nodes, function (node) {
-      return node.column;
-    });
-
-    var currentWidth = x1 - x0;
-    var currentHeight = y1 - y0;
-
-    var newWidth = currentWidth + margin.right + margin.left;
-    var newHeight = currentHeight + margin.top + margin.bottom;
-
-    var scaleX = currentWidth / newWidth;
-    var scaleY = currentHeight / newHeight;
-
-    x0 = x0 * scaleX + margin.left;
-    x1 = margin.right == 0 ? x1 : x1 * scaleX;
-    y0 = y0 * scaleY + margin.top;
-    y1 = y1 * scaleY;
-
-    graph.nodes.forEach(function (node) {
-      node.x0 = x0 + node.column * ((x1 - x0 - dx) / maxColumn);
-      node.x1 = node.x0 + dx;
-    });
-
-    return scaleY;
-  }
-
-  // Iteratively assign the depth for each node.
-  // Nodes are assigned the maximum depth of incoming neighbors plus one;
-  // nodes with no incoming links are assigned depth zero, while
-  // nodes with no outgoing links are assigned the maximum depth.
-  function computeNodeDepths(graph) {
-    var nodes, next, x, minDepth;
-
-    for (nodes = graph.nodes, next = [], x = 0; nodes.length; ++x, nodes = next, next = []) {
-      nodes.forEach(function (node) {
-        node.depth = x;
-        node.sourceLinks.forEach(function (link) {
-          if (next.indexOf(link.target) < 0 && !link.circular) {
-            next.push(link.target);
-          }
-        });
-      });
-    }
-
-    for (nodes = graph.nodes, next = [], x = 0; nodes.length; ++x, nodes = next, next = []) {
-      nodes.forEach(function (node) {
-        node.height = x;
-        node.targetLinks.forEach(function (link) {
-          if (next.indexOf(link.source) < 0 && !link.circular) {
-            next.push(link.source);
-          }
-        });
-      });
-    }
-
-    minDepth = _.minBy(graph.nodes, function (n) {
-      return n.depthLevel;
-    }).depthLevel;
-
-    // assign column numbers, and get max value
-    graph.nodes.forEach(function (node) {
-      node.column = Math.floor(align.call(null, node, x, minDepth));
-    });
-  }
-
-  // Assign nodes' breadths, and then shift nodes that overlap (resolveCollisions)
-  function computeNodeBreadths(graph, iterations, id) {
-    var columns = src_nest().key(function (d) {
-      return d.column;
-    }).sortKeys(src_ascending).entries(graph.nodes).map(function (d) {
-      return d.values;
-    });
-
-    initializeNodeBreadth(id);
-    resolveCollisions();
-
-    for (var alpha = 1, n = iterations; n > 0; --n) {
-      relaxLeftAndRight(alpha *= 0.99, id);
-      resolveCollisions();
-    }
-
-    function initializeNodeBreadth(id) {
-      //override py if nodePadding has been set
-      if (paddingRatio) {
-        var padding = Infinity;
-        columns.forEach(function (nodes) {
-          var thisPadding = y1 * paddingRatio / (nodes.length + 1);
-          padding = thisPadding < padding ? thisPadding : padding;
-        });
-        py = padding;
-      }
-
-      var ky = src_min(columns, function (nodes) {
-        return (y1 - y0 - (nodes.length - 1) * py) / src_sum(nodes, d3_sankey_circular_es_value);
-      });
-
-      //calculate the widths of the links
-      ky = ky * d3_sankey_circular_es_scale;
-
-      graph.links.forEach(function (link) {
-        link.width = link.value * ky;
-      });
-
-      //determine how much to scale down the chart, based on circular links
-      var margin = getCircleMargins(graph);
-      var ratio = scaleSankeySize(graph, margin);
-
-      //re-calculate widths
-      ky = ky * ratio;
-
-      graph.links.forEach(function (link) {
-        link.width = link.value * ky;
-      });
-
-      columns.forEach(function (nodes) {
-        var nodesLength = nodes.length;
-        nodes.forEach(function (node, i) {
-          if (node.depth == columns.length - 1 && nodesLength == 1) {
-            node.y0 = y1 / 2 - node.value * ky;
-            node.y1 = node.y0 + node.value * ky;
-          } else if (node.depth == 0 && nodesLength == 1) {
-            node.y0 = y1 / 2 - node.value * ky;
-            node.y1 = node.y0 + node.value * ky;
-          } else if (node.partOfCycle) {
-            if (numberOfNonSelfLinkingCycles(node, id) == 0) {
-              node.y0 = y1 / 2 + i;
-              node.y1 = node.y0 + node.value * ky;
-            } else if (node.circularLinkType == 'top') {
-              node.y0 = y0 + i;
-              node.y1 = node.y0 + node.value * ky;
-            } else {
-              node.y0 = y1 - node.value * ky - i;
-              node.y1 = node.y0 + node.value * ky;
-            }
-          } else {
-            if (margin.top == 0 || margin.bottom == 0) {
-              node.y0 = (y1 - y0) / nodesLength * i;
-              node.y1 = node.y0 + node.value * ky;
-            } else {
-              node.y0 = (y1 - y0) / 2 - nodesLength / 2 + i;
-              node.y1 = node.y0 + node.value * ky;
-            }
-          }
-        });
-      });
-    }
-
-    // For each node in each column, check the node's vertical position in relation to its targets and sources vertical position
-    // and shift up/down to be closer to the vertical middle of those targets and sources
-    function relaxLeftAndRight(alpha, id) {
-      var columnsLength = columns.length;
-
-      columns.forEach(function (nodes) {
-        var n = nodes.length;
-        var depth = nodes[0].depth;
-
-        nodes.forEach(function (node) {
-          // check the node is not an orphan
-          var nodeHeight;
-          if (node.sourceLinks.length || node.targetLinks.length) {
-            if (node.partOfCycle && numberOfNonSelfLinkingCycles(node, id) > 0) ; else if (depth == 0 && n == 1) {
-              nodeHeight = node.y1 - node.y0;
-
-              node.y0 = y1 / 2 - nodeHeight / 2;
-              node.y1 = y1 / 2 + nodeHeight / 2;
-            } else if (depth == columnsLength - 1 && n == 1) {
-              nodeHeight = node.y1 - node.y0;
-
-              node.y0 = y1 / 2 - nodeHeight / 2;
-              node.y1 = y1 / 2 + nodeHeight / 2;
-            } else {
-              var avg = 0;
-
-              var avgTargetY = src_mean(node.sourceLinks, linkTargetCenter);
-              var avgSourceY = src_mean(node.targetLinks, linkSourceCenter);
-
-              if (avgTargetY && avgSourceY) {
-                avg = (avgTargetY + avgSourceY) / 2;
-              } else {
-                avg = avgTargetY || avgSourceY;
-              }
-
-              var dy = (avg - nodeCenter(node)) * alpha;
-              // positive if it node needs to move down
-              node.y0 += dy;
-              node.y1 += dy;
-            }
-          }
-        });
-      });
-    }
-
-    // For each column, check if nodes are overlapping, and if so, shift up/down
-    function resolveCollisions() {
-      columns.forEach(function (nodes) {
-        var node,
-            dy,
-            y = y0,
-            n = nodes.length,
-            i;
-
-        // Push any overlapping nodes down.
-        nodes.sort(ascendingBreadth);
-
-        for (i = 0; i < n; ++i) {
-          node = nodes[i];
-          dy = y - node.y0;
-
-          if (dy > 0) {
-            node.y0 += dy;
-            node.y1 += dy;
-          }
-          y = node.y1 + py;
-        }
-
-        // If the bottommost node goes outside the bounds, push it back up.
-        dy = y - py - y1;
-        if (dy > 0) {
-y = node.y0 -= dy, node.y1 -= dy;
-
-          // Push any overlapping nodes back up.
-          for (i = n - 2; i >= 0; --i) {
-            node = nodes[i];
-            dy = node.y1 + py - y;
-            if (dy > 0) node.y0 -= dy, node.y1 -= dy;
-            y = node.y0;
-          }
-        }
-      });
-    }
-  }
-
-  // Assign the links y0 and y1 based on source/target nodes position,
-  // plus the link's relative position to other links to the same node
-  function computeLinkBreadths(graph) {
-    graph.nodes.forEach(function (node) {
-      node.sourceLinks.sort(ascendingTargetBreadth);
-      node.targetLinks.sort(ascendingSourceBreadth);
-    });
-    graph.nodes.forEach(function (node) {
-      var y0 = node.y0;
-      var y1 = y0;
-
-      // start from the bottom of the node for cycle links
-      var y0cycle = node.y1;
-      var y1cycle = y0cycle;
-
-      node.sourceLinks.forEach(function (link) {
-        if (link.circular) {
-          link.y0 = y0cycle - link.width / 2;
-          y0cycle = y0cycle - link.width;
-        } else {
-          link.y0 = y0 + link.width / 2;
-          y0 += link.width;
-        }
-      });
-      node.targetLinks.forEach(function (link) {
-        if (link.circular) {
-          link.y1 = y1cycle - link.width / 2;
-          y1cycle = y1cycle - link.width;
-        } else {
-          link.y1 = y1 + link.width / 2;
-          y1 += link.width;
-        }
-      });
-    });
-  }
-
-  return sankeyCircular;
-}
-
-/// /////////////////////////////////////////////////////////////////////////////////
-// Cycle functions
-// portion of code to detect circular links based on Colin Fergus' bl.ock https://gist.github.com/cfergus/3956043
-
-// Identify circles in the link objects
-function identifyCircles(graph, id, sortNodes) {
-  var circularLinkID = 0;
-  if (sortNodes === null) {
-    // Building adjacency graph
-    var adjList = [];
-    for (var i = 0; i < graph.links.length; i++) {
-      var link = graph.links[i];
-      var source = link.source.index;
-      var target = link.target.index;
-      if (!adjList[source]) adjList[source] = [];
-      if (!adjList[target]) adjList[target] = [];
-
-      // Add links if not already in set
-      if (adjList[source].indexOf(target) === -1) adjList[source].push(target);
-    }
-
-    // Find all elementary circuits
-    var cycles = johnson_default()(adjList);
-
-    // Sort by circuits length
-    cycles.sort(function (a, b) {
-      return a.length - b.length;
-    });
-
-    var circularLinks = {};
-    for (i = 0; i < cycles.length; i++) {
-      var cycle = cycles[i];
-      var last = cycle.slice(-2);
-      if (!circularLinks[last[0]]) circularLinks[last[0]] = {};
-      circularLinks[last[0]][last[1]] = true;
-    }
-
-    graph.links.forEach(function (link) {
-      var target = link.target.index;
-      var source = link.source.index;
-      // If self-linking or a back-edge
-      if (
-      // target === source ||
-      // (circularLinks[source] && circularLinks[source][target])
-
-      // My change for alignFixed
-      link.target.depthLevel <= link.source.depthLevel) {
-        link.circular = true;
-        link.circularLinkID = circularLinkID;
-        circularLinkID = circularLinkID + 1;
-      } else {
-        link.circular = false;
-      }
-    });
-  } else {
-    graph.links.forEach(function (link) {
-      if (link.source[sortNodes] < link.target[sortNodes]) {
-        link.circular = false;
-      } else {
-        link.circular = true;
-        link.circularLinkID = circularLinkID;
-        circularLinkID = circularLinkID + 1;
-      }
-    });
-  }
-}
-
-// Assign a circular link type (top or bottom), based on:
-// - if the source/target node already has circular links, then use the same type
-// - if not, choose the type with fewer links
-function selectCircularLinkTypes(graph, id) {
-  var numberOfTops = 0;
-  var numberOfBottoms = 0;
-  graph.links.forEach(function (link) {
-    if (link.circular) {
-      // if either souce or target has type already use that
-      if (link.source.circularLinkType || link.target.circularLinkType) {
-        // default to source type if available
-        link.circularLinkType = link.source.circularLinkType ? link.source.circularLinkType : link.target.circularLinkType;
-      } else {
-        link.circularLinkType = numberOfTops < numberOfBottoms ? 'top' : 'bottom';
-      }
-
-      if (link.circularLinkType == 'top') {
-        numberOfTops = numberOfTops + 1;
-      } else {
-        numberOfBottoms = numberOfBottoms + 1;
-      }
-
-      graph.nodes.forEach(function (node) {
-        if (getNodeID(node, id) == getNodeID(link.source, id) || getNodeID(node, id) == getNodeID(link.target, id)) {
-          node.circularLinkType = link.circularLinkType;
-        }
-      });
-    }
-  });
-
-  //correct self-linking links to be same direction as node
-  graph.links.forEach(function (link) {
-    if (link.circular) {
-      //if both source and target node are same type, then link should have same type
-      if (link.source.circularLinkType == link.target.circularLinkType) {
-        link.circularLinkType = link.source.circularLinkType;
-      }
-      //if link is selflinking, then link should have same type as node
-      if (selfLinking(link, id)) {
-        link.circularLinkType = link.source.circularLinkType;
-      }
-    }
-  });
-}
-
-// Return the angle between a straight line between the source and target of the link, and the vertical plane of the node
-function linkAngle(link) {
-  var adjacent = Math.abs(link.y1 - link.y0);
-  var opposite = Math.abs(link.target.x0 - link.source.x1);
-
-  return Math.atan(opposite / adjacent);
-}
-
-// Check if two circular links potentially overlap
-function circularLinksCross(link1, link2) {
-  if (link1.source.column < link2.target.column) {
-    return false;
-  } else if (link1.target.column > link2.source.column) {
-    return false;
-  } else {
-    return true;
-  }
-}
-
-// Return the number of circular links for node, not including self linking links
-function numberOfNonSelfLinkingCycles(node, id) {
-  var sourceCount = 0;
-  node.sourceLinks.forEach(function (l) {
-    sourceCount = l.circular && !selfLinking(l, id) ? sourceCount + 1 : sourceCount;
-  });
-
-  var targetCount = 0;
-  node.targetLinks.forEach(function (l) {
-    targetCount = l.circular && !selfLinking(l, id) ? targetCount + 1 : targetCount;
-  });
-
-  return sourceCount + targetCount;
-}
-
-// Check if a circular link is the only circular link for both its source and target node
-function onlyCircularLink(link) {
-  var nodeSourceLinks = link.source.sourceLinks;
-  var sourceCount = 0;
-  nodeSourceLinks.forEach(function (l) {
-    sourceCount = l.circular ? sourceCount + 1 : sourceCount;
-  });
-
-  var nodeTargetLinks = link.target.targetLinks;
-  var targetCount = 0;
-  nodeTargetLinks.forEach(function (l) {
-    targetCount = l.circular ? targetCount + 1 : targetCount;
-  });
-
-  if (sourceCount > 1 || targetCount > 1) {
-    return false;
-  } else {
-    return true;
-  }
-}
-
-// creates vertical buffer values per set of top/bottom links
-function calcVerticalBuffer(links, circularLinkGap, id) {
-  links.sort(sortLinkColumnAscending);
-  links.forEach(function (link, i) {
-    var buffer = 0;
-
-    if (selfLinking(link, id) && onlyCircularLink(link)) {
-      link.circularPathData.verticalBuffer = buffer + link.width / 2;
-    } else {
-      var j = 0;
-      for (j; j < i; j++) {
-        if (circularLinksCross(links[i], links[j])) {
-          var bufferOverThisLink = links[j].circularPathData.verticalBuffer + links[j].width / 2 + circularLinkGap;
-          buffer = bufferOverThisLink > buffer ? bufferOverThisLink : buffer;
-        }
-      }
-
-      link.circularPathData.verticalBuffer = buffer + link.width / 2;
-    }
-  });
-
-  return links;
-}
-
-// calculate the optimum path for a link to reduce overlaps
-function addCircularPathData(graph, circularLinkGap, y1, id) {
-  //var baseRadius = 10
-  var buffer = 5;
-  //var verticalMargin = 25
-
-  var minY = src_min(graph.links, function (link) {
-    return link.source.y0;
-  });
-
-  // create object for circular Path Data
-  graph.links.forEach(function (link) {
-    if (link.circular) {
-      link.circularPathData = {};
-    }
-  });
-
-  // calc vertical offsets per top/bottom links
-  var topLinks = graph.links.filter(function (l) {
-    return l.circularLinkType == 'top';
-  });
-  /* topLinks = */calcVerticalBuffer(topLinks, circularLinkGap, id);
-
-  var bottomLinks = graph.links.filter(function (l) {
-    return l.circularLinkType == 'bottom';
-  });
-  /* bottomLinks = */calcVerticalBuffer(bottomLinks, circularLinkGap, id);
-
-  // add the base data for each link
-  graph.links.forEach(function (link) {
-    if (link.circular) {
-      link.circularPathData.arcRadius = link.width + baseRadius;
-      link.circularPathData.leftNodeBuffer = buffer;
-      link.circularPathData.rightNodeBuffer = buffer;
-      link.circularPathData.sourceWidth = link.source.x1 - link.source.x0;
-      link.circularPathData.sourceX = link.source.x0 + link.circularPathData.sourceWidth;
-      link.circularPathData.targetX = link.target.x0;
-      link.circularPathData.sourceY = link.y0;
-      link.circularPathData.targetY = link.y1;
-
-      // for self linking paths, and that the only circular link in/out of that node
-      if (selfLinking(link, id) && onlyCircularLink(link)) {
-        link.circularPathData.leftSmallArcRadius = baseRadius + link.width / 2;
-        link.circularPathData.leftLargeArcRadius = baseRadius + link.width / 2;
-        link.circularPathData.rightSmallArcRadius = baseRadius + link.width / 2;
-        link.circularPathData.rightLargeArcRadius = baseRadius + link.width / 2;
-
-        if (link.circularLinkType == 'bottom') {
-          link.circularPathData.verticalFullExtent = link.source.y1 + verticalMargin + link.circularPathData.verticalBuffer;
-          link.circularPathData.verticalLeftInnerExtent = link.circularPathData.verticalFullExtent - link.circularPathData.leftLargeArcRadius;
-          link.circularPathData.verticalRightInnerExtent = link.circularPathData.verticalFullExtent - link.circularPathData.rightLargeArcRadius;
-        } else {
-          // top links
-          link.circularPathData.verticalFullExtent = link.source.y0 - verticalMargin - link.circularPathData.verticalBuffer;
-          link.circularPathData.verticalLeftInnerExtent = link.circularPathData.verticalFullExtent + link.circularPathData.leftLargeArcRadius;
-          link.circularPathData.verticalRightInnerExtent = link.circularPathData.verticalFullExtent + link.circularPathData.rightLargeArcRadius;
-        }
-      } else {
-        // else calculate normally
-        // add left extent coordinates, based on links with same source column and circularLink type
-        var thisColumn = link.source.column;
-        var thisCircularLinkType = link.circularLinkType;
-        var sameColumnLinks = graph.links.filter(function (l) {
-          return l.source.column == thisColumn && l.circularLinkType == thisCircularLinkType;
-        });
-
-        if (link.circularLinkType == 'bottom') {
-          sameColumnLinks.sort(sortLinkSourceYDescending);
-        } else {
-          sameColumnLinks.sort(sortLinkSourceYAscending);
-        }
-
-        var radiusOffset = 0;
-        sameColumnLinks.forEach(function (l, i) {
-          if (l.circularLinkID == link.circularLinkID) {
-            link.circularPathData.leftSmallArcRadius = baseRadius + link.width / 2 + radiusOffset;
-            link.circularPathData.leftLargeArcRadius = baseRadius + link.width / 2 + i * circularLinkGap + radiusOffset;
-          }
-          radiusOffset = radiusOffset + l.width;
-        });
-
-        // add right extent coordinates, based on links with same target column and circularLink type
-        thisColumn = link.target.column;
-        sameColumnLinks = graph.links.filter(function (l) {
-          return l.target.column == thisColumn && l.circularLinkType == thisCircularLinkType;
-        });
-        if (link.circularLinkType == 'bottom') {
-          sameColumnLinks.sort(sortLinkTargetYDescending);
-        } else {
-          sameColumnLinks.sort(sortLinkTargetYAscending);
-        }
-
-        radiusOffset = 0;
-        sameColumnLinks.forEach(function (l, i) {
-          if (l.circularLinkID == link.circularLinkID) {
-            link.circularPathData.rightSmallArcRadius = baseRadius + link.width / 2 + radiusOffset;
-            link.circularPathData.rightLargeArcRadius = baseRadius + link.width / 2 + i * circularLinkGap + radiusOffset;
-          }
-          radiusOffset = radiusOffset + l.width;
-        });
-
-        // bottom links
-        if (link.circularLinkType == 'bottom') {
-          link.circularPathData.verticalFullExtent = Math.max(y1, link.source.y1, link.target.y1) + verticalMargin + link.circularPathData.verticalBuffer;
-          link.circularPathData.verticalLeftInnerExtent = link.circularPathData.verticalFullExtent - link.circularPathData.leftLargeArcRadius;
-          link.circularPathData.verticalRightInnerExtent = link.circularPathData.verticalFullExtent - link.circularPathData.rightLargeArcRadius;
-        } else {
-          // top links
-          link.circularPathData.verticalFullExtent = minY - verticalMargin - link.circularPathData.verticalBuffer;
-          link.circularPathData.verticalLeftInnerExtent = link.circularPathData.verticalFullExtent + link.circularPathData.leftLargeArcRadius;
-          link.circularPathData.verticalRightInnerExtent = link.circularPathData.verticalFullExtent + link.circularPathData.rightLargeArcRadius;
-        }
-      }
-
-      // all links
-      link.circularPathData.leftInnerExtent = link.circularPathData.sourceX + link.circularPathData.leftNodeBuffer;
-      link.circularPathData.rightInnerExtent = link.circularPathData.targetX - link.circularPathData.rightNodeBuffer;
-      link.circularPathData.leftFullExtent = link.circularPathData.sourceX + link.circularPathData.leftLargeArcRadius + link.circularPathData.leftNodeBuffer;
-      link.circularPathData.rightFullExtent = link.circularPathData.targetX - link.circularPathData.rightLargeArcRadius - link.circularPathData.rightNodeBuffer;
-    }
-
-    if (link.circular) {
-      link.path = createCircularPathString(link);
-    } else {
-      var normalPath = linkHorizontal().source(function (d) {
-        var x = d.source.x0 + (d.source.x1 - d.source.x0);
-        var y = d.y0;
-        return [x, y];
-      }).target(function (d) {
-        var x = d.target.x0;
-        var y = d.y1;
-        return [x, y];
-      });
-      link.path = normalPath(link);
-    }
-  });
-}
-
-// create a d path using the addCircularPathData
-function createCircularPathString(link) {
-  var pathString = '';
-  // 'pathData' is assigned a value but never used
-  // var pathData = {}
-
-  if (link.circularLinkType == 'top') {
-    pathString =
-    // start at the right of the source node
-    'M' + link.circularPathData.sourceX + ' ' + link.circularPathData.sourceY + ' ' +
-    // line right to buffer point
-    'L' + link.circularPathData.leftInnerExtent + ' ' + link.circularPathData.sourceY + ' ' +
-    // Arc around: Centre of arc X and  //Centre of arc Y
-    'A' + link.circularPathData.leftLargeArcRadius + ' ' + link.circularPathData.leftSmallArcRadius + ' 0 0 0 ' +
-    // End of arc X //End of arc Y
-    link.circularPathData.leftFullExtent + ' ' + (link.circularPathData.sourceY - link.circularPathData.leftSmallArcRadius) + ' ' + // End of arc X
-    // line up to buffer point
-    'L' + link.circularPathData.leftFullExtent + ' ' + link.circularPathData.verticalLeftInnerExtent + ' ' +
-    // Arc around: Centre of arc X and  //Centre of arc Y
-    'A' + link.circularPathData.leftLargeArcRadius + ' ' + link.circularPathData.leftLargeArcRadius + ' 0 0 0 ' +
-    // End of arc X //End of arc Y
-    link.circularPathData.leftInnerExtent + ' ' + link.circularPathData.verticalFullExtent + ' ' + // End of arc X
-    // line left to buffer point
-    'L' + link.circularPathData.rightInnerExtent + ' ' + link.circularPathData.verticalFullExtent + ' ' +
-    // Arc around: Centre of arc X and  //Centre of arc Y
-    'A' + link.circularPathData.rightLargeArcRadius + ' ' + link.circularPathData.rightLargeArcRadius + ' 0 0 0 ' +
-    // End of arc X //End of arc Y
-    link.circularPathData.rightFullExtent + ' ' + link.circularPathData.verticalRightInnerExtent + ' ' + // End of arc X
-    // line down
-    'L' + link.circularPathData.rightFullExtent + ' ' + (link.circularPathData.targetY - link.circularPathData.rightSmallArcRadius) + ' ' +
-    // Arc around: Centre of arc X and  //Centre of arc Y
-    'A' + link.circularPathData.rightLargeArcRadius + ' ' + link.circularPathData.rightSmallArcRadius + ' 0 0 0 ' +
-    // End of arc X //End of arc Y
-    link.circularPathData.rightInnerExtent + ' ' + link.circularPathData.targetY + ' ' + // End of arc X
-    // line to end
-    'L' + link.circularPathData.targetX + ' ' + link.circularPathData.targetY;
-  } else {
-    // bottom path
-    pathString =
-    // start at the right of the source node
-    'M' + link.circularPathData.sourceX + ' ' + link.circularPathData.sourceY + ' ' +
-    // line right to buffer point
-    'L' + link.circularPathData.leftInnerExtent + ' ' + link.circularPathData.sourceY + ' ' +
-    // Arc around: Centre of arc X and  //Centre of arc Y
-    'A' + link.circularPathData.leftLargeArcRadius + ' ' + link.circularPathData.leftSmallArcRadius + ' 0 0 1 ' +
-    // End of arc X //End of arc Y
-    link.circularPathData.leftFullExtent + ' ' + (link.circularPathData.sourceY + link.circularPathData.leftSmallArcRadius) + ' ' + // End of arc X
-    // line down to buffer point
-    'L' + link.circularPathData.leftFullExtent + ' ' + link.circularPathData.verticalLeftInnerExtent + ' ' +
-    // Arc around: Centre of arc X and  //Centre of arc Y
-    'A' + link.circularPathData.leftLargeArcRadius + ' ' + link.circularPathData.leftLargeArcRadius + ' 0 0 1 ' +
-    // End of arc X //End of arc Y
-    link.circularPathData.leftInnerExtent + ' ' + link.circularPathData.verticalFullExtent + ' ' + // End of arc X
-    // line left to buffer point
-    'L' + link.circularPathData.rightInnerExtent + ' ' + link.circularPathData.verticalFullExtent + ' ' +
-    // Arc around: Centre of arc X and  //Centre of arc Y
-    'A' + link.circularPathData.rightLargeArcRadius + ' ' + link.circularPathData.rightLargeArcRadius + ' 0 0 1 ' +
-    // End of arc X //End of arc Y
-    link.circularPathData.rightFullExtent + ' ' + link.circularPathData.verticalRightInnerExtent + ' ' + // End of arc X
-    // line up
-    'L' + link.circularPathData.rightFullExtent + ' ' + (link.circularPathData.targetY + link.circularPathData.rightSmallArcRadius) + ' ' +
-    // Arc around: Centre of arc X and  //Centre of arc Y
-    'A' + link.circularPathData.rightLargeArcRadius + ' ' + link.circularPathData.rightSmallArcRadius + ' 0 0 1 ' +
-    // End of arc X //End of arc Y
-    link.circularPathData.rightInnerExtent + ' ' + link.circularPathData.targetY + ' ' + // End of arc X
-    // line to end
-    'L' + link.circularPathData.targetX + ' ' + link.circularPathData.targetY;
-  }
-
-  return pathString;
-}
-
-// sort links based on the distance between the source and tartget node columns
-// if the same, then use Y position of the source node
-function sortLinkColumnAscending(link1, link2) {
-  if (linkColumnDistance(link1) == linkColumnDistance(link2)) {
-    return link1.circularLinkType == 'bottom' ? sortLinkSourceYDescending(link1, link2) : sortLinkSourceYAscending(link1, link2);
-  } else {
-    return linkColumnDistance(link2) - linkColumnDistance(link1);
-  }
-}
-
-// sort ascending links by their source vertical position, y0
-function sortLinkSourceYAscending(link1, link2) {
-  return link1.y0 - link2.y0;
-}
-
-// sort descending links by their source vertical position, y0
-function sortLinkSourceYDescending(link1, link2) {
-  return link2.y0 - link1.y0;
-}
-
-// sort ascending links by their target vertical position, y1
-function sortLinkTargetYAscending(link1, link2) {
-  return link1.y1 - link2.y1;
-}
-
-// sort descending links by their target vertical position, y1
-function sortLinkTargetYDescending(link1, link2) {
-  return link2.y1 - link1.y1;
-}
-
-// return the distance between the link's target and source node, in terms of the nodes' column
-function linkColumnDistance(link) {
-  return link.target.column - link.source.column;
-}
-
-// return the distance between the link's target and source node, in terms of the nodes' X coordinate
-function linkXLength(link) {
-  return link.target.x0 - link.source.x1;
-}
-
-// Return the Y coordinate on the longerLink path * which is perpendicular shorterLink's source.
-// * approx, based on a straight line from target to source, when in fact the path is a bezier
-function linkPerpendicularYToLinkSource(longerLink, shorterLink) {
-  // get the angle for the longer link
-  var angle = linkAngle(longerLink);
-
-  // get the adjacent length to the other link's x position
-  var heightFromY1ToPependicular = linkXLength(shorterLink) / Math.tan(angle);
-
-  // add or subtract from longer link1's original y1, depending on the slope
-  var yPerpendicular = incline(longerLink) == 'up' ? longerLink.y1 + heightFromY1ToPependicular : longerLink.y1 - heightFromY1ToPependicular;
-
-  return yPerpendicular;
-}
-
-// Return the Y coordinate on the longerLink path * which is perpendicular shorterLink's source.
-// * approx, based on a straight line from target to source, when in fact the path is a bezier
-function linkPerpendicularYToLinkTarget(longerLink, shorterLink) {
-  // get the angle for the longer link
-  var angle = linkAngle(longerLink);
-
-  // get the adjacent length to the other link's x position
-  var heightFromY1ToPependicular = linkXLength(shorterLink) / Math.tan(angle);
-
-  // add or subtract from longer link's original y1, depending on the slope
-  var yPerpendicular = incline(longerLink) == 'up' ? longerLink.y1 - heightFromY1ToPependicular : longerLink.y1 + heightFromY1ToPependicular;
-
-  return yPerpendicular;
-}
-
-// Move any nodes that overlap links which span 2+ columns
-function resolveNodeLinkOverlaps(graph, y0, y1, id) {
-  graph.links.forEach(function (link) {
-    if (link.circular) {
-      return;
-    }
-
-    if (link.target.column - link.source.column > 1) {
-      var columnToTest = link.source.column + 1;
-      var maxColumnToTest = link.target.column - 1;
-
-      var i = 1;
-      var numberOfColumnsToTest = maxColumnToTest - columnToTest + 1;
-
-      for (i = 1; columnToTest <= maxColumnToTest; columnToTest++, i++) {
-        graph.nodes.forEach(function (node) {
-          if (node.column == columnToTest) {
-            var t = i / (numberOfColumnsToTest + 1);
-
-            // Find all the points of a cubic bezier curve in javascript
-            // https://stackoverflow.com/questions/15397596/find-all-the-points-of-a-cubic-bezier-curve-in-javascript
-
-            var B0_t = Math.pow(1 - t, 3);
-            var B1_t = 3 * t * Math.pow(1 - t, 2);
-            var B2_t = 3 * Math.pow(t, 2) * (1 - t);
-            var B3_t = Math.pow(t, 3);
-
-            var py_t = B0_t * link.y0 + B1_t * link.y0 + B2_t * link.y1 + B3_t * link.y1;
-
-            var linkY0AtColumn = py_t - link.width / 2;
-            var linkY1AtColumn = py_t + link.width / 2;
-            var dy;
-
-            // If top of link overlaps node, push node up
-            if (linkY0AtColumn > node.y0 && linkY0AtColumn < node.y1) {
-              dy = node.y1 - linkY0AtColumn + 10;
-              dy = node.circularLinkType == 'bottom' ? dy : -dy;
-
-              node = adjustNodeHeight(node, dy, y0, y1);
-
-              // check if other nodes need to move up too
-              graph.nodes.forEach(function (otherNode) {
-                // don't need to check itself or nodes at different columns
-                if (getNodeID(otherNode, id) == getNodeID(node, id) || otherNode.column != node.column) {
-                  return;
-                }
-                if (nodesOverlap(node, otherNode)) {
-                  adjustNodeHeight(otherNode, dy, y0, y1);
-                }
-              });
-            } else if (linkY1AtColumn > node.y0 && linkY1AtColumn < node.y1) {
-              // If bottom of link overlaps node, push node down
-              dy = linkY1AtColumn - node.y0 + 10;
-
-              node = adjustNodeHeight(node, dy, y0, y1);
-
-              // check if other nodes need to move down too
-              graph.nodes.forEach(function (otherNode) {
-                // don't need to check itself or nodes at different columns
-                if (getNodeID(otherNode, id) == getNodeID(node, id) || otherNode.column != node.column) {
-                  return;
-                }
-                if (otherNode.y0 < node.y1 && otherNode.y1 > node.y1) {
-                  adjustNodeHeight(otherNode, dy, y0, y1);
-                }
-              });
-            } else if (linkY0AtColumn < node.y0 && linkY1AtColumn > node.y1) {
-              // if link completely overlaps node
-              dy = linkY1AtColumn - node.y0 + 10;
-
-              node = adjustNodeHeight(node, dy, y0, y1);
-
-              graph.nodes.forEach(function (otherNode) {
-                // don't need to check itself or nodes at different columns
-                if (getNodeID(otherNode, id) == getNodeID(node, id) || otherNode.column != node.column) {
-                  return;
-                }
-                if (otherNode.y0 < node.y1 && otherNode.y1 > node.y1) {
-                  adjustNodeHeight(otherNode, dy, y0, y1);
-                }
-              });
-            }
-          }
-        });
-      }
-    }
-  });
-}
-
-// check if two nodes overlap
-function nodesOverlap(nodeA, nodeB) {
-  // test if nodeA top partially overlaps nodeB
-  if (nodeA.y0 > nodeB.y0 && nodeA.y0 < nodeB.y1) {
-    return true;
-  } else if (nodeA.y1 > nodeB.y0 && nodeA.y1 < nodeB.y1) {
-    // test if nodeA bottom partially overlaps nodeB
-    return true;
-  } else if (nodeA.y0 < nodeB.y0 && nodeA.y1 > nodeB.y1) {
-    // test if nodeA covers nodeB
-    return true;
-  } else {
-    return false;
-  }
-}
-
-// update a node, and its associated links, vertical positions (y0, y1)
-function adjustNodeHeight(node, dy, sankeyY0, sankeyY1) {
-  if (node.y0 + dy >= sankeyY0 && node.y1 + dy <= sankeyY1) {
-    node.y0 = node.y0 + dy;
-    node.y1 = node.y1 + dy;
-
-    node.targetLinks.forEach(function (l) {
-      l.y1 = l.y1 + dy;
-    });
-
-    node.sourceLinks.forEach(function (l) {
-      l.y0 = l.y0 + dy;
-    });
-  }
-  return node;
-}
-
-// sort and set the links' y0 for each node
-function sortSourceLinks(graph, y1, id, moveNodes) {
-  graph.nodes.forEach(function (node) {
-    // move any nodes up which are off the bottom
-    if (moveNodes && node.y + (node.y1 - node.y0) > y1) {
-      node.y = node.y - (node.y + (node.y1 - node.y0) - y1);
-    }
-
-    var nodesSourceLinks = graph.links.filter(function (l) {
-      return getNodeID(l.source, id) == getNodeID(node, id);
-    });
-
-    var nodeSourceLinksLength = nodesSourceLinks.length;
-
-    // if more than 1 link then sort
-    if (nodeSourceLinksLength > 1) {
-      nodesSourceLinks.sort(function (link1, link2) {
-        // if both are not circular...
-        if (!link1.circular && !link2.circular) {
-          // if the target nodes are the same column, then sort by the link's target y
-          if (link1.target.column == link2.target.column) {
-            return link1.y1 - link2.y1;
-          } else if (!sameInclines(link1, link2)) {
-            // if the links slope in different directions, then sort by the link's target y
-            return link1.y1 - link2.y1;
-
-            // if the links slope in same directions, then sort by any overlap
-          } else {
-            if (link1.target.column > link2.target.column) {
-              var link2Adj = linkPerpendicularYToLinkTarget(link2, link1);
-              return link1.y1 - link2Adj;
-            }
-            if (link2.target.column > link1.target.column) {
-              var link1Adj = linkPerpendicularYToLinkTarget(link1, link2);
-              return link1Adj - link2.y1;
-            }
-          }
-        }
-
-        // if only one is circular, the move top links up, or bottom links down
-        if (link1.circular && !link2.circular) {
-          return link1.circularLinkType == 'top' ? -1 : 1;
-        } else if (link2.circular && !link1.circular) {
-          return link2.circularLinkType == 'top' ? 1 : -1;
-        }
-
-        // if both links are circular...
-        if (link1.circular && link2.circular) {
-          // ...and they both loop the same way (both top)
-          if (link1.circularLinkType === link2.circularLinkType && link1.circularLinkType == 'top') {
-            // ...and they both connect to a target with same column, then sort by the target's y
-            if (link1.target.column === link2.target.column) {
-              return link1.target.y1 - link2.target.y1;
-            } else {
-              // ...and they connect to different column targets, then sort by how far back they
-              return link2.target.column - link1.target.column;
-            }
-          } else if (link1.circularLinkType === link2.circularLinkType && link1.circularLinkType == 'bottom') {
-            // ...and they both loop the same way (both bottom)
-            // ...and they both connect to a target with same column, then sort by the target's y
-            if (link1.target.column === link2.target.column) {
-              return link2.target.y1 - link1.target.y1;
-            } else {
-              // ...and they connect to different column targets, then sort by how far back they
-              return link1.target.column - link2.target.column;
-            }
-          } else {
-            // ...and they loop around different ways, the move top up and bottom down
-            return link1.circularLinkType == 'top' ? -1 : 1;
-          }
-        }
-      });
-    }
-
-    // update y0 for links
-    var ySourceOffset = node.y0;
-
-    nodesSourceLinks.forEach(function (link) {
-      link.y0 = ySourceOffset + link.width / 2;
-      ySourceOffset = ySourceOffset + link.width;
-    });
-
-    // correct any circular bottom links so they are at the bottom of the node
-    nodesSourceLinks.forEach(function (link, i) {
-      if (link.circularLinkType == 'bottom') {
-        var j = i + 1;
-        var offsetFromBottom = 0;
-        // sum the widths of any links that are below this link
-        for (j; j < nodeSourceLinksLength; j++) {
-          offsetFromBottom = offsetFromBottom + nodesSourceLinks[j].width;
-        }
-        link.y0 = node.y1 - offsetFromBottom - link.width / 2;
-      }
-    });
-  });
-}
-
-// sort and set the links' y1 for each node
-function sortTargetLinks(graph, y1, id) {
-  graph.nodes.forEach(function (node) {
-    var nodesTargetLinks = graph.links.filter(function (l) {
-      return getNodeID(l.target, id) == getNodeID(node, id);
-    });
-
-    var nodesTargetLinksLength = nodesTargetLinks.length;
-
-    if (nodesTargetLinksLength > 1) {
-      nodesTargetLinks.sort(function (link1, link2) {
-        // if both are not circular, the base on the source y position
-        if (!link1.circular && !link2.circular) {
-          if (link1.source.column == link2.source.column) {
-            return link1.y0 - link2.y0;
-          } else if (!sameInclines(link1, link2)) {
-            return link1.y0 - link2.y0;
-          } else {
-            // get the angle of the link to the further source node (ie the smaller column)
-            if (link2.source.column < link1.source.column) {
-              var link2Adj = linkPerpendicularYToLinkSource(link2, link1);
-
-              return link1.y0 - link2Adj;
-            }
-            if (link1.source.column < link2.source.column) {
-              var link1Adj = linkPerpendicularYToLinkSource(link1, link2);
-
-              return link1Adj - link2.y0;
-            }
-          }
-        }
-
-        // if only one is circular, the move top links up, or bottom links down
-        if (link1.circular && !link2.circular) {
-          return link1.circularLinkType == 'top' ? -1 : 1;
-        } else if (link2.circular && !link1.circular) {
-          return link2.circularLinkType == 'top' ? 1 : -1;
-        }
-
-        // if both links are circular...
-        if (link1.circular && link2.circular) {
-          // ...and they both loop the same way (both top)
-          if (link1.circularLinkType === link2.circularLinkType && link1.circularLinkType == 'top') {
-            // ...and they both connect to a target with same column, then sort by the target's y
-            if (link1.source.column === link2.source.column) {
-              return link1.source.y1 - link2.source.y1;
-            } else {
-              // ...and they connect to different column targets, then sort by how far back they
-              return link1.source.column - link2.source.column;
-            }
-          } else if (link1.circularLinkType === link2.circularLinkType && link1.circularLinkType == 'bottom') {
-            // ...and they both loop the same way (both bottom)
-            // ...and they both connect to a target with same column, then sort by the target's y
-            if (link1.source.column === link2.source.column) {
-              return link1.source.y1 - link2.source.y1;
-            } else {
-              // ...and they connect to different column targets, then sort by how far back they
-              return link2.source.column - link1.source.column;
-            }
-          } else {
-            // ...and they loop around different ways, the move top up and bottom down
-            return link1.circularLinkType == 'top' ? -1 : 1;
-          }
-        }
-      });
-    }
-
-    // update y1 for links
-    var yTargetOffset = node.y0;
-
-    nodesTargetLinks.forEach(function (link) {
-      link.y1 = yTargetOffset + link.width / 2;
-      yTargetOffset = yTargetOffset + link.width;
-    });
-
-    // correct any circular bottom links so they are at the bottom of the node
-    nodesTargetLinks.forEach(function (link, i) {
-      if (link.circularLinkType == 'bottom') {
-        var j = i + 1;
-        var offsetFromBottom = 0;
-        // sum the widths of any links that are below this link
-        for (j; j < nodesTargetLinksLength; j++) {
-          offsetFromBottom = offsetFromBottom + nodesTargetLinks[j].width;
-        }
-        link.y1 = node.y1 - offsetFromBottom - link.width / 2;
-      }
-    });
-  });
-}
-
-// test if links both slope up, or both slope down
-function sameInclines(link1, link2) {
-  return incline(link1) == incline(link2);
-}
-
-// returns the slope of a link, from source to target
-// up => slopes up from source to target
-// down => slopes down from source to target
-function incline(link) {
-  return link.y0 - link.y1 > 0 ? 'up' : 'down';
-}
-
-// check if link is self linking, ie links a node to the same node
-function selfLinking(link, id) {
-  return getNodeID(link.source, id) == getNodeID(link.target, id);
-}
-
-function fillHeight(graph, y0, y1) {
-  var nodes = graph.nodes;
-  var links = graph.links;
-
-  var top = false;
-  var bottom = false;
-
-  links.forEach(function (link) {
-    if (link.circularLinkType == 'top') {
-      top = true;
-    } else if (link.circularLinkType == 'bottom') {
-      bottom = true;
-    }
-  });
-
-  if (top == false || bottom == false) {
-    var minY0 = src_min(nodes, function (node) {
-      return node.y0;
-    });
-    var maxY1 = src_max(nodes, function (node) {
-      return node.y1;
-    });
-    var currentHeight = maxY1 - minY0;
-    var chartHeight = y1 - y0;
-    var ratio = chartHeight / currentHeight;
-
-    nodes.forEach(function (node) {
-      var nodeHeight = (node.y1 - node.y0) * ratio;
-      node.y0 = (node.y0 - minY0) * ratio;
-      node.y1 = node.y0 + nodeHeight;
-    });
-
-    links.forEach(function (link) {
-      link.y0 = (link.y0 - minY0) * ratio;
-      link.y1 = (link.y1 - minY0) * ratio;
-      link.width = link.width * ratio;
-    });
-  }
-}
-
-
-
-// EXTERNAL MODULE: ./node_modules/d3-path-arrows/dist/index.js
-var dist = __webpack_require__(46);
-
-// CONCATENATED MODULE: ./src/util/uid.js
-var count = 0;
-/* harmony default export */ var uid = (function (name) {
-  return new Id('O-' + (name == null ? '' : name + '-') + ++count);
-});
-
-function Id(id) {
-  this.id = id;
-  this.href = new URL("#".concat(id), location) + '';
-}
-
-Id.prototype.toString = function () {
-  return 'url(' + this.href + ')';
-};
-// CONCATENATED MODULE: ./src/reactComponents/sankeyRenderer.js
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-
-
-function sankeyRenderer(dataSource, options, selector) {
-  var g = {};
-  g.container = document.querySelector("#".concat(selector));
-  var jqContainer = $(g.container);
-  var values = Array.isArray(dataSource.values) ? _defineProperty({}, dataSource.displayed_data.split('.')[1], dataSource.values) : Object.assign({}, dataSource.values);
-  console.log(values);
-
-  if (!(values.inbound && values.inbound.length > 0) && !(values.outbound && values.outbound.length > 0)) {
-    jqContainer.empty();
-    return;
-  }
-
-  var queryVariables = JSON.parse(dataSource.variables);
-  var currency = values.inbound && values.inbound.length > 0 && values.inbound[0].currency.symbol || values.outbound && values.outbound.length > 0 && values.outbound[0].currency.symbol;
-  jqContainer.addClass('graph');
-
-  if (!jqContainer.parent().hasClass('wrapper')) {
-    jqContainer.wrap('<div class="wrapper" style="width:100%; height:100%;">');
-  }
-
-  var jqWrapper = jqContainer.parent('.wrapper');
-  g.theme = options.theme || 'light';
-
-  if (g.theme == 'dark') {
-    jqContainer.addClass('dark');
-  } else {
-    jqContainer.removeClass('dark');
-  }
-
-  g.render = function () {
-    jqWrapper.removeClass('initializing');
-    var width = $("#".concat(selector)).parent().parent().width();
-    var height = $("#".concat(selector)).parent().parent().height();
-    var edgeColor = 'path';
-    var textColor = options.theme == 'dark' ? 'white' : 'black';
-    var strokeColor = options.theme == 'dark' ? 'white' : 'black';
-    var linkOpacity = options.theme == 'dark' ? 1 : 0.85;
-    var fontSize = 12;
-    var graphSize = {};
-    var svg = src_select("#".concat(selector)).append('svg').attr('width', '100%').attr('height', '100%');
-
-    var prepareData = function prepareData(data) {
-      var getLabel = function getLabel(node) {
-        if (node.address == '0x0000000000000000000000000000000000000000') {
-          // 'coinbase'
-          return 'Coinbase';
-        } else if (node.smartContract && node.smartContract.contractType == 'Generic') {
-          // 'smart_contract'
-          return null;
-        } else if (node.smartContract && (node.smartContract.contractType == 'Token' || node.smartContract.contractType == 'TokenSale')) {
-          // 'token'
-          return node.smartContract.currency.name + ' (' + node.smartContract.currency.symbol + ')';
-        } else if (node.smartContract && node.smartContract.contractType == 'MarginPositionToken') {
-          // 'MarginPositionToken'
-          return node.annotation || null;
-        } else if (node.smartContract && node.smartContract.contractType == 'Multisig') {
-          // 'multisig'
-          return node.annotation || null;
-        } else if (node.smartContract && node.smartContract.contractType == 'DEX') {
-          // 'dex'
-          return node.annotation || null;
-        } else {
-          if (node.address == '') {
-            // 'coinbase'
-            return 'Coinbase';
-          } else if (node.annotation) {
-            // 'annotated_address'
-            return node.annotation;
-          } else {
-            // 'address'
-            return null;
-          }
-        }
-      };
-
-      var links = [];
-      var nodes = [];
-
-      if (data.inbound) {
-        lodash_default.a.each(data.inbound, function (item) {
-          links.push({
-            source: item.sender.address,
-            target: item.receiver.address,
-            amount: item.amount,
-            value: item.amount,
-            countOfTransfers: item.count
-          });
-          nodes.push({
-            id: item.sender.address,
-            label: getLabel(item.sender),
-            depthLevel: item.sender.address == queryVariables.address ? 0 : -item.depth,
-            valueFromOneLink: item.amount
-          });
-          nodes.push({
-            id: item.receiver.address,
-            label: getLabel(item.receiver),
-            depthLevel: item.receiver.address == queryVariables.address ? 0 : -item.depth + 1,
-            valueFromOneLink: item.amount
-          });
-        });
-      }
-
-      if (data.outbound) {
-        lodash_default.a.each(data.outbound, function (item) {
-          links.push({
-            source: item.sender.address,
-            target: item.receiver.address,
-            amount: item.amount,
-            value: item.amount,
-            countOfTransfers: item.count
-          });
-          nodes.push({
-            id: item.sender.address,
-            label: getLabel(item.sender),
-            depthLevel: item.sender.address == queryVariables.address ? 0 : item.depth - 1,
-            valueFromOneLink: item.amount
-          });
-          nodes.push({
-            id: item.receiver.address,
-            label: getLabel(item.receiver),
-            depthLevel: item.receiver.address == queryVariables.address ? 0 : item.depth,
-            valueFromOneLink: item.amount
-          });
-        });
-      }
-
-      nodes = lodash_default.a.uniqBy(lodash_default.a.sortBy(nodes, [function (n) {
-        return -n.valueFromOneLink;
-      }, function (n) {
-        return Math.pow(n.depthLevel, 2);
-      }]), 'id');
-
-      var numberOnLevels = lodash_default.a.reduce(nodes, function (result, n) {
-        result[n.depthLevel] ? result[n.depthLevel] += 1 : result[n.depthLevel] = 1;
-        return result;
-      }, {});
-
-      var maxVertical = lodash_default.a.max(lodash_default.a.values(numberOnLevels));
-
-      var maxHorizontal = lodash_default.a.values(numberOnLevels).length;
-
-      graphSize.width = maxHorizontal * 650;
-      graphSize.height = maxVertical * (300 - Math.min(200, Math.log10(maxVertical) * 100));
-      return {
-        links: links,
-        nodes: nodes,
-        units: currency
-      };
-    };
-
-    var data = prepareData(values);
-    var colorSchemaOdd = ordinal(category10.slice(5));
-    var colorSchemaEven = ordinal(category10.slice(0, 5));
-
-    var color = function color(d) {
-      return d.column % 2 == 0 ? colorSchemaOdd(d.category === undefined ? d.id : d.category) : colorSchemaEven(d.category === undefined ? d.id : d.category);
-    };
-
-    var format = data.units ? function (d) {
-      return "".concat(numeral_default()(d).format('0.0000a'), " ").concat(data.units);
-    } : function (d) {
-      return "".concat(numeral_default()(d).format('0.0000a'));
-    };
-    var sankey = d3_sankey_circular_es_sankeyCircular().nodeId(function (d) {
-      return d.id;
-    }).nodeAlign(fixed).nodeWidth(50).nodePaddingRatio(0.7).circularLinkGap(15).size([graphSize.width, graphSize.height]);
-    g.sankey = sankey;
-    var graph = sankey(data);
-
-    var rootNode = lodash_default.a.find(graph.nodes, {
-      id: queryVariables.address
-    });
-
-    function getAllPaths(graph) {
-      var pathsFromRootToNodes = [];
-
-      function addSourceNodeToPath(node, path) {
-        if (node.id == rootNode.id || lodash_default.a.includes(path, node.id)) {
-          if (!isDuplicate(pathsFromRootToNodes, path)) {
-            pathsFromRootToNodes.push(_toConsumableArray(path));
-          }
-        } else if (node.sourceLinks.length == 0) {
-          path.push(node.id);
-
-          if (!isDuplicate(pathsFromRootToNodes, path)) {
-            pathsFromRootToNodes.push(_toConsumableArray(path));
-          }
-        } else {
-          path.push(node.id);
-
-          if (!isDuplicate(pathsFromRootToNodes, path)) {
-            pathsFromRootToNodes.push(_toConsumableArray(path));
-          }
-
-          lodash_default.a.forEach(node.sourceLinks, function (l) {
-            addSourceNodeToPath(l.target, _toConsumableArray(path));
-          });
-        }
-      }
-
-      lodash_default.a.forEach(rootNode.sourceLinks, function (l) {
-        var path = [rootNode.id];
-        addSourceNodeToPath(l.target, path);
-      });
-
-      var pathsFromNodesToRoot = [];
-
-      function addTargetNodeToPath(node, path) {
-        if (node.id == rootNode.id || lodash_default.a.includes(path, node.id)) {
-          if (!isDuplicate(pathsFromNodesToRoot, _toConsumableArray(path).reverse())) {
-            pathsFromNodesToRoot.push(_toConsumableArray(path).reverse());
-          }
-        } else if (node.targetLinks.length == 0) {
-          path.push(node.id);
-
-          if (!isDuplicate(pathsFromNodesToRoot, _toConsumableArray(path).reverse())) {
-            pathsFromNodesToRoot.push(_toConsumableArray(path).reverse());
-          }
-        } else {
-          path.push(node.id);
-
-          if (!isDuplicate(pathsFromNodesToRoot, _toConsumableArray(path).reverse())) {
-            pathsFromNodesToRoot.push(_toConsumableArray(path).reverse());
-          }
-
-          lodash_default.a.forEach(node.targetLinks, function (l) {
-            var pathCopy = _toConsumableArray(path);
-
-            addTargetNodeToPath(l.source, pathCopy);
-          });
-        }
-      }
-
-      lodash_default.a.forEach(rootNode.targetLinks, function (l) {
-        var path = [rootNode.id];
-        addTargetNodeToPath(l.source, path);
-      });
-
-      return lodash_default.a.concat(pathsFromRootToNodes, pathsFromNodesToRoot);
-    }
-
-    var allPaths = getAllPaths(graph);
-
-    function isDuplicate(arrays, arr) {
-      return lodash_default.a.some(arrays, function (a) {
-        return lodash_default.a.isEqual(arr, a);
-      });
-    }
-
-    function getPaths(nodeId, allPaths) {
-      var toNode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-      var paths = [];
-
-      lodash_default.a.forEach(allPaths, function (p) {
-        var direction = toNode ? p.length - 1 : 0;
-
-        if (lodash_default.a.indexOf(p, nodeId) == direction) {
-          paths.push(p);
-        }
-      });
-
-      return paths;
-    }
-
-    function getDataToHighlight(nodes, allPaths) {
-      var dataToHighlight = {};
-
-      lodash_default.a.forEach(nodes, function (n) {
-        // что подсвечивать: от рутового или до или все вместе
-        var paths = lodash_default.a.concat(getPaths(n.id, allPaths), getPaths(n.id, allPaths, false));
-
-        var nodesToHighlight = lodash_default.a.uniq(lodash_default.a.flattenDeep(paths));
-
-        var linksToHighlight = [];
-
-        lodash_default.a.forEach(paths, function (p) {
-          for (var i = 0; i < p.length - 1; i++) {
-            var couple = [p[i], p[i + 1]];
-
-            if (!isDuplicate(linksToHighlight, couple)) {
-              linksToHighlight.push(couple);
-            }
-          }
-        });
-
-        dataToHighlight[n.id] = {
-          nodesToHighlight: nodesToHighlight,
-          linksToHighlight: linksToHighlight
-        };
-      });
-
-      return dataToHighlight;
-    }
-
-    var dataToHighlight = getDataToHighlight(graph.nodes, allPaths);
-    var rootG = svg.append('g').attr('class', 'root-g');
-    rootG.append('rect').attr('class', 'divider').attr('x', rootNode.x0).attr('y', -10000).attr('height', 20000).attr('width', rootNode.x1 - rootNode.x0).attr('fill', 'silver').attr('opacity', 0.5);
-    var linkG = rootG.append('g').attr('class', 'links').attr('fill', 'none').attr('stroke-opacity', linkOpacity).selectAll('path');
-    var nodeG = rootG.append('g').attr('class', 'nodes').attr('font-family', 'sans-serif').attr('font-size', fontSize).selectAll('g');
-    var node = nodeG.data(graph.nodes).enter().append('g');
-    var tooltip = src_select('.tooltip').empty() ? src_select('body').append('div').attr('class', options.theme == 'dark' ? 'tooltip tooltip--dark' : 'tooltip') : src_select('.tooltip');
-    node.append('rect').attr('x', function (d) {
-      return d.x0;
-    }).attr('y', function (d) {
-      return d.y1 - d.y0 < 1 ? d.y0 - 0.5 : d.y0;
-    }).attr('height', function (d) {
-      return d.y1 - d.y0 < 1 ? 1 : d.y1 - d.y0;
-    }).attr('width', function (d) {
-      return d.x1 - d.x0;
-    }).attr('fill', color).attr('stroke', strokeColor).attr('stroke-width', 1).on('mouseover', nodeMouseOver).on('mousemove', nodeMouseMove).on('mouseout', nodeMouseOut).on('contextmenu', nodeContextMenu);
-    node.append('text').attr('x', function (d) {
-      return (d.x0 + d.x1) / 2;
-    }).attr('y', function (d) {
-      return d.y0 - 4;
-    }).attr('text-anchor', 'middle').attr('fill', textColor).attr('class', function (d) {
-      d.isHidden = false;
-      return d.label ? 'annotation' : 'address';
-    }).text(function (d) {
-      return d.label || lodash_default.a.truncate(d.id, {
-        length: 15,
-        separator: '...'
-      });
-    }).on('mouseover', nodeMouseOver).on('mousemove', nodeMouseMove).on('mouseout', nodeMouseOut).on('contextmenu', nodeContextMenu);
-    var link = linkG.data(graph.links).enter().append('g');
-
-    if (edgeColor === 'path') {
-      var gradient = link.append('linearGradient').attr('id', function (d) {
-        return (d.uid = uid('link')).id;
-      }).attr('gradientUnits', 'userSpaceOnUse').attr('x1', function (d) {
-        return d.source.x1;
-      }).attr('x2', function (d) {
-        return d.target.x0;
-      });
-      gradient.append('stop').attr('offset', '0%').attr('stop-color', function (d) {
-        return color(d.source);
-      });
-      gradient.append('stop').attr('offset', '100%').attr('stop-color', function (d) {
-        return color(d.target);
-      });
-    }
-
-    link.append('path').attr('class', 'sankey-link').attr('d', function (link) {
-      return link.path;
-    }).attr('stroke', function (d) {
-      return edgeColor === 'none' ? '#aaa' : edgeColor === 'path' ? d.uid : edgeColor === 'input' ? color(d.source) : color(d.target);
-    }).attr('stroke-width', function (d) {
-      return Math.max(1, d.width);
-    }).attr('opacity', 1).on('mouseover', linkMouseOver).on('mousemove', linkMouseMove).on('mouseout', linkMouseOut);
-    var arrows = dist["pathArrows"]().arrowLength(10).gapLength(150).arrowHeadSize(4).path(function (link) {
-      return link.path;
-    });
-    var arrowsG = linkG.data(graph.links).enter().append('g').attr('class', 'g-arrow').call(arrows);
-    arrowsG.select('path').style('stroke', strokeColor);
-    arrowsG.selectAll('.arrow-head').style('fill', strokeColor);
-
-    function highlightNode(node, id) {
-      // isHidden, isHighlighted, isDarken,
-      if (lodash_default.a.includes(dataToHighlight[id].nodesToHighlight, node.id)) {
-        node.isHighlighted = true;
-      } else {
-        node.isDarken = true;
-      }
-    }
-
-    function highlightLinks(link, id) {
-      var highlight = lodash_default.a.some(dataToHighlight[id].linksToHighlight, function (couple) {
-        return link.source.id == couple[0] && link.target.id == couple[1];
-      });
-
-      if (highlight) {
-        link.isHighlighted = true;
-      } else {
-        link.isDarken = true;
-      }
-    }
-
-    function getOpacity(elem, type) {
-      var opacity;
-
-      switch (type) {
-        case 'node':
-          opacity = elem.isHighlighted ? 1 : elem.isDarken ? 0.3 : 1;
-          break;
-
-        case 'text':
-          opacity = elem.isHighlighted ? 1 : elem.isHidden ? 0 : elem.isDarken ? 0.3 : 1;
-          break;
-
-        case 'link':
-          opacity = elem.isHighlighted ? 1 : elem.isDarken ? 0.3 : 1;
-          break;
-
-        default:
-          break;
-      }
-
-      return opacity;
-    }
-
-    function nodeMouseOver(e, d) {
-      var thisId = d.id;
-      node.selectAll('rect').style('opacity', function (d) {
-        highlightNode(d, thisId);
-        return getOpacity(d, 'node');
-      });
-      src_selectAll('.sankey-link').style('opacity', function (l) {
-        highlightLinks(l, thisId);
-        return getOpacity(l, 'link');
-      });
-      node.selectAll('text').style('opacity', function (d) {
-        return getOpacity(d, 'text');
-      });
-      var income = 0;
-
-      lodash_default.a.each(d.targetLinks, function (l) {
-        income += l.amount;
-      });
-
-      var outcome = 0;
-
-      lodash_default.a.each(d.sourceLinks, function (l) {
-        outcome += l.amount;
-      });
-
-      tooltip.style('visibility', 'visible').html("<ul>\n\t\t\t\t\t  ".concat(income != 0 ? "<li>Income: ".concat(format(income), "</li>") : '', "\n\t\t\t\t\t  ").concat(outcome != 0 ? "<li>Outcome: ".concat(format(outcome), "</li>") : '', "\n\t\t\t\t\t  <li>").concat(d.label || d.id, "</li>\n\t\t\t\t  </ul>"));
-    }
-
-    function nodeMouseMove(e, d) {
-      var bodyWidth = src_select('body').style('width').slice(0, -2);
-      var tooltipheight = e.pageY - tooltip.style('height').slice(0, -2) - 10;
-      var tooltipWidth = tooltip.style('width').slice(0, -2);
-      var tooltipX = e.pageX < tooltipWidth / 2 ? 0 : e.pageX + tooltipWidth / 2 > bodyWidth ? bodyWidth - tooltipWidth : e.pageX - tooltipWidth / 2;
-      tooltip.style('top', tooltipheight + 'px').style('left', tooltipX + 'px');
-    }
-
-    function nodeMouseOut(e, d) {
-      node.selectAll('rect').style('opacity', function (d) {
-        d.isHighlighted = false;
-        d.isDarken = false;
-        return getOpacity(d, 'node');
-      });
-      link.selectAll('.sankey-link').style('opacity', function (l) {
-        l.isHighlighted = false;
-        l.isDarken = false;
-        return getOpacity(d, 'link');
-      });
-      node.selectAll('text').style('opacity', function (d) {
-        return getOpacity(d, 'text');
-      });
-      tooltip.style('visibility', 'hidden');
-    }
-
-    function nodeContextMenu(e, d) {
-      e.preventDefault();
-      var pathname = window.location.pathname.slice(1);
-      window.open("".concat(window.location.origin, "/").concat(pathname.slice(0, pathname.indexOf('/')), "/address/").concat(d.id), '_blank');
-    }
-
-    function linkMouseOver(e, l) {
-      var source = l.source.id;
-      var target = l.target.id;
-      link.selectAll('.sankey-link').style('opacity', function (l) {
-        if (l.source.id == source && l.target.id == target) {
-          l.isHighlighted = true;
-        } else {
-          l.isDarken = true;
-        }
-
-        return getOpacity(l, 'link');
-      });
-      node.selectAll('rect').style('opacity', function (d) {
-        if (d.id == source || d.id == target) {
-          d.isHighlighted = true;
-        } else {
-          d.isDarken = true;
-        }
-
-        return getOpacity(d, 'node');
-      });
-      node.selectAll('text').style('opacity', function (d) {
-        return getOpacity(d, 'text');
-      });
-      tooltip.style('visibility', 'visible').html("<ul>\n\t\t\t\t\t  <li>Amount: ".concat(format(l.amount), "</li>\n\t\t\t\t\t  <li>From:</li>\n\t\t\t\t\t  <li>").concat(l.source.label || l.source.id, "</li>\n\t\t\t\t\t  <li>To:</li>\n\t\t\t\t\t  <li>").concat(l.target.label || l.target.id, "</li>\n\t\t\t\t\t  <li>Count of transfers: ").concat(l.countOfTransfers, "</li>\n\t\t\t\t  </ul>"));
-    }
-
-    function linkMouseMove(e, l) {
-      var bodyWidth = src_select('body').style('width').slice(0, -2);
-      var tooltipheight = e.pageY - tooltip.style('height').slice(0, -2) - 10;
-      var tooltipWidth = tooltip.style('width').slice(0, -2);
-      var tooltipX = e.pageX < tooltipWidth / 2 ? 0 : e.pageX + tooltipWidth / 2 > bodyWidth ? bodyWidth - tooltipWidth : e.pageX - tooltipWidth / 2;
-      tooltip.style('top', tooltipheight + 'px').style('left', tooltipX + 'px');
-    }
-
-    function linkMouseOut(e, l) {
-      node.selectAll('rect').style('opacity', function (d) {
-        d.isHighlighted = false;
-        d.isDarken = false;
-        return getOpacity(d, 'node');
-      });
-      link.selectAll('.sankey-link').style('opacity', function (l) {
-        l.isHighlighted = false;
-        l.isDarken = false;
-        return getOpacity(l, 'link');
-      });
-      node.selectAll('text').style('opacity', function (d) {
-        return getOpacity(d, 'text');
-      });
-      tooltip.style('visibility', 'hidden');
-    }
-
-    var zoom = d3_zoom_src_zoom().on('zoom', function (e) {
-      rootG.select('.nodes').attr('font-size', fontSize / e.transform.k);
-
-      if (fontSize / e.transform.k > 36) {
-        node.selectAll('.address').style('opacity', function (d) {
-          d.isHidden = true;
-          return getOpacity(d, 'text');
-        });
-      } else {
-        node.selectAll('.address').style('opacity', function (d) {
-          d.isHidden = false;
-          return getOpacity(d, 'text');
-        });
-      }
-
-      rootG.select('.divider').attr('y', function (d) {
-        return -10000 / e.transform.k;
-      }).attr('height', 20000 / e.transform.k);
-      rootG.attr('transform', e.transform);
-    }).on('start', function (e) {
-      if (e.sourceEvent && e.sourceEvent.type == 'mousedown') {
-        svg.attr('cursor', 'move');
-      }
-    }).on('end', function (e) {
-      if (e.sourceEvent && e.sourceEvent.type == 'mouseup') {
-        svg.attr('cursor', 'default');
-      }
-    });
-    var initScale = Math.min(width / graphSize.width, height / graphSize.height) * 3 / 4;
-    svg.call(zoom).call(zoom.transform, transform_identity.translate((width - graphSize.width * initScale) / 2, 120).scale(initScale)).on('dblclick.zoom', null);
-    var chart = svg.node();
-    $("#".concat(selector)).html(chart);
-  };
-
-  g.render();
-  return g;
-}
-window.sankeyRenderer = sankeyRenderer;
-
-/***/ }),
-
-/***/ 48:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ graphRenderer; });
-
-// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
-var lodash = __webpack_require__(0);
-var lodash_default = /*#__PURE__*/__webpack_require__.n(lodash);
-
-// EXTERNAL MODULE: ./node_modules/numeral/numeral.js
-var numeral = __webpack_require__(3);
-var numeral_default = /*#__PURE__*/__webpack_require__.n(numeral);
-
-// EXTERNAL MODULE: ./node_modules/vis/dist/vis.js
-var vis = __webpack_require__(9);
-
-// CONCATENATED MODULE: ./src/util/lightenOrDarkenColor.js
-function lightenOrDarkenColor(color, percent) {
-  var darken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-  var num = parseInt(color.replace("#", ""), 16),
-      amt = Math.round(2.55 * percent),
-      R = (num >> 16) + (darken ? amt : -amt),
-      B = (num >> 8 & 0x00FF) + (darken ? amt : -amt),
-      G = (num & 0x0000FF) + (darken ? amt : -amt);
-  return "#".concat((0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + (B < 255 ? B < 1 ? 0 : B : 255) * 0x100 + (G < 255 ? G < 1 ? 0 : G : 255)).toString(16).slice(1));
-}
-// CONCATENATED MODULE: ./src/reactComponents/graphRenderer.js
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
-
-
-function graphRenderer(dataSource, options, selector) {
-  var g = {};
-  g.container = document.querySelector("#".concat(selector));
-  var jqContainer = $(g.container);
-  var values = Array.isArray(dataSource.values) ? _defineProperty({}, dataSource.displayed_data.split('.')[1], dataSource.values) : Object.assign({}, dataSource.values);
-
-  if (!(values.inbound && values.inbound.length > 0) && !(values.outbound && values.outbound.length > 0)) {
-    jqContainer.empty();
-    return;
-  }
-
-  var queryVariables = JSON.parse(dataSource.variables);
-  var currency = values.inbound && values.inbound.length > 0 && values.inbound[0].currency.symbol || values.outbound && values.outbound.length > 0 && values.outbound[0].currency.symbol;
-  jqContainer.addClass('graph');
-
-  if (!jqContainer.parent().hasClass('wrapper')) {
-    jqContainer.wrap('<div class="wrapper" style="width:100%; height:100%;">');
-  }
-
-  var jqWrapper = jqContainer.parent('.wrapper'); // a trick for the icons in the graph to be loaded
-
-  jqContainer.append('<i class="fa fa-flag" style="visibility:hidden;position:absolute;"></i>');
-  g.theme = options.theme || 'light';
-
-  if (g.theme == 'dark') {
-    jqContainer.addClass('dark');
-  } else {
-    jqContainer.removeClass('dark');
-  }
-
-  g.networkOptions = {
-    height: '100%',
-    physics: {
-      stabilization: {
-        enabled: false,
-        iterations: 10,
-        onlyDynamicEdges: true
-      },
-      barnesHut: {
-        damping: 0.4,
-        avoidOverlap: 0.1,
-        springConstant: 0.09
-      }
-    },
-    interaction: {
-      hover: true,
-      hoverConnectedEdges: false
-    }
-  };
-
-  g.hashCode = function (data) {
-    var string = JSON.stringify(data);
-
-    if (Array.prototype.reduce) {
-      return string.split('').reduce(function (a, b) {
-        a = (a << 5) - a + b.charCodeAt(0);
-        return a & a;
-      }, 0);
-    }
-
-    var hash = 0;
-    if (string.length === 0) return hash;
-
-    for (var i = 0; i < string.length; i++) {
-      var character = string.charCodeAt(i);
-      hash = (hash << 5) - hash + character;
-      hash = hash & hash;
-    }
-
-    return hash;
-  };
-
-  g.prepareNodes = function (nodes) {
-    if (!nodes) return [];
-
-    var prepareNode = function prepareNode(node) {
-      if (node.address == '0x0000000000000000000000000000000000000000') {
-        // 'coinbase'
-        return {
-          id: node.address,
-          label: 'Coinbase',
-          title: node.address,
-          shape: 'icon',
-          icon: {
-            face: 'FontAwesome',
-            code: "\uF0AC",
-            weight: 900,
-            size: 40,
-            color: '#03a9f4'
-          },
-          font: {
-            color: g.theme == 'dark' ? 'white' : 'black'
-          }
-        };
-      } else if (node.smartContract && node.smartContract.contractType == 'Generic') {
-        // 'smart_contract'
-        return {
-          id: node.address,
-          label: lodash_default.a.truncate(node.address, {
-            length: 15,
-            separator: '...'
-          }),
-          title: 'Smart Contract ' + node.address,
-          shape: 'icon',
-          icon: {
-            face: 'FontAwesome',
-            code: "\uF013",
-            weight: 900,
-            size: 40,
-            color: '#f0a30a'
-          },
-          font: {
-            color: g.theme == 'dark' ? 'white' : 'black'
-          }
-        };
-      } else if (node.smartContract && (node.smartContract.contractType == 'Token' || node.smartContract.contractType == 'TokenSale')) {
-        // 'token'
-        return {
-          id: node.address,
-          label: node.smartContract.currency.name + ' (' + node.smartContract.currency.symbol + ')',
-          title: node.smartContract.currency.name + ' (' + node.smartContract.currency.symbol + ')' + ' ' + node.address,
-          shape: 'icon',
-          icon: {
-            face: 'FontAwesome',
-            code: "\uF51F",
-            weight: 900,
-            size: 40,
-            color: '#ff5722'
-          },
-          font: {
-            color: g.theme == 'dark' ? 'white' : 'black'
-          }
-        };
-      } else if (node.smartContract && node.smartContract.contractType == 'MarginPositionToken') {
-        // 'MarginPositionToken'
-        return {
-          id: node.address,
-          label: node.annotation || lodash_default.a.truncate(node.address, {
-            length: 15,
-            separator: '...'
-          }),
-          title: 'MarginPositionToken ' + node.address,
-          shape: 'icon',
-          icon: {
-            face: 'FontAwesome',
-            code: "\uF1B2",
-            weight: 900,
-            size: 40,
-            color: '#ff5722'
-          },
-          font: {
-            color: g.theme == 'dark' ? 'white' : 'black'
-          }
-        };
-      } else if (node.smartContract && node.smartContract.contractType == 'Multisig') {
-        return {
-          // 'multisig'
-          id: node.address,
-          label: node.annotation || lodash_default.a.truncate(node.address, {
-            length: 15,
-            separator: '...'
-          }),
-          title: 'MultiSig Wallet ' + node.address,
-          shape: 'icon',
-          icon: {
-            face: 'FontAwesome',
-            code: "\uF4D3",
-            weight: 900,
-            size: 40,
-            color: '#03a9f4'
-          },
-          font: {
-            color: g.theme == 'dark' ? 'white' : 'black'
-          }
-        };
-      } else if (node.smartContract && node.smartContract.contractType == 'DEX') {
-        // 'dex'
-        return {
-          id: node.address,
-          label: node.annotation || lodash_default.a.truncate(node.address, {
-            length: 15,
-            separator: '...'
-          }),
-          title: 'DEX ' + node.address,
-          shape: 'icon',
-          icon: {
-            face: 'FontAwesome',
-            code: "\uF021",
-            weight: 900,
-            size: 40,
-            color: '#03a9f4'
-          },
-          font: {
-            color: g.theme == 'dark' ? 'white' : 'black'
-          }
-        };
-      } else {
-        if (node.address == '') {
-          // 'coinbase'
-          return {
-            id: node.address,
-            label: 'Coinbase',
-            title: node.address,
-            shape: 'icon',
-            icon: {
-              face: 'FontAwesome',
-              code: "\uF0AC",
-              weight: 900,
-              size: 40,
-              color: '#03a9f4'
-            },
-            font: {
-              color: g.theme == 'dark' ? 'white' : 'black'
-            }
-          };
-        } else if (node.annotation) {
-          // 'annotated_address'
-          return {
-            id: node.address,
-            label: node.annotation,
-            title: node.address,
-            shape: 'icon',
-            icon: {
-              face: 'FontAwesome',
-              code: "\uF007",
-              weight: 900,
-              size: 40,
-              color: g.theme == 'dark' ? '#00967b' : '#009183'
-            },
-            font: {
-              background: g.theme == 'dark' ? '#00967b' : '#009183',
-              color: '#ffffff'
-            }
-          };
-        } else {
-          // 'address'
-          return {
-            id: node.address,
-            label: lodash_default.a.truncate(node.address, {
-              length: 15,
-              separator: '...'
-            }),
-            title: node.address,
-            shape: 'icon',
-            icon: {
-              face: 'FontAwesome',
-              code: "\uF007",
-              weight: 900,
-              size: 40,
-              color: g.theme == 'dark' ? '#009b77' : '#009688'
-            },
-            font: {
-              color: g.theme == 'dark' ? 'white' : 'black'
-            }
-          };
-        }
-      }
-    };
-
-    var prepared = [];
-
-    lodash_default.a.each(nodes, function (node) {
-      prepared.push(prepareNode(node.receiver));
-      prepared.push(prepareNode(node.sender));
-    });
-
-    return prepared;
-  };
-
-  g.prepareEdges = function (edges) {
-    var receiver = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-    if (!edges) return [];
-
-    var prepareEdge = function prepareEdge(edge) {
-      var currency_name = currency;
-      var width = edge.amount > 1 ? 1.5 * Math.log10(edge.amount) + 1 : 1;
-      var value = parseFloat(edge.amount) <= 1e-6 ? edge.amount : numeral_default()(edge.amount).format('0.0000a');
-      var label = value + ' ' + currency_name;
-
-      if (receiver) {
-        return {
-          from: edge.sender.address,
-          to: edge.receiver.address,
-          arrows: 'to',
-          label: label,
-          color: {
-            color: g.theme == 'dark' ? 'silver' : 'grey',
-            highlight: '#ff5722'
-          },
-          font: {
-            align: 'middle',
-            multi: true,
-            color: g.theme == 'dark' ? 'white' : 'black',
-            strokeWidth: 4,
-            strokeColor: g.theme == 'dark' ? 'black' : 'white'
-          },
-          smooth: true,
-          width: width,
-          select_type: 'select_transfers',
-          hidden: false,
-          id: g.hashCode(['select_transfers', edge.sender.address, edge.receiver.address, label])
-        };
-      } else {
-        return {
-          from: edge.sender.address,
-          to: edge.receiver.address,
-          arrows: 'to',
-          label: label,
-          color: {
-            color: g.theme == 'dark' ? 'white' : 'black',
-            highlight: '#ff5722'
-          },
-          font: {
-            align: 'middle',
-            multi: true,
-            color: g.theme == 'dark' ? 'white' : 'black',
-            strokeWidth: 4,
-            strokeColor: g.theme == 'dark' ? 'black' : 'white'
-          },
-          smooth: true,
-          width: width,
-          select_type: 'select_transfers',
-          hidden: false,
-          id: g.hashCode(['select_transfers', edge.sender.address, edge.receiver.address, label])
-        };
-      }
-    };
-
-    var prepared = [];
-
-    lodash_default.a.each(edges, function (edge) {
-      prepared.push(prepareEdge(edge));
-    });
-
-    return prepared;
-  };
-
-  g.setDataset = function (data) {
-    if (!g.dataset) {
-      g.dataset = {
-        nodes: new vis["DataSet"](),
-        edges: new vis["DataSet"]()
-      };
-    }
-
-    g.dataset.nodes.clear();
-    g.dataset.edges.clear();
-
-    lodash_default.a.each(lodash_default.a.uniqBy(g.prepareNodes(data.inbound).concat(g.prepareNodes(data.outbound)), 'id'), function (node) {
-      g.dataset.nodes.add(node);
-    });
-
-    lodash_default.a.each(lodash_default.a.uniqBy(g.prepareEdges(data.inbound).concat(g.prepareEdges(data.outbound, false)), 'id'), function (edge) {
-      g.dataset.edges.add(edge);
-    });
-  };
-
-  g.expandNode = function (address) {
-    var node = g.dataset.nodes.get(address);
-
-    if (!node.expanded) {
-      node.expanded = true;
-      var prevColor = node.icon.color;
-      node.physics = false;
-      node.icon = {
-        color: lightenOrDarkenColor(prevColor, 20, g.theme == 'dark')
-      };
-
-      if (g.theme == 'dark') {
-        node.shadow = {
-          enabled: true,
-          color: prevColor,
-          size: 20,
-          x: 0,
-          y: 0
-        };
-      }
-
-      g.dataset.nodes.update(node);
-    }
-  };
-
-  g.expandDataset = function () {
-    lodash_default.a.each(lodash_default.a.uniqBy(g.prepareNodes(query.data[query.cryptoCurrency].inbound).concat(g.prepareNodes(query.data[query.cryptoCurrency].outbound)), 'id'), function (node) {
-      if (!g.dataset.nodes.get(node.id)) {
-        g.dataset.nodes.add(node);
-      }
-    });
-
-    lodash_default.a.each(lodash_default.a.uniqBy(g.prepareEdges(query.data[query.cryptoCurrency].inbound).concat(g.prepareEdges(query.data[query.cryptoCurrency].outbound, false)), 'id'), function (edge) {
-      if (!g.dataset.edges.get(edge.id)) {
-        g.dataset.edges.add(edge);
-      }
-    });
-  };
-
-  g.expand = function (address) {
-    var node = g.dataset.nodes.get(address);
-
-    if (!node.expanded) {
-      g.expandNode(address);
-      query.request({
-        address: address
-      }, true, false);
-    }
-  };
-
-  g.initGraph = function () {
-    jqWrapper.removeClass('initializing');
-    g.setDataset(values);
-    g.network = new vis["Network"](g.container, g.dataset, g.networkOptions);
-    g.network.on('dragStart', function (params) {
-      if (params.nodes.length != 0) {
-        g.network.canvas.body.container.style.cursor = 'grabbing';
-      } else {
-        g.network.canvas.body.container.style.cursor = 'move';
-      }
-    });
-    g.network.on('dragEnd', function (params) {
-      if (params.nodes.length != 0) {
-        g.network.canvas.body.container.style.cursor = 'grab';
-      } else {
-        g.network.canvas.body.container.style.cursor = 'default';
-      }
-
-      var nodeId = params.nodes[0];
-      var clickedNode = g.dataset.nodes.get(nodeId);
-      clickedNode.physics = false;
-      g.dataset.nodes.update(clickedNode);
-    });
-    g.network.on('hold', function (params) {
-      if (params.nodes.length != 0) {
-        g.network.canvas.body.container.style.cursor = 'grabbing';
-      } else {
-        g.network.canvas.body.container.style.cursor = 'move';
-      }
-    });
-    g.network.on('release', function (params) {
-      if (params.nodes.length != 0) {
-        g.network.canvas.body.container.style.cursor = 'grabbing';
-      } else {
-        g.network.canvas.body.container.style.cursor = 'default';
-      }
-    });
-    g.network.on('hoverNode', function (params) {
-      g.network.canvas.body.container.style.cursor = 'grab';
-    });
-    g.network.on('blurNode', function (params) {
-      g.network.canvas.body.container.style.cursor = 'default';
-    });
-    g.network.on('oncontext', function (params) {
-      event.preventDefault();
-      var nodeId = g.network.getNodeAt(params.pointer.DOM);
-
-      if (nodeId) {
-        var node = g.dataset.nodes.get(nodeId);
-        var pathname = window.location.pathname.slice(1);
-        window.open("".concat(window.location.origin, "/").concat(pathname.slice(0, pathname.indexOf('/')), "/address/").concat(node.id), '_blank');
-      }
-    });
-    if (g.dataset.nodes.length == 0) return;
-    g.expandNode(queryVariables.address);
-  };
-
-  g.initGraph();
-  return g;
-}
-window.graphRenderer = graphRenderer;
-
-/***/ }),
-
-/***/ 9:
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -87188,7 +77181,10889 @@ exports["default"] = FloydWarshall;
 
 /***/ }),
 
-/***/ 95:
+/***/ 102:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "graphPlugins", function() { return /* binding */ graphPlugins; });
+
+// EXTERNAL MODULE: external {"root":"React","commonjs2":"react","commonjs":"react","amd":"react","umd":"react"}
+var external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_ = __webpack_require__(1);
+var external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default = /*#__PURE__*/__webpack_require__.n(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_);
+
+// CONCATENATED MODULE: ./src/util/useFirstUpdate.js
+
+var useFirstUpdate_useFirstUpdate = function useFirstUpdate(func, deps) {
+  var didMount = Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useRef"])(false);
+  Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useEffect"])(function () {
+    if (didMount.current) func();else didMount.current = true;
+  }, deps);
+};
+// CONCATENATED MODULE: ./src/reactComponents/WidgetOptions.js
+
+
+function WidgetOptions(_ref) {
+  var model = _ref.model,
+      condition = _ref.condition,
+      value = _ref.value,
+      setValue = _ref.setValue,
+      title = _ref.title;
+  Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useEffect"])(function () {
+    if (model) {
+      var list = Object.keys(model).filter(condition);
+      if (!value) setValue(list[0]);
+    }
+  }, [JSON.stringify(model)]);
+  return /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", {
+    className: "widget-option"
+  }, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("label", null, title), /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("select", {
+    className: "custom-select",
+    value: value,
+    onChange: function onChange(e) {
+      return setValue(e.target.value);
+    }
+  }, Object.keys(model).length ? Object.keys(model).map(function (node, i) {
+    return condition(node) ? /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("option", {
+      key: i,
+      value: node
+    }, node.split('.').slice(-1)) : null;
+  }) : value ? /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("option", {
+    value: value
+  }, value.split('.').slice(-1)) : null));
+}
+
+/* harmony default export */ var reactComponents_WidgetOptions = (WidgetOptions);
+// CONCATENATED MODULE: ./src/reactComponents/SankeyEditor.js
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+function SankeyEditor(_ref) {
+  var model = _ref.model,
+      config = _ref.config,
+      setConfig = _ref.setConfig,
+      displayedData = _ref.displayedData;
+
+  var _useState = Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useState"])(''),
+      _useState2 = _slicedToArray(_useState, 2),
+      theme = _useState2[0],
+      setTheme = _useState2[1];
+
+  var themeOptions = {
+    light: 'light',
+    dark: 'dark'
+  };
+
+  var themeFunc = function themeFunc() {
+    return true;
+  };
+
+  Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useEffect"])(function () {
+    setTheme('light');
+  }, []);
+  useFirstUpdate_useFirstUpdate(function () {
+    if (model) {
+      var cfg = {
+        data: displayedData,
+        theme: theme
+      };
+      setConfig(cfg);
+    }
+  }, [theme, displayedData]);
+  return /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", {
+    className: "widget"
+  }, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", {
+    className: "widget-editor"
+  }, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(reactComponents_WidgetOptions, {
+    value: theme,
+    setValue: setTheme,
+    condition: themeFunc,
+    title: 'Theme',
+    model: themeOptions
+  })));
+}
+
+/* harmony default export */ var reactComponents_SankeyEditor = (SankeyEditor);
+// EXTERNAL MODULE: ./src/reactComponents/sankeyRenderer.js + 169 modules
+var sankeyRenderer = __webpack_require__(48);
+
+// CONCATENATED MODULE: ./src/reactComponents/GraphEditor.js
+function GraphEditor_slicedToArray(arr, i) { return GraphEditor_arrayWithHoles(arr) || GraphEditor_iterableToArrayLimit(arr, i) || GraphEditor_unsupportedIterableToArray(arr, i) || GraphEditor_nonIterableRest(); }
+
+function GraphEditor_nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function GraphEditor_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return GraphEditor_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return GraphEditor_arrayLikeToArray(o, minLen); }
+
+function GraphEditor_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function GraphEditor_iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function GraphEditor_arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+function GraphEditor(_ref) {
+  var model = _ref.model,
+      config = _ref.config,
+      setConfig = _ref.setConfig,
+      displayedData = _ref.displayedData;
+
+  var _useState = Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useState"])(''),
+      _useState2 = GraphEditor_slicedToArray(_useState, 2),
+      theme = _useState2[0],
+      setTheme = _useState2[1];
+
+  var themeOptions = {
+    light: 'light',
+    dark: 'dark'
+  };
+
+  var themeFunc = function themeFunc() {
+    return true;
+  };
+
+  Object(external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_["useEffect"])(function () {
+    setTheme('light');
+  }, []);
+  useFirstUpdate_useFirstUpdate(function () {
+    if (model) {
+      var cfg = {
+        data: displayedData,
+        theme: theme
+      };
+      setConfig(cfg);
+    }
+  }, [theme, displayedData]);
+  return /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", {
+    className: "widget"
+  }, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement("div", {
+    className: "widget-editor"
+  }, /*#__PURE__*/external_root_React_commonjs2_react_commonjs_react_amd_react_umd_react_default.a.createElement(reactComponents_WidgetOptions, {
+    value: theme,
+    setValue: setTheme,
+    condition: themeFunc,
+    title: 'Theme',
+    model: themeOptions
+  })));
+}
+
+/* harmony default export */ var reactComponents_GraphEditor = (GraphEditor);
+// EXTERNAL MODULE: ./src/reactComponents/graphRenderer.js + 1 modules
+var graphRenderer = __webpack_require__(49);
+
+// CONCATENATED MODULE: ./src/checkAllProperties.js
+function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = checkAllProperties_unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+
+function checkAllProperties_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return checkAllProperties_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return checkAllProperties_arrayLikeToArray(o, minLen); }
+
+function checkAllProperties_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function checkAllProperties(props, model) {
+  var availableProps = new Set();
+
+  function addProp(pre, item) {
+    if (item.selectionSet) {
+      item.selectionSet.selections.forEach(function (i) {
+        var start = pre ? pre + '.' : '';
+        availableProps.add(start + item.name.value);
+        addProp(start + item.name.value, i);
+      });
+    } else {
+      var start = pre ? pre + '.' : '';
+      availableProps.add(start + item.name.value);
+    }
+  }
+
+  if (model.selectionSet) {
+    model.selectionSet.selections.forEach(function (item) {
+      addProp('', item);
+    });
+  }
+
+  function isSuperset(set, subset) {
+    var _iterator = _createForOfIteratorHelper(subset),
+        _step;
+
+    try {
+      for (_iterator.s(); !(_step = _iterator.n()).done;) {
+        var elem = _step.value;
+
+        if (!set.has(elem)) {
+          return false;
+        }
+      }
+    } catch (err) {
+      _iterator.e(err);
+    } finally {
+      _iterator.f();
+    }
+
+    return true;
+  }
+
+  return isSuperset(availableProps, new Set(props));
+}
+// CONCATENATED MODULE: ./src/index.js
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || src_unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function src_unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return src_arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return src_arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return src_arrayLikeToArray(arr); }
+
+function src_arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
+
+
+
+
+
+var src_SankeyPlugin = /*#__PURE__*/function () {
+  function SankeyPlugin() {
+    _classCallCheck(this, SankeyPlugin);
+
+    this.id = 'sankey';
+    this.name = 'Sankey';
+    this.editor = reactComponents_SankeyEditor;
+    this.renderer = sankeyRenderer["default"];
+    this.dependencies = ['https://cdn.jsdelivr.net/npm/@bitquery/ide-graph@2.0.1/dist/sankeyRenderer.js', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'];
+  }
+
+  _createClass(SankeyPlugin, [{
+    key: "supportsModel",
+    value: function supportsModel(model) {
+      var _loop = function _loop(key) {
+        var isLack = false;
+        var coinpaths = [];
+
+        if (!key.includes('.') && model[key].selectionSet) {
+          coinpaths.push.apply(coinpaths, _toConsumableArray(model[key].selectionSet.selections));
+        } else if (model[key].typeInfo.toString()[0] === '[' && model[key].typeInfo.toString().slice(-2, -1) !== '0') {
+          coinpaths.push(model[key]);
+        } else {
+          return {
+            v: false
+          };
+        }
+
+        var properties = ['sender', 'sender.address', 'sender.annotation', 'receiver', 'receiver.address', 'receiver.annotation', 'amount', 'currency', 'currency.symbol', 'depth', 'count'];
+        coinpaths.forEach(function (item) {
+          if (!checkAllProperties(properties, item)) isLack = true;
+        });
+        return {
+          v: !isLack
+        };
+      };
+
+      for (var key in model) {
+        var _ret = _loop(key);
+
+        if (_typeof(_ret) === "object") return _ret.v;
+      }
+    }
+  }]);
+
+  return SankeyPlugin;
+}();
+
+var src_GraphPlugin = /*#__PURE__*/function () {
+  function GraphPlugin() {
+    _classCallCheck(this, GraphPlugin);
+
+    this.id = 'graph';
+    this.name = 'Graph';
+    this.editor = reactComponents_GraphEditor;
+    this.renderer = graphRenderer["default"];
+    this.dependencies = ['https://cdn.jsdelivr.net/npm/@bitquery/ide-graph@2.0.1/dist/graphRenderer.js', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', 'https://kit.fontawesome.com/fcc9f09153.js'];
+  }
+
+  _createClass(GraphPlugin, [{
+    key: "supportsModel",
+    value: function supportsModel(model) {
+      var _loop2 = function _loop2(key) {
+        var isLack = false;
+        var coinpaths = [];
+
+        if (!key.includes('.') && model[key].selectionSet) {
+          coinpaths.push.apply(coinpaths, _toConsumableArray(model[key].selectionSet.selections));
+        } else if (model[key].typeInfo.toString()[0] === '[' && model[key].typeInfo.toString().slice(-2, -1) !== '0') {
+          coinpaths.push(model[key]);
+        } else {
+          return {
+            v: false
+          };
+        }
+
+        var properties = ['sender', 'sender.address', 'sender.annotation', 'receiver', 'receiver.address', 'receiver.annotation', 'amount', 'currency', 'currency.symbol', 'depth', 'count'];
+        coinpaths.forEach(function (item) {
+          if (!checkAllProperties(properties, item)) isLack = true;
+        });
+        return {
+          v: !isLack
+        };
+      };
+
+      for (var key in model) {
+        var _ret2 = _loop2(key);
+
+        if (_typeof(_ret2) === "object") return _ret2.v;
+      }
+    }
+  }]);
+
+  return GraphPlugin;
+}();
+
+var graphPlugins = [new src_SankeyPlugin(), new src_GraphPlugin()];
+
+/***/ }),
+
+/***/ 2:
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var runtime = (function (exports) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function define(obj, key, value) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+    return obj[key];
+  }
+  try {
+    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+    define({}, "");
+  } catch (err) {
+    define = function(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  exports.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  IteratorPrototype[iteratorSymbol] = function () {
+    return this;
+  };
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunction.displayName = define(
+    GeneratorFunctionPrototype,
+    toStringTagSymbol,
+    "GeneratorFunction"
+  );
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      define(prototype, method, function(arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+
+  exports.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  exports.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      define(genFun, toStringTagSymbol, "GeneratorFunction");
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  exports.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return PromiseImpl.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return PromiseImpl.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
+    return this;
+  };
+  exports.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList),
+      PromiseImpl
+    );
+
+    return exports.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        // Note: ["return"] must be used for ES3 parsing compatibility.
+        if (delegate.iterator["return"]) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  define(Gp, toStringTagSymbol, "Generator");
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  Gp[iteratorSymbol] = function() {
+    return this;
+  };
+
+  Gp.toString = function() {
+    return "[object Generator]";
+  };
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  exports.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  exports.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+
+  // Regardless of whether this script is executing as a CommonJS module
+  // or not, return the runtime object so that we can declare the variable
+  // regeneratorRuntime in the outer scope, which allows this module to be
+  // injected easily by `bin/regenerator --include-runtime script.js`.
+  return exports;
+
+}(
+  // If this script is executing as a CommonJS module, use module.exports
+  // as the regeneratorRuntime namespace. Otherwise create a new empty
+  // object. Either way, the resulting object will be used to initialize
+  // the regeneratorRuntime variable at the top of this file.
+   true ? module.exports : undefined
+));
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  // This module should not be running in strict mode, so the above
+  // assignment should always work unless something is misconfigured. Just
+  // in case runtime.js accidentally runs in strict mode, we can escape
+  // strict mode using a global Function call. This could conceivably fail
+  // if a Content Security Policy forbids using Function, but in that case
+  // the proper solution is to fix the accidental strict mode problem. If
+  // you've misconfigured your bundler to force strict mode and applied a
+  // CSP to forbid Function, and you're not willing to fix either of those
+  // problems, please detail your unique predicament in a GitHub issue.
+  Function("r", "regeneratorRuntime = r")(runtime);
+}
+
+
+/***/ }),
+
+/***/ 4:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! @preserve
+ * numeral.js
+ * version : 2.0.6
+ * author : Adam Draper
+ * license : MIT
+ * http://adamwdraper.github.com/Numeral-js/
+ */
+
+(function (global, factory) {
+    if (true) {
+        !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+    } else {}
+}(this, function () {
+    /************************************
+        Variables
+    ************************************/
+
+    var numeral,
+        _,
+        VERSION = '2.0.6',
+        formats = {},
+        locales = {},
+        defaults = {
+            currentLocale: 'en',
+            zeroFormat: null,
+            nullFormat: null,
+            defaultFormat: '0,0',
+            scalePercentBy100: true
+        },
+        options = {
+            currentLocale: defaults.currentLocale,
+            zeroFormat: defaults.zeroFormat,
+            nullFormat: defaults.nullFormat,
+            defaultFormat: defaults.defaultFormat,
+            scalePercentBy100: defaults.scalePercentBy100
+        };
+
+
+    /************************************
+        Constructors
+    ************************************/
+
+    // Numeral prototype object
+    function Numeral(input, number) {
+        this._input = input;
+
+        this._value = number;
+    }
+
+    numeral = function(input) {
+        var value,
+            kind,
+            unformatFunction,
+            regexp;
+
+        if (numeral.isNumeral(input)) {
+            value = input.value();
+        } else if (input === 0 || typeof input === 'undefined') {
+            value = 0;
+        } else if (input === null || _.isNaN(input)) {
+            value = null;
+        } else if (typeof input === 'string') {
+            if (options.zeroFormat && input === options.zeroFormat) {
+                value = 0;
+            } else if (options.nullFormat && input === options.nullFormat || !input.replace(/[^0-9]+/g, '').length) {
+                value = null;
+            } else {
+                for (kind in formats) {
+                    regexp = typeof formats[kind].regexps.unformat === 'function' ? formats[kind].regexps.unformat() : formats[kind].regexps.unformat;
+
+                    if (regexp && input.match(regexp)) {
+                        unformatFunction = formats[kind].unformat;
+
+                        break;
+                    }
+                }
+
+                unformatFunction = unformatFunction || numeral._.stringToNumber;
+
+                value = unformatFunction(input);
+            }
+        } else {
+            value = Number(input)|| null;
+        }
+
+        return new Numeral(input, value);
+    };
+
+    // version number
+    numeral.version = VERSION;
+
+    // compare numeral object
+    numeral.isNumeral = function(obj) {
+        return obj instanceof Numeral;
+    };
+
+    // helper functions
+    numeral._ = _ = {
+        // formats numbers separators, decimals places, signs, abbreviations
+        numberToFormat: function(value, format, roundingFunction) {
+            var locale = locales[numeral.options.currentLocale],
+                negP = false,
+                optDec = false,
+                leadingCount = 0,
+                abbr = '',
+                trillion = 1000000000000,
+                billion = 1000000000,
+                million = 1000000,
+                thousand = 1000,
+                decimal = '',
+                neg = false,
+                abbrForce, // force abbreviation
+                abs,
+                min,
+                max,
+                power,
+                int,
+                precision,
+                signed,
+                thousands,
+                output;
+
+            // make sure we never format a null value
+            value = value || 0;
+
+            abs = Math.abs(value);
+
+            // see if we should use parentheses for negative number or if we should prefix with a sign
+            // if both are present we default to parentheses
+            if (numeral._.includes(format, '(')) {
+                negP = true;
+                format = format.replace(/[\(|\)]/g, '');
+            } else if (numeral._.includes(format, '+') || numeral._.includes(format, '-')) {
+                signed = numeral._.includes(format, '+') ? format.indexOf('+') : value < 0 ? format.indexOf('-') : -1;
+                format = format.replace(/[\+|\-]/g, '');
+            }
+
+            // see if abbreviation is wanted
+            if (numeral._.includes(format, 'a')) {
+                abbrForce = format.match(/a(k|m|b|t)?/);
+
+                abbrForce = abbrForce ? abbrForce[1] : false;
+
+                // check for space before abbreviation
+                if (numeral._.includes(format, ' a')) {
+                    abbr = ' ';
+                }
+
+                format = format.replace(new RegExp(abbr + 'a[kmbt]?'), '');
+
+                if (abs >= trillion && !abbrForce || abbrForce === 't') {
+                    // trillion
+                    abbr += locale.abbreviations.trillion;
+                    value = value / trillion;
+                } else if (abs < trillion && abs >= billion && !abbrForce || abbrForce === 'b') {
+                    // billion
+                    abbr += locale.abbreviations.billion;
+                    value = value / billion;
+                } else if (abs < billion && abs >= million && !abbrForce || abbrForce === 'm') {
+                    // million
+                    abbr += locale.abbreviations.million;
+                    value = value / million;
+                } else if (abs < million && abs >= thousand && !abbrForce || abbrForce === 'k') {
+                    // thousand
+                    abbr += locale.abbreviations.thousand;
+                    value = value / thousand;
+                }
+            }
+
+            // check for optional decimals
+            if (numeral._.includes(format, '[.]')) {
+                optDec = true;
+                format = format.replace('[.]', '.');
+            }
+
+            // break number and format
+            int = value.toString().split('.')[0];
+            precision = format.split('.')[1];
+            thousands = format.indexOf(',');
+            leadingCount = (format.split('.')[0].split(',')[0].match(/0/g) || []).length;
+
+            if (precision) {
+                if (numeral._.includes(precision, '[')) {
+                    precision = precision.replace(']', '');
+                    precision = precision.split('[');
+                    decimal = numeral._.toFixed(value, (precision[0].length + precision[1].length), roundingFunction, precision[1].length);
+                } else {
+                    decimal = numeral._.toFixed(value, precision.length, roundingFunction);
+                }
+
+                int = decimal.split('.')[0];
+
+                if (numeral._.includes(decimal, '.')) {
+                    decimal = locale.delimiters.decimal + decimal.split('.')[1];
+                } else {
+                    decimal = '';
+                }
+
+                if (optDec && Number(decimal.slice(1)) === 0) {
+                    decimal = '';
+                }
+            } else {
+                int = numeral._.toFixed(value, 0, roundingFunction);
+            }
+
+            // check abbreviation again after rounding
+            if (abbr && !abbrForce && Number(int) >= 1000 && abbr !== locale.abbreviations.trillion) {
+                int = String(Number(int) / 1000);
+
+                switch (abbr) {
+                    case locale.abbreviations.thousand:
+                        abbr = locale.abbreviations.million;
+                        break;
+                    case locale.abbreviations.million:
+                        abbr = locale.abbreviations.billion;
+                        break;
+                    case locale.abbreviations.billion:
+                        abbr = locale.abbreviations.trillion;
+                        break;
+                }
+            }
+
+
+            // format number
+            if (numeral._.includes(int, '-')) {
+                int = int.slice(1);
+                neg = true;
+            }
+
+            if (int.length < leadingCount) {
+                for (var i = leadingCount - int.length; i > 0; i--) {
+                    int = '0' + int;
+                }
+            }
+
+            if (thousands > -1) {
+                int = int.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + locale.delimiters.thousands);
+            }
+
+            if (format.indexOf('.') === 0) {
+                int = '';
+            }
+
+            output = int + decimal + (abbr ? abbr : '');
+
+            if (negP) {
+                output = (negP && neg ? '(' : '') + output + (negP && neg ? ')' : '');
+            } else {
+                if (signed >= 0) {
+                    output = signed === 0 ? (neg ? '-' : '+') + output : output + (neg ? '-' : '+');
+                } else if (neg) {
+                    output = '-' + output;
+                }
+            }
+
+            return output;
+        },
+        // unformats numbers separators, decimals places, signs, abbreviations
+        stringToNumber: function(string) {
+            var locale = locales[options.currentLocale],
+                stringOriginal = string,
+                abbreviations = {
+                    thousand: 3,
+                    million: 6,
+                    billion: 9,
+                    trillion: 12
+                },
+                abbreviation,
+                value,
+                i,
+                regexp;
+
+            if (options.zeroFormat && string === options.zeroFormat) {
+                value = 0;
+            } else if (options.nullFormat && string === options.nullFormat || !string.replace(/[^0-9]+/g, '').length) {
+                value = null;
+            } else {
+                value = 1;
+
+                if (locale.delimiters.decimal !== '.') {
+                    string = string.replace(/\./g, '').replace(locale.delimiters.decimal, '.');
+                }
+
+                for (abbreviation in abbreviations) {
+                    regexp = new RegExp('[^a-zA-Z]' + locale.abbreviations[abbreviation] + '(?:\\)|(\\' + locale.currency.symbol + ')?(?:\\))?)?$');
+
+                    if (stringOriginal.match(regexp)) {
+                        value *= Math.pow(10, abbreviations[abbreviation]);
+                        break;
+                    }
+                }
+
+                // check for negative number
+                value *= (string.split('-').length + Math.min(string.split('(').length - 1, string.split(')').length - 1)) % 2 ? 1 : -1;
+
+                // remove non numbers
+                string = string.replace(/[^0-9\.]+/g, '');
+
+                value *= Number(string);
+            }
+
+            return value;
+        },
+        isNaN: function(value) {
+            return typeof value === 'number' && isNaN(value);
+        },
+        includes: function(string, search) {
+            return string.indexOf(search) !== -1;
+        },
+        insert: function(string, subString, start) {
+            return string.slice(0, start) + subString + string.slice(start);
+        },
+        reduce: function(array, callback /*, initialValue*/) {
+            if (this === null) {
+                throw new TypeError('Array.prototype.reduce called on null or undefined');
+            }
+
+            if (typeof callback !== 'function') {
+                throw new TypeError(callback + ' is not a function');
+            }
+
+            var t = Object(array),
+                len = t.length >>> 0,
+                k = 0,
+                value;
+
+            if (arguments.length === 3) {
+                value = arguments[2];
+            } else {
+                while (k < len && !(k in t)) {
+                    k++;
+                }
+
+                if (k >= len) {
+                    throw new TypeError('Reduce of empty array with no initial value');
+                }
+
+                value = t[k++];
+            }
+            for (; k < len; k++) {
+                if (k in t) {
+                    value = callback(value, t[k], k, t);
+                }
+            }
+            return value;
+        },
+        /**
+         * Computes the multiplier necessary to make x >= 1,
+         * effectively eliminating miscalculations caused by
+         * finite precision.
+         */
+        multiplier: function (x) {
+            var parts = x.toString().split('.');
+
+            return parts.length < 2 ? 1 : Math.pow(10, parts[1].length);
+        },
+        /**
+         * Given a variable number of arguments, returns the maximum
+         * multiplier that must be used to normalize an operation involving
+         * all of them.
+         */
+        correctionFactor: function () {
+            var args = Array.prototype.slice.call(arguments);
+
+            return args.reduce(function(accum, next) {
+                var mn = _.multiplier(next);
+                return accum > mn ? accum : mn;
+            }, 1);
+        },
+        /**
+         * Implementation of toFixed() that treats floats more like decimals
+         *
+         * Fixes binary rounding issues (eg. (0.615).toFixed(2) === '0.61') that present
+         * problems for accounting- and finance-related software.
+         */
+        toFixed: function(value, maxDecimals, roundingFunction, optionals) {
+            var splitValue = value.toString().split('.'),
+                minDecimals = maxDecimals - (optionals || 0),
+                boundedPrecision,
+                optionalsRegExp,
+                power,
+                output;
+
+            // Use the smallest precision value possible to avoid errors from floating point representation
+            if (splitValue.length === 2) {
+              boundedPrecision = Math.min(Math.max(splitValue[1].length, minDecimals), maxDecimals);
+            } else {
+              boundedPrecision = minDecimals;
+            }
+
+            power = Math.pow(10, boundedPrecision);
+
+            // Multiply up by precision, round accurately, then divide and use native toFixed():
+            output = (roundingFunction(value + 'e+' + boundedPrecision) / power).toFixed(boundedPrecision);
+
+            if (optionals > maxDecimals - boundedPrecision) {
+                optionalsRegExp = new RegExp('\\.?0{1,' + (optionals - (maxDecimals - boundedPrecision)) + '}$');
+                output = output.replace(optionalsRegExp, '');
+            }
+
+            return output;
+        }
+    };
+
+    // avaliable options
+    numeral.options = options;
+
+    // avaliable formats
+    numeral.formats = formats;
+
+    // avaliable formats
+    numeral.locales = locales;
+
+    // This function sets the current locale.  If
+    // no arguments are passed in, it will simply return the current global
+    // locale key.
+    numeral.locale = function(key) {
+        if (key) {
+            options.currentLocale = key.toLowerCase();
+        }
+
+        return options.currentLocale;
+    };
+
+    // This function provides access to the loaded locale data.  If
+    // no arguments are passed in, it will simply return the current
+    // global locale object.
+    numeral.localeData = function(key) {
+        if (!key) {
+            return locales[options.currentLocale];
+        }
+
+        key = key.toLowerCase();
+
+        if (!locales[key]) {
+            throw new Error('Unknown locale : ' + key);
+        }
+
+        return locales[key];
+    };
+
+    numeral.reset = function() {
+        for (var property in defaults) {
+            options[property] = defaults[property];
+        }
+    };
+
+    numeral.zeroFormat = function(format) {
+        options.zeroFormat = typeof(format) === 'string' ? format : null;
+    };
+
+    numeral.nullFormat = function (format) {
+        options.nullFormat = typeof(format) === 'string' ? format : null;
+    };
+
+    numeral.defaultFormat = function(format) {
+        options.defaultFormat = typeof(format) === 'string' ? format : '0.0';
+    };
+
+    numeral.register = function(type, name, format) {
+        name = name.toLowerCase();
+
+        if (this[type + 's'][name]) {
+            throw new TypeError(name + ' ' + type + ' already registered.');
+        }
+
+        this[type + 's'][name] = format;
+
+        return format;
+    };
+
+
+    numeral.validate = function(val, culture) {
+        var _decimalSep,
+            _thousandSep,
+            _currSymbol,
+            _valArray,
+            _abbrObj,
+            _thousandRegEx,
+            localeData,
+            temp;
+
+        //coerce val to string
+        if (typeof val !== 'string') {
+            val += '';
+
+            if (console.warn) {
+                console.warn('Numeral.js: Value is not string. It has been co-erced to: ', val);
+            }
+        }
+
+        //trim whitespaces from either sides
+        val = val.trim();
+
+        //if val is just digits return true
+        if (!!val.match(/^\d+$/)) {
+            return true;
+        }
+
+        //if val is empty return false
+        if (val === '') {
+            return false;
+        }
+
+        //get the decimal and thousands separator from numeral.localeData
+        try {
+            //check if the culture is understood by numeral. if not, default it to current locale
+            localeData = numeral.localeData(culture);
+        } catch (e) {
+            localeData = numeral.localeData(numeral.locale());
+        }
+
+        //setup the delimiters and currency symbol based on culture/locale
+        _currSymbol = localeData.currency.symbol;
+        _abbrObj = localeData.abbreviations;
+        _decimalSep = localeData.delimiters.decimal;
+        if (localeData.delimiters.thousands === '.') {
+            _thousandSep = '\\.';
+        } else {
+            _thousandSep = localeData.delimiters.thousands;
+        }
+
+        // validating currency symbol
+        temp = val.match(/^[^\d]+/);
+        if (temp !== null) {
+            val = val.substr(1);
+            if (temp[0] !== _currSymbol) {
+                return false;
+            }
+        }
+
+        //validating abbreviation symbol
+        temp = val.match(/[^\d]+$/);
+        if (temp !== null) {
+            val = val.slice(0, -1);
+            if (temp[0] !== _abbrObj.thousand && temp[0] !== _abbrObj.million && temp[0] !== _abbrObj.billion && temp[0] !== _abbrObj.trillion) {
+                return false;
+            }
+        }
+
+        _thousandRegEx = new RegExp(_thousandSep + '{2}');
+
+        if (!val.match(/[^\d.,]/g)) {
+            _valArray = val.split(_decimalSep);
+            if (_valArray.length > 2) {
+                return false;
+            } else {
+                if (_valArray.length < 2) {
+                    return ( !! _valArray[0].match(/^\d+.*\d$/) && !_valArray[0].match(_thousandRegEx));
+                } else {
+                    if (_valArray[0].length === 1) {
+                        return ( !! _valArray[0].match(/^\d+$/) && !_valArray[0].match(_thousandRegEx) && !! _valArray[1].match(/^\d+$/));
+                    } else {
+                        return ( !! _valArray[0].match(/^\d+.*\d$/) && !_valArray[0].match(_thousandRegEx) && !! _valArray[1].match(/^\d+$/));
+                    }
+                }
+            }
+        }
+
+        return false;
+    };
+
+
+    /************************************
+        Numeral Prototype
+    ************************************/
+
+    numeral.fn = Numeral.prototype = {
+        clone: function() {
+            return numeral(this);
+        },
+        format: function(inputString, roundingFunction) {
+            var value = this._value,
+                format = inputString || options.defaultFormat,
+                kind,
+                output,
+                formatFunction;
+
+            // make sure we have a roundingFunction
+            roundingFunction = roundingFunction || Math.round;
+
+            // format based on value
+            if (value === 0 && options.zeroFormat !== null) {
+                output = options.zeroFormat;
+            } else if (value === null && options.nullFormat !== null) {
+                output = options.nullFormat;
+            } else {
+                for (kind in formats) {
+                    if (format.match(formats[kind].regexps.format)) {
+                        formatFunction = formats[kind].format;
+
+                        break;
+                    }
+                }
+
+                formatFunction = formatFunction || numeral._.numberToFormat;
+
+                output = formatFunction(value, format, roundingFunction);
+            }
+
+            return output;
+        },
+        value: function() {
+            return this._value;
+        },
+        input: function() {
+            return this._input;
+        },
+        set: function(value) {
+            this._value = Number(value);
+
+            return this;
+        },
+        add: function(value) {
+            var corrFactor = _.correctionFactor.call(null, this._value, value);
+
+            function cback(accum, curr, currI, O) {
+                return accum + Math.round(corrFactor * curr);
+            }
+
+            this._value = _.reduce([this._value, value], cback, 0) / corrFactor;
+
+            return this;
+        },
+        subtract: function(value) {
+            var corrFactor = _.correctionFactor.call(null, this._value, value);
+
+            function cback(accum, curr, currI, O) {
+                return accum - Math.round(corrFactor * curr);
+            }
+
+            this._value = _.reduce([value], cback, Math.round(this._value * corrFactor)) / corrFactor;
+
+            return this;
+        },
+        multiply: function(value) {
+            function cback(accum, curr, currI, O) {
+                var corrFactor = _.correctionFactor(accum, curr);
+                return Math.round(accum * corrFactor) * Math.round(curr * corrFactor) / Math.round(corrFactor * corrFactor);
+            }
+
+            this._value = _.reduce([this._value, value], cback, 1);
+
+            return this;
+        },
+        divide: function(value) {
+            function cback(accum, curr, currI, O) {
+                var corrFactor = _.correctionFactor(accum, curr);
+                return Math.round(accum * corrFactor) / Math.round(curr * corrFactor);
+            }
+
+            this._value = _.reduce([this._value, value], cback);
+
+            return this;
+        },
+        difference: function(value) {
+            return Math.abs(numeral(this._value).subtract(value).value());
+        }
+    };
+
+    /************************************
+        Default Locale && Format
+    ************************************/
+
+    numeral.register('locale', 'en', {
+        delimiters: {
+            thousands: ',',
+            decimal: '.'
+        },
+        abbreviations: {
+            thousand: 'k',
+            million: 'm',
+            billion: 'b',
+            trillion: 't'
+        },
+        ordinal: function(number) {
+            var b = number % 10;
+            return (~~(number % 100 / 10) === 1) ? 'th' :
+                (b === 1) ? 'st' :
+                (b === 2) ? 'nd' :
+                (b === 3) ? 'rd' : 'th';
+        },
+        currency: {
+            symbol: '$'
+        }
+    });
+
+    
+
+(function() {
+        numeral.register('format', 'bps', {
+            regexps: {
+                format: /(BPS)/,
+                unformat: /(BPS)/
+            },
+            format: function(value, format, roundingFunction) {
+                var space = numeral._.includes(format, ' BPS') ? ' ' : '',
+                    output;
+
+                value = value * 10000;
+
+                // check for space before BPS
+                format = format.replace(/\s?BPS/, '');
+
+                output = numeral._.numberToFormat(value, format, roundingFunction);
+
+                if (numeral._.includes(output, ')')) {
+                    output = output.split('');
+
+                    output.splice(-1, 0, space + 'BPS');
+
+                    output = output.join('');
+                } else {
+                    output = output + space + 'BPS';
+                }
+
+                return output;
+            },
+            unformat: function(string) {
+                return +(numeral._.stringToNumber(string) * 0.0001).toFixed(15);
+            }
+        });
+})();
+
+
+(function() {
+        var decimal = {
+            base: 1000,
+            suffixes: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+        },
+        binary = {
+            base: 1024,
+            suffixes: ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
+        };
+
+    var allSuffixes =  decimal.suffixes.concat(binary.suffixes.filter(function (item) {
+            return decimal.suffixes.indexOf(item) < 0;
+        }));
+        var unformatRegex = allSuffixes.join('|');
+        // Allow support for BPS (http://www.investopedia.com/terms/b/basispoint.asp)
+        unformatRegex = '(' + unformatRegex.replace('B', 'B(?!PS)') + ')';
+
+    numeral.register('format', 'bytes', {
+        regexps: {
+            format: /([0\s]i?b)/,
+            unformat: new RegExp(unformatRegex)
+        },
+        format: function(value, format, roundingFunction) {
+            var output,
+                bytes = numeral._.includes(format, 'ib') ? binary : decimal,
+                suffix = numeral._.includes(format, ' b') || numeral._.includes(format, ' ib') ? ' ' : '',
+                power,
+                min,
+                max;
+
+            // check for space before
+            format = format.replace(/\s?i?b/, '');
+
+            for (power = 0; power <= bytes.suffixes.length; power++) {
+                min = Math.pow(bytes.base, power);
+                max = Math.pow(bytes.base, power + 1);
+
+                if (value === null || value === 0 || value >= min && value < max) {
+                    suffix += bytes.suffixes[power];
+
+                    if (min > 0) {
+                        value = value / min;
+                    }
+
+                    break;
+                }
+            }
+
+            output = numeral._.numberToFormat(value, format, roundingFunction);
+
+            return output + suffix;
+        },
+        unformat: function(string) {
+            var value = numeral._.stringToNumber(string),
+                power,
+                bytesMultiplier;
+
+            if (value) {
+                for (power = decimal.suffixes.length - 1; power >= 0; power--) {
+                    if (numeral._.includes(string, decimal.suffixes[power])) {
+                        bytesMultiplier = Math.pow(decimal.base, power);
+
+                        break;
+                    }
+
+                    if (numeral._.includes(string, binary.suffixes[power])) {
+                        bytesMultiplier = Math.pow(binary.base, power);
+
+                        break;
+                    }
+                }
+
+                value *= (bytesMultiplier || 1);
+            }
+
+            return value;
+        }
+    });
+})();
+
+
+(function() {
+        numeral.register('format', 'currency', {
+        regexps: {
+            format: /(\$)/
+        },
+        format: function(value, format, roundingFunction) {
+            var locale = numeral.locales[numeral.options.currentLocale],
+                symbols = {
+                    before: format.match(/^([\+|\-|\(|\s|\$]*)/)[0],
+                    after: format.match(/([\+|\-|\)|\s|\$]*)$/)[0]
+                },
+                output,
+                symbol,
+                i;
+
+            // strip format of spaces and $
+            format = format.replace(/\s?\$\s?/, '');
+
+            // format the number
+            output = numeral._.numberToFormat(value, format, roundingFunction);
+
+            // update the before and after based on value
+            if (value >= 0) {
+                symbols.before = symbols.before.replace(/[\-\(]/, '');
+                symbols.after = symbols.after.replace(/[\-\)]/, '');
+            } else if (value < 0 && (!numeral._.includes(symbols.before, '-') && !numeral._.includes(symbols.before, '('))) {
+                symbols.before = '-' + symbols.before;
+            }
+
+            // loop through each before symbol
+            for (i = 0; i < symbols.before.length; i++) {
+                symbol = symbols.before[i];
+
+                switch (symbol) {
+                    case '$':
+                        output = numeral._.insert(output, locale.currency.symbol, i);
+                        break;
+                    case ' ':
+                        output = numeral._.insert(output, ' ', i + locale.currency.symbol.length - 1);
+                        break;
+                }
+            }
+
+            // loop through each after symbol
+            for (i = symbols.after.length - 1; i >= 0; i--) {
+                symbol = symbols.after[i];
+
+                switch (symbol) {
+                    case '$':
+                        output = i === symbols.after.length - 1 ? output + locale.currency.symbol : numeral._.insert(output, locale.currency.symbol, -(symbols.after.length - (1 + i)));
+                        break;
+                    case ' ':
+                        output = i === symbols.after.length - 1 ? output + ' ' : numeral._.insert(output, ' ', -(symbols.after.length - (1 + i) + locale.currency.symbol.length - 1));
+                        break;
+                }
+            }
+
+
+            return output;
+        }
+    });
+})();
+
+
+(function() {
+        numeral.register('format', 'exponential', {
+        regexps: {
+            format: /(e\+|e-)/,
+            unformat: /(e\+|e-)/
+        },
+        format: function(value, format, roundingFunction) {
+            var output,
+                exponential = typeof value === 'number' && !numeral._.isNaN(value) ? value.toExponential() : '0e+0',
+                parts = exponential.split('e');
+
+            format = format.replace(/e[\+|\-]{1}0/, '');
+
+            output = numeral._.numberToFormat(Number(parts[0]), format, roundingFunction);
+
+            return output + 'e' + parts[1];
+        },
+        unformat: function(string) {
+            var parts = numeral._.includes(string, 'e+') ? string.split('e+') : string.split('e-'),
+                value = Number(parts[0]),
+                power = Number(parts[1]);
+
+            power = numeral._.includes(string, 'e-') ? power *= -1 : power;
+
+            function cback(accum, curr, currI, O) {
+                var corrFactor = numeral._.correctionFactor(accum, curr),
+                    num = (accum * corrFactor) * (curr * corrFactor) / (corrFactor * corrFactor);
+                return num;
+            }
+
+            return numeral._.reduce([value, Math.pow(10, power)], cback, 1);
+        }
+    });
+})();
+
+
+(function() {
+        numeral.register('format', 'ordinal', {
+        regexps: {
+            format: /(o)/
+        },
+        format: function(value, format, roundingFunction) {
+            var locale = numeral.locales[numeral.options.currentLocale],
+                output,
+                ordinal = numeral._.includes(format, ' o') ? ' ' : '';
+
+            // check for space before
+            format = format.replace(/\s?o/, '');
+
+            ordinal += locale.ordinal(value);
+
+            output = numeral._.numberToFormat(value, format, roundingFunction);
+
+            return output + ordinal;
+        }
+    });
+})();
+
+
+(function() {
+        numeral.register('format', 'percentage', {
+        regexps: {
+            format: /(%)/,
+            unformat: /(%)/
+        },
+        format: function(value, format, roundingFunction) {
+            var space = numeral._.includes(format, ' %') ? ' ' : '',
+                output;
+
+            if (numeral.options.scalePercentBy100) {
+                value = value * 100;
+            }
+
+            // check for space before %
+            format = format.replace(/\s?\%/, '');
+
+            output = numeral._.numberToFormat(value, format, roundingFunction);
+
+            if (numeral._.includes(output, ')')) {
+                output = output.split('');
+
+                output.splice(-1, 0, space + '%');
+
+                output = output.join('');
+            } else {
+                output = output + space + '%';
+            }
+
+            return output;
+        },
+        unformat: function(string) {
+            var number = numeral._.stringToNumber(string);
+            if (numeral.options.scalePercentBy100) {
+                return number * 0.01;
+            }
+            return number;
+        }
+    });
+})();
+
+
+(function() {
+        numeral.register('format', 'time', {
+        regexps: {
+            format: /(:)/,
+            unformat: /(:)/
+        },
+        format: function(value, format, roundingFunction) {
+            var hours = Math.floor(value / 60 / 60),
+                minutes = Math.floor((value - (hours * 60 * 60)) / 60),
+                seconds = Math.round(value - (hours * 60 * 60) - (minutes * 60));
+
+            return hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
+        },
+        unformat: function(string) {
+            var timeArray = string.split(':'),
+                seconds = 0;
+
+            // turn hours and minutes into seconds and add them all up
+            if (timeArray.length === 3) {
+                // hours
+                seconds = seconds + (Number(timeArray[0]) * 60 * 60);
+                // minutes
+                seconds = seconds + (Number(timeArray[1]) * 60);
+                // seconds
+                seconds = seconds + Number(timeArray[2]);
+            } else if (timeArray.length === 2) {
+                // minutes
+                seconds = seconds + (Number(timeArray[0]) * 60);
+                // seconds
+                seconds = seconds + Number(timeArray[1]);
+            }
+            return Number(seconds);
+        }
+    });
+})();
+
+return numeral;
+}));
+
+
+/***/ }),
+
+/***/ 44:
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 45:
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+
+/***/ 46:
+/***/ (function(module, exports, __webpack_require__) {
+
+var tarjan = __webpack_require__(96);
+
+module.exports = function findCircuits(edges, cb) {
+    var circuits = []; // Output
+
+    var stack = [];
+    var blocked = [];
+    var B = {};
+    var Ak = [];
+    var s;
+
+    function unblock(u) {
+        blocked[u] = false;
+        if(B.hasOwnProperty(u)) {
+            Object.keys(B[u]).forEach(function(w) {
+                delete B[u][w];
+                if(blocked[w]) {unblock(w);}
+            });
+        }
+    }
+
+    function circuit(v) {
+        var found = false;
+
+        stack.push(v);
+        blocked[v] = true;
+
+        // L1
+        var i;
+        var w;
+        for(i = 0; i < Ak[v].length; i++) {
+            w = Ak[v][i];
+            if(w === s) {
+                output(s, stack);
+                found = true;
+            } else if(!blocked[w]) {
+                found = circuit(w);
+            }
+        }
+
+        // L2
+        if(found) {
+            unblock(v);
+        } else {
+            for(i = 0; i < Ak[v].length; i++) {
+                w = Ak[v][i];
+                var entry = B[w];
+
+                if(!entry) {
+                    entry = {};
+                    B[w] = entry;
+                }
+
+                entry[w] = true;
+            }
+        }
+        stack.pop();
+        return found;
+    }
+
+    function output(start, stack) {
+        var cycle = [].concat(stack).concat(start);
+        if(cb) {
+            cb(circuit);
+        } else {
+            circuits.push(cycle);
+        }
+    }
+
+    function subgraph(minId) {
+      // Remove edges with indice smaller than minId
+        for(var i = 0; i < edges.length; i++) {
+            if(i < minId) edges[i] = [];
+            edges[i] = edges[i].filter(function(i) {
+                return i >= minId;
+            });
+        }
+    }
+
+    function adjacencyStructureSCC(from) {
+        // Make subgraph starting from vertex minId
+        subgraph(from);
+        var g = edges;
+
+        // Find strongly connected components using Tarjan algorithm
+        var sccs = tarjan(g);
+
+        // Filter out trivial connected components (ie. made of one node)
+        var ccs = sccs.components.filter(function(scc) {
+            return scc.length > 1;
+        });
+
+        // Find least vertex
+        var leastVertex = Infinity;
+        var leastVertexComponent;
+        for(var i = 0; i < ccs.length; i++) {
+            for(var j = 0; j < ccs[i].length; j++) {
+                if(ccs[i][j] < leastVertex) {
+                    leastVertex = ccs[i][j];
+                    leastVertexComponent = i;
+                }
+            }
+        }
+
+        var cc = ccs[leastVertexComponent];
+
+        if(!cc) return false;
+
+        // Return the adjacency list of first component
+        var adjList = edges.map(function(l, index) {
+            if(cc.indexOf(index) === -1) return [];
+            return l.filter(function(i) {
+                return cc.indexOf(i) !== -1;
+            });
+        });
+
+        return {
+            leastVertex: leastVertex,
+            adjList: adjList
+        };
+    }
+
+    s = 0;
+    var n = edges.length;
+    while(s < n) {
+        // find strong component with least vertex in
+        // subgraph starting from vertex `s`
+        var p = adjacencyStructureSCC(s);
+
+        // Its least vertex
+        s = p.leastVertex;
+        // Its adjacency list
+        Ak = p.adjList;
+
+        if(Ak) {
+            for(var i = 0; i < Ak.length; i++) {
+                for(var j = 0; j < Ak[i].length; j++) {
+                    var vertexId = Ak[i][j];
+                    blocked[+vertexId] = false;
+                    B[vertexId] = {};
+                }
+            }
+            circuit(s);
+            s = s + 1;
+        } else {
+            s = n;
+        }
+
+    }
+
+    if(cb) {
+        return;
+    } else {
+        return circuits;
+    }
+};
+
+
+/***/ }),
+
+/***/ 47:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _pathArrows = __webpack_require__(97);
+
+Object.defineProperty(exports, "pathArrows", {
+  enumerable: true,
+  get: function () {
+    return _interopRequireDefault(_pathArrows).default;
+  }
+});
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ }),
+
+/***/ 48:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ sankeyRenderer; });
+
+// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
+var lodash = __webpack_require__(0);
+var lodash_default = /*#__PURE__*/__webpack_require__.n(lodash);
+
+// EXTERNAL MODULE: ./node_modules/numeral/numeral.js
+var numeral = __webpack_require__(4);
+var numeral_default = /*#__PURE__*/__webpack_require__.n(numeral);
+
+// CONCATENATED MODULE: ./node_modules/d3/dist/package.js
+var package_name = "d3";
+var version = "6.2.0";
+var description = "Data-Driven Documents";
+var keywords = ["dom","visualization","svg","animation","canvas"];
+var homepage = "https://d3js.org";
+var license = "BSD-3-Clause";
+var author = {"name":"Mike Bostock","url":"https://bost.ocks.org/mike"};
+var main = "dist/d3.node.js";
+var unpkg = "dist/d3.min.js";
+var jsdelivr = "dist/d3.min.js";
+var package_module = "index.js";
+var repository = {"type":"git","url":"https://github.com/d3/d3.git"};
+var files = ["dist/**/*.js","index.js"];
+var scripts = {"pretest":"rimraf dist && mkdir dist && json2module package.json > dist/package.js && rollup -c","test":"tape 'test/**/*-test.js'","prepublishOnly":"yarn test","postpublish":"git push && git push --tags && cd ../d3.github.com && git pull && cp ../d3/dist/d3.js d3.v${npm_package_version%%.*}.js && cp ../d3/dist/d3.min.js d3.v${npm_package_version%%.*}.min.js && git add d3.v${npm_package_version%%.*}.js d3.v${npm_package_version%%.*}.min.js && git commit -m \"d3 ${npm_package_version}\" && git push && cd - && zip -j dist/d3.zip -- LICENSE README.md API.md CHANGES.md dist/d3.js dist/d3.min.js"};
+var devDependencies = {"json2module":"0.0","rimraf":"3","rollup":"2","rollup-plugin-ascii":"0.0","rollup-plugin-node-resolve":"5","rollup-plugin-terser":"7","tape":"4","tape-await":"0.1"};
+var dependencies = {"d3-array":"2","d3-axis":"2","d3-brush":"2","d3-chord":"2","d3-color":"2","d3-contour":"2","d3-delaunay":"5","d3-dispatch":"2","d3-drag":"2","d3-dsv":"2","d3-ease":"2","d3-fetch":"2","d3-force":"2","d3-format":"2","d3-geo":"2","d3-hierarchy":"2","d3-interpolate":"2","d3-path":"2","d3-polygon":"2","d3-quadtree":"2","d3-random":"2","d3-scale":"3","d3-scale-chromatic":"2","d3-selection":"2","d3-shape":"2","d3-time":"2","d3-time-format":"3","d3-timer":"2","d3-transition":"2","d3-zoom":"2"};
+
+// CONCATENATED MODULE: ./node_modules/d3-dispatch/src/dispatch.js
+var noop = {value: () => {}};
+
+function dispatch() {
+  for (var i = 0, n = arguments.length, _ = {}, t; i < n; ++i) {
+    if (!(t = arguments[i] + "") || (t in _) || /[\s.]/.test(t)) throw new Error("illegal type: " + t);
+    _[t] = [];
+  }
+  return new Dispatch(_);
+}
+
+function Dispatch(_) {
+  this._ = _;
+}
+
+function parseTypenames(typenames, types) {
+  return typenames.trim().split(/^|\s+/).map(function(t) {
+    var name = "", i = t.indexOf(".");
+    if (i >= 0) name = t.slice(i + 1), t = t.slice(0, i);
+    if (t && !types.hasOwnProperty(t)) throw new Error("unknown type: " + t);
+    return {type: t, name: name};
+  });
+}
+
+Dispatch.prototype = dispatch.prototype = {
+  constructor: Dispatch,
+  on: function(typename, callback) {
+    var _ = this._,
+        T = parseTypenames(typename + "", _),
+        t,
+        i = -1,
+        n = T.length;
+
+    // If no callback was specified, return the callback of the given type and name.
+    if (arguments.length < 2) {
+      while (++i < n) if ((t = (typename = T[i]).type) && (t = get(_[t], typename.name))) return t;
+      return;
+    }
+
+    // If a type was specified, set the callback for the given type and name.
+    // Otherwise, if a null callback was specified, remove callbacks of the given name.
+    if (callback != null && typeof callback !== "function") throw new Error("invalid callback: " + callback);
+    while (++i < n) {
+      if (t = (typename = T[i]).type) _[t] = set(_[t], typename.name, callback);
+      else if (callback == null) for (t in _) _[t] = set(_[t], typename.name, null);
+    }
+
+    return this;
+  },
+  copy: function() {
+    var copy = {}, _ = this._;
+    for (var t in _) copy[t] = _[t].slice();
+    return new Dispatch(copy);
+  },
+  call: function(type, that) {
+    if ((n = arguments.length - 2) > 0) for (var args = new Array(n), i = 0, n, t; i < n; ++i) args[i] = arguments[i + 2];
+    if (!this._.hasOwnProperty(type)) throw new Error("unknown type: " + type);
+    for (t = this._[type], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
+  },
+  apply: function(type, that, args) {
+    if (!this._.hasOwnProperty(type)) throw new Error("unknown type: " + type);
+    for (var t = this._[type], i = 0, n = t.length; i < n; ++i) t[i].value.apply(that, args);
+  }
+};
+
+function get(type, name) {
+  for (var i = 0, n = type.length, c; i < n; ++i) {
+    if ((c = type[i]).name === name) {
+      return c.value;
+    }
+  }
+}
+
+function set(type, name, callback) {
+  for (var i = 0, n = type.length; i < n; ++i) {
+    if (type[i].name === name) {
+      type[i] = noop, type = type.slice(0, i).concat(type.slice(i + 1));
+      break;
+    }
+  }
+  if (callback != null) type.push({name: name, value: callback});
+  return type;
+}
+
+/* harmony default export */ var src_dispatch = (dispatch);
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selector.js
+function none() {}
+
+/* harmony default export */ var src_selector = (function(selector) {
+  return selector == null ? none : function() {
+    return this.querySelector(selector);
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/select.js
+
+
+
+/* harmony default export */ var selection_select = (function(select) {
+  if (typeof select !== "function") select = src_selector(select);
+
+  for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
+    for (var group = groups[j], n = group.length, subgroup = subgroups[j] = new Array(n), node, subnode, i = 0; i < n; ++i) {
+      if ((node = group[i]) && (subnode = select.call(node, node.__data__, i, group))) {
+        if ("__data__" in node) subnode.__data__ = node.__data__;
+        subgroup[i] = subnode;
+      }
+    }
+  }
+
+  return new Selection(subgroups, this._parents);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/array.js
+/* harmony default export */ var src_array = (function(x) {
+  return typeof x === "object" && "length" in x
+    ? x // Array, TypedArray, NodeList, array-like
+    : Array.from(x); // Map, Set, iterable, string, or anything else
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selectorAll.js
+function selectorAll_empty() {
+  return [];
+}
+
+/* harmony default export */ var selectorAll = (function(selector) {
+  return selector == null ? selectorAll_empty : function() {
+    return this.querySelectorAll(selector);
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/selectAll.js
+
+
+
+
+function arrayAll(select) {
+  return function() {
+    var group = select.apply(this, arguments);
+    return group == null ? [] : src_array(group);
+  };
+}
+
+/* harmony default export */ var selectAll = (function(select) {
+  if (typeof select === "function") select = arrayAll(select);
+  else select = selectorAll(select);
+
+  for (var groups = this._groups, m = groups.length, subgroups = [], parents = [], j = 0; j < m; ++j) {
+    for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
+      if (node = group[i]) {
+        subgroups.push(select.call(node, node.__data__, i, group));
+        parents.push(node);
+      }
+    }
+  }
+
+  return new Selection(subgroups, parents);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/matcher.js
+/* harmony default export */ var matcher = (function(selector) {
+  return function() {
+    return this.matches(selector);
+  };
+});
+
+function childMatcher(selector) {
+  return function(node) {
+    return node.matches(selector);
+  };
+}
+
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/selectChild.js
+
+
+var find = Array.prototype.find;
+
+function childFind(match) {
+  return function() {
+    return find.call(this.children, match);
+  };
+}
+
+function childFirst() {
+  return this.firstElementChild;
+}
+
+/* harmony default export */ var selectChild = (function(match) {
+  return this.select(match == null ? childFirst
+      : childFind(typeof match === "function" ? match : childMatcher(match)));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/selectChildren.js
+
+
+var selectChildren_filter = Array.prototype.filter;
+
+function selectChildren_children() {
+  return this.children;
+}
+
+function childrenFilter(match) {
+  return function() {
+    return selectChildren_filter.call(this.children, match);
+  };
+}
+
+/* harmony default export */ var selectChildren = (function(match) {
+  return this.selectAll(match == null ? selectChildren_children
+      : childrenFilter(typeof match === "function" ? match : childMatcher(match)));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/filter.js
+
+
+
+/* harmony default export */ var selection_filter = (function(match) {
+  if (typeof match !== "function") match = matcher(match);
+
+  for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
+    for (var group = groups[j], n = group.length, subgroup = subgroups[j] = [], node, i = 0; i < n; ++i) {
+      if ((node = group[i]) && match.call(node, node.__data__, i, group)) {
+        subgroup.push(node);
+      }
+    }
+  }
+
+  return new Selection(subgroups, this._parents);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/sparse.js
+/* harmony default export */ var sparse = (function(update) {
+  return new Array(update.length);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/enter.js
+
+
+
+/* harmony default export */ var selection_enter = (function() {
+  return new Selection(this._enter || this._groups.map(sparse), this._parents);
+});
+
+function EnterNode(parent, datum) {
+  this.ownerDocument = parent.ownerDocument;
+  this.namespaceURI = parent.namespaceURI;
+  this._next = null;
+  this._parent = parent;
+  this.__data__ = datum;
+}
+
+EnterNode.prototype = {
+  constructor: EnterNode,
+  appendChild: function(child) { return this._parent.insertBefore(child, this._next); },
+  insertBefore: function(child, next) { return this._parent.insertBefore(child, next); },
+  querySelector: function(selector) { return this._parent.querySelector(selector); },
+  querySelectorAll: function(selector) { return this._parent.querySelectorAll(selector); }
+};
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/constant.js
+/* harmony default export */ var constant = (function(x) {
+  return function() {
+    return x;
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/data.js
+
+
+
+
+
+function bindIndex(parent, group, enter, update, exit, data) {
+  var i = 0,
+      node,
+      groupLength = group.length,
+      dataLength = data.length;
+
+  // Put any non-null nodes that fit into update.
+  // Put any null nodes into enter.
+  // Put any remaining data into enter.
+  for (; i < dataLength; ++i) {
+    if (node = group[i]) {
+      node.__data__ = data[i];
+      update[i] = node;
+    } else {
+      enter[i] = new EnterNode(parent, data[i]);
+    }
+  }
+
+  // Put any non-null nodes that don’t fit into exit.
+  for (; i < groupLength; ++i) {
+    if (node = group[i]) {
+      exit[i] = node;
+    }
+  }
+}
+
+function bindKey(parent, group, enter, update, exit, data, key) {
+  var i,
+      node,
+      nodeByKeyValue = new Map,
+      groupLength = group.length,
+      dataLength = data.length,
+      keyValues = new Array(groupLength),
+      keyValue;
+
+  // Compute the key for each node.
+  // If multiple nodes have the same key, the duplicates are added to exit.
+  for (i = 0; i < groupLength; ++i) {
+    if (node = group[i]) {
+      keyValues[i] = keyValue = key.call(node, node.__data__, i, group) + "";
+      if (nodeByKeyValue.has(keyValue)) {
+        exit[i] = node;
+      } else {
+        nodeByKeyValue.set(keyValue, node);
+      }
+    }
+  }
+
+  // Compute the key for each datum.
+  // If there a node associated with this key, join and add it to update.
+  // If there is not (or the key is a duplicate), add it to enter.
+  for (i = 0; i < dataLength; ++i) {
+    keyValue = key.call(parent, data[i], i, data) + "";
+    if (node = nodeByKeyValue.get(keyValue)) {
+      update[i] = node;
+      node.__data__ = data[i];
+      nodeByKeyValue.delete(keyValue);
+    } else {
+      enter[i] = new EnterNode(parent, data[i]);
+    }
+  }
+
+  // Add any remaining nodes that were not bound to data to exit.
+  for (i = 0; i < groupLength; ++i) {
+    if ((node = group[i]) && (nodeByKeyValue.get(keyValues[i]) === node)) {
+      exit[i] = node;
+    }
+  }
+}
+
+function datum(node) {
+  return node.__data__;
+}
+
+/* harmony default export */ var selection_data = (function(value, key) {
+  if (!arguments.length) return Array.from(this, datum);
+
+  var bind = key ? bindKey : bindIndex,
+      parents = this._parents,
+      groups = this._groups;
+
+  if (typeof value !== "function") value = constant(value);
+
+  for (var m = groups.length, update = new Array(m), enter = new Array(m), exit = new Array(m), j = 0; j < m; ++j) {
+    var parent = parents[j],
+        group = groups[j],
+        groupLength = group.length,
+        data = src_array(value.call(parent, parent && parent.__data__, j, parents)),
+        dataLength = data.length,
+        enterGroup = enter[j] = new Array(dataLength),
+        updateGroup = update[j] = new Array(dataLength),
+        exitGroup = exit[j] = new Array(groupLength);
+
+    bind(parent, group, enterGroup, updateGroup, exitGroup, data, key);
+
+    // Now connect the enter nodes to their following update node, such that
+    // appendChild can insert the materialized enter node before this node,
+    // rather than at the end of the parent node.
+    for (var i0 = 0, i1 = 0, previous, next; i0 < dataLength; ++i0) {
+      if (previous = enterGroup[i0]) {
+        if (i0 >= i1) i1 = i0 + 1;
+        while (!(next = updateGroup[i1]) && ++i1 < dataLength);
+        previous._next = next || null;
+      }
+    }
+  }
+
+  update = new Selection(update, parents);
+  update._enter = enter;
+  update._exit = exit;
+  return update;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/exit.js
+
+
+
+/* harmony default export */ var selection_exit = (function() {
+  return new Selection(this._exit || this._groups.map(sparse), this._parents);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/join.js
+/* harmony default export */ var join = (function(onenter, onupdate, onexit) {
+  var enter = this.enter(), update = this, exit = this.exit();
+  enter = typeof onenter === "function" ? onenter(enter) : enter.append(onenter + "");
+  if (onupdate != null) update = onupdate(update);
+  if (onexit == null) exit.remove(); else onexit(exit);
+  return enter && update ? enter.merge(update).order() : update;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/merge.js
+
+
+/* harmony default export */ var selection_merge = (function(selection) {
+  if (!(selection instanceof Selection)) throw new Error("invalid merge");
+
+  for (var groups0 = this._groups, groups1 = selection._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
+    for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge = merges[j] = new Array(n), node, i = 0; i < n; ++i) {
+      if (node = group0[i] || group1[i]) {
+        merge[i] = node;
+      }
+    }
+  }
+
+  for (; j < m0; ++j) {
+    merges[j] = groups0[j];
+  }
+
+  return new Selection(merges, this._parents);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/order.js
+/* harmony default export */ var order = (function() {
+
+  for (var groups = this._groups, j = -1, m = groups.length; ++j < m;) {
+    for (var group = groups[j], i = group.length - 1, next = group[i], node; --i >= 0;) {
+      if (node = group[i]) {
+        if (next && node.compareDocumentPosition(next) ^ 4) next.parentNode.insertBefore(node, next);
+        next = node;
+      }
+    }
+  }
+
+  return this;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/sort.js
+
+
+/* harmony default export */ var sort = (function(compare) {
+  if (!compare) compare = ascending;
+
+  function compareNode(a, b) {
+    return a && b ? compare(a.__data__, b.__data__) : !a - !b;
+  }
+
+  for (var groups = this._groups, m = groups.length, sortgroups = new Array(m), j = 0; j < m; ++j) {
+    for (var group = groups[j], n = group.length, sortgroup = sortgroups[j] = new Array(n), node, i = 0; i < n; ++i) {
+      if (node = group[i]) {
+        sortgroup[i] = node;
+      }
+    }
+    sortgroup.sort(compareNode);
+  }
+
+  return new Selection(sortgroups, this._parents).order();
+});
+
+function ascending(a, b) {
+  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/call.js
+/* harmony default export */ var call = (function() {
+  var callback = arguments[0];
+  arguments[0] = this;
+  callback.apply(null, arguments);
+  return this;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/nodes.js
+/* harmony default export */ var selection_nodes = (function() {
+  return Array.from(this);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/node.js
+/* harmony default export */ var selection_node = (function() {
+
+  for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j) {
+    for (var group = groups[j], i = 0, n = group.length; i < n; ++i) {
+      var node = group[i];
+      if (node) return node;
+    }
+  }
+
+  return null;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/size.js
+/* harmony default export */ var selection_size = (function() {
+  let size = 0;
+  for (const node of this) ++size; // eslint-disable-line no-unused-vars
+  return size;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/empty.js
+/* harmony default export */ var selection_empty = (function() {
+  return !this.node();
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/each.js
+/* harmony default export */ var each = (function(callback) {
+
+  for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j) {
+    for (var group = groups[j], i = 0, n = group.length, node; i < n; ++i) {
+      if (node = group[i]) callback.call(node, node.__data__, i, group);
+    }
+  }
+
+  return this;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/namespaces.js
+var xhtml = "http://www.w3.org/1999/xhtml";
+
+/* harmony default export */ var namespaces = ({
+  svg: "http://www.w3.org/2000/svg",
+  xhtml: xhtml,
+  xlink: "http://www.w3.org/1999/xlink",
+  xml: "http://www.w3.org/XML/1998/namespace",
+  xmlns: "http://www.w3.org/2000/xmlns/"
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/namespace.js
+
+
+/* harmony default export */ var namespace = (function(name) {
+  var prefix = name += "", i = prefix.indexOf(":");
+  if (i >= 0 && (prefix = name.slice(0, i)) !== "xmlns") name = name.slice(i + 1);
+  return namespaces.hasOwnProperty(prefix) ? {space: namespaces[prefix], local: name} : name; // eslint-disable-line no-prototype-builtins
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/attr.js
+
+
+function attrRemove(name) {
+  return function() {
+    this.removeAttribute(name);
+  };
+}
+
+function attrRemoveNS(fullname) {
+  return function() {
+    this.removeAttributeNS(fullname.space, fullname.local);
+  };
+}
+
+function attrConstant(name, value) {
+  return function() {
+    this.setAttribute(name, value);
+  };
+}
+
+function attrConstantNS(fullname, value) {
+  return function() {
+    this.setAttributeNS(fullname.space, fullname.local, value);
+  };
+}
+
+function attrFunction(name, value) {
+  return function() {
+    var v = value.apply(this, arguments);
+    if (v == null) this.removeAttribute(name);
+    else this.setAttribute(name, v);
+  };
+}
+
+function attrFunctionNS(fullname, value) {
+  return function() {
+    var v = value.apply(this, arguments);
+    if (v == null) this.removeAttributeNS(fullname.space, fullname.local);
+    else this.setAttributeNS(fullname.space, fullname.local, v);
+  };
+}
+
+/* harmony default export */ var attr = (function(name, value) {
+  var fullname = namespace(name);
+
+  if (arguments.length < 2) {
+    var node = this.node();
+    return fullname.local
+        ? node.getAttributeNS(fullname.space, fullname.local)
+        : node.getAttribute(fullname);
+  }
+
+  return this.each((value == null
+      ? (fullname.local ? attrRemoveNS : attrRemove) : (typeof value === "function"
+      ? (fullname.local ? attrFunctionNS : attrFunction)
+      : (fullname.local ? attrConstantNS : attrConstant)))(fullname, value));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/window.js
+/* harmony default export */ var src_window = (function(node) {
+  return (node.ownerDocument && node.ownerDocument.defaultView) // node is a Node
+      || (node.document && node) // node is a Window
+      || node.defaultView; // node is a Document
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/style.js
+
+
+function styleRemove(name) {
+  return function() {
+    this.style.removeProperty(name);
+  };
+}
+
+function styleConstant(name, value, priority) {
+  return function() {
+    this.style.setProperty(name, value, priority);
+  };
+}
+
+function styleFunction(name, value, priority) {
+  return function() {
+    var v = value.apply(this, arguments);
+    if (v == null) this.style.removeProperty(name);
+    else this.style.setProperty(name, v, priority);
+  };
+}
+
+/* harmony default export */ var style = (function(name, value, priority) {
+  return arguments.length > 1
+      ? this.each((value == null
+            ? styleRemove : typeof value === "function"
+            ? styleFunction
+            : styleConstant)(name, value, priority == null ? "" : priority))
+      : styleValue(this.node(), name);
+});
+
+function styleValue(node, name) {
+  return node.style.getPropertyValue(name)
+      || src_window(node).getComputedStyle(node, null).getPropertyValue(name);
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/property.js
+function propertyRemove(name) {
+  return function() {
+    delete this[name];
+  };
+}
+
+function propertyConstant(name, value) {
+  return function() {
+    this[name] = value;
+  };
+}
+
+function propertyFunction(name, value) {
+  return function() {
+    var v = value.apply(this, arguments);
+    if (v == null) delete this[name];
+    else this[name] = v;
+  };
+}
+
+/* harmony default export */ var property = (function(name, value) {
+  return arguments.length > 1
+      ? this.each((value == null
+          ? propertyRemove : typeof value === "function"
+          ? propertyFunction
+          : propertyConstant)(name, value))
+      : this.node()[name];
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/classed.js
+function classArray(string) {
+  return string.trim().split(/^|\s+/);
+}
+
+function classList(node) {
+  return node.classList || new ClassList(node);
+}
+
+function ClassList(node) {
+  this._node = node;
+  this._names = classArray(node.getAttribute("class") || "");
+}
+
+ClassList.prototype = {
+  add: function(name) {
+    var i = this._names.indexOf(name);
+    if (i < 0) {
+      this._names.push(name);
+      this._node.setAttribute("class", this._names.join(" "));
+    }
+  },
+  remove: function(name) {
+    var i = this._names.indexOf(name);
+    if (i >= 0) {
+      this._names.splice(i, 1);
+      this._node.setAttribute("class", this._names.join(" "));
+    }
+  },
+  contains: function(name) {
+    return this._names.indexOf(name) >= 0;
+  }
+};
+
+function classedAdd(node, names) {
+  var list = classList(node), i = -1, n = names.length;
+  while (++i < n) list.add(names[i]);
+}
+
+function classedRemove(node, names) {
+  var list = classList(node), i = -1, n = names.length;
+  while (++i < n) list.remove(names[i]);
+}
+
+function classedTrue(names) {
+  return function() {
+    classedAdd(this, names);
+  };
+}
+
+function classedFalse(names) {
+  return function() {
+    classedRemove(this, names);
+  };
+}
+
+function classedFunction(names, value) {
+  return function() {
+    (value.apply(this, arguments) ? classedAdd : classedRemove)(this, names);
+  };
+}
+
+/* harmony default export */ var classed = (function(name, value) {
+  var names = classArray(name + "");
+
+  if (arguments.length < 2) {
+    var list = classList(this.node()), i = -1, n = names.length;
+    while (++i < n) if (!list.contains(names[i])) return false;
+    return true;
+  }
+
+  return this.each((typeof value === "function"
+      ? classedFunction : value
+      ? classedTrue
+      : classedFalse)(names, value));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/text.js
+function textRemove() {
+  this.textContent = "";
+}
+
+function textConstant(value) {
+  return function() {
+    this.textContent = value;
+  };
+}
+
+function textFunction(value) {
+  return function() {
+    var v = value.apply(this, arguments);
+    this.textContent = v == null ? "" : v;
+  };
+}
+
+/* harmony default export */ var selection_text = (function(value) {
+  return arguments.length
+      ? this.each(value == null
+          ? textRemove : (typeof value === "function"
+          ? textFunction
+          : textConstant)(value))
+      : this.node().textContent;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/html.js
+function htmlRemove() {
+  this.innerHTML = "";
+}
+
+function htmlConstant(value) {
+  return function() {
+    this.innerHTML = value;
+  };
+}
+
+function htmlFunction(value) {
+  return function() {
+    var v = value.apply(this, arguments);
+    this.innerHTML = v == null ? "" : v;
+  };
+}
+
+/* harmony default export */ var html = (function(value) {
+  return arguments.length
+      ? this.each(value == null
+          ? htmlRemove : (typeof value === "function"
+          ? htmlFunction
+          : htmlConstant)(value))
+      : this.node().innerHTML;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/raise.js
+function raise() {
+  if (this.nextSibling) this.parentNode.appendChild(this);
+}
+
+/* harmony default export */ var selection_raise = (function() {
+  return this.each(raise);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/lower.js
+function lower() {
+  if (this.previousSibling) this.parentNode.insertBefore(this, this.parentNode.firstChild);
+}
+
+/* harmony default export */ var selection_lower = (function() {
+  return this.each(lower);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/creator.js
+
+
+
+function creatorInherit(name) {
+  return function() {
+    var document = this.ownerDocument,
+        uri = this.namespaceURI;
+    return uri === xhtml && document.documentElement.namespaceURI === xhtml
+        ? document.createElement(name)
+        : document.createElementNS(uri, name);
+  };
+}
+
+function creatorFixed(fullname) {
+  return function() {
+    return this.ownerDocument.createElementNS(fullname.space, fullname.local);
+  };
+}
+
+/* harmony default export */ var creator = (function(name) {
+  var fullname = namespace(name);
+  return (fullname.local
+      ? creatorFixed
+      : creatorInherit)(fullname);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/append.js
+
+
+/* harmony default export */ var append = (function(name) {
+  var create = typeof name === "function" ? name : creator(name);
+  return this.select(function() {
+    return this.appendChild(create.apply(this, arguments));
+  });
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/insert.js
+
+
+
+function constantNull() {
+  return null;
+}
+
+/* harmony default export */ var insert = (function(name, before) {
+  var create = typeof name === "function" ? name : creator(name),
+      select = before == null ? constantNull : typeof before === "function" ? before : src_selector(before);
+  return this.select(function() {
+    return this.insertBefore(create.apply(this, arguments), select.apply(this, arguments) || null);
+  });
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/remove.js
+function remove_remove() {
+  var parent = this.parentNode;
+  if (parent) parent.removeChild(this);
+}
+
+/* harmony default export */ var selection_remove = (function() {
+  return this.each(remove_remove);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/clone.js
+function selection_cloneShallow() {
+  var clone = this.cloneNode(false), parent = this.parentNode;
+  return parent ? parent.insertBefore(clone, this.nextSibling) : clone;
+}
+
+function selection_cloneDeep() {
+  var clone = this.cloneNode(true), parent = this.parentNode;
+  return parent ? parent.insertBefore(clone, this.nextSibling) : clone;
+}
+
+/* harmony default export */ var clone = (function(deep) {
+  return this.select(deep ? selection_cloneDeep : selection_cloneShallow);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/datum.js
+/* harmony default export */ var selection_datum = (function(value) {
+  return arguments.length
+      ? this.property("__data__", value)
+      : this.node().__data__;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/on.js
+function contextListener(listener) {
+  return function(event) {
+    listener.call(this, event, this.__data__);
+  };
+}
+
+function on_parseTypenames(typenames) {
+  return typenames.trim().split(/^|\s+/).map(function(t) {
+    var name = "", i = t.indexOf(".");
+    if (i >= 0) name = t.slice(i + 1), t = t.slice(0, i);
+    return {type: t, name: name};
+  });
+}
+
+function onRemove(typename) {
+  return function() {
+    var on = this.__on;
+    if (!on) return;
+    for (var j = 0, i = -1, m = on.length, o; j < m; ++j) {
+      if (o = on[j], (!typename.type || o.type === typename.type) && o.name === typename.name) {
+        this.removeEventListener(o.type, o.listener, o.options);
+      } else {
+        on[++i] = o;
+      }
+    }
+    if (++i) on.length = i;
+    else delete this.__on;
+  };
+}
+
+function onAdd(typename, value, options) {
+  return function() {
+    var on = this.__on, o, listener = contextListener(value);
+    if (on) for (var j = 0, m = on.length; j < m; ++j) {
+      if ((o = on[j]).type === typename.type && o.name === typename.name) {
+        this.removeEventListener(o.type, o.listener, o.options);
+        this.addEventListener(o.type, o.listener = listener, o.options = options);
+        o.value = value;
+        return;
+      }
+    }
+    this.addEventListener(typename.type, listener, options);
+    o = {type: typename.type, name: typename.name, value: value, listener: listener, options: options};
+    if (!on) this.__on = [o];
+    else on.push(o);
+  };
+}
+
+/* harmony default export */ var selection_on = (function(typename, value, options) {
+  var typenames = on_parseTypenames(typename + ""), i, n = typenames.length, t;
+
+  if (arguments.length < 2) {
+    var on = this.node().__on;
+    if (on) for (var j = 0, m = on.length, o; j < m; ++j) {
+      for (i = 0, o = on[j]; i < n; ++i) {
+        if ((t = typenames[i]).type === o.type && t.name === o.name) {
+          return o.value;
+        }
+      }
+    }
+    return;
+  }
+
+  on = value ? onAdd : onRemove;
+  for (i = 0; i < n; ++i) this.each(on(typenames[i], value, options));
+  return this;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/dispatch.js
+
+
+function dispatchEvent(node, type, params) {
+  var window = src_window(node),
+      event = window.CustomEvent;
+
+  if (typeof event === "function") {
+    event = new event(type, params);
+  } else {
+    event = window.document.createEvent("Event");
+    if (params) event.initEvent(type, params.bubbles, params.cancelable), event.detail = params.detail;
+    else event.initEvent(type, false, false);
+  }
+
+  node.dispatchEvent(event);
+}
+
+function dispatchConstant(type, params) {
+  return function() {
+    return dispatchEvent(this, type, params);
+  };
+}
+
+function dispatchFunction(type, params) {
+  return function() {
+    return dispatchEvent(this, type, params.apply(this, arguments));
+  };
+}
+
+/* harmony default export */ var selection_dispatch = (function(type, params) {
+  return this.each((typeof params === "function"
+      ? dispatchFunction
+      : dispatchConstant)(type, params));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/iterator.js
+/* harmony default export */ var iterator = (function*() {
+  for (var groups = this._groups, j = 0, m = groups.length; j < m; ++j) {
+    for (var group = groups[j], i = 0, n = group.length, node; i < n; ++i) {
+      if (node = group[i]) yield node;
+    }
+  }
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selection/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var selection_root = [null];
+
+function Selection(groups, parents) {
+  this._groups = groups;
+  this._parents = parents;
+}
+
+function selection_selection() {
+  return new Selection([[document.documentElement]], selection_root);
+}
+
+function selection_selection_selection() {
+  return this;
+}
+
+Selection.prototype = selection_selection.prototype = {
+  constructor: Selection,
+  select: selection_select,
+  selectAll: selectAll,
+  selectChild: selectChild,
+  selectChildren: selectChildren,
+  filter: selection_filter,
+  data: selection_data,
+  enter: selection_enter,
+  exit: selection_exit,
+  join: join,
+  merge: selection_merge,
+  selection: selection_selection_selection,
+  order: order,
+  sort: sort,
+  call: call,
+  nodes: selection_nodes,
+  node: selection_node,
+  size: selection_size,
+  empty: selection_empty,
+  each: each,
+  attr: attr,
+  style: style,
+  property: property,
+  classed: classed,
+  text: selection_text,
+  html: html,
+  raise: selection_raise,
+  lower: selection_lower,
+  append: append,
+  insert: insert,
+  remove: selection_remove,
+  clone: clone,
+  datum: selection_datum,
+  on: selection_on,
+  dispatch: selection_dispatch,
+  [Symbol.iterator]: iterator
+};
+
+/* harmony default export */ var src_selection = (selection_selection);
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/select.js
+
+
+/* harmony default export */ var src_select = (function(selector) {
+  return typeof selector === "string"
+      ? new Selection([[document.querySelector(selector)]], [document.documentElement])
+      : new Selection([[selector]], selection_root);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-drag/src/noevent.js
+function nopropagation(event) {
+  event.stopImmediatePropagation();
+}
+
+/* harmony default export */ var noevent = (function(event) {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-drag/src/nodrag.js
+
+
+
+/* harmony default export */ var nodrag = (function(view) {
+  var root = view.document.documentElement,
+      selection = src_select(view).on("dragstart.drag", noevent, true);
+  if ("onselectstart" in root) {
+    selection.on("selectstart.drag", noevent, true);
+  } else {
+    root.__noselect = root.style.MozUserSelect;
+    root.style.MozUserSelect = "none";
+  }
+});
+
+function yesdrag(view, noclick) {
+  var root = view.document.documentElement,
+      selection = src_select(view).on("dragstart.drag", null);
+  if (noclick) {
+    selection.on("click.drag", noevent, true);
+    setTimeout(function() { selection.on("click.drag", null); }, 0);
+  }
+  if ("onselectstart" in root) {
+    selection.on("selectstart.drag", null);
+  } else {
+    root.style.MozUserSelect = root.__noselect;
+    delete root.__noselect;
+  }
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-color/src/define.js
+/* harmony default export */ var define = (function(constructor, factory, prototype) {
+  constructor.prototype = factory.prototype = prototype;
+  prototype.constructor = constructor;
+});
+
+function extend(parent, definition) {
+  var prototype = Object.create(parent.prototype);
+  for (var key in definition) prototype[key] = definition[key];
+  return prototype;
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-color/src/color.js
+
+
+function Color() {}
+
+var darker = 0.7;
+var brighter = 1 / darker;
+
+var reI = "\\s*([+-]?\\d+)\\s*",
+    reN = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)\\s*",
+    reP = "\\s*([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)%\\s*",
+    reHex = /^#([0-9a-f]{3,8})$/,
+    reRgbInteger = new RegExp("^rgb\\(" + [reI, reI, reI] + "\\)$"),
+    reRgbPercent = new RegExp("^rgb\\(" + [reP, reP, reP] + "\\)$"),
+    reRgbaInteger = new RegExp("^rgba\\(" + [reI, reI, reI, reN] + "\\)$"),
+    reRgbaPercent = new RegExp("^rgba\\(" + [reP, reP, reP, reN] + "\\)$"),
+    reHslPercent = new RegExp("^hsl\\(" + [reN, reP, reP] + "\\)$"),
+    reHslaPercent = new RegExp("^hsla\\(" + [reN, reP, reP, reN] + "\\)$");
+
+var named = {
+  aliceblue: 0xf0f8ff,
+  antiquewhite: 0xfaebd7,
+  aqua: 0x00ffff,
+  aquamarine: 0x7fffd4,
+  azure: 0xf0ffff,
+  beige: 0xf5f5dc,
+  bisque: 0xffe4c4,
+  black: 0x000000,
+  blanchedalmond: 0xffebcd,
+  blue: 0x0000ff,
+  blueviolet: 0x8a2be2,
+  brown: 0xa52a2a,
+  burlywood: 0xdeb887,
+  cadetblue: 0x5f9ea0,
+  chartreuse: 0x7fff00,
+  chocolate: 0xd2691e,
+  coral: 0xff7f50,
+  cornflowerblue: 0x6495ed,
+  cornsilk: 0xfff8dc,
+  crimson: 0xdc143c,
+  cyan: 0x00ffff,
+  darkblue: 0x00008b,
+  darkcyan: 0x008b8b,
+  darkgoldenrod: 0xb8860b,
+  darkgray: 0xa9a9a9,
+  darkgreen: 0x006400,
+  darkgrey: 0xa9a9a9,
+  darkkhaki: 0xbdb76b,
+  darkmagenta: 0x8b008b,
+  darkolivegreen: 0x556b2f,
+  darkorange: 0xff8c00,
+  darkorchid: 0x9932cc,
+  darkred: 0x8b0000,
+  darksalmon: 0xe9967a,
+  darkseagreen: 0x8fbc8f,
+  darkslateblue: 0x483d8b,
+  darkslategray: 0x2f4f4f,
+  darkslategrey: 0x2f4f4f,
+  darkturquoise: 0x00ced1,
+  darkviolet: 0x9400d3,
+  deeppink: 0xff1493,
+  deepskyblue: 0x00bfff,
+  dimgray: 0x696969,
+  dimgrey: 0x696969,
+  dodgerblue: 0x1e90ff,
+  firebrick: 0xb22222,
+  floralwhite: 0xfffaf0,
+  forestgreen: 0x228b22,
+  fuchsia: 0xff00ff,
+  gainsboro: 0xdcdcdc,
+  ghostwhite: 0xf8f8ff,
+  gold: 0xffd700,
+  goldenrod: 0xdaa520,
+  gray: 0x808080,
+  green: 0x008000,
+  greenyellow: 0xadff2f,
+  grey: 0x808080,
+  honeydew: 0xf0fff0,
+  hotpink: 0xff69b4,
+  indianred: 0xcd5c5c,
+  indigo: 0x4b0082,
+  ivory: 0xfffff0,
+  khaki: 0xf0e68c,
+  lavender: 0xe6e6fa,
+  lavenderblush: 0xfff0f5,
+  lawngreen: 0x7cfc00,
+  lemonchiffon: 0xfffacd,
+  lightblue: 0xadd8e6,
+  lightcoral: 0xf08080,
+  lightcyan: 0xe0ffff,
+  lightgoldenrodyellow: 0xfafad2,
+  lightgray: 0xd3d3d3,
+  lightgreen: 0x90ee90,
+  lightgrey: 0xd3d3d3,
+  lightpink: 0xffb6c1,
+  lightsalmon: 0xffa07a,
+  lightseagreen: 0x20b2aa,
+  lightskyblue: 0x87cefa,
+  lightslategray: 0x778899,
+  lightslategrey: 0x778899,
+  lightsteelblue: 0xb0c4de,
+  lightyellow: 0xffffe0,
+  lime: 0x00ff00,
+  limegreen: 0x32cd32,
+  linen: 0xfaf0e6,
+  magenta: 0xff00ff,
+  maroon: 0x800000,
+  mediumaquamarine: 0x66cdaa,
+  mediumblue: 0x0000cd,
+  mediumorchid: 0xba55d3,
+  mediumpurple: 0x9370db,
+  mediumseagreen: 0x3cb371,
+  mediumslateblue: 0x7b68ee,
+  mediumspringgreen: 0x00fa9a,
+  mediumturquoise: 0x48d1cc,
+  mediumvioletred: 0xc71585,
+  midnightblue: 0x191970,
+  mintcream: 0xf5fffa,
+  mistyrose: 0xffe4e1,
+  moccasin: 0xffe4b5,
+  navajowhite: 0xffdead,
+  navy: 0x000080,
+  oldlace: 0xfdf5e6,
+  olive: 0x808000,
+  olivedrab: 0x6b8e23,
+  orange: 0xffa500,
+  orangered: 0xff4500,
+  orchid: 0xda70d6,
+  palegoldenrod: 0xeee8aa,
+  palegreen: 0x98fb98,
+  paleturquoise: 0xafeeee,
+  palevioletred: 0xdb7093,
+  papayawhip: 0xffefd5,
+  peachpuff: 0xffdab9,
+  peru: 0xcd853f,
+  pink: 0xffc0cb,
+  plum: 0xdda0dd,
+  powderblue: 0xb0e0e6,
+  purple: 0x800080,
+  rebeccapurple: 0x663399,
+  red: 0xff0000,
+  rosybrown: 0xbc8f8f,
+  royalblue: 0x4169e1,
+  saddlebrown: 0x8b4513,
+  salmon: 0xfa8072,
+  sandybrown: 0xf4a460,
+  seagreen: 0x2e8b57,
+  seashell: 0xfff5ee,
+  sienna: 0xa0522d,
+  silver: 0xc0c0c0,
+  skyblue: 0x87ceeb,
+  slateblue: 0x6a5acd,
+  slategray: 0x708090,
+  slategrey: 0x708090,
+  snow: 0xfffafa,
+  springgreen: 0x00ff7f,
+  steelblue: 0x4682b4,
+  tan: 0xd2b48c,
+  teal: 0x008080,
+  thistle: 0xd8bfd8,
+  tomato: 0xff6347,
+  turquoise: 0x40e0d0,
+  violet: 0xee82ee,
+  wheat: 0xf5deb3,
+  white: 0xffffff,
+  whitesmoke: 0xf5f5f5,
+  yellow: 0xffff00,
+  yellowgreen: 0x9acd32
+};
+
+define(Color, color_color, {
+  copy: function(channels) {
+    return Object.assign(new this.constructor, this, channels);
+  },
+  displayable: function() {
+    return this.rgb().displayable();
+  },
+  hex: color_formatHex, // Deprecated! Use color.formatHex.
+  formatHex: color_formatHex,
+  formatHsl: color_formatHsl,
+  formatRgb: color_formatRgb,
+  toString: color_formatRgb
+});
+
+function color_formatHex() {
+  return this.rgb().formatHex();
+}
+
+function color_formatHsl() {
+  return hslConvert(this).formatHsl();
+}
+
+function color_formatRgb() {
+  return this.rgb().formatRgb();
+}
+
+function color_color(format) {
+  var m, l;
+  format = (format + "").trim().toLowerCase();
+  return (m = reHex.exec(format)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) // #ff0000
+      : l === 3 ? new Rgb((m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), ((m & 0xf) << 4) | (m & 0xf), 1) // #f00
+      : l === 8 ? rgba(m >> 24 & 0xff, m >> 16 & 0xff, m >> 8 & 0xff, (m & 0xff) / 0xff) // #ff000000
+      : l === 4 ? rgba((m >> 12 & 0xf) | (m >> 8 & 0xf0), (m >> 8 & 0xf) | (m >> 4 & 0xf0), (m >> 4 & 0xf) | (m & 0xf0), (((m & 0xf) << 4) | (m & 0xf)) / 0xff) // #f000
+      : null) // invalid hex
+      : (m = reRgbInteger.exec(format)) ? new Rgb(m[1], m[2], m[3], 1) // rgb(255, 0, 0)
+      : (m = reRgbPercent.exec(format)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) // rgb(100%, 0%, 0%)
+      : (m = reRgbaInteger.exec(format)) ? rgba(m[1], m[2], m[3], m[4]) // rgba(255, 0, 0, 1)
+      : (m = reRgbaPercent.exec(format)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) // rgb(100%, 0%, 0%, 1)
+      : (m = reHslPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) // hsl(120, 50%, 50%)
+      : (m = reHslaPercent.exec(format)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) // hsla(120, 50%, 50%, 1)
+      : named.hasOwnProperty(format) ? rgbn(named[format]) // eslint-disable-line no-prototype-builtins
+      : format === "transparent" ? new Rgb(NaN, NaN, NaN, 0)
+      : null;
+}
+
+function rgbn(n) {
+  return new Rgb(n >> 16 & 0xff, n >> 8 & 0xff, n & 0xff, 1);
+}
+
+function rgba(r, g, b, a) {
+  if (a <= 0) r = g = b = NaN;
+  return new Rgb(r, g, b, a);
+}
+
+function rgbConvert(o) {
+  if (!(o instanceof Color)) o = color_color(o);
+  if (!o) return new Rgb;
+  o = o.rgb();
+  return new Rgb(o.r, o.g, o.b, o.opacity);
+}
+
+function color_rgb(r, g, b, opacity) {
+  return arguments.length === 1 ? rgbConvert(r) : new Rgb(r, g, b, opacity == null ? 1 : opacity);
+}
+
+function Rgb(r, g, b, opacity) {
+  this.r = +r;
+  this.g = +g;
+  this.b = +b;
+  this.opacity = +opacity;
+}
+
+define(Rgb, color_rgb, extend(Color, {
+  brighter: function(k) {
+    k = k == null ? brighter : Math.pow(brighter, k);
+    return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
+  },
+  darker: function(k) {
+    k = k == null ? darker : Math.pow(darker, k);
+    return new Rgb(this.r * k, this.g * k, this.b * k, this.opacity);
+  },
+  rgb: function() {
+    return this;
+  },
+  displayable: function() {
+    return (-0.5 <= this.r && this.r < 255.5)
+        && (-0.5 <= this.g && this.g < 255.5)
+        && (-0.5 <= this.b && this.b < 255.5)
+        && (0 <= this.opacity && this.opacity <= 1);
+  },
+  hex: rgb_formatHex, // Deprecated! Use color.formatHex.
+  formatHex: rgb_formatHex,
+  formatRgb: rgb_formatRgb,
+  toString: rgb_formatRgb
+}));
+
+function rgb_formatHex() {
+  return "#" + hex(this.r) + hex(this.g) + hex(this.b);
+}
+
+function rgb_formatRgb() {
+  var a = this.opacity; a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
+  return (a === 1 ? "rgb(" : "rgba(")
+      + Math.max(0, Math.min(255, Math.round(this.r) || 0)) + ", "
+      + Math.max(0, Math.min(255, Math.round(this.g) || 0)) + ", "
+      + Math.max(0, Math.min(255, Math.round(this.b) || 0))
+      + (a === 1 ? ")" : ", " + a + ")");
+}
+
+function hex(value) {
+  value = Math.max(0, Math.min(255, Math.round(value) || 0));
+  return (value < 16 ? "0" : "") + value.toString(16);
+}
+
+function hsla(h, s, l, a) {
+  if (a <= 0) h = s = l = NaN;
+  else if (l <= 0 || l >= 1) h = s = NaN;
+  else if (s <= 0) h = NaN;
+  return new Hsl(h, s, l, a);
+}
+
+function hslConvert(o) {
+  if (o instanceof Hsl) return new Hsl(o.h, o.s, o.l, o.opacity);
+  if (!(o instanceof Color)) o = color_color(o);
+  if (!o) return new Hsl;
+  if (o instanceof Hsl) return o;
+  o = o.rgb();
+  var r = o.r / 255,
+      g = o.g / 255,
+      b = o.b / 255,
+      min = Math.min(r, g, b),
+      max = Math.max(r, g, b),
+      h = NaN,
+      s = max - min,
+      l = (max + min) / 2;
+  if (s) {
+    if (r === max) h = (g - b) / s + (g < b) * 6;
+    else if (g === max) h = (b - r) / s + 2;
+    else h = (r - g) / s + 4;
+    s /= l < 0.5 ? max + min : 2 - max - min;
+    h *= 60;
+  } else {
+    s = l > 0 && l < 1 ? 0 : h;
+  }
+  return new Hsl(h, s, l, o.opacity);
+}
+
+function hsl(h, s, l, opacity) {
+  return arguments.length === 1 ? hslConvert(h) : new Hsl(h, s, l, opacity == null ? 1 : opacity);
+}
+
+function Hsl(h, s, l, opacity) {
+  this.h = +h;
+  this.s = +s;
+  this.l = +l;
+  this.opacity = +opacity;
+}
+
+define(Hsl, hsl, extend(Color, {
+  brighter: function(k) {
+    k = k == null ? brighter : Math.pow(brighter, k);
+    return new Hsl(this.h, this.s, this.l * k, this.opacity);
+  },
+  darker: function(k) {
+    k = k == null ? darker : Math.pow(darker, k);
+    return new Hsl(this.h, this.s, this.l * k, this.opacity);
+  },
+  rgb: function() {
+    var h = this.h % 360 + (this.h < 0) * 360,
+        s = isNaN(h) || isNaN(this.s) ? 0 : this.s,
+        l = this.l,
+        m2 = l + (l < 0.5 ? l : 1 - l) * s,
+        m1 = 2 * l - m2;
+    return new Rgb(
+      hsl2rgb(h >= 240 ? h - 240 : h + 120, m1, m2),
+      hsl2rgb(h, m1, m2),
+      hsl2rgb(h < 120 ? h + 240 : h - 120, m1, m2),
+      this.opacity
+    );
+  },
+  displayable: function() {
+    return (0 <= this.s && this.s <= 1 || isNaN(this.s))
+        && (0 <= this.l && this.l <= 1)
+        && (0 <= this.opacity && this.opacity <= 1);
+  },
+  formatHsl: function() {
+    var a = this.opacity; a = isNaN(a) ? 1 : Math.max(0, Math.min(1, a));
+    return (a === 1 ? "hsl(" : "hsla(")
+        + (this.h || 0) + ", "
+        + (this.s || 0) * 100 + "%, "
+        + (this.l || 0) * 100 + "%"
+        + (a === 1 ? ")" : ", " + a + ")");
+  }
+}));
+
+/* From FvD 13.37, CSS Color Module Level 3 */
+function hsl2rgb(h, m1, m2) {
+  return (h < 60 ? m1 + (m2 - m1) * h / 60
+      : h < 180 ? m2
+      : h < 240 ? m1 + (m2 - m1) * (240 - h) / 60
+      : m1) * 255;
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/basis.js
+function basis(t1, v0, v1, v2, v3) {
+  var t2 = t1 * t1, t3 = t2 * t1;
+  return ((1 - 3 * t1 + 3 * t2 - t3) * v0
+      + (4 - 6 * t2 + 3 * t3) * v1
+      + (1 + 3 * t1 + 3 * t2 - 3 * t3) * v2
+      + t3 * v3) / 6;
+}
+
+/* harmony default export */ var src_basis = (function(values) {
+  var n = values.length - 1;
+  return function(t) {
+    var i = t <= 0 ? (t = 0) : t >= 1 ? (t = 1, n - 1) : Math.floor(t * n),
+        v1 = values[i],
+        v2 = values[i + 1],
+        v0 = i > 0 ? values[i - 1] : 2 * v1 - v2,
+        v3 = i < n - 1 ? values[i + 2] : 2 * v2 - v1;
+    return basis((t - i / n) * n, v0, v1, v2, v3);
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/basisClosed.js
+
+
+/* harmony default export */ var basisClosed = (function(values) {
+  var n = values.length;
+  return function(t) {
+    var i = Math.floor(((t %= 1) < 0 ? ++t : t) * n),
+        v0 = values[(i + n - 1) % n],
+        v1 = values[i % n],
+        v2 = values[(i + 1) % n],
+        v3 = values[(i + 2) % n];
+    return basis((t - i / n) * n, v0, v1, v2, v3);
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/constant.js
+/* harmony default export */ var src_constant = (x => () => x);
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/color.js
+
+
+function linear(a, d) {
+  return function(t) {
+    return a + t * d;
+  };
+}
+
+function exponential(a, b, y) {
+  return a = Math.pow(a, y), b = Math.pow(b, y) - a, y = 1 / y, function(t) {
+    return Math.pow(a + t * b, y);
+  };
+}
+
+function hue(a, b) {
+  var d = b - a;
+  return d ? linear(a, d > 180 || d < -180 ? d - 360 * Math.round(d / 360) : d) : src_constant(isNaN(a) ? b : a);
+}
+
+function gamma(y) {
+  return (y = +y) === 1 ? nogamma : function(a, b) {
+    return b - a ? exponential(a, b, y) : src_constant(isNaN(a) ? b : a);
+  };
+}
+
+function nogamma(a, b) {
+  var d = b - a;
+  return d ? linear(a, d) : src_constant(isNaN(a) ? b : a);
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/rgb.js
+
+
+
+
+
+/* harmony default export */ var src_rgb = ((function rgbGamma(y) {
+  var color = gamma(y);
+
+  function rgb(start, end) {
+    var r = color((start = color_rgb(start)).r, (end = color_rgb(end)).r),
+        g = color(start.g, end.g),
+        b = color(start.b, end.b),
+        opacity = nogamma(start.opacity, end.opacity);
+    return function(t) {
+      start.r = r(t);
+      start.g = g(t);
+      start.b = b(t);
+      start.opacity = opacity(t);
+      return start + "";
+    };
+  }
+
+  rgb.gamma = rgbGamma;
+
+  return rgb;
+})(1));
+
+function rgbSpline(spline) {
+  return function(colors) {
+    var n = colors.length,
+        r = new Array(n),
+        g = new Array(n),
+        b = new Array(n),
+        i, color;
+    for (i = 0; i < n; ++i) {
+      color = color_rgb(colors[i]);
+      r[i] = color.r || 0;
+      g[i] = color.g || 0;
+      b[i] = color.b || 0;
+    }
+    r = spline(r);
+    g = spline(g);
+    b = spline(b);
+    color.opacity = 1;
+    return function(t) {
+      color.r = r(t);
+      color.g = g(t);
+      color.b = b(t);
+      return color + "";
+    };
+  };
+}
+
+var rgbBasis = rgbSpline(src_basis);
+var rgbBasisClosed = rgbSpline(basisClosed);
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/numberArray.js
+/* harmony default export */ var numberArray = (function(a, b) {
+  if (!b) b = [];
+  var n = a ? Math.min(b.length, a.length) : 0,
+      c = b.slice(),
+      i;
+  return function(t) {
+    for (i = 0; i < n; ++i) c[i] = a[i] * (1 - t) + b[i] * t;
+    return c;
+  };
+});
+
+function isNumberArray(x) {
+  return ArrayBuffer.isView(x) && !(x instanceof DataView);
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/array.js
+
+
+
+/* harmony default export */ var d3_interpolate_src_array = (function(a, b) {
+  return (isNumberArray(b) ? numberArray : genericArray)(a, b);
+});
+
+function genericArray(a, b) {
+  var nb = b ? b.length : 0,
+      na = a ? Math.min(nb, a.length) : 0,
+      x = new Array(na),
+      c = new Array(nb),
+      i;
+
+  for (i = 0; i < na; ++i) x[i] = src_value(a[i], b[i]);
+  for (; i < nb; ++i) c[i] = b[i];
+
+  return function(t) {
+    for (i = 0; i < na; ++i) c[i] = x[i](t);
+    return c;
+  };
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/date.js
+/* harmony default export */ var date = (function(a, b) {
+  var d = new Date;
+  return a = +a, b = +b, function(t) {
+    return d.setTime(a * (1 - t) + b * t), d;
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/number.js
+/* harmony default export */ var number = (function(a, b) {
+  return a = +a, b = +b, function(t) {
+    return a * (1 - t) + b * t;
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/object.js
+
+
+/* harmony default export */ var object = (function(a, b) {
+  var i = {},
+      c = {},
+      k;
+
+  if (a === null || typeof a !== "object") a = {};
+  if (b === null || typeof b !== "object") b = {};
+
+  for (k in b) {
+    if (k in a) {
+      i[k] = src_value(a[k], b[k]);
+    } else {
+      c[k] = b[k];
+    }
+  }
+
+  return function(t) {
+    for (k in i) c[k] = i[k](t);
+    return c;
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/string.js
+
+
+var reA = /[-+]?(?:\d+\.?\d*|\.?\d+)(?:[eE][-+]?\d+)?/g,
+    reB = new RegExp(reA.source, "g");
+
+function zero(b) {
+  return function() {
+    return b;
+  };
+}
+
+function one(b) {
+  return function(t) {
+    return b(t) + "";
+  };
+}
+
+/* harmony default export */ var string = (function(a, b) {
+  var bi = reA.lastIndex = reB.lastIndex = 0, // scan index for next number in b
+      am, // current match in a
+      bm, // current match in b
+      bs, // string preceding current number in b, if any
+      i = -1, // index in s
+      s = [], // string constants and placeholders
+      q = []; // number interpolators
+
+  // Coerce inputs to strings.
+  a = a + "", b = b + "";
+
+  // Interpolate pairs of numbers in a & b.
+  while ((am = reA.exec(a))
+      && (bm = reB.exec(b))) {
+    if ((bs = bm.index) > bi) { // a string precedes the next number in b
+      bs = b.slice(bi, bs);
+      if (s[i]) s[i] += bs; // coalesce with previous string
+      else s[++i] = bs;
+    }
+    if ((am = am[0]) === (bm = bm[0])) { // numbers in a & b match
+      if (s[i]) s[i] += bm; // coalesce with previous string
+      else s[++i] = bm;
+    } else { // interpolate non-matching numbers
+      s[++i] = null;
+      q.push({i: i, x: number(am, bm)});
+    }
+    bi = reB.lastIndex;
+  }
+
+  // Add remains of b.
+  if (bi < b.length) {
+    bs = b.slice(bi);
+    if (s[i]) s[i] += bs; // coalesce with previous string
+    else s[++i] = bs;
+  }
+
+  // Special optimization for only a single match.
+  // Otherwise, interpolate each of the numbers and rejoin the string.
+  return s.length < 2 ? (q[0]
+      ? one(q[0].x)
+      : zero(b))
+      : (b = q.length, function(t) {
+          for (var i = 0, o; i < b; ++i) s[(o = q[i]).i] = o.x(t);
+          return s.join("");
+        });
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/value.js
+
+
+
+
+
+
+
+
+
+
+/* harmony default export */ var src_value = (function(a, b) {
+  var t = typeof b, c;
+  return b == null || t === "boolean" ? src_constant(b)
+      : (t === "number" ? number
+      : t === "string" ? ((c = color_color(b)) ? (b = c, src_rgb) : string)
+      : b instanceof color_color ? src_rgb
+      : b instanceof Date ? date
+      : isNumberArray(b) ? numberArray
+      : Array.isArray(b) ? genericArray
+      : typeof b.valueOf !== "function" && typeof b.toString !== "function" || isNaN(b) ? object
+      : number)(a, b);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/sourceEvent.js
+/* harmony default export */ var sourceEvent = (function(event) {
+  let sourceEvent;
+  while (sourceEvent = event.sourceEvent) event = sourceEvent;
+  return event;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/pointer.js
+
+
+/* harmony default export */ var pointer = (function(event, node) {
+  event = sourceEvent(event);
+  if (node === undefined) node = event.currentTarget;
+  if (node) {
+    var svg = node.ownerSVGElement || node;
+    if (svg.createSVGPoint) {
+      var point = svg.createSVGPoint();
+      point.x = event.clientX, point.y = event.clientY;
+      point = point.matrixTransform(node.getScreenCTM().inverse());
+      return [point.x, point.y];
+    }
+    if (node.getBoundingClientRect) {
+      var rect = node.getBoundingClientRect();
+      return [event.clientX - rect.left - node.clientLeft, event.clientY - rect.top - node.clientTop];
+    }
+  }
+  return [event.pageX, event.pageY];
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-timer/src/timer.js
+var timer_frame = 0, // is an animation frame pending?
+    timeout = 0, // is a timeout pending?
+    interval = 0, // are any timers active?
+    pokeDelay = 1000, // how frequently we check for clock skew
+    taskHead,
+    taskTail,
+    clockLast = 0,
+    clockNow = 0,
+    clockSkew = 0,
+    clock = typeof performance === "object" && performance.now ? performance : Date,
+    setFrame = typeof window === "object" && window.requestAnimationFrame ? window.requestAnimationFrame.bind(window) : function(f) { setTimeout(f, 17); };
+
+function now() {
+  return clockNow || (setFrame(clearNow), clockNow = clock.now() + clockSkew);
+}
+
+function clearNow() {
+  clockNow = 0;
+}
+
+function Timer() {
+  this._call =
+  this._time =
+  this._next = null;
+}
+
+Timer.prototype = timer.prototype = {
+  constructor: Timer,
+  restart: function(callback, delay, time) {
+    if (typeof callback !== "function") throw new TypeError("callback is not a function");
+    time = (time == null ? now() : +time) + (delay == null ? 0 : +delay);
+    if (!this._next && taskTail !== this) {
+      if (taskTail) taskTail._next = this;
+      else taskHead = this;
+      taskTail = this;
+    }
+    this._call = callback;
+    this._time = time;
+    sleep();
+  },
+  stop: function() {
+    if (this._call) {
+      this._call = null;
+      this._time = Infinity;
+      sleep();
+    }
+  }
+};
+
+function timer(callback, delay, time) {
+  var t = new Timer;
+  t.restart(callback, delay, time);
+  return t;
+}
+
+function timerFlush() {
+  now(); // Get the current time, if not already set.
+  ++timer_frame; // Pretend we’ve set an alarm, if we haven’t already.
+  var t = taskHead, e;
+  while (t) {
+    if ((e = clockNow - t._time) >= 0) t._call.call(null, e);
+    t = t._next;
+  }
+  --timer_frame;
+}
+
+function wake() {
+  clockNow = (clockLast = clock.now()) + clockSkew;
+  timer_frame = timeout = 0;
+  try {
+    timerFlush();
+  } finally {
+    timer_frame = 0;
+    nap();
+    clockNow = 0;
+  }
+}
+
+function poke() {
+  var now = clock.now(), delay = now - clockLast;
+  if (delay > pokeDelay) clockSkew -= delay, clockLast = now;
+}
+
+function nap() {
+  var t0, t1 = taskHead, t2, time = Infinity;
+  while (t1) {
+    if (t1._call) {
+      if (time > t1._time) time = t1._time;
+      t0 = t1, t1 = t1._next;
+    } else {
+      t2 = t1._next, t1._next = null;
+      t1 = t0 ? t0._next = t2 : taskHead = t2;
+    }
+  }
+  taskTail = t0;
+  sleep(time);
+}
+
+function sleep(time) {
+  if (timer_frame) return; // Soonest alarm already set, or will be.
+  if (timeout) timeout = clearTimeout(timeout);
+  var delay = time - clockNow; // Strictly less than if we recomputed clockNow.
+  if (delay > 24) {
+    if (time < Infinity) timeout = setTimeout(wake, time - clock.now() - clockSkew);
+    if (interval) interval = clearInterval(interval);
+  } else {
+    if (!interval) clockLast = clock.now(), interval = setInterval(poke, pokeDelay);
+    timer_frame = 1, setFrame(wake);
+  }
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-timer/src/timeout.js
+
+
+/* harmony default export */ var src_timeout = (function(callback, delay, time) {
+  var t = new Timer;
+  delay = delay == null ? 0 : +delay;
+  t.restart(elapsed => {
+    t.stop();
+    callback(elapsed + delay);
+  }, delay, time);
+  return t;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/schedule.js
+
+
+
+var emptyOn = src_dispatch("start", "end", "cancel", "interrupt");
+var emptyTween = [];
+
+var CREATED = 0;
+var SCHEDULED = 1;
+var STARTING = 2;
+var STARTED = 3;
+var RUNNING = 4;
+var ENDING = 5;
+var ENDED = 6;
+
+/* harmony default export */ var transition_schedule = (function(node, name, id, index, group, timing) {
+  var schedules = node.__transition;
+  if (!schedules) node.__transition = {};
+  else if (id in schedules) return;
+  schedule_create(node, id, {
+    name: name,
+    index: index, // For context during callback.
+    group: group, // For context during callback.
+    on: emptyOn,
+    tween: emptyTween,
+    time: timing.time,
+    delay: timing.delay,
+    duration: timing.duration,
+    ease: timing.ease,
+    timer: null,
+    state: CREATED
+  });
+});
+
+function init(node, id) {
+  var schedule = schedule_get(node, id);
+  if (schedule.state > CREATED) throw new Error("too late; already scheduled");
+  return schedule;
+}
+
+function schedule_set(node, id) {
+  var schedule = schedule_get(node, id);
+  if (schedule.state > STARTED) throw new Error("too late; already running");
+  return schedule;
+}
+
+function schedule_get(node, id) {
+  var schedule = node.__transition;
+  if (!schedule || !(schedule = schedule[id])) throw new Error("transition not found");
+  return schedule;
+}
+
+function schedule_create(node, id, self) {
+  var schedules = node.__transition,
+      tween;
+
+  // Initialize the self timer when the transition is created.
+  // Note the actual delay is not known until the first callback!
+  schedules[id] = self;
+  self.timer = timer(schedule, 0, self.time);
+
+  function schedule(elapsed) {
+    self.state = SCHEDULED;
+    self.timer.restart(start, self.delay, self.time);
+
+    // If the elapsed delay is less than our first sleep, start immediately.
+    if (self.delay <= elapsed) start(elapsed - self.delay);
+  }
+
+  function start(elapsed) {
+    var i, j, n, o;
+
+    // If the state is not SCHEDULED, then we previously errored on start.
+    if (self.state !== SCHEDULED) return stop();
+
+    for (i in schedules) {
+      o = schedules[i];
+      if (o.name !== self.name) continue;
+
+      // While this element already has a starting transition during this frame,
+      // defer starting an interrupting transition until that transition has a
+      // chance to tick (and possibly end); see d3/d3-transition#54!
+      if (o.state === STARTED) return src_timeout(start);
+
+      // Interrupt the active transition, if any.
+      if (o.state === RUNNING) {
+        o.state = ENDED;
+        o.timer.stop();
+        o.on.call("interrupt", node, node.__data__, o.index, o.group);
+        delete schedules[i];
+      }
+
+      // Cancel any pre-empted transitions.
+      else if (+i < id) {
+        o.state = ENDED;
+        o.timer.stop();
+        o.on.call("cancel", node, node.__data__, o.index, o.group);
+        delete schedules[i];
+      }
+    }
+
+    // Defer the first tick to end of the current frame; see d3/d3#1576.
+    // Note the transition may be canceled after start and before the first tick!
+    // Note this must be scheduled before the start event; see d3/d3-transition#16!
+    // Assuming this is successful, subsequent callbacks go straight to tick.
+    src_timeout(function() {
+      if (self.state === STARTED) {
+        self.state = RUNNING;
+        self.timer.restart(tick, self.delay, self.time);
+        tick(elapsed);
+      }
+    });
+
+    // Dispatch the start event.
+    // Note this must be done before the tween are initialized.
+    self.state = STARTING;
+    self.on.call("start", node, node.__data__, self.index, self.group);
+    if (self.state !== STARTING) return; // interrupted
+    self.state = STARTED;
+
+    // Initialize the tween, deleting null tween.
+    tween = new Array(n = self.tween.length);
+    for (i = 0, j = -1; i < n; ++i) {
+      if (o = self.tween[i].value.call(node, node.__data__, self.index, self.group)) {
+        tween[++j] = o;
+      }
+    }
+    tween.length = j + 1;
+  }
+
+  function tick(elapsed) {
+    var t = elapsed < self.duration ? self.ease.call(null, elapsed / self.duration) : (self.timer.restart(stop), self.state = ENDING, 1),
+        i = -1,
+        n = tween.length;
+
+    while (++i < n) {
+      tween[i].call(node, t);
+    }
+
+    // Dispatch the end event.
+    if (self.state === ENDING) {
+      self.on.call("end", node, node.__data__, self.index, self.group);
+      stop();
+    }
+  }
+
+  function stop() {
+    self.state = ENDED;
+    self.timer.stop();
+    delete schedules[id];
+    for (var i in schedules) return; // eslint-disable-line no-unused-vars
+    delete node.__transition;
+  }
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/interrupt.js
+
+
+/* harmony default export */ var interrupt = (function(node, name) {
+  var schedules = node.__transition,
+      schedule,
+      active,
+      empty = true,
+      i;
+
+  if (!schedules) return;
+
+  name = name == null ? null : name + "";
+
+  for (i in schedules) {
+    if ((schedule = schedules[i]).name !== name) { empty = false; continue; }
+    active = schedule.state > STARTING && schedule.state < ENDING;
+    schedule.state = ENDED;
+    schedule.timer.stop();
+    schedule.on.call(active ? "interrupt" : "cancel", node, node.__data__, schedule.index, schedule.group);
+    delete schedules[i];
+  }
+
+  if (empty) delete node.__transition;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/selection/interrupt.js
+
+
+/* harmony default export */ var selection_interrupt = (function(name) {
+  return this.each(function() {
+    interrupt(this, name);
+  });
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/transform/decompose.js
+var degrees = 180 / Math.PI;
+
+var identity = {
+  translateX: 0,
+  translateY: 0,
+  rotate: 0,
+  skewX: 0,
+  scaleX: 1,
+  scaleY: 1
+};
+
+/* harmony default export */ var decompose = (function(a, b, c, d, e, f) {
+  var scaleX, scaleY, skewX;
+  if (scaleX = Math.sqrt(a * a + b * b)) a /= scaleX, b /= scaleX;
+  if (skewX = a * c + b * d) c -= a * skewX, d -= b * skewX;
+  if (scaleY = Math.sqrt(c * c + d * d)) c /= scaleY, d /= scaleY, skewX /= scaleY;
+  if (a * d < b * c) a = -a, b = -b, skewX = -skewX, scaleX = -scaleX;
+  return {
+    translateX: e,
+    translateY: f,
+    rotate: Math.atan2(b, a) * degrees,
+    skewX: Math.atan(skewX) * degrees,
+    scaleX: scaleX,
+    scaleY: scaleY
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/transform/parse.js
+
+
+var svgNode;
+
+/* eslint-disable no-undef */
+function parseCss(value) {
+  const m = new (typeof DOMMatrix === "function" ? DOMMatrix : WebKitCSSMatrix)(value + "");
+  return m.isIdentity ? identity : decompose(m.a, m.b, m.c, m.d, m.e, m.f);
+}
+
+function parseSvg(value) {
+  if (value == null) return identity;
+  if (!svgNode) svgNode = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  svgNode.setAttribute("transform", value);
+  if (!(value = svgNode.transform.baseVal.consolidate())) return identity;
+  value = value.matrix;
+  return decompose(value.a, value.b, value.c, value.d, value.e, value.f);
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/transform/index.js
+
+
+
+function interpolateTransform(parse, pxComma, pxParen, degParen) {
+
+  function pop(s) {
+    return s.length ? s.pop() + " " : "";
+  }
+
+  function translate(xa, ya, xb, yb, s, q) {
+    if (xa !== xb || ya !== yb) {
+      var i = s.push("translate(", null, pxComma, null, pxParen);
+      q.push({i: i - 4, x: number(xa, xb)}, {i: i - 2, x: number(ya, yb)});
+    } else if (xb || yb) {
+      s.push("translate(" + xb + pxComma + yb + pxParen);
+    }
+  }
+
+  function rotate(a, b, s, q) {
+    if (a !== b) {
+      if (a - b > 180) b += 360; else if (b - a > 180) a += 360; // shortest path
+      q.push({i: s.push(pop(s) + "rotate(", null, degParen) - 2, x: number(a, b)});
+    } else if (b) {
+      s.push(pop(s) + "rotate(" + b + degParen);
+    }
+  }
+
+  function skewX(a, b, s, q) {
+    if (a !== b) {
+      q.push({i: s.push(pop(s) + "skewX(", null, degParen) - 2, x: number(a, b)});
+    } else if (b) {
+      s.push(pop(s) + "skewX(" + b + degParen);
+    }
+  }
+
+  function scale(xa, ya, xb, yb, s, q) {
+    if (xa !== xb || ya !== yb) {
+      var i = s.push(pop(s) + "scale(", null, ",", null, ")");
+      q.push({i: i - 4, x: number(xa, xb)}, {i: i - 2, x: number(ya, yb)});
+    } else if (xb !== 1 || yb !== 1) {
+      s.push(pop(s) + "scale(" + xb + "," + yb + ")");
+    }
+  }
+
+  return function(a, b) {
+    var s = [], // string constants and placeholders
+        q = []; // number interpolators
+    a = parse(a), b = parse(b);
+    translate(a.translateX, a.translateY, b.translateX, b.translateY, s, q);
+    rotate(a.rotate, b.rotate, s, q);
+    skewX(a.skewX, b.skewX, s, q);
+    scale(a.scaleX, a.scaleY, b.scaleX, b.scaleY, s, q);
+    a = b = null; // gc
+    return function(t) {
+      var i = -1, n = q.length, o;
+      while (++i < n) s[(o = q[i]).i] = o.x(t);
+      return s.join("");
+    };
+  };
+}
+
+var interpolateTransformCss = interpolateTransform(parseCss, "px, ", "px)", "deg)");
+var interpolateTransformSvg = interpolateTransform(parseSvg, ", ", ")", ")");
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/tween.js
+
+
+function tweenRemove(id, name) {
+  var tween0, tween1;
+  return function() {
+    var schedule = schedule_set(this, id),
+        tween = schedule.tween;
+
+    // If this node shared tween with the previous node,
+    // just assign the updated shared tween and we’re done!
+    // Otherwise, copy-on-write.
+    if (tween !== tween0) {
+      tween1 = tween0 = tween;
+      for (var i = 0, n = tween1.length; i < n; ++i) {
+        if (tween1[i].name === name) {
+          tween1 = tween1.slice();
+          tween1.splice(i, 1);
+          break;
+        }
+      }
+    }
+
+    schedule.tween = tween1;
+  };
+}
+
+function tweenFunction(id, name, value) {
+  var tween0, tween1;
+  if (typeof value !== "function") throw new Error;
+  return function() {
+    var schedule = schedule_set(this, id),
+        tween = schedule.tween;
+
+    // If this node shared tween with the previous node,
+    // just assign the updated shared tween and we’re done!
+    // Otherwise, copy-on-write.
+    if (tween !== tween0) {
+      tween1 = (tween0 = tween).slice();
+      for (var t = {name: name, value: value}, i = 0, n = tween1.length; i < n; ++i) {
+        if (tween1[i].name === name) {
+          tween1[i] = t;
+          break;
+        }
+      }
+      if (i === n) tween1.push(t);
+    }
+
+    schedule.tween = tween1;
+  };
+}
+
+/* harmony default export */ var transition_tween = (function(name, value) {
+  var id = this._id;
+
+  name += "";
+
+  if (arguments.length < 2) {
+    var tween = schedule_get(this.node(), id).tween;
+    for (var i = 0, n = tween.length, t; i < n; ++i) {
+      if ((t = tween[i]).name === name) {
+        return t.value;
+      }
+    }
+    return null;
+  }
+
+  return this.each((value == null ? tweenRemove : tweenFunction)(id, name, value));
+});
+
+function tweenValue(transition, name, value) {
+  var id = transition._id;
+
+  transition.each(function() {
+    var schedule = schedule_set(this, id);
+    (schedule.value || (schedule.value = {}))[name] = value.apply(this, arguments);
+  });
+
+  return function(node) {
+    return schedule_get(node, id).value[name];
+  };
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/interpolate.js
+
+
+
+/* harmony default export */ var transition_interpolate = (function(a, b) {
+  var c;
+  return (typeof b === "number" ? number
+      : b instanceof color_color ? src_rgb
+      : (c = color_color(b)) ? (b = c, src_rgb)
+      : string)(a, b);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/attr.js
+
+
+
+
+
+function attr_attrRemove(name) {
+  return function() {
+    this.removeAttribute(name);
+  };
+}
+
+function attr_attrRemoveNS(fullname) {
+  return function() {
+    this.removeAttributeNS(fullname.space, fullname.local);
+  };
+}
+
+function attr_attrConstant(name, interpolate, value1) {
+  var string00,
+      string1 = value1 + "",
+      interpolate0;
+  return function() {
+    var string0 = this.getAttribute(name);
+    return string0 === string1 ? null
+        : string0 === string00 ? interpolate0
+        : interpolate0 = interpolate(string00 = string0, value1);
+  };
+}
+
+function attr_attrConstantNS(fullname, interpolate, value1) {
+  var string00,
+      string1 = value1 + "",
+      interpolate0;
+  return function() {
+    var string0 = this.getAttributeNS(fullname.space, fullname.local);
+    return string0 === string1 ? null
+        : string0 === string00 ? interpolate0
+        : interpolate0 = interpolate(string00 = string0, value1);
+  };
+}
+
+function attr_attrFunction(name, interpolate, value) {
+  var string00,
+      string10,
+      interpolate0;
+  return function() {
+    var string0, value1 = value(this), string1;
+    if (value1 == null) return void this.removeAttribute(name);
+    string0 = this.getAttribute(name);
+    string1 = value1 + "";
+    return string0 === string1 ? null
+        : string0 === string00 && string1 === string10 ? interpolate0
+        : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+  };
+}
+
+function attr_attrFunctionNS(fullname, interpolate, value) {
+  var string00,
+      string10,
+      interpolate0;
+  return function() {
+    var string0, value1 = value(this), string1;
+    if (value1 == null) return void this.removeAttributeNS(fullname.space, fullname.local);
+    string0 = this.getAttributeNS(fullname.space, fullname.local);
+    string1 = value1 + "";
+    return string0 === string1 ? null
+        : string0 === string00 && string1 === string10 ? interpolate0
+        : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+  };
+}
+
+/* harmony default export */ var transition_attr = (function(name, value) {
+  var fullname = namespace(name), i = fullname === "transform" ? interpolateTransformSvg : transition_interpolate;
+  return this.attrTween(name, typeof value === "function"
+      ? (fullname.local ? attr_attrFunctionNS : attr_attrFunction)(fullname, i, tweenValue(this, "attr." + name, value))
+      : value == null ? (fullname.local ? attr_attrRemoveNS : attr_attrRemove)(fullname)
+      : (fullname.local ? attr_attrConstantNS : attr_attrConstant)(fullname, i, value));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/attrTween.js
+
+
+function attrInterpolate(name, i) {
+  return function(t) {
+    this.setAttribute(name, i.call(this, t));
+  };
+}
+
+function attrInterpolateNS(fullname, i) {
+  return function(t) {
+    this.setAttributeNS(fullname.space, fullname.local, i.call(this, t));
+  };
+}
+
+function attrTweenNS(fullname, value) {
+  var t0, i0;
+  function tween() {
+    var i = value.apply(this, arguments);
+    if (i !== i0) t0 = (i0 = i) && attrInterpolateNS(fullname, i);
+    return t0;
+  }
+  tween._value = value;
+  return tween;
+}
+
+function attrTween(name, value) {
+  var t0, i0;
+  function tween() {
+    var i = value.apply(this, arguments);
+    if (i !== i0) t0 = (i0 = i) && attrInterpolate(name, i);
+    return t0;
+  }
+  tween._value = value;
+  return tween;
+}
+
+/* harmony default export */ var transition_attrTween = (function(name, value) {
+  var key = "attr." + name;
+  if (arguments.length < 2) return (key = this.tween(key)) && key._value;
+  if (value == null) return this.tween(key, null);
+  if (typeof value !== "function") throw new Error;
+  var fullname = namespace(name);
+  return this.tween(key, (fullname.local ? attrTweenNS : attrTween)(fullname, value));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/delay.js
+
+
+function delayFunction(id, value) {
+  return function() {
+    init(this, id).delay = +value.apply(this, arguments);
+  };
+}
+
+function delayConstant(id, value) {
+  return value = +value, function() {
+    init(this, id).delay = value;
+  };
+}
+
+/* harmony default export */ var transition_delay = (function(value) {
+  var id = this._id;
+
+  return arguments.length
+      ? this.each((typeof value === "function"
+          ? delayFunction
+          : delayConstant)(id, value))
+      : schedule_get(this.node(), id).delay;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/duration.js
+
+
+function durationFunction(id, value) {
+  return function() {
+    schedule_set(this, id).duration = +value.apply(this, arguments);
+  };
+}
+
+function durationConstant(id, value) {
+  return value = +value, function() {
+    schedule_set(this, id).duration = value;
+  };
+}
+
+/* harmony default export */ var transition_duration = (function(value) {
+  var id = this._id;
+
+  return arguments.length
+      ? this.each((typeof value === "function"
+          ? durationFunction
+          : durationConstant)(id, value))
+      : schedule_get(this.node(), id).duration;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/ease.js
+
+
+function easeConstant(id, value) {
+  if (typeof value !== "function") throw new Error;
+  return function() {
+    schedule_set(this, id).ease = value;
+  };
+}
+
+/* harmony default export */ var ease = (function(value) {
+  var id = this._id;
+
+  return arguments.length
+      ? this.each(easeConstant(id, value))
+      : schedule_get(this.node(), id).ease;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/easeVarying.js
+
+
+function easeVarying(id, value) {
+  return function() {
+    var v = value.apply(this, arguments);
+    if (typeof v !== "function") throw new Error;
+    schedule_set(this, id).ease = v;
+  };
+}
+
+/* harmony default export */ var transition_easeVarying = (function(value) {
+  if (typeof value !== "function") throw new Error;
+  return this.each(easeVarying(this._id, value));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/filter.js
+
+
+
+/* harmony default export */ var transition_filter = (function(match) {
+  if (typeof match !== "function") match = matcher(match);
+
+  for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
+    for (var group = groups[j], n = group.length, subgroup = subgroups[j] = [], node, i = 0; i < n; ++i) {
+      if ((node = group[i]) && match.call(node, node.__data__, i, group)) {
+        subgroup.push(node);
+      }
+    }
+  }
+
+  return new Transition(subgroups, this._parents, this._name, this._id);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/merge.js
+
+
+/* harmony default export */ var transition_merge = (function(transition) {
+  if (transition._id !== this._id) throw new Error;
+
+  for (var groups0 = this._groups, groups1 = transition._groups, m0 = groups0.length, m1 = groups1.length, m = Math.min(m0, m1), merges = new Array(m0), j = 0; j < m; ++j) {
+    for (var group0 = groups0[j], group1 = groups1[j], n = group0.length, merge = merges[j] = new Array(n), node, i = 0; i < n; ++i) {
+      if (node = group0[i] || group1[i]) {
+        merge[i] = node;
+      }
+    }
+  }
+
+  for (; j < m0; ++j) {
+    merges[j] = groups0[j];
+  }
+
+  return new Transition(merges, this._parents, this._name, this._id);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/on.js
+
+
+function on_start(name) {
+  return (name + "").trim().split(/^|\s+/).every(function(t) {
+    var i = t.indexOf(".");
+    if (i >= 0) t = t.slice(0, i);
+    return !t || t === "start";
+  });
+}
+
+function onFunction(id, name, listener) {
+  var on0, on1, sit = on_start(name) ? init : schedule_set;
+  return function() {
+    var schedule = sit(this, id),
+        on = schedule.on;
+
+    // If this node shared a dispatch with the previous node,
+    // just assign the updated shared dispatch and we’re done!
+    // Otherwise, copy-on-write.
+    if (on !== on0) (on1 = (on0 = on).copy()).on(name, listener);
+
+    schedule.on = on1;
+  };
+}
+
+/* harmony default export */ var transition_on = (function(name, listener) {
+  var id = this._id;
+
+  return arguments.length < 2
+      ? schedule_get(this.node(), id).on.on(name)
+      : this.each(onFunction(id, name, listener));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/remove.js
+function removeFunction(id) {
+  return function() {
+    var parent = this.parentNode;
+    for (var i in this.__transition) if (+i !== id) return;
+    if (parent) parent.removeChild(this);
+  };
+}
+
+/* harmony default export */ var transition_remove = (function() {
+  return this.on("end.remove", removeFunction(this._id));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/select.js
+
+
+
+
+/* harmony default export */ var transition_select = (function(select) {
+  var name = this._name,
+      id = this._id;
+
+  if (typeof select !== "function") select = src_selector(select);
+
+  for (var groups = this._groups, m = groups.length, subgroups = new Array(m), j = 0; j < m; ++j) {
+    for (var group = groups[j], n = group.length, subgroup = subgroups[j] = new Array(n), node, subnode, i = 0; i < n; ++i) {
+      if ((node = group[i]) && (subnode = select.call(node, node.__data__, i, group))) {
+        if ("__data__" in node) subnode.__data__ = node.__data__;
+        subgroup[i] = subnode;
+        transition_schedule(subgroup[i], name, id, i, subgroup, schedule_get(node, id));
+      }
+    }
+  }
+
+  return new Transition(subgroups, this._parents, name, id);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/selectAll.js
+
+
+
+
+/* harmony default export */ var transition_selectAll = (function(select) {
+  var name = this._name,
+      id = this._id;
+
+  if (typeof select !== "function") select = selectorAll(select);
+
+  for (var groups = this._groups, m = groups.length, subgroups = [], parents = [], j = 0; j < m; ++j) {
+    for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
+      if (node = group[i]) {
+        for (var children = select.call(node, node.__data__, i, group), child, inherit = schedule_get(node, id), k = 0, l = children.length; k < l; ++k) {
+          if (child = children[k]) {
+            transition_schedule(child, name, id, k, children, inherit);
+          }
+        }
+        subgroups.push(children);
+        parents.push(node);
+      }
+    }
+  }
+
+  return new Transition(subgroups, parents, name, id);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/selection.js
+
+
+var selection_Selection = src_selection.prototype.constructor;
+
+/* harmony default export */ var transition_selection = (function() {
+  return new selection_Selection(this._groups, this._parents);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/style.js
+
+
+
+
+
+
+function styleNull(name, interpolate) {
+  var string00,
+      string10,
+      interpolate0;
+  return function() {
+    var string0 = styleValue(this, name),
+        string1 = (this.style.removeProperty(name), styleValue(this, name));
+    return string0 === string1 ? null
+        : string0 === string00 && string1 === string10 ? interpolate0
+        : interpolate0 = interpolate(string00 = string0, string10 = string1);
+  };
+}
+
+function style_styleRemove(name) {
+  return function() {
+    this.style.removeProperty(name);
+  };
+}
+
+function style_styleConstant(name, interpolate, value1) {
+  var string00,
+      string1 = value1 + "",
+      interpolate0;
+  return function() {
+    var string0 = styleValue(this, name);
+    return string0 === string1 ? null
+        : string0 === string00 ? interpolate0
+        : interpolate0 = interpolate(string00 = string0, value1);
+  };
+}
+
+function style_styleFunction(name, interpolate, value) {
+  var string00,
+      string10,
+      interpolate0;
+  return function() {
+    var string0 = styleValue(this, name),
+        value1 = value(this),
+        string1 = value1 + "";
+    if (value1 == null) string1 = value1 = (this.style.removeProperty(name), styleValue(this, name));
+    return string0 === string1 ? null
+        : string0 === string00 && string1 === string10 ? interpolate0
+        : (string10 = string1, interpolate0 = interpolate(string00 = string0, value1));
+  };
+}
+
+function styleMaybeRemove(id, name) {
+  var on0, on1, listener0, key = "style." + name, event = "end." + key, remove;
+  return function() {
+    var schedule = schedule_set(this, id),
+        on = schedule.on,
+        listener = schedule.value[key] == null ? remove || (remove = style_styleRemove(name)) : undefined;
+
+    // If this node shared a dispatch with the previous node,
+    // just assign the updated shared dispatch and we’re done!
+    // Otherwise, copy-on-write.
+    if (on !== on0 || listener0 !== listener) (on1 = (on0 = on).copy()).on(event, listener0 = listener);
+
+    schedule.on = on1;
+  };
+}
+
+/* harmony default export */ var transition_style = (function(name, value, priority) {
+  var i = (name += "") === "transform" ? interpolateTransformCss : transition_interpolate;
+  return value == null ? this
+      .styleTween(name, styleNull(name, i))
+      .on("end.style." + name, style_styleRemove(name))
+    : typeof value === "function" ? this
+      .styleTween(name, style_styleFunction(name, i, tweenValue(this, "style." + name, value)))
+      .each(styleMaybeRemove(this._id, name))
+    : this
+      .styleTween(name, style_styleConstant(name, i, value), priority)
+      .on("end.style." + name, null);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/styleTween.js
+function styleInterpolate(name, i, priority) {
+  return function(t) {
+    this.style.setProperty(name, i.call(this, t), priority);
+  };
+}
+
+function styleTween(name, value, priority) {
+  var t, i0;
+  function tween() {
+    var i = value.apply(this, arguments);
+    if (i !== i0) t = (i0 = i) && styleInterpolate(name, i, priority);
+    return t;
+  }
+  tween._value = value;
+  return tween;
+}
+
+/* harmony default export */ var transition_styleTween = (function(name, value, priority) {
+  var key = "style." + (name += "");
+  if (arguments.length < 2) return (key = this.tween(key)) && key._value;
+  if (value == null) return this.tween(key, null);
+  if (typeof value !== "function") throw new Error;
+  return this.tween(key, styleTween(name, value, priority == null ? "" : priority));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/text.js
+
+
+function text_textConstant(value) {
+  return function() {
+    this.textContent = value;
+  };
+}
+
+function text_textFunction(value) {
+  return function() {
+    var value1 = value(this);
+    this.textContent = value1 == null ? "" : value1;
+  };
+}
+
+/* harmony default export */ var transition_text = (function(value) {
+  return this.tween("text", typeof value === "function"
+      ? text_textFunction(tweenValue(this, "text", value))
+      : text_textConstant(value == null ? "" : value + ""));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/textTween.js
+function textInterpolate(i) {
+  return function(t) {
+    this.textContent = i.call(this, t);
+  };
+}
+
+function textTween(value) {
+  var t0, i0;
+  function tween() {
+    var i = value.apply(this, arguments);
+    if (i !== i0) t0 = (i0 = i) && textInterpolate(i);
+    return t0;
+  }
+  tween._value = value;
+  return tween;
+}
+
+/* harmony default export */ var transition_textTween = (function(value) {
+  var key = "text";
+  if (arguments.length < 1) return (key = this.tween(key)) && key._value;
+  if (value == null) return this.tween(key, null);
+  if (typeof value !== "function") throw new Error;
+  return this.tween(key, textTween(value));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/transition.js
+
+
+
+/* harmony default export */ var transition_transition = (function() {
+  var name = this._name,
+      id0 = this._id,
+      id1 = newId();
+
+  for (var groups = this._groups, m = groups.length, j = 0; j < m; ++j) {
+    for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
+      if (node = group[i]) {
+        var inherit = schedule_get(node, id0);
+        transition_schedule(node, name, id1, i, group, {
+          time: inherit.time + inherit.delay + inherit.duration,
+          delay: 0,
+          duration: inherit.duration,
+          ease: inherit.ease
+        });
+      }
+    }
+  }
+
+  return new Transition(groups, this._parents, name, id1);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/end.js
+
+
+/* harmony default export */ var transition_end = (function() {
+  var on0, on1, that = this, id = that._id, size = that.size();
+  return new Promise(function(resolve, reject) {
+    var cancel = {value: reject},
+        end = {value: function() { if (--size === 0) resolve(); }};
+
+    that.each(function() {
+      var schedule = schedule_set(this, id),
+          on = schedule.on;
+
+      // If this node shared a dispatch with the previous node,
+      // just assign the updated shared dispatch and we’re done!
+      // Otherwise, copy-on-write.
+      if (on !== on0) {
+        on1 = (on0 = on).copy();
+        on1._.cancel.push(cancel);
+        on1._.interrupt.push(cancel);
+        on1._.end.push(end);
+      }
+
+      schedule.on = on1;
+    });
+
+    // The selection was empty, resolve end immediately
+    if (size === 0) resolve();
+  });
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/transition/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var transition_id = 0;
+
+function Transition(groups, parents, name, id) {
+  this._groups = groups;
+  this._parents = parents;
+  this._name = name;
+  this._id = id;
+}
+
+function src_transition_transition(name) {
+  return src_selection().transition(name);
+}
+
+function newId() {
+  return ++transition_id;
+}
+
+var selection_prototype = src_selection.prototype;
+
+Transition.prototype = src_transition_transition.prototype = {
+  constructor: Transition,
+  select: transition_select,
+  selectAll: transition_selectAll,
+  filter: transition_filter,
+  merge: transition_merge,
+  selection: transition_selection,
+  transition: transition_transition,
+  call: selection_prototype.call,
+  nodes: selection_prototype.nodes,
+  node: selection_prototype.node,
+  size: selection_prototype.size,
+  empty: selection_prototype.empty,
+  each: selection_prototype.each,
+  on: transition_on,
+  attr: transition_attr,
+  attrTween: transition_attrTween,
+  style: transition_style,
+  styleTween: transition_styleTween,
+  text: transition_text,
+  textTween: transition_textTween,
+  remove: transition_remove,
+  tween: transition_tween,
+  delay: transition_delay,
+  duration: transition_duration,
+  ease: ease,
+  easeVarying: transition_easeVarying,
+  end: transition_end,
+  [Symbol.iterator]: selection_prototype[Symbol.iterator]
+};
+
+// CONCATENATED MODULE: ./node_modules/d3-ease/src/cubic.js
+function cubicIn(t) {
+  return t * t * t;
+}
+
+function cubicOut(t) {
+  return --t * t * t + 1;
+}
+
+function cubicInOut(t) {
+  return ((t *= 2) <= 1 ? t * t * t : (t -= 2) * t * t + 2) / 2;
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/selection/transition.js
+
+
+
+
+
+var defaultTiming = {
+  time: null, // Set on use.
+  delay: 0,
+  duration: 250,
+  ease: cubicInOut
+};
+
+function transition_inherit(node, id) {
+  var timing;
+  while (!(timing = node.__transition) || !(timing = timing[id])) {
+    if (!(node = node.parentNode)) {
+      throw new Error(`transition ${id} not found`);
+    }
+  }
+  return timing;
+}
+
+/* harmony default export */ var selection_transition = (function(name) {
+  var id,
+      timing;
+
+  if (name instanceof Transition) {
+    id = name._id, name = name._name;
+  } else {
+    id = newId(), (timing = defaultTiming).time = now(), name = name == null ? null : name + "";
+  }
+
+  for (var groups = this._groups, m = groups.length, j = 0; j < m; ++j) {
+    for (var group = groups[j], n = group.length, node, i = 0; i < n; ++i) {
+      if (node = group[i]) {
+        transition_schedule(node, name, id, i, group, timing || transition_inherit(node, id));
+      }
+    }
+  }
+
+  return new Transition(groups, this._parents, name, id);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/selection/index.js
+
+
+
+
+src_selection.prototype.interrupt = selection_interrupt;
+src_selection.prototype.transition = selection_transition;
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/active.js
+
+
+
+var active_root = [null];
+
+/* harmony default export */ var src_active = (function(node, name) {
+  var schedules = node.__transition,
+      schedule,
+      i;
+
+  if (schedules) {
+    name = name == null ? null : name + "";
+    for (i in schedules) {
+      if ((schedule = schedules[i]).state > SCHEDULED && schedule.name === name) {
+        return new Transition([[node]], active_root, name, +i);
+      }
+    }
+  }
+
+  return null;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-transition/src/index.js
+
+
+
+
+
+// CONCATENATED MODULE: ./node_modules/d3-brush/src/constant.js
+/* harmony default export */ var d3_brush_src_constant = (x => () => x);
+
+// CONCATENATED MODULE: ./node_modules/d3-brush/src/event.js
+function BrushEvent(type, {
+  sourceEvent,
+  target,
+  selection,
+  mode,
+  dispatch
+}) {
+  Object.defineProperties(this, {
+    type: {value: type, enumerable: true, configurable: true},
+    sourceEvent: {value: sourceEvent, enumerable: true, configurable: true},
+    target: {value: target, enumerable: true, configurable: true},
+    selection: {value: selection, enumerable: true, configurable: true},
+    mode: {value: mode, enumerable: true, configurable: true},
+    _: {value: dispatch}
+  });
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-brush/src/noevent.js
+function noevent_nopropagation(event) {
+  event.stopImmediatePropagation();
+}
+
+/* harmony default export */ var src_noevent = (function(event) {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-brush/src/brush.js
+
+
+
+
+
+
+
+
+
+var MODE_DRAG = {name: "drag"},
+    MODE_SPACE = {name: "space"},
+    MODE_HANDLE = {name: "handle"},
+    MODE_CENTER = {name: "center"};
+
+const {abs, max: brush_max, min: brush_min} = Math;
+
+function number1(e) {
+  return [+e[0], +e[1]];
+}
+
+function number2(e) {
+  return [number1(e[0]), number1(e[1])];
+}
+
+var X = {
+  name: "x",
+  handles: ["w", "e"].map(brush_type),
+  input: function(x, e) { return x == null ? null : [[+x[0], e[0][1]], [+x[1], e[1][1]]]; },
+  output: function(xy) { return xy && [xy[0][0], xy[1][0]]; }
+};
+
+var Y = {
+  name: "y",
+  handles: ["n", "s"].map(brush_type),
+  input: function(y, e) { return y == null ? null : [[e[0][0], +y[0]], [e[1][0], +y[1]]]; },
+  output: function(xy) { return xy && [xy[0][1], xy[1][1]]; }
+};
+
+var XY = {
+  name: "xy",
+  handles: ["n", "w", "e", "s", "nw", "ne", "sw", "se"].map(brush_type),
+  input: function(xy) { return xy == null ? null : number2(xy); },
+  output: function(xy) { return xy; }
+};
+
+var cursors = {
+  overlay: "crosshair",
+  selection: "move",
+  n: "ns-resize",
+  e: "ew-resize",
+  s: "ns-resize",
+  w: "ew-resize",
+  nw: "nwse-resize",
+  ne: "nesw-resize",
+  se: "nwse-resize",
+  sw: "nesw-resize"
+};
+
+var flipX = {
+  e: "w",
+  w: "e",
+  nw: "ne",
+  ne: "nw",
+  se: "sw",
+  sw: "se"
+};
+
+var flipY = {
+  n: "s",
+  s: "n",
+  nw: "sw",
+  ne: "se",
+  se: "ne",
+  sw: "nw"
+};
+
+var signsX = {
+  overlay: +1,
+  selection: +1,
+  n: null,
+  e: +1,
+  s: null,
+  w: -1,
+  nw: -1,
+  ne: +1,
+  se: +1,
+  sw: -1
+};
+
+var signsY = {
+  overlay: +1,
+  selection: +1,
+  n: -1,
+  e: null,
+  s: +1,
+  w: null,
+  nw: -1,
+  ne: -1,
+  se: +1,
+  sw: +1
+};
+
+function brush_type(t) {
+  return {type: t};
+}
+
+// Ignore right-click, since that should open the context menu.
+function defaultFilter(event) {
+  return !event.ctrlKey && !event.button;
+}
+
+function defaultExtent() {
+  var svg = this.ownerSVGElement || this;
+  if (svg.hasAttribute("viewBox")) {
+    svg = svg.viewBox.baseVal;
+    return [[svg.x, svg.y], [svg.x + svg.width, svg.y + svg.height]];
+  }
+  return [[0, 0], [svg.width.baseVal.value, svg.height.baseVal.value]];
+}
+
+function defaultTouchable() {
+  return navigator.maxTouchPoints || ("ontouchstart" in this);
+}
+
+// Like d3.local, but with the name “__brush” rather than auto-generated.
+function local(node) {
+  while (!node.__brush) if (!(node = node.parentNode)) return;
+  return node.__brush;
+}
+
+function brush_empty(extent) {
+  return extent[0][0] === extent[1][0]
+      || extent[0][1] === extent[1][1];
+}
+
+function brushSelection(node) {
+  var state = node.__brush;
+  return state ? state.dim.output(state.selection) : null;
+}
+
+function brushX() {
+  return brush_brush(X);
+}
+
+function brushY() {
+  return brush_brush(Y);
+}
+
+/* harmony default export */ var src_brush = (function() {
+  return brush_brush(XY);
+});
+
+function brush_brush(dim) {
+  var extent = defaultExtent,
+      filter = defaultFilter,
+      touchable = defaultTouchable,
+      keys = true,
+      listeners = src_dispatch("start", "brush", "end"),
+      handleSize = 6,
+      touchending;
+
+  function brush(group) {
+    var overlay = group
+        .property("__brush", initialize)
+      .selectAll(".overlay")
+      .data([brush_type("overlay")]);
+
+    overlay.enter().append("rect")
+        .attr("class", "overlay")
+        .attr("pointer-events", "all")
+        .attr("cursor", cursors.overlay)
+      .merge(overlay)
+        .each(function() {
+          var extent = local(this).extent;
+          src_select(this)
+              .attr("x", extent[0][0])
+              .attr("y", extent[0][1])
+              .attr("width", extent[1][0] - extent[0][0])
+              .attr("height", extent[1][1] - extent[0][1]);
+        });
+
+    group.selectAll(".selection")
+      .data([brush_type("selection")])
+      .enter().append("rect")
+        .attr("class", "selection")
+        .attr("cursor", cursors.selection)
+        .attr("fill", "#777")
+        .attr("fill-opacity", 0.3)
+        .attr("stroke", "#fff")
+        .attr("shape-rendering", "crispEdges");
+
+    var handle = group.selectAll(".handle")
+      .data(dim.handles, function(d) { return d.type; });
+
+    handle.exit().remove();
+
+    handle.enter().append("rect")
+        .attr("class", function(d) { return "handle handle--" + d.type; })
+        .attr("cursor", function(d) { return cursors[d.type]; });
+
+    group
+        .each(redraw)
+        .attr("fill", "none")
+        .attr("pointer-events", "all")
+        .on("mousedown.brush", started)
+      .filter(touchable)
+        .on("touchstart.brush", started)
+        .on("touchmove.brush", touchmoved)
+        .on("touchend.brush touchcancel.brush", touchended)
+        .style("touch-action", "none")
+        .style("-webkit-tap-highlight-color", "rgba(0,0,0,0)");
+  }
+
+  brush.move = function(group, selection) {
+    if (group.tween) {
+      group
+          .on("start.brush", function(event) { emitter(this, arguments).beforestart().start(event); })
+          .on("interrupt.brush end.brush", function(event) { emitter(this, arguments).end(event); })
+          .tween("brush", function() {
+            var that = this,
+                state = that.__brush,
+                emit = emitter(that, arguments),
+                selection0 = state.selection,
+                selection1 = dim.input(typeof selection === "function" ? selection.apply(this, arguments) : selection, state.extent),
+                i = src_value(selection0, selection1);
+
+            function tween(t) {
+              state.selection = t === 1 && selection1 === null ? null : i(t);
+              redraw.call(that);
+              emit.brush();
+            }
+
+            return selection0 !== null && selection1 !== null ? tween : tween(1);
+          });
+    } else {
+      group
+          .each(function() {
+            var that = this,
+                args = arguments,
+                state = that.__brush,
+                selection1 = dim.input(typeof selection === "function" ? selection.apply(that, args) : selection, state.extent),
+                emit = emitter(that, args).beforestart();
+
+            interrupt(that);
+            state.selection = selection1 === null ? null : selection1;
+            redraw.call(that);
+            emit.start().brush().end();
+          });
+    }
+  };
+
+  brush.clear = function(group) {
+    brush.move(group, null);
+  };
+
+  function redraw() {
+    var group = src_select(this),
+        selection = local(this).selection;
+
+    if (selection) {
+      group.selectAll(".selection")
+          .style("display", null)
+          .attr("x", selection[0][0])
+          .attr("y", selection[0][1])
+          .attr("width", selection[1][0] - selection[0][0])
+          .attr("height", selection[1][1] - selection[0][1]);
+
+      group.selectAll(".handle")
+          .style("display", null)
+          .attr("x", function(d) { return d.type[d.type.length - 1] === "e" ? selection[1][0] - handleSize / 2 : selection[0][0] - handleSize / 2; })
+          .attr("y", function(d) { return d.type[0] === "s" ? selection[1][1] - handleSize / 2 : selection[0][1] - handleSize / 2; })
+          .attr("width", function(d) { return d.type === "n" || d.type === "s" ? selection[1][0] - selection[0][0] + handleSize : handleSize; })
+          .attr("height", function(d) { return d.type === "e" || d.type === "w" ? selection[1][1] - selection[0][1] + handleSize : handleSize; });
+    }
+
+    else {
+      group.selectAll(".selection,.handle")
+          .style("display", "none")
+          .attr("x", null)
+          .attr("y", null)
+          .attr("width", null)
+          .attr("height", null);
+    }
+  }
+
+  function emitter(that, args, clean) {
+    var emit = that.__brush.emitter;
+    return emit && (!clean || !emit.clean) ? emit : new Emitter(that, args, clean);
+  }
+
+  function Emitter(that, args, clean) {
+    this.that = that;
+    this.args = args;
+    this.state = that.__brush;
+    this.active = 0;
+    this.clean = clean;
+  }
+
+  Emitter.prototype = {
+    beforestart: function() {
+      if (++this.active === 1) this.state.emitter = this, this.starting = true;
+      return this;
+    },
+    start: function(event, mode) {
+      if (this.starting) this.starting = false, this.emit("start", event, mode);
+      else this.emit("brush", event);
+      return this;
+    },
+    brush: function(event, mode) {
+      this.emit("brush", event, mode);
+      return this;
+    },
+    end: function(event, mode) {
+      if (--this.active === 0) delete this.state.emitter, this.emit("end", event, mode);
+      return this;
+    },
+    emit: function(type, event, mode) {
+      var d = src_select(this.that).datum();
+      listeners.call(
+        type,
+        this.that,
+        new BrushEvent(type, {
+          sourceEvent: event,
+          target: brush,
+          selection: dim.output(this.state.selection),
+          mode,
+          dispatch: listeners
+        }),
+        d
+      );
+    }
+  };
+
+  function started(event) {
+    if (touchending && !event.touches) return;
+    if (!filter.apply(this, arguments)) return;
+
+    var that = this,
+        type = event.target.__data__.type,
+        mode = (keys && event.metaKey ? type = "overlay" : type) === "selection" ? MODE_DRAG : (keys && event.altKey ? MODE_CENTER : MODE_HANDLE),
+        signX = dim === Y ? null : signsX[type],
+        signY = dim === X ? null : signsY[type],
+        state = local(that),
+        extent = state.extent,
+        selection = state.selection,
+        W = extent[0][0], w0, w1,
+        N = extent[0][1], n0, n1,
+        E = extent[1][0], e0, e1,
+        S = extent[1][1], s0, s1,
+        dx = 0,
+        dy = 0,
+        moving,
+        shifting = signX && signY && keys && event.shiftKey,
+        lockX,
+        lockY,
+        points = Array.from(event.touches || [event], t => {
+          const i = t.identifier;
+          t = pointer(t, that);
+          t.point0 = t.slice();
+          t.identifier = i;
+          return t;
+        });
+
+    if (type === "overlay") {
+      if (selection) moving = true;
+      const pts = [points[0], points[1] || points[0]];
+      state.selection = selection = [[
+          w0 = dim === Y ? W : brush_min(pts[0][0], pts[1][0]),
+          n0 = dim === X ? N : brush_min(pts[0][1], pts[1][1])
+        ], [
+          e0 = dim === Y ? E : brush_max(pts[0][0], pts[1][0]),
+          s0 = dim === X ? S : brush_max(pts[0][1], pts[1][1])
+        ]];
+      if (points.length > 1) move();
+    } else {
+      w0 = selection[0][0];
+      n0 = selection[0][1];
+      e0 = selection[1][0];
+      s0 = selection[1][1];
+    }
+
+    w1 = w0;
+    n1 = n0;
+    e1 = e0;
+    s1 = s0;
+
+    var group = src_select(that)
+        .attr("pointer-events", "none");
+
+    var overlay = group.selectAll(".overlay")
+        .attr("cursor", cursors[type]);
+
+    interrupt(that);
+    var emit = emitter(that, arguments, true).beforestart();
+
+    if (event.touches) {
+      emit.moved = moved;
+      emit.ended = ended;
+    } else {
+      var view = src_select(event.view)
+          .on("mousemove.brush", moved, true)
+          .on("mouseup.brush", ended, true);
+      if (keys) view
+          .on("keydown.brush", keydowned, true)
+          .on("keyup.brush", keyupped, true)
+
+      nodrag(event.view);
+    }
+
+    redraw.call(that);
+    emit.start(event, mode.name);
+
+    function moved(event) {
+      for (const p of event.changedTouches || [event]) {
+        for (const d of points)
+          if (d.identifier === p.identifier) d.cur = pointer(p, that);
+      }
+      if (shifting && !lockX && !lockY && points.length === 1) {
+        const point = points[0];
+        if (abs(point.cur[0] - point[0]) > abs(point.cur[1] - point[1]))
+          lockY = true;
+        else
+          lockX = true;
+      }
+      for (const point of points)
+        if (point.cur) point[0] = point.cur[0], point[1] = point.cur[1];
+      moving = true;
+      src_noevent(event);
+      move(event);
+    }
+
+    function move(event) {
+      const point = points[0], point0 = point.point0;
+      var t;
+
+      dx = point[0] - point0[0];
+      dy = point[1] - point0[1];
+
+      switch (mode) {
+        case MODE_SPACE:
+        case MODE_DRAG: {
+          if (signX) dx = brush_max(W - w0, brush_min(E - e0, dx)), w1 = w0 + dx, e1 = e0 + dx;
+          if (signY) dy = brush_max(N - n0, brush_min(S - s0, dy)), n1 = n0 + dy, s1 = s0 + dy;
+          break;
+        }
+        case MODE_HANDLE: {
+          if (points[1]) {
+            if (signX) w1 = brush_max(W, brush_min(E, points[0][0])), e1 = brush_max(W, brush_min(E, points[1][0])), signX = 1;
+            if (signY) n1 = brush_max(N, brush_min(S, points[0][1])), s1 = brush_max(N, brush_min(S, points[1][1])), signY = 1;
+          } else {
+            if (signX < 0) dx = brush_max(W - w0, brush_min(E - w0, dx)), w1 = w0 + dx, e1 = e0;
+            else if (signX > 0) dx = brush_max(W - e0, brush_min(E - e0, dx)), w1 = w0, e1 = e0 + dx;
+            if (signY < 0) dy = brush_max(N - n0, brush_min(S - n0, dy)), n1 = n0 + dy, s1 = s0;
+            else if (signY > 0) dy = brush_max(N - s0, brush_min(S - s0, dy)), n1 = n0, s1 = s0 + dy;
+          }
+          break;
+        }
+        case MODE_CENTER: {
+          if (signX) w1 = brush_max(W, brush_min(E, w0 - dx * signX)), e1 = brush_max(W, brush_min(E, e0 + dx * signX));
+          if (signY) n1 = brush_max(N, brush_min(S, n0 - dy * signY)), s1 = brush_max(N, brush_min(S, s0 + dy * signY));
+          break;
+        }
+      }
+
+      if (e1 < w1) {
+        signX *= -1;
+        t = w0, w0 = e0, e0 = t;
+        t = w1, w1 = e1, e1 = t;
+        if (type in flipX) overlay.attr("cursor", cursors[type = flipX[type]]);
+      }
+
+      if (s1 < n1) {
+        signY *= -1;
+        t = n0, n0 = s0, s0 = t;
+        t = n1, n1 = s1, s1 = t;
+        if (type in flipY) overlay.attr("cursor", cursors[type = flipY[type]]);
+      }
+
+      if (state.selection) selection = state.selection; // May be set by brush.move!
+      if (lockX) w1 = selection[0][0], e1 = selection[1][0];
+      if (lockY) n1 = selection[0][1], s1 = selection[1][1];
+
+      if (selection[0][0] !== w1
+          || selection[0][1] !== n1
+          || selection[1][0] !== e1
+          || selection[1][1] !== s1) {
+        state.selection = [[w1, n1], [e1, s1]];
+        redraw.call(that);
+        emit.brush(event, mode.name);
+      }
+    }
+
+    function ended(event) {
+      noevent_nopropagation(event);
+      if (event.touches) {
+        if (event.touches.length) return;
+        if (touchending) clearTimeout(touchending);
+        touchending = setTimeout(function() { touchending = null; }, 500); // Ghost clicks are delayed!
+      } else {
+        yesdrag(event.view, moving);
+        view.on("keydown.brush keyup.brush mousemove.brush mouseup.brush", null);
+      }
+      group.attr("pointer-events", "all");
+      overlay.attr("cursor", cursors.overlay);
+      if (state.selection) selection = state.selection; // May be set by brush.move (on start)!
+      if (brush_empty(selection)) state.selection = null, redraw.call(that);
+      emit.end(event, mode.name);
+    }
+
+    function keydowned(event) {
+      switch (event.keyCode) {
+        case 16: { // SHIFT
+          shifting = signX && signY;
+          break;
+        }
+        case 18: { // ALT
+          if (mode === MODE_HANDLE) {
+            if (signX) e0 = e1 - dx * signX, w0 = w1 + dx * signX;
+            if (signY) s0 = s1 - dy * signY, n0 = n1 + dy * signY;
+            mode = MODE_CENTER;
+            move();
+          }
+          break;
+        }
+        case 32: { // SPACE; takes priority over ALT
+          if (mode === MODE_HANDLE || mode === MODE_CENTER) {
+            if (signX < 0) e0 = e1 - dx; else if (signX > 0) w0 = w1 - dx;
+            if (signY < 0) s0 = s1 - dy; else if (signY > 0) n0 = n1 - dy;
+            mode = MODE_SPACE;
+            overlay.attr("cursor", cursors.selection);
+            move();
+          }
+          break;
+        }
+        default: return;
+      }
+      src_noevent(event);
+    }
+
+    function keyupped(event) {
+      switch (event.keyCode) {
+        case 16: { // SHIFT
+          if (shifting) {
+            lockX = lockY = shifting = false;
+            move();
+          }
+          break;
+        }
+        case 18: { // ALT
+          if (mode === MODE_CENTER) {
+            if (signX < 0) e0 = e1; else if (signX > 0) w0 = w1;
+            if (signY < 0) s0 = s1; else if (signY > 0) n0 = n1;
+            mode = MODE_HANDLE;
+            move();
+          }
+          break;
+        }
+        case 32: { // SPACE
+          if (mode === MODE_SPACE) {
+            if (event.altKey) {
+              if (signX) e0 = e1 - dx * signX, w0 = w1 + dx * signX;
+              if (signY) s0 = s1 - dy * signY, n0 = n1 + dy * signY;
+              mode = MODE_CENTER;
+            } else {
+              if (signX < 0) e0 = e1; else if (signX > 0) w0 = w1;
+              if (signY < 0) s0 = s1; else if (signY > 0) n0 = n1;
+              mode = MODE_HANDLE;
+            }
+            overlay.attr("cursor", cursors[type]);
+            move();
+          }
+          break;
+        }
+        default: return;
+      }
+      src_noevent(event);
+    }
+  }
+
+  function touchmoved(event) {
+    emitter(this, arguments).moved(event);
+  }
+
+  function touchended(event) {
+    emitter(this, arguments).ended(event);
+  }
+
+  function initialize() {
+    var state = this.__brush || {selection: null};
+    state.extent = number2(extent.apply(this, arguments));
+    state.dim = dim;
+    return state;
+  }
+
+  brush.extent = function(_) {
+    return arguments.length ? (extent = typeof _ === "function" ? _ : d3_brush_src_constant(number2(_)), brush) : extent;
+  };
+
+  brush.filter = function(_) {
+    return arguments.length ? (filter = typeof _ === "function" ? _ : d3_brush_src_constant(!!_), brush) : filter;
+  };
+
+  brush.touchable = function(_) {
+    return arguments.length ? (touchable = typeof _ === "function" ? _ : d3_brush_src_constant(!!_), brush) : touchable;
+  };
+
+  brush.handleSize = function(_) {
+    return arguments.length ? (handleSize = +_, brush) : handleSize;
+  };
+
+  brush.keyModifiers = function(_) {
+    return arguments.length ? (keys = !!_, brush) : keys;
+  };
+
+  brush.on = function() {
+    var value = listeners.on.apply(listeners, arguments);
+    return value === listeners ? brush : value;
+  };
+
+  return brush;
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-brush/src/index.js
+
+
+// CONCATENATED MODULE: ./node_modules/d3-scale/src/init.js
+function initRange(domain, range) {
+  switch (arguments.length) {
+    case 0: break;
+    case 1: this.range(domain); break;
+    default: this.range(range).domain(domain); break;
+  }
+  return this;
+}
+
+function initInterpolator(domain, interpolator) {
+  switch (arguments.length) {
+    case 0: break;
+    case 1: {
+      if (typeof domain === "function") this.interpolator(domain);
+      else this.range(domain);
+      break;
+    }
+    default: {
+      this.domain(domain);
+      if (typeof interpolator === "function") this.interpolator(interpolator);
+      else this.range(interpolator);
+      break;
+    }
+  }
+  return this;
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-scale/src/ordinal.js
+
+
+const implicit = Symbol("implicit");
+
+function ordinal() {
+  var index = new Map(),
+      domain = [],
+      range = [],
+      unknown = implicit;
+
+  function scale(d) {
+    var key = d + "", i = index.get(key);
+    if (!i) {
+      if (unknown !== implicit) return unknown;
+      index.set(key, i = domain.push(d));
+    }
+    return range[(i - 1) % range.length];
+  }
+
+  scale.domain = function(_) {
+    if (!arguments.length) return domain.slice();
+    domain = [], index = new Map();
+    for (const value of _) {
+      const key = value + "";
+      if (index.has(key)) continue;
+      index.set(key, domain.push(value));
+    }
+    return scale;
+  };
+
+  scale.range = function(_) {
+    return arguments.length ? (range = Array.from(_), scale) : range.slice();
+  };
+
+  scale.unknown = function(_) {
+    return arguments.length ? (unknown = _, scale) : unknown;
+  };
+
+  scale.copy = function() {
+    return ordinal(domain, range).unknown(unknown);
+  };
+
+  initRange.apply(scale, arguments);
+
+  return scale;
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-scale/src/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CONCATENATED MODULE: ./node_modules/d3-scale-chromatic/src/colors.js
+/* harmony default export */ var src_colors = (function(specifier) {
+  var n = specifier.length / 6 | 0, colors = new Array(n), i = 0;
+  while (i < n) colors[i] = "#" + specifier.slice(i * 6, ++i * 6);
+  return colors;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-scale-chromatic/src/categorical/category10.js
+
+
+/* harmony default export */ var category10 = (src_colors("1f77b4ff7f0e2ca02cd627289467bd8c564be377c27f7f7fbcbd2217becf"));
+
+// CONCATENATED MODULE: ./node_modules/d3-scale-chromatic/src/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/selectAll.js
+
+
+
+/* harmony default export */ var src_selectAll = (function(selector) {
+  return typeof selector === "string"
+      ? new Selection([document.querySelectorAll(selector)], [document.documentElement])
+      : new Selection([selector == null ? [] : src_array(selector)], selection_root);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-selection/src/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CONCATENATED MODULE: ./node_modules/d3-interpolate/src/zoom.js
+var epsilon2 = 1e-12;
+
+function cosh(x) {
+  return ((x = Math.exp(x)) + 1 / x) / 2;
+}
+
+function sinh(x) {
+  return ((x = Math.exp(x)) - 1 / x) / 2;
+}
+
+function tanh(x) {
+  return ((x = Math.exp(2 * x)) - 1) / (x + 1);
+}
+
+/* harmony default export */ var src_zoom = ((function zoomRho(rho, rho2, rho4) {
+
+  // p0 = [ux0, uy0, w0]
+  // p1 = [ux1, uy1, w1]
+  function zoom(p0, p1) {
+    var ux0 = p0[0], uy0 = p0[1], w0 = p0[2],
+        ux1 = p1[0], uy1 = p1[1], w1 = p1[2],
+        dx = ux1 - ux0,
+        dy = uy1 - uy0,
+        d2 = dx * dx + dy * dy,
+        i,
+        S;
+
+    // Special case for u0 ≅ u1.
+    if (d2 < epsilon2) {
+      S = Math.log(w1 / w0) / rho;
+      i = function(t) {
+        return [
+          ux0 + t * dx,
+          uy0 + t * dy,
+          w0 * Math.exp(rho * t * S)
+        ];
+      }
+    }
+
+    // General case.
+    else {
+      var d1 = Math.sqrt(d2),
+          b0 = (w1 * w1 - w0 * w0 + rho4 * d2) / (2 * w0 * rho2 * d1),
+          b1 = (w1 * w1 - w0 * w0 - rho4 * d2) / (2 * w1 * rho2 * d1),
+          r0 = Math.log(Math.sqrt(b0 * b0 + 1) - b0),
+          r1 = Math.log(Math.sqrt(b1 * b1 + 1) - b1);
+      S = (r1 - r0) / rho;
+      i = function(t) {
+        var s = t * S,
+            coshr0 = cosh(r0),
+            u = w0 / (rho2 * d1) * (coshr0 * tanh(rho * s + r0) - sinh(r0));
+        return [
+          ux0 + u * dx,
+          uy0 + u * dy,
+          w0 * coshr0 / cosh(rho * s + r0)
+        ];
+      }
+    }
+
+    i.duration = S * 1000 * rho / Math.SQRT2;
+
+    return i;
+  }
+
+  zoom.rho = function(_) {
+    var _1 = Math.max(1e-3, +_), _2 = _1 * _1, _4 = _2 * _2;
+    return zoomRho(_1, _2, _4);
+  };
+
+  return zoom;
+})(Math.SQRT2, 2, 4));
+
+// CONCATENATED MODULE: ./node_modules/d3-zoom/src/constant.js
+/* harmony default export */ var d3_zoom_src_constant = (x => () => x);
+
+// CONCATENATED MODULE: ./node_modules/d3-zoom/src/event.js
+function ZoomEvent(type, {
+  sourceEvent,
+  target,
+  transform,
+  dispatch
+}) {
+  Object.defineProperties(this, {
+    type: {value: type, enumerable: true, configurable: true},
+    sourceEvent: {value: sourceEvent, enumerable: true, configurable: true},
+    target: {value: target, enumerable: true, configurable: true},
+    transform: {value: transform, enumerable: true, configurable: true},
+    _: {value: dispatch}
+  });
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-zoom/src/transform.js
+function Transform(k, x, y) {
+  this.k = k;
+  this.x = x;
+  this.y = y;
+}
+
+Transform.prototype = {
+  constructor: Transform,
+  scale: function(k) {
+    return k === 1 ? this : new Transform(this.k * k, this.x, this.y);
+  },
+  translate: function(x, y) {
+    return x === 0 & y === 0 ? this : new Transform(this.k, this.x + this.k * x, this.y + this.k * y);
+  },
+  apply: function(point) {
+    return [point[0] * this.k + this.x, point[1] * this.k + this.y];
+  },
+  applyX: function(x) {
+    return x * this.k + this.x;
+  },
+  applyY: function(y) {
+    return y * this.k + this.y;
+  },
+  invert: function(location) {
+    return [(location[0] - this.x) / this.k, (location[1] - this.y) / this.k];
+  },
+  invertX: function(x) {
+    return (x - this.x) / this.k;
+  },
+  invertY: function(y) {
+    return (y - this.y) / this.k;
+  },
+  rescaleX: function(x) {
+    return x.copy().domain(x.range().map(this.invertX, this).map(x.invert, x));
+  },
+  rescaleY: function(y) {
+    return y.copy().domain(y.range().map(this.invertY, this).map(y.invert, y));
+  },
+  toString: function() {
+    return "translate(" + this.x + "," + this.y + ") scale(" + this.k + ")";
+  }
+};
+
+var transform_identity = new Transform(1, 0, 0);
+
+transform_transform.prototype = Transform.prototype;
+
+function transform_transform(node) {
+  while (!node.__zoom) if (!(node = node.parentNode)) return transform_identity;
+  return node.__zoom;
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-zoom/src/noevent.js
+function src_noevent_nopropagation(event) {
+  event.stopImmediatePropagation();
+}
+
+/* harmony default export */ var d3_zoom_src_noevent = (function(event) {
+  event.preventDefault();
+  event.stopImmediatePropagation();
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-zoom/src/zoom.js
+
+
+
+
+
+
+
+
+
+
+// Ignore right-click, since that should open the context menu.
+// except for pinch-to-zoom, which is sent as a wheel+ctrlKey event
+function zoom_defaultFilter(event) {
+  return (!event.ctrlKey || event.type === 'wheel') && !event.button;
+}
+
+function zoom_defaultExtent() {
+  var e = this;
+  if (e instanceof SVGElement) {
+    e = e.ownerSVGElement || e;
+    if (e.hasAttribute("viewBox")) {
+      e = e.viewBox.baseVal;
+      return [[e.x, e.y], [e.x + e.width, e.y + e.height]];
+    }
+    return [[0, 0], [e.width.baseVal.value, e.height.baseVal.value]];
+  }
+  return [[0, 0], [e.clientWidth, e.clientHeight]];
+}
+
+function defaultTransform() {
+  return this.__zoom || transform_identity;
+}
+
+function defaultWheelDelta(event) {
+  return -event.deltaY * (event.deltaMode === 1 ? 0.05 : event.deltaMode ? 1 : 0.002) * (event.ctrlKey ? 10 : 1);
+}
+
+function zoom_defaultTouchable() {
+  return navigator.maxTouchPoints || ("ontouchstart" in this);
+}
+
+function defaultConstrain(transform, extent, translateExtent) {
+  var dx0 = transform.invertX(extent[0][0]) - translateExtent[0][0],
+      dx1 = transform.invertX(extent[1][0]) - translateExtent[1][0],
+      dy0 = transform.invertY(extent[0][1]) - translateExtent[0][1],
+      dy1 = transform.invertY(extent[1][1]) - translateExtent[1][1];
+  return transform.translate(
+    dx1 > dx0 ? (dx0 + dx1) / 2 : Math.min(0, dx0) || Math.max(0, dx1),
+    dy1 > dy0 ? (dy0 + dy1) / 2 : Math.min(0, dy0) || Math.max(0, dy1)
+  );
+}
+
+/* harmony default export */ var d3_zoom_src_zoom = (function() {
+  var filter = zoom_defaultFilter,
+      extent = zoom_defaultExtent,
+      constrain = defaultConstrain,
+      wheelDelta = defaultWheelDelta,
+      touchable = zoom_defaultTouchable,
+      scaleExtent = [0, Infinity],
+      translateExtent = [[-Infinity, -Infinity], [Infinity, Infinity]],
+      duration = 250,
+      interpolate = src_zoom,
+      listeners = src_dispatch("start", "zoom", "end"),
+      touchstarting,
+      touchfirst,
+      touchending,
+      touchDelay = 500,
+      wheelDelay = 150,
+      clickDistance2 = 0,
+      tapDistance = 10;
+
+  function zoom(selection) {
+    selection
+        .property("__zoom", defaultTransform)
+        .on("wheel.zoom", wheeled)
+        .on("mousedown.zoom", mousedowned)
+        .on("dblclick.zoom", dblclicked)
+      .filter(touchable)
+        .on("touchstart.zoom", touchstarted)
+        .on("touchmove.zoom", touchmoved)
+        .on("touchend.zoom touchcancel.zoom", touchended)
+        .style("-webkit-tap-highlight-color", "rgba(0,0,0,0)");
+  }
+
+  zoom.transform = function(collection, transform, point, event) {
+    var selection = collection.selection ? collection.selection() : collection;
+    selection.property("__zoom", defaultTransform);
+    if (collection !== selection) {
+      schedule(collection, transform, point, event);
+    } else {
+      selection.interrupt().each(function() {
+        gesture(this, arguments)
+          .event(event)
+          .start()
+          .zoom(null, typeof transform === "function" ? transform.apply(this, arguments) : transform)
+          .end();
+      });
+    }
+  };
+
+  zoom.scaleBy = function(selection, k, p, event) {
+    zoom.scaleTo(selection, function() {
+      var k0 = this.__zoom.k,
+          k1 = typeof k === "function" ? k.apply(this, arguments) : k;
+      return k0 * k1;
+    }, p, event);
+  };
+
+  zoom.scaleTo = function(selection, k, p, event) {
+    zoom.transform(selection, function() {
+      var e = extent.apply(this, arguments),
+          t0 = this.__zoom,
+          p0 = p == null ? centroid(e) : typeof p === "function" ? p.apply(this, arguments) : p,
+          p1 = t0.invert(p0),
+          k1 = typeof k === "function" ? k.apply(this, arguments) : k;
+      return constrain(translate(scale(t0, k1), p0, p1), e, translateExtent);
+    }, p, event);
+  };
+
+  zoom.translateBy = function(selection, x, y, event) {
+    zoom.transform(selection, function() {
+      return constrain(this.__zoom.translate(
+        typeof x === "function" ? x.apply(this, arguments) : x,
+        typeof y === "function" ? y.apply(this, arguments) : y
+      ), extent.apply(this, arguments), translateExtent);
+    }, null, event);
+  };
+
+  zoom.translateTo = function(selection, x, y, p, event) {
+    zoom.transform(selection, function() {
+      var e = extent.apply(this, arguments),
+          t = this.__zoom,
+          p0 = p == null ? centroid(e) : typeof p === "function" ? p.apply(this, arguments) : p;
+      return constrain(transform_identity.translate(p0[0], p0[1]).scale(t.k).translate(
+        typeof x === "function" ? -x.apply(this, arguments) : -x,
+        typeof y === "function" ? -y.apply(this, arguments) : -y
+      ), e, translateExtent);
+    }, p, event);
+  };
+
+  function scale(transform, k) {
+    k = Math.max(scaleExtent[0], Math.min(scaleExtent[1], k));
+    return k === transform.k ? transform : new Transform(k, transform.x, transform.y);
+  }
+
+  function translate(transform, p0, p1) {
+    var x = p0[0] - p1[0] * transform.k, y = p0[1] - p1[1] * transform.k;
+    return x === transform.x && y === transform.y ? transform : new Transform(transform.k, x, y);
+  }
+
+  function centroid(extent) {
+    return [(+extent[0][0] + +extent[1][0]) / 2, (+extent[0][1] + +extent[1][1]) / 2];
+  }
+
+  function schedule(transition, transform, point, event) {
+    transition
+        .on("start.zoom", function() { gesture(this, arguments).event(event).start(); })
+        .on("interrupt.zoom end.zoom", function() { gesture(this, arguments).event(event).end(); })
+        .tween("zoom", function() {
+          var that = this,
+              args = arguments,
+              g = gesture(that, args).event(event),
+              e = extent.apply(that, args),
+              p = point == null ? centroid(e) : typeof point === "function" ? point.apply(that, args) : point,
+              w = Math.max(e[1][0] - e[0][0], e[1][1] - e[0][1]),
+              a = that.__zoom,
+              b = typeof transform === "function" ? transform.apply(that, args) : transform,
+              i = interpolate(a.invert(p).concat(w / a.k), b.invert(p).concat(w / b.k));
+          return function(t) {
+            if (t === 1) t = b; // Avoid rounding error on end.
+            else { var l = i(t), k = w / l[2]; t = new Transform(k, p[0] - l[0] * k, p[1] - l[1] * k); }
+            g.zoom(null, t);
+          };
+        });
+  }
+
+  function gesture(that, args, clean) {
+    return (!clean && that.__zooming) || new Gesture(that, args);
+  }
+
+  function Gesture(that, args) {
+    this.that = that;
+    this.args = args;
+    this.active = 0;
+    this.sourceEvent = null;
+    this.extent = extent.apply(that, args);
+    this.taps = 0;
+  }
+
+  Gesture.prototype = {
+    event: function(event) {
+      if (event) this.sourceEvent = event;
+      return this;
+    },
+    start: function() {
+      if (++this.active === 1) {
+        this.that.__zooming = this;
+        this.emit("start");
+      }
+      return this;
+    },
+    zoom: function(key, transform) {
+      if (this.mouse && key !== "mouse") this.mouse[1] = transform.invert(this.mouse[0]);
+      if (this.touch0 && key !== "touch") this.touch0[1] = transform.invert(this.touch0[0]);
+      if (this.touch1 && key !== "touch") this.touch1[1] = transform.invert(this.touch1[0]);
+      this.that.__zoom = transform;
+      this.emit("zoom");
+      return this;
+    },
+    end: function() {
+      if (--this.active === 0) {
+        delete this.that.__zooming;
+        this.emit("end");
+      }
+      return this;
+    },
+    emit: function(type) {
+      var d = src_select(this.that).datum();
+      listeners.call(
+        type,
+        this.that,
+        new ZoomEvent(type, {
+          sourceEvent: this.sourceEvent,
+          target: zoom,
+          type,
+          transform: this.that.__zoom,
+          dispatch: listeners
+        }),
+        d
+      );
+    }
+  };
+
+  function wheeled(event, ...args) {
+    if (!filter.apply(this, arguments)) return;
+    var g = gesture(this, args).event(event),
+        t = this.__zoom,
+        k = Math.max(scaleExtent[0], Math.min(scaleExtent[1], t.k * Math.pow(2, wheelDelta.apply(this, arguments)))),
+        p = pointer(event);
+
+    // If the mouse is in the same location as before, reuse it.
+    // If there were recent wheel events, reset the wheel idle timeout.
+    if (g.wheel) {
+      if (g.mouse[0][0] !== p[0] || g.mouse[0][1] !== p[1]) {
+        g.mouse[1] = t.invert(g.mouse[0] = p);
+      }
+      clearTimeout(g.wheel);
+    }
+
+    // If this wheel event won’t trigger a transform change, ignore it.
+    else if (t.k === k) return;
+
+    // Otherwise, capture the mouse point and location at the start.
+    else {
+      g.mouse = [p, t.invert(p)];
+      interrupt(this);
+      g.start();
+    }
+
+    d3_zoom_src_noevent(event);
+    g.wheel = setTimeout(wheelidled, wheelDelay);
+    g.zoom("mouse", constrain(translate(scale(t, k), g.mouse[0], g.mouse[1]), g.extent, translateExtent));
+
+    function wheelidled() {
+      g.wheel = null;
+      g.end();
+    }
+  }
+
+  function mousedowned(event, ...args) {
+    if (touchending || !filter.apply(this, arguments)) return;
+    var g = gesture(this, args, true).event(event),
+        v = src_select(event.view).on("mousemove.zoom", mousemoved, true).on("mouseup.zoom", mouseupped, true),
+        p = pointer(event, currentTarget),
+        currentTarget = event.currentTarget,
+        x0 = event.clientX,
+        y0 = event.clientY;
+
+    nodrag(event.view);
+    src_noevent_nopropagation(event);
+    g.mouse = [p, this.__zoom.invert(p)];
+    interrupt(this);
+    g.start();
+
+    function mousemoved(event) {
+      d3_zoom_src_noevent(event);
+      if (!g.moved) {
+        var dx = event.clientX - x0, dy = event.clientY - y0;
+        g.moved = dx * dx + dy * dy > clickDistance2;
+      }
+      g.event(event)
+       .zoom("mouse", constrain(translate(g.that.__zoom, g.mouse[0] = pointer(event, currentTarget), g.mouse[1]), g.extent, translateExtent));
+    }
+
+    function mouseupped(event) {
+      v.on("mousemove.zoom mouseup.zoom", null);
+      yesdrag(event.view, g.moved);
+      d3_zoom_src_noevent(event);
+      g.event(event).end();
+    }
+  }
+
+  function dblclicked(event, ...args) {
+    if (!filter.apply(this, arguments)) return;
+    var t0 = this.__zoom,
+        p0 = pointer(event.changedTouches ? event.changedTouches[0] : event, this),
+        p1 = t0.invert(p0),
+        k1 = t0.k * (event.shiftKey ? 0.5 : 2),
+        t1 = constrain(translate(scale(t0, k1), p0, p1), extent.apply(this, args), translateExtent);
+
+    d3_zoom_src_noevent(event);
+    if (duration > 0) src_select(this).transition().duration(duration).call(schedule, t1, p0, event);
+    else src_select(this).call(zoom.transform, t1, p0, event);
+  }
+
+  function touchstarted(event, ...args) {
+    if (!filter.apply(this, arguments)) return;
+    var touches = event.touches,
+        n = touches.length,
+        g = gesture(this, args, event.changedTouches.length === n).event(event),
+        started, i, t, p;
+
+    src_noevent_nopropagation(event);
+    for (i = 0; i < n; ++i) {
+      t = touches[i], p = pointer(t, this);
+      p = [p, this.__zoom.invert(p), t.identifier];
+      if (!g.touch0) g.touch0 = p, started = true, g.taps = 1 + !!touchstarting;
+      else if (!g.touch1 && g.touch0[2] !== p[2]) g.touch1 = p, g.taps = 0;
+    }
+
+    if (touchstarting) touchstarting = clearTimeout(touchstarting);
+
+    if (started) {
+      if (g.taps < 2) touchfirst = p[0], touchstarting = setTimeout(function() { touchstarting = null; }, touchDelay);
+      interrupt(this);
+      g.start();
+    }
+  }
+
+  function touchmoved(event, ...args) {
+    if (!this.__zooming) return;
+    var g = gesture(this, args).event(event),
+        touches = event.changedTouches,
+        n = touches.length, i, t, p, l;
+
+    d3_zoom_src_noevent(event);
+    for (i = 0; i < n; ++i) {
+      t = touches[i], p = pointer(t, this);
+      if (g.touch0 && g.touch0[2] === t.identifier) g.touch0[0] = p;
+      else if (g.touch1 && g.touch1[2] === t.identifier) g.touch1[0] = p;
+    }
+    t = g.that.__zoom;
+    if (g.touch1) {
+      var p0 = g.touch0[0], l0 = g.touch0[1],
+          p1 = g.touch1[0], l1 = g.touch1[1],
+          dp = (dp = p1[0] - p0[0]) * dp + (dp = p1[1] - p0[1]) * dp,
+          dl = (dl = l1[0] - l0[0]) * dl + (dl = l1[1] - l0[1]) * dl;
+      t = scale(t, Math.sqrt(dp / dl));
+      p = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2];
+      l = [(l0[0] + l1[0]) / 2, (l0[1] + l1[1]) / 2];
+    }
+    else if (g.touch0) p = g.touch0[0], l = g.touch0[1];
+    else return;
+
+    g.zoom("touch", constrain(translate(t, p, l), g.extent, translateExtent));
+  }
+
+  function touchended(event, ...args) {
+    if (!this.__zooming) return;
+    var g = gesture(this, args).event(event),
+        touches = event.changedTouches,
+        n = touches.length, i, t;
+
+    src_noevent_nopropagation(event);
+    if (touchending) clearTimeout(touchending);
+    touchending = setTimeout(function() { touchending = null; }, touchDelay);
+    for (i = 0; i < n; ++i) {
+      t = touches[i];
+      if (g.touch0 && g.touch0[2] === t.identifier) delete g.touch0;
+      else if (g.touch1 && g.touch1[2] === t.identifier) delete g.touch1;
+    }
+    if (g.touch1 && !g.touch0) g.touch0 = g.touch1, delete g.touch1;
+    if (g.touch0) g.touch0[1] = this.__zoom.invert(g.touch0[0]);
+    else {
+      g.end();
+      // If this was a dbltap, reroute to the (optional) dblclick.zoom handler.
+      if (g.taps === 2) {
+        t = pointer(t, this);
+        if (Math.hypot(touchfirst[0] - t[0], touchfirst[1] - t[1]) < tapDistance) {
+          var p = src_select(this).on("dblclick.zoom");
+          if (p) p.apply(this, arguments);
+        }
+      }
+    }
+  }
+
+  zoom.wheelDelta = function(_) {
+    return arguments.length ? (wheelDelta = typeof _ === "function" ? _ : d3_zoom_src_constant(+_), zoom) : wheelDelta;
+  };
+
+  zoom.filter = function(_) {
+    return arguments.length ? (filter = typeof _ === "function" ? _ : d3_zoom_src_constant(!!_), zoom) : filter;
+  };
+
+  zoom.touchable = function(_) {
+    return arguments.length ? (touchable = typeof _ === "function" ? _ : d3_zoom_src_constant(!!_), zoom) : touchable;
+  };
+
+  zoom.extent = function(_) {
+    return arguments.length ? (extent = typeof _ === "function" ? _ : d3_zoom_src_constant([[+_[0][0], +_[0][1]], [+_[1][0], +_[1][1]]]), zoom) : extent;
+  };
+
+  zoom.scaleExtent = function(_) {
+    return arguments.length ? (scaleExtent[0] = +_[0], scaleExtent[1] = +_[1], zoom) : [scaleExtent[0], scaleExtent[1]];
+  };
+
+  zoom.translateExtent = function(_) {
+    return arguments.length ? (translateExtent[0][0] = +_[0][0], translateExtent[1][0] = +_[1][0], translateExtent[0][1] = +_[0][1], translateExtent[1][1] = +_[1][1], zoom) : [[translateExtent[0][0], translateExtent[0][1]], [translateExtent[1][0], translateExtent[1][1]]];
+  };
+
+  zoom.constrain = function(_) {
+    return arguments.length ? (constrain = _, zoom) : constrain;
+  };
+
+  zoom.duration = function(_) {
+    return arguments.length ? (duration = +_, zoom) : duration;
+  };
+
+  zoom.interpolate = function(_) {
+    return arguments.length ? (interpolate = _, zoom) : interpolate;
+  };
+
+  zoom.on = function() {
+    var value = listeners.on.apply(listeners, arguments);
+    return value === listeners ? zoom : value;
+  };
+
+  zoom.clickDistance = function(_) {
+    return arguments.length ? (clickDistance2 = (_ = +_) * _, zoom) : Math.sqrt(clickDistance2);
+  };
+
+  zoom.tapDistance = function(_) {
+    return arguments.length ? (tapDistance = +_, zoom) : tapDistance;
+  };
+
+  return zoom;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-zoom/src/index.js
+
+
+
+// CONCATENATED MODULE: ./node_modules/d3/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/ascending.js
+/* harmony default export */ var src_ascending = (function(a, b) {
+  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/bisector.js
+
+
+/* harmony default export */ var bisector = (function(compare) {
+  if (compare.length === 1) compare = ascendingComparator(compare);
+  return {
+    left: function(a, x, lo, hi) {
+      if (lo == null) lo = 0;
+      if (hi == null) hi = a.length;
+      while (lo < hi) {
+        var mid = lo + hi >>> 1;
+        if (compare(a[mid], x) < 0) lo = mid + 1;
+        else hi = mid;
+      }
+      return lo;
+    },
+    right: function(a, x, lo, hi) {
+      if (lo == null) lo = 0;
+      if (hi == null) hi = a.length;
+      while (lo < hi) {
+        var mid = lo + hi >>> 1;
+        if (compare(a[mid], x) > 0) hi = mid;
+        else lo = mid + 1;
+      }
+      return lo;
+    }
+  };
+});
+
+function ascendingComparator(f) {
+  return function(d, x) {
+    return src_ascending(f(d), x);
+  };
+}
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/bisect.js
+
+
+
+var ascendingBisect = bisector(src_ascending);
+var bisectRight = ascendingBisect.right;
+var bisectLeft = ascendingBisect.left;
+/* harmony default export */ var bisect = (bisectRight);
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/pairs.js
+/* harmony default export */ var pairs = (function(array, f) {
+  if (f == null) f = pair;
+  var i = 0, n = array.length - 1, p = array[0], pairs = new Array(n < 0 ? 0 : n);
+  while (i < n) pairs[i] = f(p, p = array[++i]);
+  return pairs;
+});
+
+function pair(a, b) {
+  return [a, b];
+}
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/cross.js
+
+
+/* harmony default export */ var cross = (function(values0, values1, reduce) {
+  var n0 = values0.length,
+      n1 = values1.length,
+      values = new Array(n0 * n1),
+      i0,
+      i1,
+      i,
+      value0;
+
+  if (reduce == null) reduce = pair;
+
+  for (i0 = i = 0; i0 < n0; ++i0) {
+    for (value0 = values0[i0], i1 = 0; i1 < n1; ++i1, ++i) {
+      values[i] = reduce(value0, values1[i1]);
+    }
+  }
+
+  return values;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/descending.js
+/* harmony default export */ var descending = (function(a, b) {
+  return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/number.js
+/* harmony default export */ var src_number = (function(x) {
+  return x === null ? NaN : +x;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/variance.js
+
+
+/* harmony default export */ var variance = (function(values, valueof) {
+  var n = values.length,
+      m = 0,
+      i = -1,
+      mean = 0,
+      value,
+      delta,
+      sum = 0;
+
+  if (valueof == null) {
+    while (++i < n) {
+      if (!isNaN(value = src_number(values[i]))) {
+        delta = value - mean;
+        mean += delta / ++m;
+        sum += delta * (value - mean);
+      }
+    }
+  }
+
+  else {
+    while (++i < n) {
+      if (!isNaN(value = src_number(valueof(values[i], i, values)))) {
+        delta = value - mean;
+        mean += delta / ++m;
+        sum += delta * (value - mean);
+      }
+    }
+  }
+
+  if (m > 1) return sum / (m - 1);
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/deviation.js
+
+
+/* harmony default export */ var deviation = (function(array, f) {
+  var v = variance(array, f);
+  return v ? Math.sqrt(v) : v;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/extent.js
+/* harmony default export */ var src_extent = (function(values, valueof) {
+  var n = values.length,
+      i = -1,
+      value,
+      min,
+      max;
+
+  if (valueof == null) {
+    while (++i < n) { // Find the first comparable value.
+      if ((value = values[i]) != null && value >= value) {
+        min = max = value;
+        while (++i < n) { // Compare the remaining values.
+          if ((value = values[i]) != null) {
+            if (min > value) min = value;
+            if (max < value) max = value;
+          }
+        }
+      }
+    }
+  }
+
+  else {
+    while (++i < n) { // Find the first comparable value.
+      if ((value = valueof(values[i], i, values)) != null && value >= value) {
+        min = max = value;
+        while (++i < n) { // Compare the remaining values.
+          if ((value = valueof(values[i], i, values)) != null) {
+            if (min > value) min = value;
+            if (max < value) max = value;
+          }
+        }
+      }
+    }
+  }
+
+  return [min, max];
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/array.js
+var array_array = Array.prototype;
+
+var slice = array_array.slice;
+var map = array_array.map;
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/constant.js
+/* harmony default export */ var d3_array_src_constant = (function(x) {
+  return function() {
+    return x;
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/identity.js
+/* harmony default export */ var src_identity = (function(x) {
+  return x;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/range.js
+/* harmony default export */ var src_range = (function(start, stop, step) {
+  start = +start, stop = +stop, step = (n = arguments.length) < 2 ? (stop = start, start = 0, 1) : n < 3 ? 1 : +step;
+
+  var i = -1,
+      n = Math.max(0, Math.ceil((stop - start) / step)) | 0,
+      range = new Array(n);
+
+  while (++i < n) {
+    range[i] = start + i * step;
+  }
+
+  return range;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/ticks.js
+var e10 = Math.sqrt(50),
+    e5 = Math.sqrt(10),
+    e2 = Math.sqrt(2);
+
+/* harmony default export */ var ticks = (function(start, stop, count) {
+  var reverse,
+      i = -1,
+      n,
+      ticks,
+      step;
+
+  stop = +stop, start = +start, count = +count;
+  if (start === stop && count > 0) return [start];
+  if (reverse = stop < start) n = start, start = stop, stop = n;
+  if ((step = tickIncrement(start, stop, count)) === 0 || !isFinite(step)) return [];
+
+  if (step > 0) {
+    start = Math.ceil(start / step);
+    stop = Math.floor(stop / step);
+    ticks = new Array(n = Math.ceil(stop - start + 1));
+    while (++i < n) ticks[i] = (start + i) * step;
+  } else {
+    start = Math.floor(start * step);
+    stop = Math.ceil(stop * step);
+    ticks = new Array(n = Math.ceil(start - stop + 1));
+    while (++i < n) ticks[i] = (start - i) / step;
+  }
+
+  if (reverse) ticks.reverse();
+
+  return ticks;
+});
+
+function tickIncrement(start, stop, count) {
+  var step = (stop - start) / Math.max(0, count),
+      power = Math.floor(Math.log(step) / Math.LN10),
+      error = step / Math.pow(10, power);
+  return power >= 0
+      ? (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1) * Math.pow(10, power)
+      : -Math.pow(10, -power) / (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1);
+}
+
+function tickStep(start, stop, count) {
+  var step0 = Math.abs(stop - start) / Math.max(0, count),
+      step1 = Math.pow(10, Math.floor(Math.log(step0) / Math.LN10)),
+      error = step0 / step1;
+  if (error >= e10) step1 *= 10;
+  else if (error >= e5) step1 *= 5;
+  else if (error >= e2) step1 *= 2;
+  return stop < start ? -step1 : step1;
+}
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/threshold/sturges.js
+/* harmony default export */ var sturges = (function(values) {
+  return Math.ceil(Math.log(values.length) / Math.LN2) + 1;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/histogram.js
+
+
+
+
+
+
+
+
+
+/* harmony default export */ var src_histogram = (function() {
+  var value = src_identity,
+      domain = src_extent,
+      threshold = sturges;
+
+  function histogram(data) {
+    var i,
+        n = data.length,
+        x,
+        values = new Array(n);
+
+    for (i = 0; i < n; ++i) {
+      values[i] = value(data[i], i, data);
+    }
+
+    var xz = domain(values),
+        x0 = xz[0],
+        x1 = xz[1],
+        tz = threshold(values, x0, x1);
+
+    // Convert number of thresholds into uniform thresholds.
+    if (!Array.isArray(tz)) {
+      tz = tickStep(x0, x1, tz);
+      tz = src_range(Math.ceil(x0 / tz) * tz, x1, tz); // exclusive
+    }
+
+    // Remove any thresholds outside the domain.
+    var m = tz.length;
+    while (tz[0] <= x0) tz.shift(), --m;
+    while (tz[m - 1] > x1) tz.pop(), --m;
+
+    var bins = new Array(m + 1),
+        bin;
+
+    // Initialize bins.
+    for (i = 0; i <= m; ++i) {
+      bin = bins[i] = [];
+      bin.x0 = i > 0 ? tz[i - 1] : x0;
+      bin.x1 = i < m ? tz[i] : x1;
+    }
+
+    // Assign data to bins by value, ignoring any outside the domain.
+    for (i = 0; i < n; ++i) {
+      x = values[i];
+      if (x0 <= x && x <= x1) {
+        bins[bisect(tz, x, 0, m)].push(data[i]);
+      }
+    }
+
+    return bins;
+  }
+
+  histogram.value = function(_) {
+    return arguments.length ? (value = typeof _ === "function" ? _ : d3_array_src_constant(_), histogram) : value;
+  };
+
+  histogram.domain = function(_) {
+    return arguments.length ? (domain = typeof _ === "function" ? _ : d3_array_src_constant([_[0], _[1]]), histogram) : domain;
+  };
+
+  histogram.thresholds = function(_) {
+    return arguments.length ? (threshold = typeof _ === "function" ? _ : Array.isArray(_) ? d3_array_src_constant(slice.call(_)) : d3_array_src_constant(_), histogram) : threshold;
+  };
+
+  return histogram;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/quantile.js
+
+
+/* harmony default export */ var quantile = (function(values, p, valueof) {
+  if (valueof == null) valueof = src_number;
+  if (!(n = values.length)) return;
+  if ((p = +p) <= 0 || n < 2) return +valueof(values[0], 0, values);
+  if (p >= 1) return +valueof(values[n - 1], n - 1, values);
+  var n,
+      i = (n - 1) * p,
+      i0 = Math.floor(i),
+      value0 = +valueof(values[i0], i0, values),
+      value1 = +valueof(values[i0 + 1], i0 + 1, values);
+  return value0 + (value1 - value0) * (i - i0);
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/threshold/freedmanDiaconis.js
+
+
+
+
+
+/* harmony default export */ var freedmanDiaconis = (function(values, min, max) {
+  values = map.call(values, src_number).sort(src_ascending);
+  return Math.ceil((max - min) / (2 * (quantile(values, 0.75) - quantile(values, 0.25)) * Math.pow(values.length, -1 / 3)));
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/threshold/scott.js
+
+
+/* harmony default export */ var scott = (function(values, min, max) {
+  return Math.ceil((max - min) / (3.5 * deviation(values) * Math.pow(values.length, -1 / 3)));
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/max.js
+/* harmony default export */ var src_max = (function(values, valueof) {
+  var n = values.length,
+      i = -1,
+      value,
+      max;
+
+  if (valueof == null) {
+    while (++i < n) { // Find the first comparable value.
+      if ((value = values[i]) != null && value >= value) {
+        max = value;
+        while (++i < n) { // Compare the remaining values.
+          if ((value = values[i]) != null && value > max) {
+            max = value;
+          }
+        }
+      }
+    }
+  }
+
+  else {
+    while (++i < n) { // Find the first comparable value.
+      if ((value = valueof(values[i], i, values)) != null && value >= value) {
+        max = value;
+        while (++i < n) { // Compare the remaining values.
+          if ((value = valueof(values[i], i, values)) != null && value > max) {
+            max = value;
+          }
+        }
+      }
+    }
+  }
+
+  return max;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/mean.js
+
+
+/* harmony default export */ var src_mean = (function(values, valueof) {
+  var n = values.length,
+      m = n,
+      i = -1,
+      value,
+      sum = 0;
+
+  if (valueof == null) {
+    while (++i < n) {
+      if (!isNaN(value = src_number(values[i]))) sum += value;
+      else --m;
+    }
+  }
+
+  else {
+    while (++i < n) {
+      if (!isNaN(value = src_number(valueof(values[i], i, values)))) sum += value;
+      else --m;
+    }
+  }
+
+  if (m) return sum / m;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/median.js
+
+
+
+
+/* harmony default export */ var median = (function(values, valueof) {
+  var n = values.length,
+      i = -1,
+      value,
+      numbers = [];
+
+  if (valueof == null) {
+    while (++i < n) {
+      if (!isNaN(value = src_number(values[i]))) {
+        numbers.push(value);
+      }
+    }
+  }
+
+  else {
+    while (++i < n) {
+      if (!isNaN(value = src_number(valueof(values[i], i, values)))) {
+        numbers.push(value);
+      }
+    }
+  }
+
+  return quantile(numbers.sort(src_ascending), 0.5);
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/merge.js
+/* harmony default export */ var src_merge = (function(arrays) {
+  var n = arrays.length,
+      m,
+      i = -1,
+      j = 0,
+      merged,
+      array;
+
+  while (++i < n) j += arrays[i].length;
+  merged = new Array(j);
+
+  while (--n >= 0) {
+    array = arrays[n];
+    m = array.length;
+    while (--m >= 0) {
+      merged[--j] = array[m];
+    }
+  }
+
+  return merged;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/min.js
+/* harmony default export */ var src_min = (function(values, valueof) {
+  var n = values.length,
+      i = -1,
+      value,
+      min;
+
+  if (valueof == null) {
+    while (++i < n) { // Find the first comparable value.
+      if ((value = values[i]) != null && value >= value) {
+        min = value;
+        while (++i < n) { // Compare the remaining values.
+          if ((value = values[i]) != null && min > value) {
+            min = value;
+          }
+        }
+      }
+    }
+  }
+
+  else {
+    while (++i < n) { // Find the first comparable value.
+      if ((value = valueof(values[i], i, values)) != null && value >= value) {
+        min = value;
+        while (++i < n) { // Compare the remaining values.
+          if ((value = valueof(values[i], i, values)) != null && min > value) {
+            min = value;
+          }
+        }
+      }
+    }
+  }
+
+  return min;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/permute.js
+/* harmony default export */ var permute = (function(array, indexes) {
+  var i = indexes.length, permutes = new Array(i);
+  while (i--) permutes[i] = array[indexes[i]];
+  return permutes;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/scan.js
+
+
+/* harmony default export */ var scan = (function(values, compare) {
+  if (!(n = values.length)) return;
+  var n,
+      i = 0,
+      j = 0,
+      xi,
+      xj = values[j];
+
+  if (compare == null) compare = src_ascending;
+
+  while (++i < n) {
+    if (compare(xi = values[i], xj) < 0 || compare(xj, xj) !== 0) {
+      xj = xi, j = i;
+    }
+  }
+
+  if (compare(xj, xj) === 0) return j;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/shuffle.js
+/* harmony default export */ var shuffle = (function(array, i0, i1) {
+  var m = (i1 == null ? array.length : i1) - (i0 = i0 == null ? 0 : +i0),
+      t,
+      i;
+
+  while (m) {
+    i = Math.random() * m-- | 0;
+    t = array[m + i0];
+    array[m + i0] = array[i + i0];
+    array[i + i0] = t;
+  }
+
+  return array;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/sum.js
+/* harmony default export */ var src_sum = (function(values, valueof) {
+  var n = values.length,
+      i = -1,
+      value,
+      sum = 0;
+
+  if (valueof == null) {
+    while (++i < n) {
+      if (value = +values[i]) sum += value; // Note: zero and null are equivalent.
+    }
+  }
+
+  else {
+    while (++i < n) {
+      if (value = +valueof(values[i], i, values)) sum += value;
+    }
+  }
+
+  return sum;
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/transpose.js
+
+
+/* harmony default export */ var src_transpose = (function(matrix) {
+  if (!(n = matrix.length)) return [];
+  for (var i = -1, m = src_min(matrix, transpose_length), transpose = new Array(m); ++i < m;) {
+    for (var j = -1, n, row = transpose[i] = new Array(n); ++j < n;) {
+      row[j] = matrix[j][i];
+    }
+  }
+  return transpose;
+});
+
+function transpose_length(d) {
+  return d.length;
+}
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/zip.js
+
+
+/* harmony default export */ var zip = (function() {
+  return src_transpose(arguments);
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// CONCATENATED MODULE: ./node_modules/d3-collection/src/map.js
+var map_prefix = "$";
+
+function map_Map() {}
+
+map_Map.prototype = map_map.prototype = {
+  constructor: map_Map,
+  has: function(key) {
+    return (map_prefix + key) in this;
+  },
+  get: function(key) {
+    return this[map_prefix + key];
+  },
+  set: function(key, value) {
+    this[map_prefix + key] = value;
+    return this;
+  },
+  remove: function(key) {
+    var property = map_prefix + key;
+    return property in this && delete this[property];
+  },
+  clear: function() {
+    for (var property in this) if (property[0] === map_prefix) delete this[property];
+  },
+  keys: function() {
+    var keys = [];
+    for (var property in this) if (property[0] === map_prefix) keys.push(property.slice(1));
+    return keys;
+  },
+  values: function() {
+    var values = [];
+    for (var property in this) if (property[0] === map_prefix) values.push(this[property]);
+    return values;
+  },
+  entries: function() {
+    var entries = [];
+    for (var property in this) if (property[0] === map_prefix) entries.push({key: property.slice(1), value: this[property]});
+    return entries;
+  },
+  size: function() {
+    var size = 0;
+    for (var property in this) if (property[0] === map_prefix) ++size;
+    return size;
+  },
+  empty: function() {
+    for (var property in this) if (property[0] === map_prefix) return false;
+    return true;
+  },
+  each: function(f) {
+    for (var property in this) if (property[0] === map_prefix) f(this[property], property.slice(1), this);
+  }
+};
+
+function map_map(object, f) {
+  var map = new map_Map;
+
+  // Copy constructor.
+  if (object instanceof map_Map) object.each(function(value, key) { map.set(key, value); });
+
+  // Index array by numeric index or specified key function.
+  else if (Array.isArray(object)) {
+    var i = -1,
+        n = object.length,
+        o;
+
+    if (f == null) while (++i < n) map.set(i, object[i]);
+    else while (++i < n) map.set(f(o = object[i], i, object), o);
+  }
+
+  // Convert object to map.
+  else if (object) for (var key in object) map.set(key, object[key]);
+
+  return map;
+}
+
+/* harmony default export */ var src_map = (map_map);
+
+// CONCATENATED MODULE: ./node_modules/d3-collection/src/nest.js
+
+
+/* harmony default export */ var src_nest = (function() {
+  var keys = [],
+      sortKeys = [],
+      sortValues,
+      rollup,
+      nest;
+
+  function apply(array, depth, createResult, setResult) {
+    if (depth >= keys.length) {
+      if (sortValues != null) array.sort(sortValues);
+      return rollup != null ? rollup(array) : array;
+    }
+
+    var i = -1,
+        n = array.length,
+        key = keys[depth++],
+        keyValue,
+        value,
+        valuesByKey = src_map(),
+        values,
+        result = createResult();
+
+    while (++i < n) {
+      if (values = valuesByKey.get(keyValue = key(value = array[i]) + "")) {
+        values.push(value);
+      } else {
+        valuesByKey.set(keyValue, [value]);
+      }
+    }
+
+    valuesByKey.each(function(values, key) {
+      setResult(result, key, apply(values, depth, createResult, setResult));
+    });
+
+    return result;
+  }
+
+  function entries(map, depth) {
+    if (++depth > keys.length) return map;
+    var array, sortKey = sortKeys[depth - 1];
+    if (rollup != null && depth >= keys.length) array = map.entries();
+    else array = [], map.each(function(v, k) { array.push({key: k, values: entries(v, depth)}); });
+    return sortKey != null ? array.sort(function(a, b) { return sortKey(a.key, b.key); }) : array;
+  }
+
+  return nest = {
+    object: function(array) { return apply(array, 0, createObject, setObject); },
+    map: function(array) { return apply(array, 0, createMap, setMap); },
+    entries: function(array) { return entries(apply(array, 0, createMap, setMap), 0); },
+    key: function(d) { keys.push(d); return nest; },
+    sortKeys: function(order) { sortKeys[keys.length - 1] = order; return nest; },
+    sortValues: function(order) { sortValues = order; return nest; },
+    rollup: function(f) { rollup = f; return nest; }
+  };
+});
+
+function createObject() {
+  return {};
+}
+
+function setObject(object, key, value) {
+  object[key] = value;
+}
+
+function createMap() {
+  return src_map();
+}
+
+function setMap(map, key, value) {
+  map.set(key, value);
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-collection/src/set.js
+
+
+function Set() {}
+
+var proto = src_map.prototype;
+
+Set.prototype = set_set.prototype = {
+  constructor: Set,
+  has: proto.has,
+  add: function(value) {
+    value += "";
+    this[map_prefix + value] = value;
+    return this;
+  },
+  remove: proto.remove,
+  clear: proto.clear,
+  values: proto.keys,
+  size: proto.size,
+  empty: proto.empty,
+  each: proto.each
+};
+
+function set_set(object, f) {
+  var set = new Set;
+
+  // Copy constructor.
+  if (object instanceof Set) object.each(function(value) { set.add(value); });
+
+  // Otherwise, assume it’s an array.
+  else if (object) {
+    var i = -1, n = object.length;
+    if (f == null) while (++i < n) set.add(object[i]);
+    else while (++i < n) set.add(f(object[i], i, object));
+  }
+
+  return set;
+}
+
+/* harmony default export */ var src_set = (set_set);
+
+// CONCATENATED MODULE: ./node_modules/d3-collection/src/keys.js
+/* harmony default export */ var src_keys = (function(map) {
+  var keys = [];
+  for (var key in map) keys.push(key);
+  return keys;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-collection/src/values.js
+/* harmony default export */ var src_values = (function(map) {
+  var values = [];
+  for (var key in map) values.push(map[key]);
+  return values;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-collection/src/entries.js
+/* harmony default export */ var src_entries = (function(map) {
+  var entries = [];
+  for (var key in map) entries.push({key: key, value: map[key]});
+  return entries;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-collection/src/index.js
+
+
+
+
+
+
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-path/src/path.js
+var pi = Math.PI,
+    tau = 2 * pi,
+    epsilon = 1e-6,
+    tauEpsilon = tau - epsilon;
+
+function Path() {
+  this._x0 = this._y0 = // start of current subpath
+  this._x1 = this._y1 = null; // end of current subpath
+  this._ = "";
+}
+
+function path_path() {
+  return new Path;
+}
+
+Path.prototype = path_path.prototype = {
+  constructor: Path,
+  moveTo: function(x, y) {
+    this._ += "M" + (this._x0 = this._x1 = +x) + "," + (this._y0 = this._y1 = +y);
+  },
+  closePath: function() {
+    if (this._x1 !== null) {
+      this._x1 = this._x0, this._y1 = this._y0;
+      this._ += "Z";
+    }
+  },
+  lineTo: function(x, y) {
+    this._ += "L" + (this._x1 = +x) + "," + (this._y1 = +y);
+  },
+  quadraticCurveTo: function(x1, y1, x, y) {
+    this._ += "Q" + (+x1) + "," + (+y1) + "," + (this._x1 = +x) + "," + (this._y1 = +y);
+  },
+  bezierCurveTo: function(x1, y1, x2, y2, x, y) {
+    this._ += "C" + (+x1) + "," + (+y1) + "," + (+x2) + "," + (+y2) + "," + (this._x1 = +x) + "," + (this._y1 = +y);
+  },
+  arcTo: function(x1, y1, x2, y2, r) {
+    x1 = +x1, y1 = +y1, x2 = +x2, y2 = +y2, r = +r;
+    var x0 = this._x1,
+        y0 = this._y1,
+        x21 = x2 - x1,
+        y21 = y2 - y1,
+        x01 = x0 - x1,
+        y01 = y0 - y1,
+        l01_2 = x01 * x01 + y01 * y01;
+
+    // Is the radius negative? Error.
+    if (r < 0) throw new Error("negative radius: " + r);
+
+    // Is this path empty? Move to (x1,y1).
+    if (this._x1 === null) {
+      this._ += "M" + (this._x1 = x1) + "," + (this._y1 = y1);
+    }
+
+    // Or, is (x1,y1) coincident with (x0,y0)? Do nothing.
+    else if (!(l01_2 > epsilon));
+
+    // Or, are (x0,y0), (x1,y1) and (x2,y2) collinear?
+    // Equivalently, is (x1,y1) coincident with (x2,y2)?
+    // Or, is the radius zero? Line to (x1,y1).
+    else if (!(Math.abs(y01 * x21 - y21 * x01) > epsilon) || !r) {
+      this._ += "L" + (this._x1 = x1) + "," + (this._y1 = y1);
+    }
+
+    // Otherwise, draw an arc!
+    else {
+      var x20 = x2 - x0,
+          y20 = y2 - y0,
+          l21_2 = x21 * x21 + y21 * y21,
+          l20_2 = x20 * x20 + y20 * y20,
+          l21 = Math.sqrt(l21_2),
+          l01 = Math.sqrt(l01_2),
+          l = r * Math.tan((pi - Math.acos((l21_2 + l01_2 - l20_2) / (2 * l21 * l01))) / 2),
+          t01 = l / l01,
+          t21 = l / l21;
+
+      // If the start tangent is not coincident with (x0,y0), line to.
+      if (Math.abs(t01 - 1) > epsilon) {
+        this._ += "L" + (x1 + t01 * x01) + "," + (y1 + t01 * y01);
+      }
+
+      this._ += "A" + r + "," + r + ",0,0," + (+(y01 * x20 > x01 * y20)) + "," + (this._x1 = x1 + t21 * x21) + "," + (this._y1 = y1 + t21 * y21);
+    }
+  },
+  arc: function(x, y, r, a0, a1, ccw) {
+    x = +x, y = +y, r = +r, ccw = !!ccw;
+    var dx = r * Math.cos(a0),
+        dy = r * Math.sin(a0),
+        x0 = x + dx,
+        y0 = y + dy,
+        cw = 1 ^ ccw,
+        da = ccw ? a0 - a1 : a1 - a0;
+
+    // Is the radius negative? Error.
+    if (r < 0) throw new Error("negative radius: " + r);
+
+    // Is this path empty? Move to (x0,y0).
+    if (this._x1 === null) {
+      this._ += "M" + x0 + "," + y0;
+    }
+
+    // Or, is (x0,y0) not coincident with the previous point? Line to (x0,y0).
+    else if (Math.abs(this._x1 - x0) > epsilon || Math.abs(this._y1 - y0) > epsilon) {
+      this._ += "L" + x0 + "," + y0;
+    }
+
+    // Is this arc empty? We’re done.
+    if (!r) return;
+
+    // Does the angle go the wrong way? Flip the direction.
+    if (da < 0) da = da % tau + tau;
+
+    // Is this a complete circle? Draw two arcs to complete the circle.
+    if (da > tauEpsilon) {
+      this._ += "A" + r + "," + r + ",0,1," + cw + "," + (x - dx) + "," + (y - dy) + "A" + r + "," + r + ",0,1," + cw + "," + (this._x1 = x0) + "," + (this._y1 = y0);
+    }
+
+    // Is this arc non-empty? Draw an arc!
+    else if (da > epsilon) {
+      this._ += "A" + r + "," + r + ",0," + (+(da >= pi)) + "," + cw + "," + (this._x1 = x + r * Math.cos(a1)) + "," + (this._y1 = y + r * Math.sin(a1));
+    }
+  },
+  rect: function(x, y, w, h) {
+    this._ += "M" + (this._x0 = this._x1 = +x) + "," + (this._y0 = this._y1 = +y) + "h" + (+w) + "v" + (+h) + "h" + (-w) + "Z";
+  },
+  toString: function() {
+    return this._;
+  }
+};
+
+/* harmony default export */ var src_path = (path_path);
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/array.js
+var array_slice = Array.prototype.slice;
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/constant.js
+/* harmony default export */ var d3_shape_src_constant = (function(x) {
+  return function constant() {
+    return x;
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/point.js
+function point_x(p) {
+  return p[0];
+}
+
+function point_y(p) {
+  return p[1];
+}
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/pointRadial.js
+/* harmony default export */ var pointRadial = (function(x, y) {
+  return [(y = +y) * Math.cos(x -= Math.PI / 2), y * Math.sin(x)];
+});
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/link/index.js
+
+
+
+
+
+
+function linkSource(d) {
+  return d.source;
+}
+
+function linkTarget(d) {
+  return d.target;
+}
+
+function link_link(curve) {
+  var source = linkSource,
+      target = linkTarget,
+      x = point_x,
+      y = point_y,
+      context = null;
+
+  function link() {
+    var buffer, argv = array_slice.call(arguments), s = source.apply(this, argv), t = target.apply(this, argv);
+    if (!context) context = buffer = src_path();
+    curve(context, +x.apply(this, (argv[0] = s, argv)), +y.apply(this, argv), +x.apply(this, (argv[0] = t, argv)), +y.apply(this, argv));
+    if (buffer) return context = null, buffer + "" || null;
+  }
+
+  link.source = function(_) {
+    return arguments.length ? (source = _, link) : source;
+  };
+
+  link.target = function(_) {
+    return arguments.length ? (target = _, link) : target;
+  };
+
+  link.x = function(_) {
+    return arguments.length ? (x = typeof _ === "function" ? _ : d3_shape_src_constant(+_), link) : x;
+  };
+
+  link.y = function(_) {
+    return arguments.length ? (y = typeof _ === "function" ? _ : d3_shape_src_constant(+_), link) : y;
+  };
+
+  link.context = function(_) {
+    return arguments.length ? ((context = _ == null ? null : _), link) : context;
+  };
+
+  return link;
+}
+
+function curveHorizontal(context, x0, y0, x1, y1) {
+  context.moveTo(x0, y0);
+  context.bezierCurveTo(x0 = (x0 + x1) / 2, y0, x0, y1, x1, y1);
+}
+
+function curveVertical(context, x0, y0, x1, y1) {
+  context.moveTo(x0, y0);
+  context.bezierCurveTo(x0, y0 = (y0 + y1) / 2, x1, y0, x1, y1);
+}
+
+function curveRadial(context, x0, y0, x1, y1) {
+  var p0 = pointRadial(x0, y0),
+      p1 = pointRadial(x0, y0 = (y0 + y1) / 2),
+      p2 = pointRadial(x1, y0),
+      p3 = pointRadial(x1, y1);
+  context.moveTo(p0[0], p0[1]);
+  context.bezierCurveTo(p1[0], p1[1], p2[0], p2[1], p3[0], p3[1]);
+}
+
+function linkHorizontal() {
+  return link_link(curveHorizontal);
+}
+
+function linkVertical() {
+  return link_link(curveVertical);
+}
+
+function linkRadial() {
+  var l = link_link(curveRadial);
+  l.angle = l.x, delete l.x;
+  l.radius = l.y, delete l.y;
+  return l;
+}
+
+// EXTERNAL MODULE: ./node_modules/elementary-circuits-directed-graph/johnson.js
+var johnson = __webpack_require__(46);
+var johnson_default = /*#__PURE__*/__webpack_require__.n(johnson);
+
+// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/dist/d3-sankey-circular.es.js
+
+
+
+
+
+// For a given link, return the target node's depth
+function targetDepth(d) {
+  return d.target.depth;
+}
+
+// The depth of a node when the nodeAlign (align) is set to 'left'
+function left(node) {
+  return node.depth;
+}
+
+// The depth of a node when the nodeAlign (align) is set to 'right'
+function right(node, n) {
+  return n - 1 - node.height;
+}
+
+// The depth of a node when the nodeAlign (align) is set to 'justify'
+function justify(node, n) {
+  return node.sourceLinks.length ? node.depth : n - 1;
+}
+
+// The depth of a node when the nodeAlign (align) is set to 'center'
+function center(node) {
+  return node.targetLinks.length ? node.depth : node.sourceLinks.length ? src_min(node.sourceLinks, targetDepth) - 1 : 0;
+}
+
+function fixed(node, n, minDepth) {
+  return node.depthLevel - minDepth;
+}
+
+// returns a function, using the parameter given to the sankey setting
+function d3_sankey_circular_es_constant(x) {
+  return function () {
+    return x;
+  };
+}
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) {
+  return typeof obj;
+} : function (obj) {
+  return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+};
+
+/// https://github.com/tomshanley/d3-sankeyCircular-circular
+
+// sort links' breadth (ie top to bottom in a column), based on their source nodes' breadths
+function ascendingSourceBreadth(a, b) {
+  return ascendingBreadth(a.source, b.source) || a.index - b.index;
+}
+
+// sort links' breadth (ie top to bottom in a column), based on their target nodes' breadths
+function ascendingTargetBreadth(a, b) {
+  return ascendingBreadth(a.target, b.target) || a.index - b.index;
+}
+
+// sort nodes' breadth (ie top to bottom in a column)
+// if both nodes have circular links, or both don't have circular links, then sort by the top (y0) of the node
+// else push nodes that have top circular links to the top, and nodes that have bottom circular links to the bottom
+function ascendingBreadth(a, b) {
+  if (a.partOfCycle === b.partOfCycle) {
+    return a.y0 - b.y0;
+  } else {
+    if (a.circularLinkType === 'top' || b.circularLinkType === 'bottom') {
+      return -1;
+    } else {
+      return 1;
+    }
+  }
+}
+
+// return the value of a node or link
+function d3_sankey_circular_es_value(d) {
+  return d.value;
+}
+
+// return the vertical center of a node
+function nodeCenter(node) {
+  return (node.y0 + node.y1) / 2;
+}
+
+// return the vertical center of a link's source node
+function linkSourceCenter(link) {
+  return nodeCenter(link.source);
+}
+
+// return the vertical center of a link's target node
+function linkTargetCenter(link) {
+  return nodeCenter(link.target);
+}
+
+// Return the default value for ID for node, d.index
+function defaultId(d) {
+  return d.index;
+}
+
+// Return the default object the graph's nodes, graph.nodes
+function defaultNodes(graph) {
+  return graph.nodes;
+}
+
+// Return the default object the graph's nodes, graph.links
+function defaultLinks(graph) {
+  return graph.links;
+}
+
+// Return the node from the collection that matches the provided ID, or throw an error if no match
+function d3_sankey_circular_es_find(nodeById, id) {
+  var node = nodeById.get(id);
+  if (!node) throw new Error('missing: ' + id);
+  return node;
+}
+
+function getNodeID(node, id) {
+  return id(node);
+}
+
+// The main sankeyCircular functions
+
+// Some constants for circular link calculations
+var verticalMargin = 25;
+var baseRadius = 10;
+// var scale = 0.3 //Possibly let user control this, although anything over 0.5 starts to get too cramped
+
+var d3_sankey_circular_es_scale = 0.15;
+
+function d3_sankey_circular_es_sankeyCircular () {
+  // Set the default values
+  var x0 = 0,
+      y0 = 0,
+      x1 = 1,
+      y1 = 1,
+      // extent
+  dx = 24,
+      // nodeWidth
+  py,
+      // nodePadding, for vertical postioning
+  id = defaultId,
+      align = justify,
+      nodes = defaultNodes,
+      links = defaultLinks,
+      iterations = 32,
+      circularLinkGap = 2,
+      paddingRatio,
+      sortNodes = null;
+
+  function sankeyCircular() {
+    var graph = {
+      nodes: nodes.apply(null, arguments),
+      links: links.apply(null, arguments)
+
+      // Process the graph's nodes and links, setting their positions
+
+      // 1.  Associate the nodes with their respective links, and vice versa
+    };computeNodeLinks(graph);
+
+    // 2.  Determine which links result in a circular path in the graph
+    identifyCircles(graph, id, sortNodes);
+
+    // 4. Calculate the nodes' values, based on the values of the incoming and outgoing links
+    computeNodeValues(graph);
+
+    // 5.  Calculate the nodes' depth based on the incoming and outgoing links
+    //     Sets the nodes':
+    //     - depth:  the depth in the graph
+    //     - column: the depth (0, 1, 2, etc), as is relates to visual position from left to right
+    //     - x0, x1: the x coordinates, as is relates to visual position from left to right
+    computeNodeDepths(graph);
+
+    // 3.  Determine how the circular links will be drawn,
+    //     either travelling back above the main chart ("top")
+    //     or below the main chart ("bottom")
+    selectCircularLinkTypes(graph, id);
+
+    // 6.  Calculate the nodes' and links' vertical position within their respective column
+    //     Also readjusts sankeyCircular size if circular links are needed, and node x's
+    computeNodeBreadths(graph, iterations, id);
+    computeLinkBreadths(graph);
+
+    // 7.  Sort links per node, based on the links' source/target nodes' breadths
+    // 8.  Adjust nodes that overlap links that span 2+ columns
+    var linkSortingIterations = 4; //Possibly let user control this number, like the iterations over node placement
+    for (var iteration = 0; iteration < linkSortingIterations; iteration++) {
+      sortSourceLinks(graph, y1, id);
+      sortTargetLinks(graph, y1, id);
+      resolveNodeLinkOverlaps(graph, y0, y1, id);
+      sortSourceLinks(graph, y1, id);
+      sortTargetLinks(graph, y1, id);
+    }
+
+    // 8.1  Adjust node and link positions back to fill height of chart area if compressed
+    fillHeight(graph, y0, y1);
+
+    // 9. Calculate visually appealling path for the circular paths, and create the "d" string
+    addCircularPathData(graph, circularLinkGap, y1, id);
+
+    return graph;
+  } // end of sankeyCircular function
+
+  // Set the sankeyCircular parameters
+  // nodeID, nodeAlign, nodeWidth, nodePadding, nodes, links, size, extent, iterations, nodePaddingRatio, circularLinkGap
+  sankeyCircular.nodeId = function (_) {
+    return arguments.length ? (id = typeof _ === 'function' ? _ : d3_sankey_circular_es_constant(_), sankeyCircular) : id;
+  };
+
+  sankeyCircular.nodeAlign = function (_) {
+    return arguments.length ? (align = typeof _ === 'function' ? _ : d3_sankey_circular_es_constant(_), sankeyCircular) : align;
+  };
+
+  sankeyCircular.nodeWidth = function (_) {
+    return arguments.length ? (dx = +_, sankeyCircular) : dx;
+  };
+
+  sankeyCircular.nodePadding = function (_) {
+    return arguments.length ? (py = +_, sankeyCircular) : py;
+  };
+
+  sankeyCircular.nodes = function (_) {
+    return arguments.length ? (nodes = typeof _ === 'function' ? _ : d3_sankey_circular_es_constant(_), sankeyCircular) : nodes;
+  };
+
+  sankeyCircular.links = function (_) {
+    return arguments.length ? (links = typeof _ === 'function' ? _ : d3_sankey_circular_es_constant(_), sankeyCircular) : links;
+  };
+
+  sankeyCircular.size = function (_) {
+    return arguments.length ? (x0 = y0 = 0, x1 = +_[0], y1 = +_[1], sankeyCircular) : [x1 - x0, y1 - y0];
+  };
+
+  sankeyCircular.extent = function (_) {
+    return arguments.length ? (x0 = +_[0][0], x1 = +_[1][0], y0 = +_[0][1], y1 = +_[1][1], sankeyCircular) : [[x0, y0], [x1, y1]];
+  };
+
+  sankeyCircular.iterations = function (_) {
+    return arguments.length ? (iterations = +_, sankeyCircular) : iterations;
+  };
+
+  sankeyCircular.circularLinkGap = function (_) {
+    return arguments.length ? (circularLinkGap = +_, sankeyCircular) : circularLinkGap;
+  };
+
+  sankeyCircular.nodePaddingRatio = function (_) {
+    return arguments.length ? (paddingRatio = +_, sankeyCircular) : paddingRatio;
+  };
+
+  sankeyCircular.sortNodes = function (_) {
+    return arguments.length ? (sortNodes = _, sankeyCircular) : sortNodes;
+  };
+
+  sankeyCircular.update = function (graph) {
+    // 5.  Calculate the nodes' depth based on the incoming and outgoing links
+    //     Sets the nodes':
+    //     - depth:  the depth in the graph
+    //     - column: the depth (0, 1, 2, etc), as is relates to visual position from left to right
+    //     - x0, x1: the x coordinates, as is relates to visual position from left to right
+    // computeNodeDepths(graph)
+
+    // 3.  Determine how the circular links will be drawn,
+    //     either travelling back above the main chart ("top")
+    //     or below the main chart ("bottom")
+    selectCircularLinkTypes(graph, id);
+
+    // 6.  Calculate the nodes' and links' vertical position within their respective column
+    //     Also readjusts sankeyCircular size if circular links are needed, and node x's
+    // computeNodeBreadths(graph, iterations, id)
+    computeLinkBreadths(graph);
+
+    // Force position of circular link type based on position
+    graph.links.forEach(function (link) {
+      if (link.circular) {
+        link.circularLinkType = link.y0 + link.y1 < y1 ? 'top' : 'bottom';
+
+        link.source.circularLinkType = link.circularLinkType;
+        link.target.circularLinkType = link.circularLinkType;
+      }
+    });
+
+    sortSourceLinks(graph, y1, id, false); // Sort links but do not move nodes
+    sortTargetLinks(graph, y1, id);
+
+    // 7.  Sort links per node, based on the links' source/target nodes' breadths
+    // 8.  Adjust nodes that overlap links that span 2+ columns
+    // var linkSortingIterations = 4; //Possibly let user control this number, like the iterations over node placement
+    // for (var iteration = 0; iteration < linkSortingIterations; iteration++) {
+    //
+    //   sortSourceLinks(graph, y1, id)
+    //   sortTargetLinks(graph, y1, id)
+    //   resolveNodeLinkOverlaps(graph, y0, y1, id)
+    //   sortSourceLinks(graph, y1, id)
+    //   sortTargetLinks(graph, y1, id)
+    //
+    // }
+
+    // 8.1  Adjust node and link positions back to fill height of chart area if compressed
+    // fillHeight(graph, y0, y1)
+
+    // 9. Calculate visually appealling path for the circular paths, and create the "d" string
+    addCircularPathData(graph, circularLinkGap, y1, id);
+    return graph;
+  };
+
+  // Populate the sourceLinks and targetLinks for each node.
+  // Also, if the source and target are not objects, assume they are indices.
+  function computeNodeLinks(graph) {
+    graph.nodes.forEach(function (node, i) {
+      node.index = i;
+      node.sourceLinks = [];
+      node.targetLinks = [];
+    });
+    var nodeById = src_map(graph.nodes, id);
+    graph.links.forEach(function (link, i) {
+      link.index = i;
+      var source = link.source;
+      var target = link.target;
+      if ((typeof source === 'undefined' ? 'undefined' : _typeof(source)) !== 'object') {
+        source = link.source = d3_sankey_circular_es_find(nodeById, source);
+      }
+      if ((typeof target === 'undefined' ? 'undefined' : _typeof(target)) !== 'object') {
+        target = link.target = d3_sankey_circular_es_find(nodeById, target);
+      }
+      source.sourceLinks.push(link);
+      target.targetLinks.push(link);
+    });
+    return graph;
+  }
+
+  // Compute the value (size) and cycleness of each node by summing the associated links.
+  function computeNodeValues(graph) {
+    graph.nodes.forEach(function (node) {
+      node.partOfCycle = false;
+      node.value = Math.max(src_sum(node.sourceLinks, d3_sankey_circular_es_value), src_sum(node.targetLinks, d3_sankey_circular_es_value));
+      node.sourceLinks.forEach(function (link) {
+        if (link.circular) {
+          node.partOfCycle = true;
+          node.circularLinkType = link.circularLinkType;
+        }
+      });
+      node.targetLinks.forEach(function (link) {
+        if (link.circular) {
+          node.partOfCycle = true;
+          node.circularLinkType = link.circularLinkType;
+        }
+      });
+    });
+  }
+
+  function getCircleMargins(graph) {
+    var totalTopLinksWidth = 0,
+        totalBottomLinksWidth = 0,
+        totalRightLinksWidth = 0,
+        totalLeftLinksWidth = 0;
+
+    var maxColumn = src_max(graph.nodes, function (node) {
+      return node.column;
+    });
+
+    graph.links.forEach(function (link) {
+      if (link.circular) {
+        if (link.circularLinkType == 'top') {
+          totalTopLinksWidth = totalTopLinksWidth + link.width;
+        } else {
+          totalBottomLinksWidth = totalBottomLinksWidth + link.width;
+        }
+
+        if (link.target.column == 0) {
+          totalLeftLinksWidth = totalLeftLinksWidth + link.width;
+        }
+
+        if (link.source.column == maxColumn) {
+          totalRightLinksWidth = totalRightLinksWidth + link.width;
+        }
+      }
+    });
+
+    //account for radius of curves and padding between links
+    totalTopLinksWidth = totalTopLinksWidth > 0 ? totalTopLinksWidth + verticalMargin + baseRadius : totalTopLinksWidth;
+    totalBottomLinksWidth = totalBottomLinksWidth > 0 ? totalBottomLinksWidth + verticalMargin + baseRadius : totalBottomLinksWidth;
+    totalRightLinksWidth = totalRightLinksWidth > 0 ? totalRightLinksWidth + verticalMargin + baseRadius : totalRightLinksWidth;
+    totalLeftLinksWidth = totalLeftLinksWidth > 0 ? totalLeftLinksWidth + verticalMargin + baseRadius : totalLeftLinksWidth;
+
+    return {
+      top: totalTopLinksWidth,
+      bottom: totalBottomLinksWidth,
+      left: totalLeftLinksWidth,
+      right: totalRightLinksWidth
+    };
+  }
+
+  // Update the x0, y0, x1 and y1 for the sankeyCircular, to allow space for any circular links
+  function scaleSankeySize(graph, margin) {
+    var maxColumn = src_max(graph.nodes, function (node) {
+      return node.column;
+    });
+
+    var currentWidth = x1 - x0;
+    var currentHeight = y1 - y0;
+
+    var newWidth = currentWidth + margin.right + margin.left;
+    var newHeight = currentHeight + margin.top + margin.bottom;
+
+    var scaleX = currentWidth / newWidth;
+    var scaleY = currentHeight / newHeight;
+
+    x0 = x0 * scaleX + margin.left;
+    x1 = margin.right == 0 ? x1 : x1 * scaleX;
+    y0 = y0 * scaleY + margin.top;
+    y1 = y1 * scaleY;
+
+    graph.nodes.forEach(function (node) {
+      node.x0 = x0 + node.column * ((x1 - x0 - dx) / maxColumn);
+      node.x1 = node.x0 + dx;
+    });
+
+    return scaleY;
+  }
+
+  // Iteratively assign the depth for each node.
+  // Nodes are assigned the maximum depth of incoming neighbors plus one;
+  // nodes with no incoming links are assigned depth zero, while
+  // nodes with no outgoing links are assigned the maximum depth.
+  function computeNodeDepths(graph) {
+    var nodes, next, x, minDepth;
+
+    for (nodes = graph.nodes, next = [], x = 0; nodes.length; ++x, nodes = next, next = []) {
+      nodes.forEach(function (node) {
+        node.depth = x;
+        node.sourceLinks.forEach(function (link) {
+          if (next.indexOf(link.target) < 0 && !link.circular) {
+            next.push(link.target);
+          }
+        });
+      });
+    }
+
+    for (nodes = graph.nodes, next = [], x = 0; nodes.length; ++x, nodes = next, next = []) {
+      nodes.forEach(function (node) {
+        node.height = x;
+        node.targetLinks.forEach(function (link) {
+          if (next.indexOf(link.source) < 0 && !link.circular) {
+            next.push(link.source);
+          }
+        });
+      });
+    }
+
+    minDepth = _.minBy(graph.nodes, function (n) {
+      return n.depthLevel;
+    }).depthLevel;
+
+    // assign column numbers, and get max value
+    graph.nodes.forEach(function (node) {
+      node.column = Math.floor(align.call(null, node, x, minDepth));
+    });
+  }
+
+  // Assign nodes' breadths, and then shift nodes that overlap (resolveCollisions)
+  function computeNodeBreadths(graph, iterations, id) {
+    var columns = src_nest().key(function (d) {
+      return d.column;
+    }).sortKeys(src_ascending).entries(graph.nodes).map(function (d) {
+      return d.values;
+    });
+
+    initializeNodeBreadth(id);
+    resolveCollisions();
+
+    for (var alpha = 1, n = iterations; n > 0; --n) {
+      relaxLeftAndRight(alpha *= 0.99, id);
+      resolveCollisions();
+    }
+
+    function initializeNodeBreadth(id) {
+      //override py if nodePadding has been set
+      if (paddingRatio) {
+        var padding = Infinity;
+        columns.forEach(function (nodes) {
+          var thisPadding = y1 * paddingRatio / (nodes.length + 1);
+          padding = thisPadding < padding ? thisPadding : padding;
+        });
+        py = padding;
+      }
+
+      var ky = src_min(columns, function (nodes) {
+        return (y1 - y0 - (nodes.length - 1) * py) / src_sum(nodes, d3_sankey_circular_es_value);
+      });
+
+      //calculate the widths of the links
+      ky = ky * d3_sankey_circular_es_scale;
+
+      graph.links.forEach(function (link) {
+        link.width = link.value * ky;
+      });
+
+      //determine how much to scale down the chart, based on circular links
+      var margin = getCircleMargins(graph);
+      var ratio = scaleSankeySize(graph, margin);
+
+      //re-calculate widths
+      ky = ky * ratio;
+
+      graph.links.forEach(function (link) {
+        link.width = link.value * ky;
+      });
+
+      columns.forEach(function (nodes) {
+        var nodesLength = nodes.length;
+        nodes.forEach(function (node, i) {
+          if (node.depth == columns.length - 1 && nodesLength == 1) {
+            node.y0 = y1 / 2 - node.value * ky;
+            node.y1 = node.y0 + node.value * ky;
+          } else if (node.depth == 0 && nodesLength == 1) {
+            node.y0 = y1 / 2 - node.value * ky;
+            node.y1 = node.y0 + node.value * ky;
+          } else if (node.partOfCycle) {
+            if (numberOfNonSelfLinkingCycles(node, id) == 0) {
+              node.y0 = y1 / 2 + i;
+              node.y1 = node.y0 + node.value * ky;
+            } else if (node.circularLinkType == 'top') {
+              node.y0 = y0 + i;
+              node.y1 = node.y0 + node.value * ky;
+            } else {
+              node.y0 = y1 - node.value * ky - i;
+              node.y1 = node.y0 + node.value * ky;
+            }
+          } else {
+            if (margin.top == 0 || margin.bottom == 0) {
+              node.y0 = (y1 - y0) / nodesLength * i;
+              node.y1 = node.y0 + node.value * ky;
+            } else {
+              node.y0 = (y1 - y0) / 2 - nodesLength / 2 + i;
+              node.y1 = node.y0 + node.value * ky;
+            }
+          }
+        });
+      });
+    }
+
+    // For each node in each column, check the node's vertical position in relation to its targets and sources vertical position
+    // and shift up/down to be closer to the vertical middle of those targets and sources
+    function relaxLeftAndRight(alpha, id) {
+      var columnsLength = columns.length;
+
+      columns.forEach(function (nodes) {
+        var n = nodes.length;
+        var depth = nodes[0].depth;
+
+        nodes.forEach(function (node) {
+          // check the node is not an orphan
+          var nodeHeight;
+          if (node.sourceLinks.length || node.targetLinks.length) {
+            if (node.partOfCycle && numberOfNonSelfLinkingCycles(node, id) > 0) ; else if (depth == 0 && n == 1) {
+              nodeHeight = node.y1 - node.y0;
+
+              node.y0 = y1 / 2 - nodeHeight / 2;
+              node.y1 = y1 / 2 + nodeHeight / 2;
+            } else if (depth == columnsLength - 1 && n == 1) {
+              nodeHeight = node.y1 - node.y0;
+
+              node.y0 = y1 / 2 - nodeHeight / 2;
+              node.y1 = y1 / 2 + nodeHeight / 2;
+            } else {
+              var avg = 0;
+
+              var avgTargetY = src_mean(node.sourceLinks, linkTargetCenter);
+              var avgSourceY = src_mean(node.targetLinks, linkSourceCenter);
+
+              if (avgTargetY && avgSourceY) {
+                avg = (avgTargetY + avgSourceY) / 2;
+              } else {
+                avg = avgTargetY || avgSourceY;
+              }
+
+              var dy = (avg - nodeCenter(node)) * alpha;
+              // positive if it node needs to move down
+              node.y0 += dy;
+              node.y1 += dy;
+            }
+          }
+        });
+      });
+    }
+
+    // For each column, check if nodes are overlapping, and if so, shift up/down
+    function resolveCollisions() {
+      columns.forEach(function (nodes) {
+        var node,
+            dy,
+            y = y0,
+            n = nodes.length,
+            i;
+
+        // Push any overlapping nodes down.
+        nodes.sort(ascendingBreadth);
+
+        for (i = 0; i < n; ++i) {
+          node = nodes[i];
+          dy = y - node.y0;
+
+          if (dy > 0) {
+            node.y0 += dy;
+            node.y1 += dy;
+          }
+          y = node.y1 + py;
+        }
+
+        // If the bottommost node goes outside the bounds, push it back up.
+        dy = y - py - y1;
+        if (dy > 0) {
+y = node.y0 -= dy, node.y1 -= dy;
+
+          // Push any overlapping nodes back up.
+          for (i = n - 2; i >= 0; --i) {
+            node = nodes[i];
+            dy = node.y1 + py - y;
+            if (dy > 0) node.y0 -= dy, node.y1 -= dy;
+            y = node.y0;
+          }
+        }
+      });
+    }
+  }
+
+  // Assign the links y0 and y1 based on source/target nodes position,
+  // plus the link's relative position to other links to the same node
+  function computeLinkBreadths(graph) {
+    graph.nodes.forEach(function (node) {
+      node.sourceLinks.sort(ascendingTargetBreadth);
+      node.targetLinks.sort(ascendingSourceBreadth);
+    });
+    graph.nodes.forEach(function (node) {
+      var y0 = node.y0;
+      var y1 = y0;
+
+      // start from the bottom of the node for cycle links
+      var y0cycle = node.y1;
+      var y1cycle = y0cycle;
+
+      node.sourceLinks.forEach(function (link) {
+        if (link.circular) {
+          link.y0 = y0cycle - link.width / 2;
+          y0cycle = y0cycle - link.width;
+        } else {
+          link.y0 = y0 + link.width / 2;
+          y0 += link.width;
+        }
+      });
+      node.targetLinks.forEach(function (link) {
+        if (link.circular) {
+          link.y1 = y1cycle - link.width / 2;
+          y1cycle = y1cycle - link.width;
+        } else {
+          link.y1 = y1 + link.width / 2;
+          y1 += link.width;
+        }
+      });
+    });
+  }
+
+  return sankeyCircular;
+}
+
+/// /////////////////////////////////////////////////////////////////////////////////
+// Cycle functions
+// portion of code to detect circular links based on Colin Fergus' bl.ock https://gist.github.com/cfergus/3956043
+
+// Identify circles in the link objects
+function identifyCircles(graph, id, sortNodes) {
+  var circularLinkID = 0;
+  if (sortNodes === null) {
+    // Building adjacency graph
+    var adjList = [];
+    for (var i = 0; i < graph.links.length; i++) {
+      var link = graph.links[i];
+      var source = link.source.index;
+      var target = link.target.index;
+      if (!adjList[source]) adjList[source] = [];
+      if (!adjList[target]) adjList[target] = [];
+
+      // Add links if not already in set
+      if (adjList[source].indexOf(target) === -1) adjList[source].push(target);
+    }
+
+    // Find all elementary circuits
+    var cycles = johnson_default()(adjList);
+
+    // Sort by circuits length
+    cycles.sort(function (a, b) {
+      return a.length - b.length;
+    });
+
+    var circularLinks = {};
+    for (i = 0; i < cycles.length; i++) {
+      var cycle = cycles[i];
+      var last = cycle.slice(-2);
+      if (!circularLinks[last[0]]) circularLinks[last[0]] = {};
+      circularLinks[last[0]][last[1]] = true;
+    }
+
+    graph.links.forEach(function (link) {
+      var target = link.target.index;
+      var source = link.source.index;
+      // If self-linking or a back-edge
+      if (
+      // target === source ||
+      // (circularLinks[source] && circularLinks[source][target])
+
+      // My change for alignFixed
+      link.target.depthLevel <= link.source.depthLevel) {
+        link.circular = true;
+        link.circularLinkID = circularLinkID;
+        circularLinkID = circularLinkID + 1;
+      } else {
+        link.circular = false;
+      }
+    });
+  } else {
+    graph.links.forEach(function (link) {
+      if (link.source[sortNodes] < link.target[sortNodes]) {
+        link.circular = false;
+      } else {
+        link.circular = true;
+        link.circularLinkID = circularLinkID;
+        circularLinkID = circularLinkID + 1;
+      }
+    });
+  }
+}
+
+// Assign a circular link type (top or bottom), based on:
+// - if the source/target node already has circular links, then use the same type
+// - if not, choose the type with fewer links
+function selectCircularLinkTypes(graph, id) {
+  var numberOfTops = 0;
+  var numberOfBottoms = 0;
+  graph.links.forEach(function (link) {
+    if (link.circular) {
+      // if either souce or target has type already use that
+      if (link.source.circularLinkType || link.target.circularLinkType) {
+        // default to source type if available
+        link.circularLinkType = link.source.circularLinkType ? link.source.circularLinkType : link.target.circularLinkType;
+      } else {
+        link.circularLinkType = numberOfTops < numberOfBottoms ? 'top' : 'bottom';
+      }
+
+      if (link.circularLinkType == 'top') {
+        numberOfTops = numberOfTops + 1;
+      } else {
+        numberOfBottoms = numberOfBottoms + 1;
+      }
+
+      graph.nodes.forEach(function (node) {
+        if (getNodeID(node, id) == getNodeID(link.source, id) || getNodeID(node, id) == getNodeID(link.target, id)) {
+          node.circularLinkType = link.circularLinkType;
+        }
+      });
+    }
+  });
+
+  //correct self-linking links to be same direction as node
+  graph.links.forEach(function (link) {
+    if (link.circular) {
+      //if both source and target node are same type, then link should have same type
+      if (link.source.circularLinkType == link.target.circularLinkType) {
+        link.circularLinkType = link.source.circularLinkType;
+      }
+      //if link is selflinking, then link should have same type as node
+      if (selfLinking(link, id)) {
+        link.circularLinkType = link.source.circularLinkType;
+      }
+    }
+  });
+}
+
+// Return the angle between a straight line between the source and target of the link, and the vertical plane of the node
+function linkAngle(link) {
+  var adjacent = Math.abs(link.y1 - link.y0);
+  var opposite = Math.abs(link.target.x0 - link.source.x1);
+
+  return Math.atan(opposite / adjacent);
+}
+
+// Check if two circular links potentially overlap
+function circularLinksCross(link1, link2) {
+  if (link1.source.column < link2.target.column) {
+    return false;
+  } else if (link1.target.column > link2.source.column) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+// Return the number of circular links for node, not including self linking links
+function numberOfNonSelfLinkingCycles(node, id) {
+  var sourceCount = 0;
+  node.sourceLinks.forEach(function (l) {
+    sourceCount = l.circular && !selfLinking(l, id) ? sourceCount + 1 : sourceCount;
+  });
+
+  var targetCount = 0;
+  node.targetLinks.forEach(function (l) {
+    targetCount = l.circular && !selfLinking(l, id) ? targetCount + 1 : targetCount;
+  });
+
+  return sourceCount + targetCount;
+}
+
+// Check if a circular link is the only circular link for both its source and target node
+function onlyCircularLink(link) {
+  var nodeSourceLinks = link.source.sourceLinks;
+  var sourceCount = 0;
+  nodeSourceLinks.forEach(function (l) {
+    sourceCount = l.circular ? sourceCount + 1 : sourceCount;
+  });
+
+  var nodeTargetLinks = link.target.targetLinks;
+  var targetCount = 0;
+  nodeTargetLinks.forEach(function (l) {
+    targetCount = l.circular ? targetCount + 1 : targetCount;
+  });
+
+  if (sourceCount > 1 || targetCount > 1) {
+    return false;
+  } else {
+    return true;
+  }
+}
+
+// creates vertical buffer values per set of top/bottom links
+function calcVerticalBuffer(links, circularLinkGap, id) {
+  links.sort(sortLinkColumnAscending);
+  links.forEach(function (link, i) {
+    var buffer = 0;
+
+    if (selfLinking(link, id) && onlyCircularLink(link)) {
+      link.circularPathData.verticalBuffer = buffer + link.width / 2;
+    } else {
+      var j = 0;
+      for (j; j < i; j++) {
+        if (circularLinksCross(links[i], links[j])) {
+          var bufferOverThisLink = links[j].circularPathData.verticalBuffer + links[j].width / 2 + circularLinkGap;
+          buffer = bufferOverThisLink > buffer ? bufferOverThisLink : buffer;
+        }
+      }
+
+      link.circularPathData.verticalBuffer = buffer + link.width / 2;
+    }
+  });
+
+  return links;
+}
+
+// calculate the optimum path for a link to reduce overlaps
+function addCircularPathData(graph, circularLinkGap, y1, id) {
+  //var baseRadius = 10
+  var buffer = 5;
+  //var verticalMargin = 25
+
+  var minY = src_min(graph.links, function (link) {
+    return link.source.y0;
+  });
+
+  // create object for circular Path Data
+  graph.links.forEach(function (link) {
+    if (link.circular) {
+      link.circularPathData = {};
+    }
+  });
+
+  // calc vertical offsets per top/bottom links
+  var topLinks = graph.links.filter(function (l) {
+    return l.circularLinkType == 'top';
+  });
+  /* topLinks = */calcVerticalBuffer(topLinks, circularLinkGap, id);
+
+  var bottomLinks = graph.links.filter(function (l) {
+    return l.circularLinkType == 'bottom';
+  });
+  /* bottomLinks = */calcVerticalBuffer(bottomLinks, circularLinkGap, id);
+
+  // add the base data for each link
+  graph.links.forEach(function (link) {
+    if (link.circular) {
+      link.circularPathData.arcRadius = link.width + baseRadius;
+      link.circularPathData.leftNodeBuffer = buffer;
+      link.circularPathData.rightNodeBuffer = buffer;
+      link.circularPathData.sourceWidth = link.source.x1 - link.source.x0;
+      link.circularPathData.sourceX = link.source.x0 + link.circularPathData.sourceWidth;
+      link.circularPathData.targetX = link.target.x0;
+      link.circularPathData.sourceY = link.y0;
+      link.circularPathData.targetY = link.y1;
+
+      // for self linking paths, and that the only circular link in/out of that node
+      if (selfLinking(link, id) && onlyCircularLink(link)) {
+        link.circularPathData.leftSmallArcRadius = baseRadius + link.width / 2;
+        link.circularPathData.leftLargeArcRadius = baseRadius + link.width / 2;
+        link.circularPathData.rightSmallArcRadius = baseRadius + link.width / 2;
+        link.circularPathData.rightLargeArcRadius = baseRadius + link.width / 2;
+
+        if (link.circularLinkType == 'bottom') {
+          link.circularPathData.verticalFullExtent = link.source.y1 + verticalMargin + link.circularPathData.verticalBuffer;
+          link.circularPathData.verticalLeftInnerExtent = link.circularPathData.verticalFullExtent - link.circularPathData.leftLargeArcRadius;
+          link.circularPathData.verticalRightInnerExtent = link.circularPathData.verticalFullExtent - link.circularPathData.rightLargeArcRadius;
+        } else {
+          // top links
+          link.circularPathData.verticalFullExtent = link.source.y0 - verticalMargin - link.circularPathData.verticalBuffer;
+          link.circularPathData.verticalLeftInnerExtent = link.circularPathData.verticalFullExtent + link.circularPathData.leftLargeArcRadius;
+          link.circularPathData.verticalRightInnerExtent = link.circularPathData.verticalFullExtent + link.circularPathData.rightLargeArcRadius;
+        }
+      } else {
+        // else calculate normally
+        // add left extent coordinates, based on links with same source column and circularLink type
+        var thisColumn = link.source.column;
+        var thisCircularLinkType = link.circularLinkType;
+        var sameColumnLinks = graph.links.filter(function (l) {
+          return l.source.column == thisColumn && l.circularLinkType == thisCircularLinkType;
+        });
+
+        if (link.circularLinkType == 'bottom') {
+          sameColumnLinks.sort(sortLinkSourceYDescending);
+        } else {
+          sameColumnLinks.sort(sortLinkSourceYAscending);
+        }
+
+        var radiusOffset = 0;
+        sameColumnLinks.forEach(function (l, i) {
+          if (l.circularLinkID == link.circularLinkID) {
+            link.circularPathData.leftSmallArcRadius = baseRadius + link.width / 2 + radiusOffset;
+            link.circularPathData.leftLargeArcRadius = baseRadius + link.width / 2 + i * circularLinkGap + radiusOffset;
+          }
+          radiusOffset = radiusOffset + l.width;
+        });
+
+        // add right extent coordinates, based on links with same target column and circularLink type
+        thisColumn = link.target.column;
+        sameColumnLinks = graph.links.filter(function (l) {
+          return l.target.column == thisColumn && l.circularLinkType == thisCircularLinkType;
+        });
+        if (link.circularLinkType == 'bottom') {
+          sameColumnLinks.sort(sortLinkTargetYDescending);
+        } else {
+          sameColumnLinks.sort(sortLinkTargetYAscending);
+        }
+
+        radiusOffset = 0;
+        sameColumnLinks.forEach(function (l, i) {
+          if (l.circularLinkID == link.circularLinkID) {
+            link.circularPathData.rightSmallArcRadius = baseRadius + link.width / 2 + radiusOffset;
+            link.circularPathData.rightLargeArcRadius = baseRadius + link.width / 2 + i * circularLinkGap + radiusOffset;
+          }
+          radiusOffset = radiusOffset + l.width;
+        });
+
+        // bottom links
+        if (link.circularLinkType == 'bottom') {
+          link.circularPathData.verticalFullExtent = Math.max(y1, link.source.y1, link.target.y1) + verticalMargin + link.circularPathData.verticalBuffer;
+          link.circularPathData.verticalLeftInnerExtent = link.circularPathData.verticalFullExtent - link.circularPathData.leftLargeArcRadius;
+          link.circularPathData.verticalRightInnerExtent = link.circularPathData.verticalFullExtent - link.circularPathData.rightLargeArcRadius;
+        } else {
+          // top links
+          link.circularPathData.verticalFullExtent = minY - verticalMargin - link.circularPathData.verticalBuffer;
+          link.circularPathData.verticalLeftInnerExtent = link.circularPathData.verticalFullExtent + link.circularPathData.leftLargeArcRadius;
+          link.circularPathData.verticalRightInnerExtent = link.circularPathData.verticalFullExtent + link.circularPathData.rightLargeArcRadius;
+        }
+      }
+
+      // all links
+      link.circularPathData.leftInnerExtent = link.circularPathData.sourceX + link.circularPathData.leftNodeBuffer;
+      link.circularPathData.rightInnerExtent = link.circularPathData.targetX - link.circularPathData.rightNodeBuffer;
+      link.circularPathData.leftFullExtent = link.circularPathData.sourceX + link.circularPathData.leftLargeArcRadius + link.circularPathData.leftNodeBuffer;
+      link.circularPathData.rightFullExtent = link.circularPathData.targetX - link.circularPathData.rightLargeArcRadius - link.circularPathData.rightNodeBuffer;
+    }
+
+    if (link.circular) {
+      link.path = createCircularPathString(link);
+    } else {
+      var normalPath = linkHorizontal().source(function (d) {
+        var x = d.source.x0 + (d.source.x1 - d.source.x0);
+        var y = d.y0;
+        return [x, y];
+      }).target(function (d) {
+        var x = d.target.x0;
+        var y = d.y1;
+        return [x, y];
+      });
+      link.path = normalPath(link);
+    }
+  });
+}
+
+// create a d path using the addCircularPathData
+function createCircularPathString(link) {
+  var pathString = '';
+  // 'pathData' is assigned a value but never used
+  // var pathData = {}
+
+  if (link.circularLinkType == 'top') {
+    pathString =
+    // start at the right of the source node
+    'M' + link.circularPathData.sourceX + ' ' + link.circularPathData.sourceY + ' ' +
+    // line right to buffer point
+    'L' + link.circularPathData.leftInnerExtent + ' ' + link.circularPathData.sourceY + ' ' +
+    // Arc around: Centre of arc X and  //Centre of arc Y
+    'A' + link.circularPathData.leftLargeArcRadius + ' ' + link.circularPathData.leftSmallArcRadius + ' 0 0 0 ' +
+    // End of arc X //End of arc Y
+    link.circularPathData.leftFullExtent + ' ' + (link.circularPathData.sourceY - link.circularPathData.leftSmallArcRadius) + ' ' + // End of arc X
+    // line up to buffer point
+    'L' + link.circularPathData.leftFullExtent + ' ' + link.circularPathData.verticalLeftInnerExtent + ' ' +
+    // Arc around: Centre of arc X and  //Centre of arc Y
+    'A' + link.circularPathData.leftLargeArcRadius + ' ' + link.circularPathData.leftLargeArcRadius + ' 0 0 0 ' +
+    // End of arc X //End of arc Y
+    link.circularPathData.leftInnerExtent + ' ' + link.circularPathData.verticalFullExtent + ' ' + // End of arc X
+    // line left to buffer point
+    'L' + link.circularPathData.rightInnerExtent + ' ' + link.circularPathData.verticalFullExtent + ' ' +
+    // Arc around: Centre of arc X and  //Centre of arc Y
+    'A' + link.circularPathData.rightLargeArcRadius + ' ' + link.circularPathData.rightLargeArcRadius + ' 0 0 0 ' +
+    // End of arc X //End of arc Y
+    link.circularPathData.rightFullExtent + ' ' + link.circularPathData.verticalRightInnerExtent + ' ' + // End of arc X
+    // line down
+    'L' + link.circularPathData.rightFullExtent + ' ' + (link.circularPathData.targetY - link.circularPathData.rightSmallArcRadius) + ' ' +
+    // Arc around: Centre of arc X and  //Centre of arc Y
+    'A' + link.circularPathData.rightLargeArcRadius + ' ' + link.circularPathData.rightSmallArcRadius + ' 0 0 0 ' +
+    // End of arc X //End of arc Y
+    link.circularPathData.rightInnerExtent + ' ' + link.circularPathData.targetY + ' ' + // End of arc X
+    // line to end
+    'L' + link.circularPathData.targetX + ' ' + link.circularPathData.targetY;
+  } else {
+    // bottom path
+    pathString =
+    // start at the right of the source node
+    'M' + link.circularPathData.sourceX + ' ' + link.circularPathData.sourceY + ' ' +
+    // line right to buffer point
+    'L' + link.circularPathData.leftInnerExtent + ' ' + link.circularPathData.sourceY + ' ' +
+    // Arc around: Centre of arc X and  //Centre of arc Y
+    'A' + link.circularPathData.leftLargeArcRadius + ' ' + link.circularPathData.leftSmallArcRadius + ' 0 0 1 ' +
+    // End of arc X //End of arc Y
+    link.circularPathData.leftFullExtent + ' ' + (link.circularPathData.sourceY + link.circularPathData.leftSmallArcRadius) + ' ' + // End of arc X
+    // line down to buffer point
+    'L' + link.circularPathData.leftFullExtent + ' ' + link.circularPathData.verticalLeftInnerExtent + ' ' +
+    // Arc around: Centre of arc X and  //Centre of arc Y
+    'A' + link.circularPathData.leftLargeArcRadius + ' ' + link.circularPathData.leftLargeArcRadius + ' 0 0 1 ' +
+    // End of arc X //End of arc Y
+    link.circularPathData.leftInnerExtent + ' ' + link.circularPathData.verticalFullExtent + ' ' + // End of arc X
+    // line left to buffer point
+    'L' + link.circularPathData.rightInnerExtent + ' ' + link.circularPathData.verticalFullExtent + ' ' +
+    // Arc around: Centre of arc X and  //Centre of arc Y
+    'A' + link.circularPathData.rightLargeArcRadius + ' ' + link.circularPathData.rightLargeArcRadius + ' 0 0 1 ' +
+    // End of arc X //End of arc Y
+    link.circularPathData.rightFullExtent + ' ' + link.circularPathData.verticalRightInnerExtent + ' ' + // End of arc X
+    // line up
+    'L' + link.circularPathData.rightFullExtent + ' ' + (link.circularPathData.targetY + link.circularPathData.rightSmallArcRadius) + ' ' +
+    // Arc around: Centre of arc X and  //Centre of arc Y
+    'A' + link.circularPathData.rightLargeArcRadius + ' ' + link.circularPathData.rightSmallArcRadius + ' 0 0 1 ' +
+    // End of arc X //End of arc Y
+    link.circularPathData.rightInnerExtent + ' ' + link.circularPathData.targetY + ' ' + // End of arc X
+    // line to end
+    'L' + link.circularPathData.targetX + ' ' + link.circularPathData.targetY;
+  }
+
+  return pathString;
+}
+
+// sort links based on the distance between the source and tartget node columns
+// if the same, then use Y position of the source node
+function sortLinkColumnAscending(link1, link2) {
+  if (linkColumnDistance(link1) == linkColumnDistance(link2)) {
+    return link1.circularLinkType == 'bottom' ? sortLinkSourceYDescending(link1, link2) : sortLinkSourceYAscending(link1, link2);
+  } else {
+    return linkColumnDistance(link2) - linkColumnDistance(link1);
+  }
+}
+
+// sort ascending links by their source vertical position, y0
+function sortLinkSourceYAscending(link1, link2) {
+  return link1.y0 - link2.y0;
+}
+
+// sort descending links by their source vertical position, y0
+function sortLinkSourceYDescending(link1, link2) {
+  return link2.y0 - link1.y0;
+}
+
+// sort ascending links by their target vertical position, y1
+function sortLinkTargetYAscending(link1, link2) {
+  return link1.y1 - link2.y1;
+}
+
+// sort descending links by their target vertical position, y1
+function sortLinkTargetYDescending(link1, link2) {
+  return link2.y1 - link1.y1;
+}
+
+// return the distance between the link's target and source node, in terms of the nodes' column
+function linkColumnDistance(link) {
+  return link.target.column - link.source.column;
+}
+
+// return the distance between the link's target and source node, in terms of the nodes' X coordinate
+function linkXLength(link) {
+  return link.target.x0 - link.source.x1;
+}
+
+// Return the Y coordinate on the longerLink path * which is perpendicular shorterLink's source.
+// * approx, based on a straight line from target to source, when in fact the path is a bezier
+function linkPerpendicularYToLinkSource(longerLink, shorterLink) {
+  // get the angle for the longer link
+  var angle = linkAngle(longerLink);
+
+  // get the adjacent length to the other link's x position
+  var heightFromY1ToPependicular = linkXLength(shorterLink) / Math.tan(angle);
+
+  // add or subtract from longer link1's original y1, depending on the slope
+  var yPerpendicular = incline(longerLink) == 'up' ? longerLink.y1 + heightFromY1ToPependicular : longerLink.y1 - heightFromY1ToPependicular;
+
+  return yPerpendicular;
+}
+
+// Return the Y coordinate on the longerLink path * which is perpendicular shorterLink's source.
+// * approx, based on a straight line from target to source, when in fact the path is a bezier
+function linkPerpendicularYToLinkTarget(longerLink, shorterLink) {
+  // get the angle for the longer link
+  var angle = linkAngle(longerLink);
+
+  // get the adjacent length to the other link's x position
+  var heightFromY1ToPependicular = linkXLength(shorterLink) / Math.tan(angle);
+
+  // add or subtract from longer link's original y1, depending on the slope
+  var yPerpendicular = incline(longerLink) == 'up' ? longerLink.y1 - heightFromY1ToPependicular : longerLink.y1 + heightFromY1ToPependicular;
+
+  return yPerpendicular;
+}
+
+// Move any nodes that overlap links which span 2+ columns
+function resolveNodeLinkOverlaps(graph, y0, y1, id) {
+  graph.links.forEach(function (link) {
+    if (link.circular) {
+      return;
+    }
+
+    if (link.target.column - link.source.column > 1) {
+      var columnToTest = link.source.column + 1;
+      var maxColumnToTest = link.target.column - 1;
+
+      var i = 1;
+      var numberOfColumnsToTest = maxColumnToTest - columnToTest + 1;
+
+      for (i = 1; columnToTest <= maxColumnToTest; columnToTest++, i++) {
+        graph.nodes.forEach(function (node) {
+          if (node.column == columnToTest) {
+            var t = i / (numberOfColumnsToTest + 1);
+
+            // Find all the points of a cubic bezier curve in javascript
+            // https://stackoverflow.com/questions/15397596/find-all-the-points-of-a-cubic-bezier-curve-in-javascript
+
+            var B0_t = Math.pow(1 - t, 3);
+            var B1_t = 3 * t * Math.pow(1 - t, 2);
+            var B2_t = 3 * Math.pow(t, 2) * (1 - t);
+            var B3_t = Math.pow(t, 3);
+
+            var py_t = B0_t * link.y0 + B1_t * link.y0 + B2_t * link.y1 + B3_t * link.y1;
+
+            var linkY0AtColumn = py_t - link.width / 2;
+            var linkY1AtColumn = py_t + link.width / 2;
+            var dy;
+
+            // If top of link overlaps node, push node up
+            if (linkY0AtColumn > node.y0 && linkY0AtColumn < node.y1) {
+              dy = node.y1 - linkY0AtColumn + 10;
+              dy = node.circularLinkType == 'bottom' ? dy : -dy;
+
+              node = adjustNodeHeight(node, dy, y0, y1);
+
+              // check if other nodes need to move up too
+              graph.nodes.forEach(function (otherNode) {
+                // don't need to check itself or nodes at different columns
+                if (getNodeID(otherNode, id) == getNodeID(node, id) || otherNode.column != node.column) {
+                  return;
+                }
+                if (nodesOverlap(node, otherNode)) {
+                  adjustNodeHeight(otherNode, dy, y0, y1);
+                }
+              });
+            } else if (linkY1AtColumn > node.y0 && linkY1AtColumn < node.y1) {
+              // If bottom of link overlaps node, push node down
+              dy = linkY1AtColumn - node.y0 + 10;
+
+              node = adjustNodeHeight(node, dy, y0, y1);
+
+              // check if other nodes need to move down too
+              graph.nodes.forEach(function (otherNode) {
+                // don't need to check itself or nodes at different columns
+                if (getNodeID(otherNode, id) == getNodeID(node, id) || otherNode.column != node.column) {
+                  return;
+                }
+                if (otherNode.y0 < node.y1 && otherNode.y1 > node.y1) {
+                  adjustNodeHeight(otherNode, dy, y0, y1);
+                }
+              });
+            } else if (linkY0AtColumn < node.y0 && linkY1AtColumn > node.y1) {
+              // if link completely overlaps node
+              dy = linkY1AtColumn - node.y0 + 10;
+
+              node = adjustNodeHeight(node, dy, y0, y1);
+
+              graph.nodes.forEach(function (otherNode) {
+                // don't need to check itself or nodes at different columns
+                if (getNodeID(otherNode, id) == getNodeID(node, id) || otherNode.column != node.column) {
+                  return;
+                }
+                if (otherNode.y0 < node.y1 && otherNode.y1 > node.y1) {
+                  adjustNodeHeight(otherNode, dy, y0, y1);
+                }
+              });
+            }
+          }
+        });
+      }
+    }
+  });
+}
+
+// check if two nodes overlap
+function nodesOverlap(nodeA, nodeB) {
+  // test if nodeA top partially overlaps nodeB
+  if (nodeA.y0 > nodeB.y0 && nodeA.y0 < nodeB.y1) {
+    return true;
+  } else if (nodeA.y1 > nodeB.y0 && nodeA.y1 < nodeB.y1) {
+    // test if nodeA bottom partially overlaps nodeB
+    return true;
+  } else if (nodeA.y0 < nodeB.y0 && nodeA.y1 > nodeB.y1) {
+    // test if nodeA covers nodeB
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// update a node, and its associated links, vertical positions (y0, y1)
+function adjustNodeHeight(node, dy, sankeyY0, sankeyY1) {
+  if (node.y0 + dy >= sankeyY0 && node.y1 + dy <= sankeyY1) {
+    node.y0 = node.y0 + dy;
+    node.y1 = node.y1 + dy;
+
+    node.targetLinks.forEach(function (l) {
+      l.y1 = l.y1 + dy;
+    });
+
+    node.sourceLinks.forEach(function (l) {
+      l.y0 = l.y0 + dy;
+    });
+  }
+  return node;
+}
+
+// sort and set the links' y0 for each node
+function sortSourceLinks(graph, y1, id, moveNodes) {
+  graph.nodes.forEach(function (node) {
+    // move any nodes up which are off the bottom
+    if (moveNodes && node.y + (node.y1 - node.y0) > y1) {
+      node.y = node.y - (node.y + (node.y1 - node.y0) - y1);
+    }
+
+    var nodesSourceLinks = graph.links.filter(function (l) {
+      return getNodeID(l.source, id) == getNodeID(node, id);
+    });
+
+    var nodeSourceLinksLength = nodesSourceLinks.length;
+
+    // if more than 1 link then sort
+    if (nodeSourceLinksLength > 1) {
+      nodesSourceLinks.sort(function (link1, link2) {
+        // if both are not circular...
+        if (!link1.circular && !link2.circular) {
+          // if the target nodes are the same column, then sort by the link's target y
+          if (link1.target.column == link2.target.column) {
+            return link1.y1 - link2.y1;
+          } else if (!sameInclines(link1, link2)) {
+            // if the links slope in different directions, then sort by the link's target y
+            return link1.y1 - link2.y1;
+
+            // if the links slope in same directions, then sort by any overlap
+          } else {
+            if (link1.target.column > link2.target.column) {
+              var link2Adj = linkPerpendicularYToLinkTarget(link2, link1);
+              return link1.y1 - link2Adj;
+            }
+            if (link2.target.column > link1.target.column) {
+              var link1Adj = linkPerpendicularYToLinkTarget(link1, link2);
+              return link1Adj - link2.y1;
+            }
+          }
+        }
+
+        // if only one is circular, the move top links up, or bottom links down
+        if (link1.circular && !link2.circular) {
+          return link1.circularLinkType == 'top' ? -1 : 1;
+        } else if (link2.circular && !link1.circular) {
+          return link2.circularLinkType == 'top' ? 1 : -1;
+        }
+
+        // if both links are circular...
+        if (link1.circular && link2.circular) {
+          // ...and they both loop the same way (both top)
+          if (link1.circularLinkType === link2.circularLinkType && link1.circularLinkType == 'top') {
+            // ...and they both connect to a target with same column, then sort by the target's y
+            if (link1.target.column === link2.target.column) {
+              return link1.target.y1 - link2.target.y1;
+            } else {
+              // ...and they connect to different column targets, then sort by how far back they
+              return link2.target.column - link1.target.column;
+            }
+          } else if (link1.circularLinkType === link2.circularLinkType && link1.circularLinkType == 'bottom') {
+            // ...and they both loop the same way (both bottom)
+            // ...and they both connect to a target with same column, then sort by the target's y
+            if (link1.target.column === link2.target.column) {
+              return link2.target.y1 - link1.target.y1;
+            } else {
+              // ...and they connect to different column targets, then sort by how far back they
+              return link1.target.column - link2.target.column;
+            }
+          } else {
+            // ...and they loop around different ways, the move top up and bottom down
+            return link1.circularLinkType == 'top' ? -1 : 1;
+          }
+        }
+      });
+    }
+
+    // update y0 for links
+    var ySourceOffset = node.y0;
+
+    nodesSourceLinks.forEach(function (link) {
+      link.y0 = ySourceOffset + link.width / 2;
+      ySourceOffset = ySourceOffset + link.width;
+    });
+
+    // correct any circular bottom links so they are at the bottom of the node
+    nodesSourceLinks.forEach(function (link, i) {
+      if (link.circularLinkType == 'bottom') {
+        var j = i + 1;
+        var offsetFromBottom = 0;
+        // sum the widths of any links that are below this link
+        for (j; j < nodeSourceLinksLength; j++) {
+          offsetFromBottom = offsetFromBottom + nodesSourceLinks[j].width;
+        }
+        link.y0 = node.y1 - offsetFromBottom - link.width / 2;
+      }
+    });
+  });
+}
+
+// sort and set the links' y1 for each node
+function sortTargetLinks(graph, y1, id) {
+  graph.nodes.forEach(function (node) {
+    var nodesTargetLinks = graph.links.filter(function (l) {
+      return getNodeID(l.target, id) == getNodeID(node, id);
+    });
+
+    var nodesTargetLinksLength = nodesTargetLinks.length;
+
+    if (nodesTargetLinksLength > 1) {
+      nodesTargetLinks.sort(function (link1, link2) {
+        // if both are not circular, the base on the source y position
+        if (!link1.circular && !link2.circular) {
+          if (link1.source.column == link2.source.column) {
+            return link1.y0 - link2.y0;
+          } else if (!sameInclines(link1, link2)) {
+            return link1.y0 - link2.y0;
+          } else {
+            // get the angle of the link to the further source node (ie the smaller column)
+            if (link2.source.column < link1.source.column) {
+              var link2Adj = linkPerpendicularYToLinkSource(link2, link1);
+
+              return link1.y0 - link2Adj;
+            }
+            if (link1.source.column < link2.source.column) {
+              var link1Adj = linkPerpendicularYToLinkSource(link1, link2);
+
+              return link1Adj - link2.y0;
+            }
+          }
+        }
+
+        // if only one is circular, the move top links up, or bottom links down
+        if (link1.circular && !link2.circular) {
+          return link1.circularLinkType == 'top' ? -1 : 1;
+        } else if (link2.circular && !link1.circular) {
+          return link2.circularLinkType == 'top' ? 1 : -1;
+        }
+
+        // if both links are circular...
+        if (link1.circular && link2.circular) {
+          // ...and they both loop the same way (both top)
+          if (link1.circularLinkType === link2.circularLinkType && link1.circularLinkType == 'top') {
+            // ...and they both connect to a target with same column, then sort by the target's y
+            if (link1.source.column === link2.source.column) {
+              return link1.source.y1 - link2.source.y1;
+            } else {
+              // ...and they connect to different column targets, then sort by how far back they
+              return link1.source.column - link2.source.column;
+            }
+          } else if (link1.circularLinkType === link2.circularLinkType && link1.circularLinkType == 'bottom') {
+            // ...and they both loop the same way (both bottom)
+            // ...and they both connect to a target with same column, then sort by the target's y
+            if (link1.source.column === link2.source.column) {
+              return link1.source.y1 - link2.source.y1;
+            } else {
+              // ...and they connect to different column targets, then sort by how far back they
+              return link2.source.column - link1.source.column;
+            }
+          } else {
+            // ...and they loop around different ways, the move top up and bottom down
+            return link1.circularLinkType == 'top' ? -1 : 1;
+          }
+        }
+      });
+    }
+
+    // update y1 for links
+    var yTargetOffset = node.y0;
+
+    nodesTargetLinks.forEach(function (link) {
+      link.y1 = yTargetOffset + link.width / 2;
+      yTargetOffset = yTargetOffset + link.width;
+    });
+
+    // correct any circular bottom links so they are at the bottom of the node
+    nodesTargetLinks.forEach(function (link, i) {
+      if (link.circularLinkType == 'bottom') {
+        var j = i + 1;
+        var offsetFromBottom = 0;
+        // sum the widths of any links that are below this link
+        for (j; j < nodesTargetLinksLength; j++) {
+          offsetFromBottom = offsetFromBottom + nodesTargetLinks[j].width;
+        }
+        link.y1 = node.y1 - offsetFromBottom - link.width / 2;
+      }
+    });
+  });
+}
+
+// test if links both slope up, or both slope down
+function sameInclines(link1, link2) {
+  return incline(link1) == incline(link2);
+}
+
+// returns the slope of a link, from source to target
+// up => slopes up from source to target
+// down => slopes down from source to target
+function incline(link) {
+  return link.y0 - link.y1 > 0 ? 'up' : 'down';
+}
+
+// check if link is self linking, ie links a node to the same node
+function selfLinking(link, id) {
+  return getNodeID(link.source, id) == getNodeID(link.target, id);
+}
+
+function fillHeight(graph, y0, y1) {
+  var nodes = graph.nodes;
+  var links = graph.links;
+
+  var top = false;
+  var bottom = false;
+
+  links.forEach(function (link) {
+    if (link.circularLinkType == 'top') {
+      top = true;
+    } else if (link.circularLinkType == 'bottom') {
+      bottom = true;
+    }
+  });
+
+  if (top == false || bottom == false) {
+    var minY0 = src_min(nodes, function (node) {
+      return node.y0;
+    });
+    var maxY1 = src_max(nodes, function (node) {
+      return node.y1;
+    });
+    var currentHeight = maxY1 - minY0;
+    var chartHeight = y1 - y0;
+    var ratio = chartHeight / currentHeight;
+
+    nodes.forEach(function (node) {
+      var nodeHeight = (node.y1 - node.y0) * ratio;
+      node.y0 = (node.y0 - minY0) * ratio;
+      node.y1 = node.y0 + nodeHeight;
+    });
+
+    links.forEach(function (link) {
+      link.y0 = (link.y0 - minY0) * ratio;
+      link.y1 = (link.y1 - minY0) * ratio;
+      link.width = link.width * ratio;
+    });
+  }
+}
+
+
+
+// EXTERNAL MODULE: ./node_modules/d3-path-arrows/dist/index.js
+var dist = __webpack_require__(47);
+
+// CONCATENATED MODULE: ./src/util/uid.js
+var count = 0;
+/* harmony default export */ var uid = (function (name) {
+  return new Id('O-' + (name == null ? '' : name + '-') + ++count);
+});
+
+function Id(id) {
+  this.id = id;
+  this.href = new URL("#".concat(id), location) + '';
+}
+
+Id.prototype.toString = function () {
+  return 'url(' + this.href + ')';
+};
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
+var runtime = __webpack_require__(2);
+var runtime_default = /*#__PURE__*/__webpack_require__.n(runtime);
+
+// CONCATENATED MODULE: ./src/reactComponents/sankeyRenderer.js
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function sankeyRenderer_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { sankeyRenderer_typeof = function _typeof(obj) { return typeof obj; }; } else { sankeyRenderer_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return sankeyRenderer_typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+
+
+
+
+function sankeyRenderer(_x, _x2, _x3) {
+  return _sankeyRenderer.apply(this, arguments);
+}
+
+function _sankeyRenderer() {
+  _sankeyRenderer = _asyncToGenerator( /*#__PURE__*/runtime_default.a.mark(function _callee(dataSource, options, selector) {
+    var g, jqContainer, value, data, json, values, queryVariables, currency, jqWrapper;
+    return runtime_default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            g = {};
+            g.container = document.querySelector("#".concat(selector));
+            jqContainer = $(g.container);
+            value = undefined;
+
+            if (dataSource.values) {
+              _context.next = 14;
+              break;
+            }
+
+            _context.next = 7;
+            return dataSource.fetcher();
+
+          case 7:
+            data = _context.sent;
+            _context.next = 10;
+            return data.json();
+
+          case 10:
+            json = _context.sent;
+            value = dataSource.setupData(json);
+            _context.next = 15;
+            break;
+
+          case 14:
+            value = dataSource.values;
+
+          case 15:
+            values = Array.isArray(value) ? _defineProperty({}, dataSource.displayed_data.split('.')[1], value) : Object.assign({}, value);
+            console.log(values);
+
+            if (!(!(values.inbound && values.inbound.length > 0) && !(values.outbound && values.outbound.length > 0))) {
+              _context.next = 20;
+              break;
+            }
+
+            jqContainer.empty();
+            return _context.abrupt("return");
+
+          case 20:
+            queryVariables = sankeyRenderer_typeof(dataSource.variables) === 'object' ? dataSource.variables : JSON.parse(dataSource.variables);
+            currency = values.inbound && values.inbound.length > 0 && values.inbound[0].currency.symbol || values.outbound && values.outbound.length > 0 && values.outbound[0].currency.symbol;
+            jqContainer.addClass('graph');
+
+            if (!jqContainer.parent().hasClass('wrapper')) {
+              jqContainer.wrap('<div class="wrapper" style="width:100%; height:100%;">');
+            }
+
+            jqWrapper = jqContainer.parent('.wrapper');
+            g.theme = options.theme || 'light';
+
+            if (g.theme == 'dark') {
+              jqContainer.addClass('dark');
+            } else {
+              jqContainer.removeClass('dark');
+            }
+
+            g.render = function () {
+              jqWrapper.removeClass('initializing');
+              var width = $("#".concat(selector)).parent().parent().width();
+              var height = $("#".concat(selector)).parent().parent().height();
+              var edgeColor = 'path';
+              var textColor = options.theme == 'dark' ? 'white' : 'black';
+              var strokeColor = options.theme == 'dark' ? 'white' : 'black';
+              var linkOpacity = options.theme == 'dark' ? 1 : 0.85;
+              var fontSize = 12;
+              var graphSize = {};
+              var svg = src_select("#".concat(selector)).append('svg').attr('width', '100%').attr('height', '100%');
+
+              var prepareData = function prepareData(data) {
+                var getLabel = function getLabel(node) {
+                  if (node.address == '0x0000000000000000000000000000000000000000') {
+                    // 'coinbase'
+                    return 'Coinbase';
+                  } else if (node.smartContract && node.smartContract.contractType == 'Generic') {
+                    // 'smart_contract'
+                    return null;
+                  } else if (node.smartContract && (node.smartContract.contractType == 'Token' || node.smartContract.contractType == 'TokenSale')) {
+                    // 'token'
+                    return node.smartContract.currency.name + ' (' + node.smartContract.currency.symbol + ')';
+                  } else if (node.smartContract && node.smartContract.contractType == 'MarginPositionToken') {
+                    // 'MarginPositionToken'
+                    return node.annotation || null;
+                  } else if (node.smartContract && node.smartContract.contractType == 'Multisig') {
+                    // 'multisig'
+                    return node.annotation || null;
+                  } else if (node.smartContract && node.smartContract.contractType == 'DEX') {
+                    // 'dex'
+                    return node.annotation || null;
+                  } else {
+                    if (node.address == '') {
+                      // 'coinbase'
+                      return 'Coinbase';
+                    } else if (node.annotation) {
+                      // 'annotated_address'
+                      return node.annotation;
+                    } else {
+                      // 'address'
+                      return null;
+                    }
+                  }
+                };
+
+                var links = [];
+                var nodes = [];
+
+                if (data.inbound) {
+                  lodash_default.a.each(data.inbound, function (item) {
+                    links.push({
+                      source: item.sender.address,
+                      target: item.receiver.address,
+                      amount: item.amount,
+                      value: item.amount,
+                      countOfTransfers: item.count
+                    });
+                    nodes.push({
+                      id: item.sender.address,
+                      label: getLabel(item.sender),
+                      depthLevel: item.sender.address == queryVariables.address ? 0 : -item.depth,
+                      valueFromOneLink: item.amount
+                    });
+                    nodes.push({
+                      id: item.receiver.address,
+                      label: getLabel(item.receiver),
+                      depthLevel: item.receiver.address == queryVariables.address ? 0 : -item.depth + 1,
+                      valueFromOneLink: item.amount
+                    });
+                  });
+                }
+
+                if (data.outbound) {
+                  lodash_default.a.each(data.outbound, function (item) {
+                    links.push({
+                      source: item.sender.address,
+                      target: item.receiver.address,
+                      amount: item.amount,
+                      value: item.amount,
+                      countOfTransfers: item.count
+                    });
+                    nodes.push({
+                      id: item.sender.address,
+                      label: getLabel(item.sender),
+                      depthLevel: item.sender.address == queryVariables.address ? 0 : item.depth - 1,
+                      valueFromOneLink: item.amount
+                    });
+                    nodes.push({
+                      id: item.receiver.address,
+                      label: getLabel(item.receiver),
+                      depthLevel: item.receiver.address == queryVariables.address ? 0 : item.depth,
+                      valueFromOneLink: item.amount
+                    });
+                  });
+                }
+
+                nodes = lodash_default.a.uniqBy(lodash_default.a.sortBy(nodes, [function (n) {
+                  return -n.valueFromOneLink;
+                }, function (n) {
+                  return Math.pow(n.depthLevel, 2);
+                }]), 'id');
+
+                var numberOnLevels = lodash_default.a.reduce(nodes, function (result, n) {
+                  result[n.depthLevel] ? result[n.depthLevel] += 1 : result[n.depthLevel] = 1;
+                  return result;
+                }, {});
+
+                var maxVertical = lodash_default.a.max(lodash_default.a.values(numberOnLevels));
+
+                var maxHorizontal = lodash_default.a.values(numberOnLevels).length;
+
+                graphSize.width = maxHorizontal * 650;
+                graphSize.height = maxVertical * (300 - Math.min(200, Math.log10(maxVertical) * 100));
+                return {
+                  links: links,
+                  nodes: nodes,
+                  units: currency
+                };
+              };
+
+              var data = prepareData(values);
+              var colorSchemaOdd = ordinal(category10.slice(5));
+              var colorSchemaEven = ordinal(category10.slice(0, 5));
+
+              var color = function color(d) {
+                return d.column % 2 == 0 ? colorSchemaOdd(d.category === undefined ? d.id : d.category) : colorSchemaEven(d.category === undefined ? d.id : d.category);
+              };
+
+              var format = data.units ? function (d) {
+                return "".concat(numeral_default()(d).format('0.0000a'), " ").concat(data.units);
+              } : function (d) {
+                return "".concat(numeral_default()(d).format('0.0000a'));
+              };
+              var sankey = d3_sankey_circular_es_sankeyCircular().nodeId(function (d) {
+                return d.id;
+              }).nodeAlign(fixed).nodeWidth(50).nodePaddingRatio(0.7).circularLinkGap(15).size([graphSize.width, graphSize.height]);
+              g.sankey = sankey;
+              var graph = sankey(data);
+
+              var rootNode = lodash_default.a.find(graph.nodes, {
+                id: queryVariables.address
+              });
+
+              function getAllPaths(graph) {
+                var pathsFromRootToNodes = [];
+
+                function addSourceNodeToPath(node, path) {
+                  if (node.id == rootNode.id || lodash_default.a.includes(path, node.id)) {
+                    if (!isDuplicate(pathsFromRootToNodes, path)) {
+                      pathsFromRootToNodes.push(_toConsumableArray(path));
+                    }
+                  } else if (node.sourceLinks.length == 0) {
+                    path.push(node.id);
+
+                    if (!isDuplicate(pathsFromRootToNodes, path)) {
+                      pathsFromRootToNodes.push(_toConsumableArray(path));
+                    }
+                  } else {
+                    path.push(node.id);
+
+                    if (!isDuplicate(pathsFromRootToNodes, path)) {
+                      pathsFromRootToNodes.push(_toConsumableArray(path));
+                    }
+
+                    lodash_default.a.forEach(node.sourceLinks, function (l) {
+                      addSourceNodeToPath(l.target, _toConsumableArray(path));
+                    });
+                  }
+                }
+
+                lodash_default.a.forEach(rootNode.sourceLinks, function (l) {
+                  var path = [rootNode.id];
+                  addSourceNodeToPath(l.target, path);
+                });
+
+                var pathsFromNodesToRoot = [];
+
+                function addTargetNodeToPath(node, path) {
+                  if (node.id == rootNode.id || lodash_default.a.includes(path, node.id)) {
+                    if (!isDuplicate(pathsFromNodesToRoot, _toConsumableArray(path).reverse())) {
+                      pathsFromNodesToRoot.push(_toConsumableArray(path).reverse());
+                    }
+                  } else if (node.targetLinks.length == 0) {
+                    path.push(node.id);
+
+                    if (!isDuplicate(pathsFromNodesToRoot, _toConsumableArray(path).reverse())) {
+                      pathsFromNodesToRoot.push(_toConsumableArray(path).reverse());
+                    }
+                  } else {
+                    path.push(node.id);
+
+                    if (!isDuplicate(pathsFromNodesToRoot, _toConsumableArray(path).reverse())) {
+                      pathsFromNodesToRoot.push(_toConsumableArray(path).reverse());
+                    }
+
+                    lodash_default.a.forEach(node.targetLinks, function (l) {
+                      var pathCopy = _toConsumableArray(path);
+
+                      addTargetNodeToPath(l.source, pathCopy);
+                    });
+                  }
+                }
+
+                lodash_default.a.forEach(rootNode.targetLinks, function (l) {
+                  var path = [rootNode.id];
+                  addTargetNodeToPath(l.source, path);
+                });
+
+                return lodash_default.a.concat(pathsFromRootToNodes, pathsFromNodesToRoot);
+              }
+
+              var allPaths = getAllPaths(graph);
+
+              function isDuplicate(arrays, arr) {
+                return lodash_default.a.some(arrays, function (a) {
+                  return lodash_default.a.isEqual(arr, a);
+                });
+              }
+
+              function getPaths(nodeId, allPaths) {
+                var toNode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+                var paths = [];
+
+                lodash_default.a.forEach(allPaths, function (p) {
+                  var direction = toNode ? p.length - 1 : 0;
+
+                  if (lodash_default.a.indexOf(p, nodeId) == direction) {
+                    paths.push(p);
+                  }
+                });
+
+                return paths;
+              }
+
+              function getDataToHighlight(nodes, allPaths) {
+                var dataToHighlight = {};
+
+                lodash_default.a.forEach(nodes, function (n) {
+                  // что подсвечивать: от рутового или до или все вместе
+                  var paths = lodash_default.a.concat(getPaths(n.id, allPaths), getPaths(n.id, allPaths, false));
+
+                  var nodesToHighlight = lodash_default.a.uniq(lodash_default.a.flattenDeep(paths));
+
+                  var linksToHighlight = [];
+
+                  lodash_default.a.forEach(paths, function (p) {
+                    for (var i = 0; i < p.length - 1; i++) {
+                      var couple = [p[i], p[i + 1]];
+
+                      if (!isDuplicate(linksToHighlight, couple)) {
+                        linksToHighlight.push(couple);
+                      }
+                    }
+                  });
+
+                  dataToHighlight[n.id] = {
+                    nodesToHighlight: nodesToHighlight,
+                    linksToHighlight: linksToHighlight
+                  };
+                });
+
+                return dataToHighlight;
+              }
+
+              var dataToHighlight = getDataToHighlight(graph.nodes, allPaths);
+              var rootG = svg.append('g').attr('class', 'root-g');
+              rootG.append('rect').attr('class', 'divider').attr('x', rootNode.x0).attr('y', -10000).attr('height', 20000).attr('width', rootNode.x1 - rootNode.x0).attr('fill', 'silver').attr('opacity', 0.5);
+              var linkG = rootG.append('g').attr('class', 'links').attr('fill', 'none').attr('stroke-opacity', linkOpacity).selectAll('path');
+              var nodeG = rootG.append('g').attr('class', 'nodes').attr('font-family', 'sans-serif').attr('font-size', fontSize).selectAll('g');
+              var node = nodeG.data(graph.nodes).enter().append('g');
+              var tooltip = src_select('.tooltip').empty() ? src_select('body').append('div').attr('class', options.theme == 'dark' ? 'tooltip tooltip--dark' : 'tooltip') : src_select('.tooltip');
+              node.append('rect').attr('x', function (d) {
+                return d.x0;
+              }).attr('y', function (d) {
+                return d.y1 - d.y0 < 1 ? d.y0 - 0.5 : d.y0;
+              }).attr('height', function (d) {
+                return d.y1 - d.y0 < 1 ? 1 : d.y1 - d.y0;
+              }).attr('width', function (d) {
+                return d.x1 - d.x0;
+              }).attr('fill', color).attr('stroke', strokeColor).attr('stroke-width', 1).on('mouseover', nodeMouseOver).on('mousemove', nodeMouseMove).on('mouseout', nodeMouseOut).on('contextmenu', nodeContextMenu);
+              node.append('text').attr('x', function (d) {
+                return (d.x0 + d.x1) / 2;
+              }).attr('y', function (d) {
+                return d.y0 - 4;
+              }).attr('text-anchor', 'middle').attr('fill', textColor).attr('class', function (d) {
+                d.isHidden = false;
+                return d.label ? 'annotation' : 'address';
+              }).text(function (d) {
+                return d.label || lodash_default.a.truncate(d.id, {
+                  length: 15,
+                  separator: '...'
+                });
+              }).on('mouseover', nodeMouseOver).on('mousemove', nodeMouseMove).on('mouseout', nodeMouseOut).on('contextmenu', nodeContextMenu);
+              var link = linkG.data(graph.links).enter().append('g');
+
+              if (edgeColor === 'path') {
+                var gradient = link.append('linearGradient').attr('id', function (d) {
+                  return (d.uid = uid('link')).id;
+                }).attr('gradientUnits', 'userSpaceOnUse').attr('x1', function (d) {
+                  return d.source.x1;
+                }).attr('x2', function (d) {
+                  return d.target.x0;
+                });
+                gradient.append('stop').attr('offset', '0%').attr('stop-color', function (d) {
+                  return color(d.source);
+                });
+                gradient.append('stop').attr('offset', '100%').attr('stop-color', function (d) {
+                  return color(d.target);
+                });
+              }
+
+              link.append('path').attr('class', 'sankey-link').attr('d', function (link) {
+                return link.path;
+              }).attr('stroke', function (d) {
+                return edgeColor === 'none' ? '#aaa' : edgeColor === 'path' ? d.uid : edgeColor === 'input' ? color(d.source) : color(d.target);
+              }).attr('stroke-width', function (d) {
+                return Math.max(1, d.width);
+              }).attr('opacity', 1).on('mouseover', linkMouseOver).on('mousemove', linkMouseMove).on('mouseout', linkMouseOut);
+              var arrows = dist["pathArrows"]().arrowLength(10).gapLength(150).arrowHeadSize(4).path(function (link) {
+                return link.path;
+              });
+              var arrowsG = linkG.data(graph.links).enter().append('g').attr('class', 'g-arrow').call(arrows);
+              arrowsG.select('path').style('stroke', strokeColor);
+              arrowsG.selectAll('.arrow-head').style('fill', strokeColor);
+
+              function highlightNode(node, id) {
+                // isHidden, isHighlighted, isDarken,
+                if (lodash_default.a.includes(dataToHighlight[id].nodesToHighlight, node.id)) {
+                  node.isHighlighted = true;
+                } else {
+                  node.isDarken = true;
+                }
+              }
+
+              function highlightLinks(link, id) {
+                var highlight = lodash_default.a.some(dataToHighlight[id].linksToHighlight, function (couple) {
+                  return link.source.id == couple[0] && link.target.id == couple[1];
+                });
+
+                if (highlight) {
+                  link.isHighlighted = true;
+                } else {
+                  link.isDarken = true;
+                }
+              }
+
+              function getOpacity(elem, type) {
+                var opacity;
+
+                switch (type) {
+                  case 'node':
+                    opacity = elem.isHighlighted ? 1 : elem.isDarken ? 0.3 : 1;
+                    break;
+
+                  case 'text':
+                    opacity = elem.isHighlighted ? 1 : elem.isHidden ? 0 : elem.isDarken ? 0.3 : 1;
+                    break;
+
+                  case 'link':
+                    opacity = elem.isHighlighted ? 1 : elem.isDarken ? 0.3 : 1;
+                    break;
+
+                  default:
+                    break;
+                }
+
+                return opacity;
+              }
+
+              function nodeMouseOver(e, d) {
+                var thisId = d.id;
+                node.selectAll('rect').style('opacity', function (d) {
+                  highlightNode(d, thisId);
+                  return getOpacity(d, 'node');
+                });
+                src_selectAll('.sankey-link').style('opacity', function (l) {
+                  highlightLinks(l, thisId);
+                  return getOpacity(l, 'link');
+                });
+                node.selectAll('text').style('opacity', function (d) {
+                  return getOpacity(d, 'text');
+                });
+                var income = 0;
+
+                lodash_default.a.each(d.targetLinks, function (l) {
+                  income += l.amount;
+                });
+
+                var outcome = 0;
+
+                lodash_default.a.each(d.sourceLinks, function (l) {
+                  outcome += l.amount;
+                });
+
+                tooltip.style('visibility', 'visible').html("<ul>\n\t\t\t\t\t  ".concat(income != 0 ? "<li>Income: ".concat(format(income), "</li>") : '', "\n\t\t\t\t\t  ").concat(outcome != 0 ? "<li>Outcome: ".concat(format(outcome), "</li>") : '', "\n\t\t\t\t\t  <li>").concat(d.label || d.id, "</li>\n\t\t\t\t  </ul>"));
+              }
+
+              function nodeMouseMove(e, d) {
+                var bodyWidth = src_select('body').style('width').slice(0, -2);
+                var tooltipheight = e.pageY - tooltip.style('height').slice(0, -2) - 10;
+                var tooltipWidth = tooltip.style('width').slice(0, -2);
+                var tooltipX = e.pageX < tooltipWidth / 2 ? 0 : e.pageX + tooltipWidth / 2 > bodyWidth ? bodyWidth - tooltipWidth : e.pageX - tooltipWidth / 2;
+                tooltip.style('top', tooltipheight + 'px').style('left', tooltipX + 'px');
+              }
+
+              function nodeMouseOut(e, d) {
+                node.selectAll('rect').style('opacity', function (d) {
+                  d.isHighlighted = false;
+                  d.isDarken = false;
+                  return getOpacity(d, 'node');
+                });
+                link.selectAll('.sankey-link').style('opacity', function (l) {
+                  l.isHighlighted = false;
+                  l.isDarken = false;
+                  return getOpacity(d, 'link');
+                });
+                node.selectAll('text').style('opacity', function (d) {
+                  return getOpacity(d, 'text');
+                });
+                tooltip.style('visibility', 'hidden');
+              }
+
+              function nodeContextMenu(e, d) {
+                e.preventDefault();
+                var pathname = window.location.pathname.slice(1);
+                window.open("".concat(window.location.origin, "/").concat(pathname.slice(0, pathname.indexOf('/')), "/address/").concat(d.id), '_blank');
+              }
+
+              function linkMouseOver(e, l) {
+                var source = l.source.id;
+                var target = l.target.id;
+                link.selectAll('.sankey-link').style('opacity', function (l) {
+                  if (l.source.id == source && l.target.id == target) {
+                    l.isHighlighted = true;
+                  } else {
+                    l.isDarken = true;
+                  }
+
+                  return getOpacity(l, 'link');
+                });
+                node.selectAll('rect').style('opacity', function (d) {
+                  if (d.id == source || d.id == target) {
+                    d.isHighlighted = true;
+                  } else {
+                    d.isDarken = true;
+                  }
+
+                  return getOpacity(d, 'node');
+                });
+                node.selectAll('text').style('opacity', function (d) {
+                  return getOpacity(d, 'text');
+                });
+                tooltip.style('visibility', 'visible').html("<ul>\n\t\t\t\t\t  <li>Amount: ".concat(format(l.amount), "</li>\n\t\t\t\t\t  <li>From:</li>\n\t\t\t\t\t  <li>").concat(l.source.label || l.source.id, "</li>\n\t\t\t\t\t  <li>To:</li>\n\t\t\t\t\t  <li>").concat(l.target.label || l.target.id, "</li>\n\t\t\t\t\t  <li>Count of transfers: ").concat(l.countOfTransfers, "</li>\n\t\t\t\t  </ul>"));
+              }
+
+              function linkMouseMove(e, l) {
+                var bodyWidth = src_select('body').style('width').slice(0, -2);
+                var tooltipheight = e.pageY - tooltip.style('height').slice(0, -2) - 10;
+                var tooltipWidth = tooltip.style('width').slice(0, -2);
+                var tooltipX = e.pageX < tooltipWidth / 2 ? 0 : e.pageX + tooltipWidth / 2 > bodyWidth ? bodyWidth - tooltipWidth : e.pageX - tooltipWidth / 2;
+                tooltip.style('top', tooltipheight + 'px').style('left', tooltipX + 'px');
+              }
+
+              function linkMouseOut(e, l) {
+                node.selectAll('rect').style('opacity', function (d) {
+                  d.isHighlighted = false;
+                  d.isDarken = false;
+                  return getOpacity(d, 'node');
+                });
+                link.selectAll('.sankey-link').style('opacity', function (l) {
+                  l.isHighlighted = false;
+                  l.isDarken = false;
+                  return getOpacity(l, 'link');
+                });
+                node.selectAll('text').style('opacity', function (d) {
+                  return getOpacity(d, 'text');
+                });
+                tooltip.style('visibility', 'hidden');
+              }
+
+              var zoom = d3_zoom_src_zoom().on('zoom', function (e) {
+                rootG.select('.nodes').attr('font-size', fontSize / e.transform.k);
+
+                if (fontSize / e.transform.k > 36) {
+                  node.selectAll('.address').style('opacity', function (d) {
+                    d.isHidden = true;
+                    return getOpacity(d, 'text');
+                  });
+                } else {
+                  node.selectAll('.address').style('opacity', function (d) {
+                    d.isHidden = false;
+                    return getOpacity(d, 'text');
+                  });
+                }
+
+                rootG.select('.divider').attr('y', function (d) {
+                  return -10000 / e.transform.k;
+                }).attr('height', 20000 / e.transform.k);
+                rootG.attr('transform', e.transform);
+              }).on('start', function (e) {
+                if (e.sourceEvent && e.sourceEvent.type == 'mousedown') {
+                  svg.attr('cursor', 'move');
+                }
+              }).on('end', function (e) {
+                if (e.sourceEvent && e.sourceEvent.type == 'mouseup') {
+                  svg.attr('cursor', 'default');
+                }
+              });
+              var initScale = Math.min(width / graphSize.width, height / graphSize.height) * 3 / 4;
+              svg.call(zoom).call(zoom.transform, transform_identity.translate((width - graphSize.width * initScale) / 2, 120).scale(initScale)).on('dblclick.zoom', null);
+              var chart = svg.node();
+              $("#".concat(selector)).html(chart);
+            };
+
+            g.render();
+            return _context.abrupt("return", g);
+
+          case 30:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _sankeyRenderer.apply(this, arguments);
+}
+
+window.sankeyRenderer = sankeyRenderer;
+
+/***/ }),
+
+/***/ 49:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "default", function() { return /* binding */ graphRenderer; });
+
+// EXTERNAL MODULE: ./node_modules/lodash/lodash.js
+var lodash = __webpack_require__(0);
+var lodash_default = /*#__PURE__*/__webpack_require__.n(lodash);
+
+// EXTERNAL MODULE: ./node_modules/numeral/numeral.js
+var numeral = __webpack_require__(4);
+var numeral_default = /*#__PURE__*/__webpack_require__.n(numeral);
+
+// EXTERNAL MODULE: ./node_modules/vis/dist/vis.js
+var vis = __webpack_require__(10);
+
+// CONCATENATED MODULE: ./src/util/lightenOrDarkenColor.js
+function lightenOrDarkenColor(color, percent) {
+  var darken = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var num = parseInt(color.replace("#", ""), 16),
+      amt = Math.round(2.55 * percent),
+      R = (num >> 16) + (darken ? amt : -amt),
+      B = (num >> 8 & 0x00FF) + (darken ? amt : -amt),
+      G = (num & 0x0000FF) + (darken ? amt : -amt);
+  return "#".concat((0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + (B < 255 ? B < 1 ? 0 : B : 255) * 0x100 + (G < 255 ? G < 1 ? 0 : G : 255)).toString(16).slice(1));
+}
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
+var runtime = __webpack_require__(2);
+var runtime_default = /*#__PURE__*/__webpack_require__.n(runtime);
+
+// CONCATENATED MODULE: ./src/reactComponents/graphRenderer.js
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+
+
+
+
+
+function graphRenderer(_x, _x2, _x3) {
+  return _graphRenderer.apply(this, arguments);
+}
+
+function _graphRenderer() {
+  _graphRenderer = _asyncToGenerator( /*#__PURE__*/runtime_default.a.mark(function _callee(dataSource, options, selector) {
+    var g, jqContainer, value, data, json, values, queryVariables, currency, jqWrapper;
+    return runtime_default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            g = {};
+            g.container = document.querySelector("#".concat(selector));
+            jqContainer = $(g.container);
+            value = undefined;
+
+            if (dataSource.values) {
+              _context.next = 14;
+              break;
+            }
+
+            _context.next = 7;
+            return dataSource.fetcher();
+
+          case 7:
+            data = _context.sent;
+            _context.next = 10;
+            return data.json();
+
+          case 10:
+            json = _context.sent;
+            value = dataSource.setupData(json);
+            _context.next = 15;
+            break;
+
+          case 14:
+            value = dataSource.values;
+
+          case 15:
+            values = Array.isArray(value) ? _defineProperty({}, dataSource.displayed_data.split('.')[1], value) : Object.assign({}, value);
+
+            if (!(!(values.inbound && values.inbound.length > 0) && !(values.outbound && values.outbound.length > 0))) {
+              _context.next = 19;
+              break;
+            }
+
+            jqContainer.empty();
+            return _context.abrupt("return");
+
+          case 19:
+            queryVariables = _typeof(dataSource.variables) === 'object' ? dataSource.variables : JSON.parse(dataSource.variables);
+            currency = values.inbound && values.inbound.length > 0 && values.inbound[0].currency.symbol || values.outbound && values.outbound.length > 0 && values.outbound[0].currency.symbol;
+            jqContainer.addClass('graph');
+
+            if (!jqContainer.parent().hasClass('wrapper')) {
+              jqContainer.wrap('<div class="wrapper" style="width:100%; height:100%;">');
+            }
+
+            jqWrapper = jqContainer.parent('.wrapper'); // a trick for the icons in the graph to be loaded
+
+            jqContainer.append('<i class="fa fa-flag" style="visibility:hidden;position:absolute;"></i>');
+            g.theme = options.theme || 'light';
+
+            if (g.theme == 'dark') {
+              jqContainer.addClass('dark');
+            } else {
+              jqContainer.removeClass('dark');
+            }
+
+            g.networkOptions = {
+              height: '100%',
+              physics: {
+                stabilization: {
+                  enabled: false,
+                  iterations: 10,
+                  onlyDynamicEdges: true
+                },
+                barnesHut: {
+                  damping: 0.4,
+                  avoidOverlap: 0.1,
+                  springConstant: 0.09
+                }
+              },
+              interaction: {
+                hover: true,
+                hoverConnectedEdges: false
+              }
+            };
+
+            g.hashCode = function (data) {
+              var string = JSON.stringify(data);
+
+              if (Array.prototype.reduce) {
+                return string.split('').reduce(function (a, b) {
+                  a = (a << 5) - a + b.charCodeAt(0);
+                  return a & a;
+                }, 0);
+              }
+
+              var hash = 0;
+              if (string.length === 0) return hash;
+
+              for (var i = 0; i < string.length; i++) {
+                var character = string.charCodeAt(i);
+                hash = (hash << 5) - hash + character;
+                hash = hash & hash;
+              }
+
+              return hash;
+            };
+
+            g.prepareNodes = function (nodes) {
+              if (!nodes) return [];
+
+              var prepareNode = function prepareNode(node) {
+                if (node.address == '0x0000000000000000000000000000000000000000') {
+                  // 'coinbase'
+                  return {
+                    id: node.address,
+                    label: 'Coinbase',
+                    title: node.address,
+                    shape: 'icon',
+                    icon: {
+                      face: 'FontAwesome',
+                      code: "\uF0AC",
+                      weight: 900,
+                      size: 40,
+                      color: '#03a9f4'
+                    },
+                    font: {
+                      color: g.theme == 'dark' ? 'white' : 'black'
+                    }
+                  };
+                } else if (node.smartContract && node.smartContract.contractType == 'Generic') {
+                  // 'smart_contract'
+                  return {
+                    id: node.address,
+                    label: lodash_default.a.truncate(node.address, {
+                      length: 15,
+                      separator: '...'
+                    }),
+                    title: 'Smart Contract ' + node.address,
+                    shape: 'icon',
+                    icon: {
+                      face: 'FontAwesome',
+                      code: "\uF013",
+                      weight: 900,
+                      size: 40,
+                      color: '#f0a30a'
+                    },
+                    font: {
+                      color: g.theme == 'dark' ? 'white' : 'black'
+                    }
+                  };
+                } else if (node.smartContract && (node.smartContract.contractType == 'Token' || node.smartContract.contractType == 'TokenSale')) {
+                  // 'token'
+                  return {
+                    id: node.address,
+                    label: node.smartContract.currency.name + ' (' + node.smartContract.currency.symbol + ')',
+                    title: node.smartContract.currency.name + ' (' + node.smartContract.currency.symbol + ')' + ' ' + node.address,
+                    shape: 'icon',
+                    icon: {
+                      face: 'FontAwesome',
+                      code: "\uF51F",
+                      weight: 900,
+                      size: 40,
+                      color: '#ff5722'
+                    },
+                    font: {
+                      color: g.theme == 'dark' ? 'white' : 'black'
+                    }
+                  };
+                } else if (node.smartContract && node.smartContract.contractType == 'MarginPositionToken') {
+                  // 'MarginPositionToken'
+                  return {
+                    id: node.address,
+                    label: node.annotation || lodash_default.a.truncate(node.address, {
+                      length: 15,
+                      separator: '...'
+                    }),
+                    title: 'MarginPositionToken ' + node.address,
+                    shape: 'icon',
+                    icon: {
+                      face: 'FontAwesome',
+                      code: "\uF1B2",
+                      weight: 900,
+                      size: 40,
+                      color: '#ff5722'
+                    },
+                    font: {
+                      color: g.theme == 'dark' ? 'white' : 'black'
+                    }
+                  };
+                } else if (node.smartContract && node.smartContract.contractType == 'Multisig') {
+                  return {
+                    // 'multisig'
+                    id: node.address,
+                    label: node.annotation || lodash_default.a.truncate(node.address, {
+                      length: 15,
+                      separator: '...'
+                    }),
+                    title: 'MultiSig Wallet ' + node.address,
+                    shape: 'icon',
+                    icon: {
+                      face: 'FontAwesome',
+                      code: "\uF4D3",
+                      weight: 900,
+                      size: 40,
+                      color: '#03a9f4'
+                    },
+                    font: {
+                      color: g.theme == 'dark' ? 'white' : 'black'
+                    }
+                  };
+                } else if (node.smartContract && node.smartContract.contractType == 'DEX') {
+                  // 'dex'
+                  return {
+                    id: node.address,
+                    label: node.annotation || lodash_default.a.truncate(node.address, {
+                      length: 15,
+                      separator: '...'
+                    }),
+                    title: 'DEX ' + node.address,
+                    shape: 'icon',
+                    icon: {
+                      face: 'FontAwesome',
+                      code: "\uF021",
+                      weight: 900,
+                      size: 40,
+                      color: '#03a9f4'
+                    },
+                    font: {
+                      color: g.theme == 'dark' ? 'white' : 'black'
+                    }
+                  };
+                } else {
+                  if (node.address == '') {
+                    // 'coinbase'
+                    return {
+                      id: node.address,
+                      label: 'Coinbase',
+                      title: node.address,
+                      shape: 'icon',
+                      icon: {
+                        face: 'FontAwesome',
+                        code: "\uF0AC",
+                        weight: 900,
+                        size: 40,
+                        color: '#03a9f4'
+                      },
+                      font: {
+                        color: g.theme == 'dark' ? 'white' : 'black'
+                      }
+                    };
+                  } else if (node.annotation) {
+                    // 'annotated_address'
+                    return {
+                      id: node.address,
+                      label: node.annotation,
+                      title: node.address,
+                      shape: 'icon',
+                      icon: {
+                        face: 'FontAwesome',
+                        code: "\uF007",
+                        weight: 900,
+                        size: 40,
+                        color: g.theme == 'dark' ? '#00967b' : '#009183'
+                      },
+                      font: {
+                        background: g.theme == 'dark' ? '#00967b' : '#009183',
+                        color: '#ffffff'
+                      }
+                    };
+                  } else {
+                    // 'address'
+                    return {
+                      id: node.address,
+                      label: lodash_default.a.truncate(node.address, {
+                        length: 15,
+                        separator: '...'
+                      }),
+                      title: node.address,
+                      shape: 'icon',
+                      icon: {
+                        face: 'FontAwesome',
+                        code: "\uF007",
+                        weight: 900,
+                        size: 40,
+                        color: g.theme == 'dark' ? '#009b77' : '#009688'
+                      },
+                      font: {
+                        color: g.theme == 'dark' ? 'white' : 'black'
+                      }
+                    };
+                  }
+                }
+              };
+
+              var prepared = [];
+
+              lodash_default.a.each(nodes, function (node) {
+                prepared.push(prepareNode(node.receiver));
+                prepared.push(prepareNode(node.sender));
+              });
+
+              return prepared;
+            };
+
+            g.prepareEdges = function (edges) {
+              var receiver = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+              if (!edges) return [];
+
+              var prepareEdge = function prepareEdge(edge) {
+                var currency_name = currency;
+                var width = edge.amount > 1 ? 1.5 * Math.log10(edge.amount) + 1 : 1;
+                var value = parseFloat(edge.amount) <= 1e-6 ? edge.amount : numeral_default()(edge.amount).format('0.0000a');
+                var label = value + ' ' + currency_name;
+
+                if (receiver) {
+                  return {
+                    from: edge.sender.address,
+                    to: edge.receiver.address,
+                    arrows: 'to',
+                    label: label,
+                    color: {
+                      color: g.theme == 'dark' ? 'silver' : 'grey',
+                      highlight: '#ff5722'
+                    },
+                    font: {
+                      align: 'middle',
+                      multi: true,
+                      color: g.theme == 'dark' ? 'white' : 'black',
+                      strokeWidth: 4,
+                      strokeColor: g.theme == 'dark' ? 'black' : 'white'
+                    },
+                    smooth: true,
+                    width: width,
+                    select_type: 'select_transfers',
+                    hidden: false,
+                    id: g.hashCode(['select_transfers', edge.sender.address, edge.receiver.address, label])
+                  };
+                } else {
+                  return {
+                    from: edge.sender.address,
+                    to: edge.receiver.address,
+                    arrows: 'to',
+                    label: label,
+                    color: {
+                      color: g.theme == 'dark' ? 'white' : 'black',
+                      highlight: '#ff5722'
+                    },
+                    font: {
+                      align: 'middle',
+                      multi: true,
+                      color: g.theme == 'dark' ? 'white' : 'black',
+                      strokeWidth: 4,
+                      strokeColor: g.theme == 'dark' ? 'black' : 'white'
+                    },
+                    smooth: true,
+                    width: width,
+                    select_type: 'select_transfers',
+                    hidden: false,
+                    id: g.hashCode(['select_transfers', edge.sender.address, edge.receiver.address, label])
+                  };
+                }
+              };
+
+              var prepared = [];
+
+              lodash_default.a.each(edges, function (edge) {
+                prepared.push(prepareEdge(edge));
+              });
+
+              return prepared;
+            };
+
+            g.setDataset = function (data) {
+              if (!g.dataset) {
+                g.dataset = {
+                  nodes: new vis["DataSet"](),
+                  edges: new vis["DataSet"]()
+                };
+              }
+
+              g.dataset.nodes.clear();
+              g.dataset.edges.clear();
+
+              lodash_default.a.each(lodash_default.a.uniqBy(g.prepareNodes(data.inbound).concat(g.prepareNodes(data.outbound)), 'id'), function (node) {
+                g.dataset.nodes.add(node);
+              });
+
+              lodash_default.a.each(lodash_default.a.uniqBy(g.prepareEdges(data.inbound).concat(g.prepareEdges(data.outbound, false)), 'id'), function (edge) {
+                g.dataset.edges.add(edge);
+              });
+            };
+
+            g.expandNode = function (address) {
+              var node = g.dataset.nodes.get(address);
+
+              if (!node.expanded) {
+                node.expanded = true;
+                var prevColor = node.icon.color;
+                node.physics = false;
+                node.icon = {
+                  color: lightenOrDarkenColor(prevColor, 20, g.theme == 'dark')
+                };
+
+                if (g.theme == 'dark') {
+                  node.shadow = {
+                    enabled: true,
+                    color: prevColor,
+                    size: 20,
+                    x: 0,
+                    y: 0
+                  };
+                }
+
+                g.dataset.nodes.update(node);
+              }
+            };
+
+            g.expandDataset = function () {
+              lodash_default.a.each(lodash_default.a.uniqBy(g.prepareNodes(query.data[query.cryptoCurrency].inbound).concat(g.prepareNodes(query.data[query.cryptoCurrency].outbound)), 'id'), function (node) {
+                if (!g.dataset.nodes.get(node.id)) {
+                  g.dataset.nodes.add(node);
+                }
+              });
+
+              lodash_default.a.each(lodash_default.a.uniqBy(g.prepareEdges(query.data[query.cryptoCurrency].inbound).concat(g.prepareEdges(query.data[query.cryptoCurrency].outbound, false)), 'id'), function (edge) {
+                if (!g.dataset.edges.get(edge.id)) {
+                  g.dataset.edges.add(edge);
+                }
+              });
+            };
+
+            g.expand = function (address) {
+              var node = g.dataset.nodes.get(address);
+
+              if (!node.expanded) {
+                g.expandNode(address);
+                query.request({
+                  address: address
+                }, true, false);
+              }
+            };
+
+            g.initGraph = function () {
+              jqWrapper.removeClass('initializing');
+              g.setDataset(values);
+              g.network = new vis["Network"](g.container, g.dataset, g.networkOptions);
+              g.network.on('dragStart', function (params) {
+                if (params.nodes.length != 0) {
+                  g.network.canvas.body.container.style.cursor = 'grabbing';
+                } else {
+                  g.network.canvas.body.container.style.cursor = 'move';
+                }
+              });
+              g.network.on('dragEnd', function (params) {
+                if (params.nodes.length != 0) {
+                  g.network.canvas.body.container.style.cursor = 'grab';
+                } else {
+                  g.network.canvas.body.container.style.cursor = 'default';
+                }
+
+                var nodeId = params.nodes[0];
+                var clickedNode = g.dataset.nodes.get(nodeId);
+                clickedNode.physics = false;
+                g.dataset.nodes.update(clickedNode);
+              });
+              g.network.on('hold', function (params) {
+                if (params.nodes.length != 0) {
+                  g.network.canvas.body.container.style.cursor = 'grabbing';
+                } else {
+                  g.network.canvas.body.container.style.cursor = 'move';
+                }
+              });
+              g.network.on('release', function (params) {
+                if (params.nodes.length != 0) {
+                  g.network.canvas.body.container.style.cursor = 'grabbing';
+                } else {
+                  g.network.canvas.body.container.style.cursor = 'default';
+                }
+              });
+              g.network.on('hoverNode', function (params) {
+                g.network.canvas.body.container.style.cursor = 'grab';
+              });
+              g.network.on('blurNode', function (params) {
+                g.network.canvas.body.container.style.cursor = 'default';
+              });
+              g.network.on('oncontext', function (params) {
+                event.preventDefault();
+                var nodeId = g.network.getNodeAt(params.pointer.DOM);
+
+                if (nodeId) {
+                  var node = g.dataset.nodes.get(nodeId);
+                  var pathname = window.location.pathname.slice(1);
+                  window.open("".concat(window.location.origin, "/").concat(pathname.slice(0, pathname.indexOf('/')), "/address/").concat(node.id), '_blank');
+                }
+              });
+              if (g.dataset.nodes.length == 0) return;
+              g.expandNode(queryVariables.address);
+            };
+
+            g.initGraph();
+            return _context.abrupt("return", g);
+
+          case 38:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _graphRenderer.apply(this, arguments);
+}
+
+window.graphRenderer = graphRenderer;
+
+/***/ }),
+
+/***/ 96:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -87310,7 +88185,7 @@ function stronglyConnectedComponents(adjList) {
 
 /***/ }),
 
-/***/ 96:
+/***/ 97:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -87321,9 +88196,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = pathArrows;
 
-var _d3Selection = __webpack_require__(97);
+var _d3Selection = __webpack_require__(98);
 
-var _d3Array = __webpack_require__(98);
+var _d3Array = __webpack_require__(99);
 
 // Function that appends a path to selection that has sankey path data attached
 // The path is formatted as dash array, and triangle paths to create arrows along the path
@@ -87427,7 +88302,7 @@ function pathArrows() {
 
 /***/ }),
 
-/***/ 97:
+/***/ 98:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -88579,7 +89454,7 @@ Local.prototype = local.prototype = {
 
 /***/ }),
 
-/***/ 98:
+/***/ 99:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

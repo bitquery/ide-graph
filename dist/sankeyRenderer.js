@@ -91,7 +91,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 47);
+/******/ 	return __webpack_require__(__webpack_require__.s = 48);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -17253,11 +17253,766 @@ return /******/ (function(modules) { // webpackBootstrap
   else {}
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(43), __webpack_require__(44)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(44), __webpack_require__(45)(module)))
 
 /***/ }),
 
-/***/ 3:
+/***/ 2:
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright (c) 2014-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+var runtime = (function (exports) {
+  "use strict";
+
+  var Op = Object.prototype;
+  var hasOwn = Op.hasOwnProperty;
+  var undefined; // More compressible than void 0.
+  var $Symbol = typeof Symbol === "function" ? Symbol : {};
+  var iteratorSymbol = $Symbol.iterator || "@@iterator";
+  var asyncIteratorSymbol = $Symbol.asyncIterator || "@@asyncIterator";
+  var toStringTagSymbol = $Symbol.toStringTag || "@@toStringTag";
+
+  function define(obj, key, value) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+    return obj[key];
+  }
+  try {
+    // IE 8 has a broken Object.defineProperty that only works on DOM objects.
+    define({}, "");
+  } catch (err) {
+    define = function(obj, key, value) {
+      return obj[key] = value;
+    };
+  }
+
+  function wrap(innerFn, outerFn, self, tryLocsList) {
+    // If outerFn provided and outerFn.prototype is a Generator, then outerFn.prototype instanceof Generator.
+    var protoGenerator = outerFn && outerFn.prototype instanceof Generator ? outerFn : Generator;
+    var generator = Object.create(protoGenerator.prototype);
+    var context = new Context(tryLocsList || []);
+
+    // The ._invoke method unifies the implementations of the .next,
+    // .throw, and .return methods.
+    generator._invoke = makeInvokeMethod(innerFn, self, context);
+
+    return generator;
+  }
+  exports.wrap = wrap;
+
+  // Try/catch helper to minimize deoptimizations. Returns a completion
+  // record like context.tryEntries[i].completion. This interface could
+  // have been (and was previously) designed to take a closure to be
+  // invoked without arguments, but in all the cases we care about we
+  // already have an existing method we want to call, so there's no need
+  // to create a new function object. We can even get away with assuming
+  // the method takes exactly one argument, since that happens to be true
+  // in every case, so we don't have to touch the arguments object. The
+  // only additional allocation required is the completion record, which
+  // has a stable shape and so hopefully should be cheap to allocate.
+  function tryCatch(fn, obj, arg) {
+    try {
+      return { type: "normal", arg: fn.call(obj, arg) };
+    } catch (err) {
+      return { type: "throw", arg: err };
+    }
+  }
+
+  var GenStateSuspendedStart = "suspendedStart";
+  var GenStateSuspendedYield = "suspendedYield";
+  var GenStateExecuting = "executing";
+  var GenStateCompleted = "completed";
+
+  // Returning this object from the innerFn has the same effect as
+  // breaking out of the dispatch switch statement.
+  var ContinueSentinel = {};
+
+  // Dummy constructor functions that we use as the .constructor and
+  // .constructor.prototype properties for functions that return Generator
+  // objects. For full spec compliance, you may wish to configure your
+  // minifier not to mangle the names of these two functions.
+  function Generator() {}
+  function GeneratorFunction() {}
+  function GeneratorFunctionPrototype() {}
+
+  // This is a polyfill for %IteratorPrototype% for environments that
+  // don't natively support it.
+  var IteratorPrototype = {};
+  IteratorPrototype[iteratorSymbol] = function () {
+    return this;
+  };
+
+  var getProto = Object.getPrototypeOf;
+  var NativeIteratorPrototype = getProto && getProto(getProto(values([])));
+  if (NativeIteratorPrototype &&
+      NativeIteratorPrototype !== Op &&
+      hasOwn.call(NativeIteratorPrototype, iteratorSymbol)) {
+    // This environment has a native %IteratorPrototype%; use it instead
+    // of the polyfill.
+    IteratorPrototype = NativeIteratorPrototype;
+  }
+
+  var Gp = GeneratorFunctionPrototype.prototype =
+    Generator.prototype = Object.create(IteratorPrototype);
+  GeneratorFunction.prototype = Gp.constructor = GeneratorFunctionPrototype;
+  GeneratorFunctionPrototype.constructor = GeneratorFunction;
+  GeneratorFunction.displayName = define(
+    GeneratorFunctionPrototype,
+    toStringTagSymbol,
+    "GeneratorFunction"
+  );
+
+  // Helper for defining the .next, .throw, and .return methods of the
+  // Iterator interface in terms of a single ._invoke method.
+  function defineIteratorMethods(prototype) {
+    ["next", "throw", "return"].forEach(function(method) {
+      define(prototype, method, function(arg) {
+        return this._invoke(method, arg);
+      });
+    });
+  }
+
+  exports.isGeneratorFunction = function(genFun) {
+    var ctor = typeof genFun === "function" && genFun.constructor;
+    return ctor
+      ? ctor === GeneratorFunction ||
+        // For the native GeneratorFunction constructor, the best we can
+        // do is to check its .name property.
+        (ctor.displayName || ctor.name) === "GeneratorFunction"
+      : false;
+  };
+
+  exports.mark = function(genFun) {
+    if (Object.setPrototypeOf) {
+      Object.setPrototypeOf(genFun, GeneratorFunctionPrototype);
+    } else {
+      genFun.__proto__ = GeneratorFunctionPrototype;
+      define(genFun, toStringTagSymbol, "GeneratorFunction");
+    }
+    genFun.prototype = Object.create(Gp);
+    return genFun;
+  };
+
+  // Within the body of any async function, `await x` is transformed to
+  // `yield regeneratorRuntime.awrap(x)`, so that the runtime can test
+  // `hasOwn.call(value, "__await")` to determine if the yielded value is
+  // meant to be awaited.
+  exports.awrap = function(arg) {
+    return { __await: arg };
+  };
+
+  function AsyncIterator(generator, PromiseImpl) {
+    function invoke(method, arg, resolve, reject) {
+      var record = tryCatch(generator[method], generator, arg);
+      if (record.type === "throw") {
+        reject(record.arg);
+      } else {
+        var result = record.arg;
+        var value = result.value;
+        if (value &&
+            typeof value === "object" &&
+            hasOwn.call(value, "__await")) {
+          return PromiseImpl.resolve(value.__await).then(function(value) {
+            invoke("next", value, resolve, reject);
+          }, function(err) {
+            invoke("throw", err, resolve, reject);
+          });
+        }
+
+        return PromiseImpl.resolve(value).then(function(unwrapped) {
+          // When a yielded Promise is resolved, its final value becomes
+          // the .value of the Promise<{value,done}> result for the
+          // current iteration.
+          result.value = unwrapped;
+          resolve(result);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
+      }
+    }
+
+    var previousPromise;
+
+    function enqueue(method, arg) {
+      function callInvokeWithMethodAndArg() {
+        return new PromiseImpl(function(resolve, reject) {
+          invoke(method, arg, resolve, reject);
+        });
+      }
+
+      return previousPromise =
+        // If enqueue has been called before, then we want to wait until
+        // all previous Promises have been resolved before calling invoke,
+        // so that results are always delivered in the correct order. If
+        // enqueue has not been called before, then it is important to
+        // call invoke immediately, without waiting on a callback to fire,
+        // so that the async generator function has the opportunity to do
+        // any necessary setup in a predictable way. This predictability
+        // is why the Promise constructor synchronously invokes its
+        // executor callback, and why async functions synchronously
+        // execute code before the first await. Since we implement simple
+        // async functions in terms of async generators, it is especially
+        // important to get this right, even though it requires care.
+        previousPromise ? previousPromise.then(
+          callInvokeWithMethodAndArg,
+          // Avoid propagating failures to Promises returned by later
+          // invocations of the iterator.
+          callInvokeWithMethodAndArg
+        ) : callInvokeWithMethodAndArg();
+    }
+
+    // Define the unified helper method that is used to implement .next,
+    // .throw, and .return (see defineIteratorMethods).
+    this._invoke = enqueue;
+  }
+
+  defineIteratorMethods(AsyncIterator.prototype);
+  AsyncIterator.prototype[asyncIteratorSymbol] = function () {
+    return this;
+  };
+  exports.AsyncIterator = AsyncIterator;
+
+  // Note that simple async functions are implemented on top of
+  // AsyncIterator objects; they just return a Promise for the value of
+  // the final result produced by the iterator.
+  exports.async = function(innerFn, outerFn, self, tryLocsList, PromiseImpl) {
+    if (PromiseImpl === void 0) PromiseImpl = Promise;
+
+    var iter = new AsyncIterator(
+      wrap(innerFn, outerFn, self, tryLocsList),
+      PromiseImpl
+    );
+
+    return exports.isGeneratorFunction(outerFn)
+      ? iter // If outerFn is a generator, return the full iterator.
+      : iter.next().then(function(result) {
+          return result.done ? result.value : iter.next();
+        });
+  };
+
+  function makeInvokeMethod(innerFn, self, context) {
+    var state = GenStateSuspendedStart;
+
+    return function invoke(method, arg) {
+      if (state === GenStateExecuting) {
+        throw new Error("Generator is already running");
+      }
+
+      if (state === GenStateCompleted) {
+        if (method === "throw") {
+          throw arg;
+        }
+
+        // Be forgiving, per 25.3.3.3.3 of the spec:
+        // https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generatorresume
+        return doneResult();
+      }
+
+      context.method = method;
+      context.arg = arg;
+
+      while (true) {
+        var delegate = context.delegate;
+        if (delegate) {
+          var delegateResult = maybeInvokeDelegate(delegate, context);
+          if (delegateResult) {
+            if (delegateResult === ContinueSentinel) continue;
+            return delegateResult;
+          }
+        }
+
+        if (context.method === "next") {
+          // Setting context._sent for legacy support of Babel's
+          // function.sent implementation.
+          context.sent = context._sent = context.arg;
+
+        } else if (context.method === "throw") {
+          if (state === GenStateSuspendedStart) {
+            state = GenStateCompleted;
+            throw context.arg;
+          }
+
+          context.dispatchException(context.arg);
+
+        } else if (context.method === "return") {
+          context.abrupt("return", context.arg);
+        }
+
+        state = GenStateExecuting;
+
+        var record = tryCatch(innerFn, self, context);
+        if (record.type === "normal") {
+          // If an exception is thrown from innerFn, we leave state ===
+          // GenStateExecuting and loop back for another invocation.
+          state = context.done
+            ? GenStateCompleted
+            : GenStateSuspendedYield;
+
+          if (record.arg === ContinueSentinel) {
+            continue;
+          }
+
+          return {
+            value: record.arg,
+            done: context.done
+          };
+
+        } else if (record.type === "throw") {
+          state = GenStateCompleted;
+          // Dispatch the exception by looping back around to the
+          // context.dispatchException(context.arg) call above.
+          context.method = "throw";
+          context.arg = record.arg;
+        }
+      }
+    };
+  }
+
+  // Call delegate.iterator[context.method](context.arg) and handle the
+  // result, either by returning a { value, done } result from the
+  // delegate iterator, or by modifying context.method and context.arg,
+  // setting context.delegate to null, and returning the ContinueSentinel.
+  function maybeInvokeDelegate(delegate, context) {
+    var method = delegate.iterator[context.method];
+    if (method === undefined) {
+      // A .throw or .return when the delegate iterator has no .throw
+      // method always terminates the yield* loop.
+      context.delegate = null;
+
+      if (context.method === "throw") {
+        // Note: ["return"] must be used for ES3 parsing compatibility.
+        if (delegate.iterator["return"]) {
+          // If the delegate iterator has a return method, give it a
+          // chance to clean up.
+          context.method = "return";
+          context.arg = undefined;
+          maybeInvokeDelegate(delegate, context);
+
+          if (context.method === "throw") {
+            // If maybeInvokeDelegate(context) changed context.method from
+            // "return" to "throw", let that override the TypeError below.
+            return ContinueSentinel;
+          }
+        }
+
+        context.method = "throw";
+        context.arg = new TypeError(
+          "The iterator does not provide a 'throw' method");
+      }
+
+      return ContinueSentinel;
+    }
+
+    var record = tryCatch(method, delegate.iterator, context.arg);
+
+    if (record.type === "throw") {
+      context.method = "throw";
+      context.arg = record.arg;
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    var info = record.arg;
+
+    if (! info) {
+      context.method = "throw";
+      context.arg = new TypeError("iterator result is not an object");
+      context.delegate = null;
+      return ContinueSentinel;
+    }
+
+    if (info.done) {
+      // Assign the result of the finished delegate to the temporary
+      // variable specified by delegate.resultName (see delegateYield).
+      context[delegate.resultName] = info.value;
+
+      // Resume execution at the desired location (see delegateYield).
+      context.next = delegate.nextLoc;
+
+      // If context.method was "throw" but the delegate handled the
+      // exception, let the outer generator proceed normally. If
+      // context.method was "next", forget context.arg since it has been
+      // "consumed" by the delegate iterator. If context.method was
+      // "return", allow the original .return call to continue in the
+      // outer generator.
+      if (context.method !== "return") {
+        context.method = "next";
+        context.arg = undefined;
+      }
+
+    } else {
+      // Re-yield the result returned by the delegate method.
+      return info;
+    }
+
+    // The delegate iterator is finished, so forget it and continue with
+    // the outer generator.
+    context.delegate = null;
+    return ContinueSentinel;
+  }
+
+  // Define Generator.prototype.{next,throw,return} in terms of the
+  // unified ._invoke helper method.
+  defineIteratorMethods(Gp);
+
+  define(Gp, toStringTagSymbol, "Generator");
+
+  // A Generator should always return itself as the iterator object when the
+  // @@iterator function is called on it. Some browsers' implementations of the
+  // iterator prototype chain incorrectly implement this, causing the Generator
+  // object to not be returned from this call. This ensures that doesn't happen.
+  // See https://github.com/facebook/regenerator/issues/274 for more details.
+  Gp[iteratorSymbol] = function() {
+    return this;
+  };
+
+  Gp.toString = function() {
+    return "[object Generator]";
+  };
+
+  function pushTryEntry(locs) {
+    var entry = { tryLoc: locs[0] };
+
+    if (1 in locs) {
+      entry.catchLoc = locs[1];
+    }
+
+    if (2 in locs) {
+      entry.finallyLoc = locs[2];
+      entry.afterLoc = locs[3];
+    }
+
+    this.tryEntries.push(entry);
+  }
+
+  function resetTryEntry(entry) {
+    var record = entry.completion || {};
+    record.type = "normal";
+    delete record.arg;
+    entry.completion = record;
+  }
+
+  function Context(tryLocsList) {
+    // The root entry object (effectively a try statement without a catch
+    // or a finally block) gives us a place to store values thrown from
+    // locations where there is no enclosing try statement.
+    this.tryEntries = [{ tryLoc: "root" }];
+    tryLocsList.forEach(pushTryEntry, this);
+    this.reset(true);
+  }
+
+  exports.keys = function(object) {
+    var keys = [];
+    for (var key in object) {
+      keys.push(key);
+    }
+    keys.reverse();
+
+    // Rather than returning an object with a next method, we keep
+    // things simple and return the next function itself.
+    return function next() {
+      while (keys.length) {
+        var key = keys.pop();
+        if (key in object) {
+          next.value = key;
+          next.done = false;
+          return next;
+        }
+      }
+
+      // To avoid creating an additional object, we just hang the .value
+      // and .done properties off the next function object itself. This
+      // also ensures that the minifier will not anonymize the function.
+      next.done = true;
+      return next;
+    };
+  };
+
+  function values(iterable) {
+    if (iterable) {
+      var iteratorMethod = iterable[iteratorSymbol];
+      if (iteratorMethod) {
+        return iteratorMethod.call(iterable);
+      }
+
+      if (typeof iterable.next === "function") {
+        return iterable;
+      }
+
+      if (!isNaN(iterable.length)) {
+        var i = -1, next = function next() {
+          while (++i < iterable.length) {
+            if (hasOwn.call(iterable, i)) {
+              next.value = iterable[i];
+              next.done = false;
+              return next;
+            }
+          }
+
+          next.value = undefined;
+          next.done = true;
+
+          return next;
+        };
+
+        return next.next = next;
+      }
+    }
+
+    // Return an iterator with no values.
+    return { next: doneResult };
+  }
+  exports.values = values;
+
+  function doneResult() {
+    return { value: undefined, done: true };
+  }
+
+  Context.prototype = {
+    constructor: Context,
+
+    reset: function(skipTempReset) {
+      this.prev = 0;
+      this.next = 0;
+      // Resetting context._sent for legacy support of Babel's
+      // function.sent implementation.
+      this.sent = this._sent = undefined;
+      this.done = false;
+      this.delegate = null;
+
+      this.method = "next";
+      this.arg = undefined;
+
+      this.tryEntries.forEach(resetTryEntry);
+
+      if (!skipTempReset) {
+        for (var name in this) {
+          // Not sure about the optimal order of these conditions:
+          if (name.charAt(0) === "t" &&
+              hasOwn.call(this, name) &&
+              !isNaN(+name.slice(1))) {
+            this[name] = undefined;
+          }
+        }
+      }
+    },
+
+    stop: function() {
+      this.done = true;
+
+      var rootEntry = this.tryEntries[0];
+      var rootRecord = rootEntry.completion;
+      if (rootRecord.type === "throw") {
+        throw rootRecord.arg;
+      }
+
+      return this.rval;
+    },
+
+    dispatchException: function(exception) {
+      if (this.done) {
+        throw exception;
+      }
+
+      var context = this;
+      function handle(loc, caught) {
+        record.type = "throw";
+        record.arg = exception;
+        context.next = loc;
+
+        if (caught) {
+          // If the dispatched exception was caught by a catch block,
+          // then let that catch block handle the exception normally.
+          context.method = "next";
+          context.arg = undefined;
+        }
+
+        return !! caught;
+      }
+
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        var record = entry.completion;
+
+        if (entry.tryLoc === "root") {
+          // Exception thrown outside of any try block that could handle
+          // it, so set the completion value of the entire function to
+          // throw the exception.
+          return handle("end");
+        }
+
+        if (entry.tryLoc <= this.prev) {
+          var hasCatch = hasOwn.call(entry, "catchLoc");
+          var hasFinally = hasOwn.call(entry, "finallyLoc");
+
+          if (hasCatch && hasFinally) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            } else if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else if (hasCatch) {
+            if (this.prev < entry.catchLoc) {
+              return handle(entry.catchLoc, true);
+            }
+
+          } else if (hasFinally) {
+            if (this.prev < entry.finallyLoc) {
+              return handle(entry.finallyLoc);
+            }
+
+          } else {
+            throw new Error("try statement without catch or finally");
+          }
+        }
+      }
+    },
+
+    abrupt: function(type, arg) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc <= this.prev &&
+            hasOwn.call(entry, "finallyLoc") &&
+            this.prev < entry.finallyLoc) {
+          var finallyEntry = entry;
+          break;
+        }
+      }
+
+      if (finallyEntry &&
+          (type === "break" ||
+           type === "continue") &&
+          finallyEntry.tryLoc <= arg &&
+          arg <= finallyEntry.finallyLoc) {
+        // Ignore the finally entry if control is not jumping to a
+        // location outside the try/catch block.
+        finallyEntry = null;
+      }
+
+      var record = finallyEntry ? finallyEntry.completion : {};
+      record.type = type;
+      record.arg = arg;
+
+      if (finallyEntry) {
+        this.method = "next";
+        this.next = finallyEntry.finallyLoc;
+        return ContinueSentinel;
+      }
+
+      return this.complete(record);
+    },
+
+    complete: function(record, afterLoc) {
+      if (record.type === "throw") {
+        throw record.arg;
+      }
+
+      if (record.type === "break" ||
+          record.type === "continue") {
+        this.next = record.arg;
+      } else if (record.type === "return") {
+        this.rval = this.arg = record.arg;
+        this.method = "return";
+        this.next = "end";
+      } else if (record.type === "normal" && afterLoc) {
+        this.next = afterLoc;
+      }
+
+      return ContinueSentinel;
+    },
+
+    finish: function(finallyLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.finallyLoc === finallyLoc) {
+          this.complete(entry.completion, entry.afterLoc);
+          resetTryEntry(entry);
+          return ContinueSentinel;
+        }
+      }
+    },
+
+    "catch": function(tryLoc) {
+      for (var i = this.tryEntries.length - 1; i >= 0; --i) {
+        var entry = this.tryEntries[i];
+        if (entry.tryLoc === tryLoc) {
+          var record = entry.completion;
+          if (record.type === "throw") {
+            var thrown = record.arg;
+            resetTryEntry(entry);
+          }
+          return thrown;
+        }
+      }
+
+      // The context.catch method must only be called with a location
+      // argument that corresponds to a known catch block.
+      throw new Error("illegal catch attempt");
+    },
+
+    delegateYield: function(iterable, resultName, nextLoc) {
+      this.delegate = {
+        iterator: values(iterable),
+        resultName: resultName,
+        nextLoc: nextLoc
+      };
+
+      if (this.method === "next") {
+        // Deliberately forget the last sent value so that we don't
+        // accidentally pass it on to the delegate.
+        this.arg = undefined;
+      }
+
+      return ContinueSentinel;
+    }
+  };
+
+  // Regardless of whether this script is executing as a CommonJS module
+  // or not, return the runtime object so that we can declare the variable
+  // regeneratorRuntime in the outer scope, which allows this module to be
+  // injected easily by `bin/regenerator --include-runtime script.js`.
+  return exports;
+
+}(
+  // If this script is executing as a CommonJS module, use module.exports
+  // as the regeneratorRuntime namespace. Otherwise create a new empty
+  // object. Either way, the resulting object will be used to initialize
+  // the regeneratorRuntime variable at the top of this file.
+   true ? module.exports : undefined
+));
+
+try {
+  regeneratorRuntime = runtime;
+} catch (accidentalStrictMode) {
+  // This module should not be running in strict mode, so the above
+  // assignment should always work unless something is misconfigured. Just
+  // in case runtime.js accidentally runs in strict mode, we can escape
+  // strict mode using a global Function call. This could conceivably fail
+  // if a Content Security Policy forbids using Function, but in that case
+  // the proper solution is to fix the accidental strict mode problem. If
+  // you've misconfigured your bundler to force strict mode and applied a
+  // CSP to forbid Function, and you're not willing to fix either of those
+  // problems, please detail your unique predicament in a GitHub issue.
+  Function("r", "regeneratorRuntime = r")(runtime);
+}
+
+
+/***/ }),
+
+/***/ 4:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! @preserve
@@ -18277,7 +19032,7 @@ return numeral;
 
 /***/ }),
 
-/***/ 43:
+/***/ 44:
 /***/ (function(module, exports) {
 
 var g;
@@ -18304,7 +19059,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 44:
+/***/ 45:
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -18333,10 +19088,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ 45:
+/***/ 46:
 /***/ (function(module, exports, __webpack_require__) {
 
-var tarjan = __webpack_require__(95);
+var tarjan = __webpack_require__(96);
 
 module.exports = function findCircuits(edges, cb) {
     var circuits = []; // Output
@@ -18496,7 +19251,7 @@ module.exports = function findCircuits(edges, cb) {
 
 /***/ }),
 
-/***/ 46:
+/***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18506,7 +19261,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _pathArrows = __webpack_require__(96);
+var _pathArrows = __webpack_require__(97);
 
 Object.defineProperty(exports, "pathArrows", {
   enumerable: true,
@@ -18519,7 +19274,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ 47:
+/***/ 48:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -18534,7 +19289,7 @@ var lodash = __webpack_require__(0);
 var lodash_default = /*#__PURE__*/__webpack_require__.n(lodash);
 
 // EXTERNAL MODULE: ./node_modules/numeral/numeral.js
-var numeral = __webpack_require__(3);
+var numeral = __webpack_require__(4);
 var numeral_default = /*#__PURE__*/__webpack_require__.n(numeral);
 
 // CONCATENATED MODULE: ./node_modules/d3/dist/package.js
@@ -24292,7 +25047,7 @@ function linkRadial() {
 }
 
 // EXTERNAL MODULE: ./node_modules/elementary-circuits-directed-graph/johnson.js
-var johnson = __webpack_require__(45);
+var johnson = __webpack_require__(46);
 var johnson_default = /*#__PURE__*/__webpack_require__.n(johnson);
 
 // CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/dist/d3-sankey-circular.es.js
@@ -25800,7 +26555,7 @@ function fillHeight(graph, y0, y1) {
 
 
 // EXTERNAL MODULE: ./node_modules/d3-path-arrows/dist/index.js
-var dist = __webpack_require__(46);
+var dist = __webpack_require__(47);
 
 // CONCATENATED MODULE: ./src/util/uid.js
 var count = 0;
@@ -25816,6 +26571,10 @@ function Id(id) {
 Id.prototype.toString = function () {
   return 'url(' + this.href + ')';
 };
+// EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
+var runtime = __webpack_require__(2);
+var runtime_default = /*#__PURE__*/__webpack_require__.n(runtime);
+
 // CONCATENATED MODULE: ./src/reactComponents/sankeyRenderer.js
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
@@ -25829,566 +26588,622 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+function sankeyRenderer_typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { sankeyRenderer_typeof = function _typeof(obj) { return typeof obj; }; } else { sankeyRenderer_typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return sankeyRenderer_typeof(obj); }
+
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 
 
 
 
-function sankeyRenderer(dataSource, options, selector) {
-  var g = {};
-  g.container = document.querySelector("#".concat(selector));
-  var jqContainer = $(g.container);
-  var values = Array.isArray(dataSource.values) ? _defineProperty({}, dataSource.displayed_data.split('.')[1], dataSource.values) : Object.assign({}, dataSource.values);
-  console.log(values);
 
-  if (!(values.inbound && values.inbound.length > 0) && !(values.outbound && values.outbound.length > 0)) {
-    jqContainer.empty();
-    return;
-  }
 
-  var queryVariables = JSON.parse(dataSource.variables);
-  var currency = values.inbound && values.inbound.length > 0 && values.inbound[0].currency.symbol || values.outbound && values.outbound.length > 0 && values.outbound[0].currency.symbol;
-  jqContainer.addClass('graph');
 
-  if (!jqContainer.parent().hasClass('wrapper')) {
-    jqContainer.wrap('<div class="wrapper" style="width:100%; height:100%;">');
-  }
-
-  var jqWrapper = jqContainer.parent('.wrapper');
-  g.theme = options.theme || 'light';
-
-  if (g.theme == 'dark') {
-    jqContainer.addClass('dark');
-  } else {
-    jqContainer.removeClass('dark');
-  }
-
-  g.render = function () {
-    jqWrapper.removeClass('initializing');
-    var width = $("#".concat(selector)).parent().parent().width();
-    var height = $("#".concat(selector)).parent().parent().height();
-    var edgeColor = 'path';
-    var textColor = options.theme == 'dark' ? 'white' : 'black';
-    var strokeColor = options.theme == 'dark' ? 'white' : 'black';
-    var linkOpacity = options.theme == 'dark' ? 1 : 0.85;
-    var fontSize = 12;
-    var graphSize = {};
-    var svg = src_select("#".concat(selector)).append('svg').attr('width', '100%').attr('height', '100%');
-
-    var prepareData = function prepareData(data) {
-      var getLabel = function getLabel(node) {
-        if (node.address == '0x0000000000000000000000000000000000000000') {
-          // 'coinbase'
-          return 'Coinbase';
-        } else if (node.smartContract && node.smartContract.contractType == 'Generic') {
-          // 'smart_contract'
-          return null;
-        } else if (node.smartContract && (node.smartContract.contractType == 'Token' || node.smartContract.contractType == 'TokenSale')) {
-          // 'token'
-          return node.smartContract.currency.name + ' (' + node.smartContract.currency.symbol + ')';
-        } else if (node.smartContract && node.smartContract.contractType == 'MarginPositionToken') {
-          // 'MarginPositionToken'
-          return node.annotation || null;
-        } else if (node.smartContract && node.smartContract.contractType == 'Multisig') {
-          // 'multisig'
-          return node.annotation || null;
-        } else if (node.smartContract && node.smartContract.contractType == 'DEX') {
-          // 'dex'
-          return node.annotation || null;
-        } else {
-          if (node.address == '') {
-            // 'coinbase'
-            return 'Coinbase';
-          } else if (node.annotation) {
-            // 'annotated_address'
-            return node.annotation;
-          } else {
-            // 'address'
-            return null;
-          }
-        }
-      };
-
-      var links = [];
-      var nodes = [];
-
-      if (data.inbound) {
-        lodash_default.a.each(data.inbound, function (item) {
-          links.push({
-            source: item.sender.address,
-            target: item.receiver.address,
-            amount: item.amount,
-            value: item.amount,
-            countOfTransfers: item.count
-          });
-          nodes.push({
-            id: item.sender.address,
-            label: getLabel(item.sender),
-            depthLevel: item.sender.address == queryVariables.address ? 0 : -item.depth,
-            valueFromOneLink: item.amount
-          });
-          nodes.push({
-            id: item.receiver.address,
-            label: getLabel(item.receiver),
-            depthLevel: item.receiver.address == queryVariables.address ? 0 : -item.depth + 1,
-            valueFromOneLink: item.amount
-          });
-        });
-      }
-
-      if (data.outbound) {
-        lodash_default.a.each(data.outbound, function (item) {
-          links.push({
-            source: item.sender.address,
-            target: item.receiver.address,
-            amount: item.amount,
-            value: item.amount,
-            countOfTransfers: item.count
-          });
-          nodes.push({
-            id: item.sender.address,
-            label: getLabel(item.sender),
-            depthLevel: item.sender.address == queryVariables.address ? 0 : item.depth - 1,
-            valueFromOneLink: item.amount
-          });
-          nodes.push({
-            id: item.receiver.address,
-            label: getLabel(item.receiver),
-            depthLevel: item.receiver.address == queryVariables.address ? 0 : item.depth,
-            valueFromOneLink: item.amount
-          });
-        });
-      }
-
-      nodes = lodash_default.a.uniqBy(lodash_default.a.sortBy(nodes, [function (n) {
-        return -n.valueFromOneLink;
-      }, function (n) {
-        return Math.pow(n.depthLevel, 2);
-      }]), 'id');
-
-      var numberOnLevels = lodash_default.a.reduce(nodes, function (result, n) {
-        result[n.depthLevel] ? result[n.depthLevel] += 1 : result[n.depthLevel] = 1;
-        return result;
-      }, {});
-
-      var maxVertical = lodash_default.a.max(lodash_default.a.values(numberOnLevels));
-
-      var maxHorizontal = lodash_default.a.values(numberOnLevels).length;
-
-      graphSize.width = maxHorizontal * 650;
-      graphSize.height = maxVertical * (300 - Math.min(200, Math.log10(maxVertical) * 100));
-      return {
-        links: links,
-        nodes: nodes,
-        units: currency
-      };
-    };
-
-    var data = prepareData(values);
-    var colorSchemaOdd = ordinal(category10.slice(5));
-    var colorSchemaEven = ordinal(category10.slice(0, 5));
-
-    var color = function color(d) {
-      return d.column % 2 == 0 ? colorSchemaOdd(d.category === undefined ? d.id : d.category) : colorSchemaEven(d.category === undefined ? d.id : d.category);
-    };
-
-    var format = data.units ? function (d) {
-      return "".concat(numeral_default()(d).format('0.0000a'), " ").concat(data.units);
-    } : function (d) {
-      return "".concat(numeral_default()(d).format('0.0000a'));
-    };
-    var sankey = d3_sankey_circular_es_sankeyCircular().nodeId(function (d) {
-      return d.id;
-    }).nodeAlign(fixed).nodeWidth(50).nodePaddingRatio(0.7).circularLinkGap(15).size([graphSize.width, graphSize.height]);
-    g.sankey = sankey;
-    var graph = sankey(data);
-
-    var rootNode = lodash_default.a.find(graph.nodes, {
-      id: queryVariables.address
-    });
-
-    function getAllPaths(graph) {
-      var pathsFromRootToNodes = [];
-
-      function addSourceNodeToPath(node, path) {
-        if (node.id == rootNode.id || lodash_default.a.includes(path, node.id)) {
-          if (!isDuplicate(pathsFromRootToNodes, path)) {
-            pathsFromRootToNodes.push(_toConsumableArray(path));
-          }
-        } else if (node.sourceLinks.length == 0) {
-          path.push(node.id);
-
-          if (!isDuplicate(pathsFromRootToNodes, path)) {
-            pathsFromRootToNodes.push(_toConsumableArray(path));
-          }
-        } else {
-          path.push(node.id);
-
-          if (!isDuplicate(pathsFromRootToNodes, path)) {
-            pathsFromRootToNodes.push(_toConsumableArray(path));
-          }
-
-          lodash_default.a.forEach(node.sourceLinks, function (l) {
-            addSourceNodeToPath(l.target, _toConsumableArray(path));
-          });
-        }
-      }
-
-      lodash_default.a.forEach(rootNode.sourceLinks, function (l) {
-        var path = [rootNode.id];
-        addSourceNodeToPath(l.target, path);
-      });
-
-      var pathsFromNodesToRoot = [];
-
-      function addTargetNodeToPath(node, path) {
-        if (node.id == rootNode.id || lodash_default.a.includes(path, node.id)) {
-          if (!isDuplicate(pathsFromNodesToRoot, _toConsumableArray(path).reverse())) {
-            pathsFromNodesToRoot.push(_toConsumableArray(path).reverse());
-          }
-        } else if (node.targetLinks.length == 0) {
-          path.push(node.id);
-
-          if (!isDuplicate(pathsFromNodesToRoot, _toConsumableArray(path).reverse())) {
-            pathsFromNodesToRoot.push(_toConsumableArray(path).reverse());
-          }
-        } else {
-          path.push(node.id);
-
-          if (!isDuplicate(pathsFromNodesToRoot, _toConsumableArray(path).reverse())) {
-            pathsFromNodesToRoot.push(_toConsumableArray(path).reverse());
-          }
-
-          lodash_default.a.forEach(node.targetLinks, function (l) {
-            var pathCopy = _toConsumableArray(path);
-
-            addTargetNodeToPath(l.source, pathCopy);
-          });
-        }
-      }
-
-      lodash_default.a.forEach(rootNode.targetLinks, function (l) {
-        var path = [rootNode.id];
-        addTargetNodeToPath(l.source, path);
-      });
-
-      return lodash_default.a.concat(pathsFromRootToNodes, pathsFromNodesToRoot);
-    }
-
-    var allPaths = getAllPaths(graph);
-
-    function isDuplicate(arrays, arr) {
-      return lodash_default.a.some(arrays, function (a) {
-        return lodash_default.a.isEqual(arr, a);
-      });
-    }
-
-    function getPaths(nodeId, allPaths) {
-      var toNode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-      var paths = [];
-
-      lodash_default.a.forEach(allPaths, function (p) {
-        var direction = toNode ? p.length - 1 : 0;
-
-        if (lodash_default.a.indexOf(p, nodeId) == direction) {
-          paths.push(p);
-        }
-      });
-
-      return paths;
-    }
-
-    function getDataToHighlight(nodes, allPaths) {
-      var dataToHighlight = {};
-
-      lodash_default.a.forEach(nodes, function (n) {
-        // что подсвечивать: от рутового или до или все вместе
-        var paths = lodash_default.a.concat(getPaths(n.id, allPaths), getPaths(n.id, allPaths, false));
-
-        var nodesToHighlight = lodash_default.a.uniq(lodash_default.a.flattenDeep(paths));
-
-        var linksToHighlight = [];
-
-        lodash_default.a.forEach(paths, function (p) {
-          for (var i = 0; i < p.length - 1; i++) {
-            var couple = [p[i], p[i + 1]];
-
-            if (!isDuplicate(linksToHighlight, couple)) {
-              linksToHighlight.push(couple);
-            }
-          }
-        });
-
-        dataToHighlight[n.id] = {
-          nodesToHighlight: nodesToHighlight,
-          linksToHighlight: linksToHighlight
-        };
-      });
-
-      return dataToHighlight;
-    }
-
-    var dataToHighlight = getDataToHighlight(graph.nodes, allPaths);
-    var rootG = svg.append('g').attr('class', 'root-g');
-    rootG.append('rect').attr('class', 'divider').attr('x', rootNode.x0).attr('y', -10000).attr('height', 20000).attr('width', rootNode.x1 - rootNode.x0).attr('fill', 'silver').attr('opacity', 0.5);
-    var linkG = rootG.append('g').attr('class', 'links').attr('fill', 'none').attr('stroke-opacity', linkOpacity).selectAll('path');
-    var nodeG = rootG.append('g').attr('class', 'nodes').attr('font-family', 'sans-serif').attr('font-size', fontSize).selectAll('g');
-    var node = nodeG.data(graph.nodes).enter().append('g');
-    var tooltip = src_select('.tooltip').empty() ? src_select('body').append('div').attr('class', options.theme == 'dark' ? 'tooltip tooltip--dark' : 'tooltip') : src_select('.tooltip');
-    node.append('rect').attr('x', function (d) {
-      return d.x0;
-    }).attr('y', function (d) {
-      return d.y1 - d.y0 < 1 ? d.y0 - 0.5 : d.y0;
-    }).attr('height', function (d) {
-      return d.y1 - d.y0 < 1 ? 1 : d.y1 - d.y0;
-    }).attr('width', function (d) {
-      return d.x1 - d.x0;
-    }).attr('fill', color).attr('stroke', strokeColor).attr('stroke-width', 1).on('mouseover', nodeMouseOver).on('mousemove', nodeMouseMove).on('mouseout', nodeMouseOut).on('contextmenu', nodeContextMenu);
-    node.append('text').attr('x', function (d) {
-      return (d.x0 + d.x1) / 2;
-    }).attr('y', function (d) {
-      return d.y0 - 4;
-    }).attr('text-anchor', 'middle').attr('fill', textColor).attr('class', function (d) {
-      d.isHidden = false;
-      return d.label ? 'annotation' : 'address';
-    }).text(function (d) {
-      return d.label || lodash_default.a.truncate(d.id, {
-        length: 15,
-        separator: '...'
-      });
-    }).on('mouseover', nodeMouseOver).on('mousemove', nodeMouseMove).on('mouseout', nodeMouseOut).on('contextmenu', nodeContextMenu);
-    var link = linkG.data(graph.links).enter().append('g');
-
-    if (edgeColor === 'path') {
-      var gradient = link.append('linearGradient').attr('id', function (d) {
-        return (d.uid = uid('link')).id;
-      }).attr('gradientUnits', 'userSpaceOnUse').attr('x1', function (d) {
-        return d.source.x1;
-      }).attr('x2', function (d) {
-        return d.target.x0;
-      });
-      gradient.append('stop').attr('offset', '0%').attr('stop-color', function (d) {
-        return color(d.source);
-      });
-      gradient.append('stop').attr('offset', '100%').attr('stop-color', function (d) {
-        return color(d.target);
-      });
-    }
-
-    link.append('path').attr('class', 'sankey-link').attr('d', function (link) {
-      return link.path;
-    }).attr('stroke', function (d) {
-      return edgeColor === 'none' ? '#aaa' : edgeColor === 'path' ? d.uid : edgeColor === 'input' ? color(d.source) : color(d.target);
-    }).attr('stroke-width', function (d) {
-      return Math.max(1, d.width);
-    }).attr('opacity', 1).on('mouseover', linkMouseOver).on('mousemove', linkMouseMove).on('mouseout', linkMouseOut);
-    var arrows = dist["pathArrows"]().arrowLength(10).gapLength(150).arrowHeadSize(4).path(function (link) {
-      return link.path;
-    });
-    var arrowsG = linkG.data(graph.links).enter().append('g').attr('class', 'g-arrow').call(arrows);
-    arrowsG.select('path').style('stroke', strokeColor);
-    arrowsG.selectAll('.arrow-head').style('fill', strokeColor);
-
-    function highlightNode(node, id) {
-      // isHidden, isHighlighted, isDarken,
-      if (lodash_default.a.includes(dataToHighlight[id].nodesToHighlight, node.id)) {
-        node.isHighlighted = true;
-      } else {
-        node.isDarken = true;
-      }
-    }
-
-    function highlightLinks(link, id) {
-      var highlight = lodash_default.a.some(dataToHighlight[id].linksToHighlight, function (couple) {
-        return link.source.id == couple[0] && link.target.id == couple[1];
-      });
-
-      if (highlight) {
-        link.isHighlighted = true;
-      } else {
-        link.isDarken = true;
-      }
-    }
-
-    function getOpacity(elem, type) {
-      var opacity;
-
-      switch (type) {
-        case 'node':
-          opacity = elem.isHighlighted ? 1 : elem.isDarken ? 0.3 : 1;
-          break;
-
-        case 'text':
-          opacity = elem.isHighlighted ? 1 : elem.isHidden ? 0 : elem.isDarken ? 0.3 : 1;
-          break;
-
-        case 'link':
-          opacity = elem.isHighlighted ? 1 : elem.isDarken ? 0.3 : 1;
-          break;
-
-        default:
-          break;
-      }
-
-      return opacity;
-    }
-
-    function nodeMouseOver(e, d) {
-      var thisId = d.id;
-      node.selectAll('rect').style('opacity', function (d) {
-        highlightNode(d, thisId);
-        return getOpacity(d, 'node');
-      });
-      src_selectAll('.sankey-link').style('opacity', function (l) {
-        highlightLinks(l, thisId);
-        return getOpacity(l, 'link');
-      });
-      node.selectAll('text').style('opacity', function (d) {
-        return getOpacity(d, 'text');
-      });
-      var income = 0;
-
-      lodash_default.a.each(d.targetLinks, function (l) {
-        income += l.amount;
-      });
-
-      var outcome = 0;
-
-      lodash_default.a.each(d.sourceLinks, function (l) {
-        outcome += l.amount;
-      });
-
-      tooltip.style('visibility', 'visible').html("<ul>\n\t\t\t\t\t  ".concat(income != 0 ? "<li>Income: ".concat(format(income), "</li>") : '', "\n\t\t\t\t\t  ").concat(outcome != 0 ? "<li>Outcome: ".concat(format(outcome), "</li>") : '', "\n\t\t\t\t\t  <li>").concat(d.label || d.id, "</li>\n\t\t\t\t  </ul>"));
-    }
-
-    function nodeMouseMove(e, d) {
-      var bodyWidth = src_select('body').style('width').slice(0, -2);
-      var tooltipheight = e.pageY - tooltip.style('height').slice(0, -2) - 10;
-      var tooltipWidth = tooltip.style('width').slice(0, -2);
-      var tooltipX = e.pageX < tooltipWidth / 2 ? 0 : e.pageX + tooltipWidth / 2 > bodyWidth ? bodyWidth - tooltipWidth : e.pageX - tooltipWidth / 2;
-      tooltip.style('top', tooltipheight + 'px').style('left', tooltipX + 'px');
-    }
-
-    function nodeMouseOut(e, d) {
-      node.selectAll('rect').style('opacity', function (d) {
-        d.isHighlighted = false;
-        d.isDarken = false;
-        return getOpacity(d, 'node');
-      });
-      link.selectAll('.sankey-link').style('opacity', function (l) {
-        l.isHighlighted = false;
-        l.isDarken = false;
-        return getOpacity(d, 'link');
-      });
-      node.selectAll('text').style('opacity', function (d) {
-        return getOpacity(d, 'text');
-      });
-      tooltip.style('visibility', 'hidden');
-    }
-
-    function nodeContextMenu(e, d) {
-      e.preventDefault();
-      var pathname = window.location.pathname.slice(1);
-      window.open("".concat(window.location.origin, "/").concat(pathname.slice(0, pathname.indexOf('/')), "/address/").concat(d.id), '_blank');
-    }
-
-    function linkMouseOver(e, l) {
-      var source = l.source.id;
-      var target = l.target.id;
-      link.selectAll('.sankey-link').style('opacity', function (l) {
-        if (l.source.id == source && l.target.id == target) {
-          l.isHighlighted = true;
-        } else {
-          l.isDarken = true;
-        }
-
-        return getOpacity(l, 'link');
-      });
-      node.selectAll('rect').style('opacity', function (d) {
-        if (d.id == source || d.id == target) {
-          d.isHighlighted = true;
-        } else {
-          d.isDarken = true;
-        }
-
-        return getOpacity(d, 'node');
-      });
-      node.selectAll('text').style('opacity', function (d) {
-        return getOpacity(d, 'text');
-      });
-      tooltip.style('visibility', 'visible').html("<ul>\n\t\t\t\t\t  <li>Amount: ".concat(format(l.amount), "</li>\n\t\t\t\t\t  <li>From:</li>\n\t\t\t\t\t  <li>").concat(l.source.label || l.source.id, "</li>\n\t\t\t\t\t  <li>To:</li>\n\t\t\t\t\t  <li>").concat(l.target.label || l.target.id, "</li>\n\t\t\t\t\t  <li>Count of transfers: ").concat(l.countOfTransfers, "</li>\n\t\t\t\t  </ul>"));
-    }
-
-    function linkMouseMove(e, l) {
-      var bodyWidth = src_select('body').style('width').slice(0, -2);
-      var tooltipheight = e.pageY - tooltip.style('height').slice(0, -2) - 10;
-      var tooltipWidth = tooltip.style('width').slice(0, -2);
-      var tooltipX = e.pageX < tooltipWidth / 2 ? 0 : e.pageX + tooltipWidth / 2 > bodyWidth ? bodyWidth - tooltipWidth : e.pageX - tooltipWidth / 2;
-      tooltip.style('top', tooltipheight + 'px').style('left', tooltipX + 'px');
-    }
-
-    function linkMouseOut(e, l) {
-      node.selectAll('rect').style('opacity', function (d) {
-        d.isHighlighted = false;
-        d.isDarken = false;
-        return getOpacity(d, 'node');
-      });
-      link.selectAll('.sankey-link').style('opacity', function (l) {
-        l.isHighlighted = false;
-        l.isDarken = false;
-        return getOpacity(l, 'link');
-      });
-      node.selectAll('text').style('opacity', function (d) {
-        return getOpacity(d, 'text');
-      });
-      tooltip.style('visibility', 'hidden');
-    }
-
-    var zoom = d3_zoom_src_zoom().on('zoom', function (e) {
-      rootG.select('.nodes').attr('font-size', fontSize / e.transform.k);
-
-      if (fontSize / e.transform.k > 36) {
-        node.selectAll('.address').style('opacity', function (d) {
-          d.isHidden = true;
-          return getOpacity(d, 'text');
-        });
-      } else {
-        node.selectAll('.address').style('opacity', function (d) {
-          d.isHidden = false;
-          return getOpacity(d, 'text');
-        });
-      }
-
-      rootG.select('.divider').attr('y', function (d) {
-        return -10000 / e.transform.k;
-      }).attr('height', 20000 / e.transform.k);
-      rootG.attr('transform', e.transform);
-    }).on('start', function (e) {
-      if (e.sourceEvent && e.sourceEvent.type == 'mousedown') {
-        svg.attr('cursor', 'move');
-      }
-    }).on('end', function (e) {
-      if (e.sourceEvent && e.sourceEvent.type == 'mouseup') {
-        svg.attr('cursor', 'default');
-      }
-    });
-    var initScale = Math.min(width / graphSize.width, height / graphSize.height) * 3 / 4;
-    svg.call(zoom).call(zoom.transform, transform_identity.translate((width - graphSize.width * initScale) / 2, 120).scale(initScale)).on('dblclick.zoom', null);
-    var chart = svg.node();
-    $("#".concat(selector)).html(chart);
-  };
-
-  g.render();
-  return g;
+function sankeyRenderer(_x, _x2, _x3) {
+  return _sankeyRenderer.apply(this, arguments);
 }
+
+function _sankeyRenderer() {
+  _sankeyRenderer = _asyncToGenerator( /*#__PURE__*/runtime_default.a.mark(function _callee(dataSource, options, selector) {
+    var g, jqContainer, value, data, json, values, queryVariables, currency, jqWrapper;
+    return runtime_default.a.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            g = {};
+            g.container = document.querySelector("#".concat(selector));
+            jqContainer = $(g.container);
+            value = undefined;
+
+            if (dataSource.values) {
+              _context.next = 14;
+              break;
+            }
+
+            _context.next = 7;
+            return dataSource.fetcher();
+
+          case 7:
+            data = _context.sent;
+            _context.next = 10;
+            return data.json();
+
+          case 10:
+            json = _context.sent;
+            value = dataSource.setupData(json);
+            _context.next = 15;
+            break;
+
+          case 14:
+            value = dataSource.values;
+
+          case 15:
+            values = Array.isArray(value) ? _defineProperty({}, dataSource.displayed_data.split('.')[1], value) : Object.assign({}, value);
+            console.log(values);
+
+            if (!(!(values.inbound && values.inbound.length > 0) && !(values.outbound && values.outbound.length > 0))) {
+              _context.next = 20;
+              break;
+            }
+
+            jqContainer.empty();
+            return _context.abrupt("return");
+
+          case 20:
+            queryVariables = sankeyRenderer_typeof(dataSource.variables) === 'object' ? dataSource.variables : JSON.parse(dataSource.variables);
+            currency = values.inbound && values.inbound.length > 0 && values.inbound[0].currency.symbol || values.outbound && values.outbound.length > 0 && values.outbound[0].currency.symbol;
+            jqContainer.addClass('graph');
+
+            if (!jqContainer.parent().hasClass('wrapper')) {
+              jqContainer.wrap('<div class="wrapper" style="width:100%; height:100%;">');
+            }
+
+            jqWrapper = jqContainer.parent('.wrapper');
+            g.theme = options.theme || 'light';
+
+            if (g.theme == 'dark') {
+              jqContainer.addClass('dark');
+            } else {
+              jqContainer.removeClass('dark');
+            }
+
+            g.render = function () {
+              jqWrapper.removeClass('initializing');
+              var width = $("#".concat(selector)).parent().parent().width();
+              var height = $("#".concat(selector)).parent().parent().height();
+              var edgeColor = 'path';
+              var textColor = options.theme == 'dark' ? 'white' : 'black';
+              var strokeColor = options.theme == 'dark' ? 'white' : 'black';
+              var linkOpacity = options.theme == 'dark' ? 1 : 0.85;
+              var fontSize = 12;
+              var graphSize = {};
+              var svg = src_select("#".concat(selector)).append('svg').attr('width', '100%').attr('height', '100%');
+
+              var prepareData = function prepareData(data) {
+                var getLabel = function getLabel(node) {
+                  if (node.address == '0x0000000000000000000000000000000000000000') {
+                    // 'coinbase'
+                    return 'Coinbase';
+                  } else if (node.smartContract && node.smartContract.contractType == 'Generic') {
+                    // 'smart_contract'
+                    return null;
+                  } else if (node.smartContract && (node.smartContract.contractType == 'Token' || node.smartContract.contractType == 'TokenSale')) {
+                    // 'token'
+                    return node.smartContract.currency.name + ' (' + node.smartContract.currency.symbol + ')';
+                  } else if (node.smartContract && node.smartContract.contractType == 'MarginPositionToken') {
+                    // 'MarginPositionToken'
+                    return node.annotation || null;
+                  } else if (node.smartContract && node.smartContract.contractType == 'Multisig') {
+                    // 'multisig'
+                    return node.annotation || null;
+                  } else if (node.smartContract && node.smartContract.contractType == 'DEX') {
+                    // 'dex'
+                    return node.annotation || null;
+                  } else {
+                    if (node.address == '') {
+                      // 'coinbase'
+                      return 'Coinbase';
+                    } else if (node.annotation) {
+                      // 'annotated_address'
+                      return node.annotation;
+                    } else {
+                      // 'address'
+                      return null;
+                    }
+                  }
+                };
+
+                var links = [];
+                var nodes = [];
+
+                if (data.inbound) {
+                  lodash_default.a.each(data.inbound, function (item) {
+                    links.push({
+                      source: item.sender.address,
+                      target: item.receiver.address,
+                      amount: item.amount,
+                      value: item.amount,
+                      countOfTransfers: item.count
+                    });
+                    nodes.push({
+                      id: item.sender.address,
+                      label: getLabel(item.sender),
+                      depthLevel: item.sender.address == queryVariables.address ? 0 : -item.depth,
+                      valueFromOneLink: item.amount
+                    });
+                    nodes.push({
+                      id: item.receiver.address,
+                      label: getLabel(item.receiver),
+                      depthLevel: item.receiver.address == queryVariables.address ? 0 : -item.depth + 1,
+                      valueFromOneLink: item.amount
+                    });
+                  });
+                }
+
+                if (data.outbound) {
+                  lodash_default.a.each(data.outbound, function (item) {
+                    links.push({
+                      source: item.sender.address,
+                      target: item.receiver.address,
+                      amount: item.amount,
+                      value: item.amount,
+                      countOfTransfers: item.count
+                    });
+                    nodes.push({
+                      id: item.sender.address,
+                      label: getLabel(item.sender),
+                      depthLevel: item.sender.address == queryVariables.address ? 0 : item.depth - 1,
+                      valueFromOneLink: item.amount
+                    });
+                    nodes.push({
+                      id: item.receiver.address,
+                      label: getLabel(item.receiver),
+                      depthLevel: item.receiver.address == queryVariables.address ? 0 : item.depth,
+                      valueFromOneLink: item.amount
+                    });
+                  });
+                }
+
+                nodes = lodash_default.a.uniqBy(lodash_default.a.sortBy(nodes, [function (n) {
+                  return -n.valueFromOneLink;
+                }, function (n) {
+                  return Math.pow(n.depthLevel, 2);
+                }]), 'id');
+
+                var numberOnLevels = lodash_default.a.reduce(nodes, function (result, n) {
+                  result[n.depthLevel] ? result[n.depthLevel] += 1 : result[n.depthLevel] = 1;
+                  return result;
+                }, {});
+
+                var maxVertical = lodash_default.a.max(lodash_default.a.values(numberOnLevels));
+
+                var maxHorizontal = lodash_default.a.values(numberOnLevels).length;
+
+                graphSize.width = maxHorizontal * 650;
+                graphSize.height = maxVertical * (300 - Math.min(200, Math.log10(maxVertical) * 100));
+                return {
+                  links: links,
+                  nodes: nodes,
+                  units: currency
+                };
+              };
+
+              var data = prepareData(values);
+              var colorSchemaOdd = ordinal(category10.slice(5));
+              var colorSchemaEven = ordinal(category10.slice(0, 5));
+
+              var color = function color(d) {
+                return d.column % 2 == 0 ? colorSchemaOdd(d.category === undefined ? d.id : d.category) : colorSchemaEven(d.category === undefined ? d.id : d.category);
+              };
+
+              var format = data.units ? function (d) {
+                return "".concat(numeral_default()(d).format('0.0000a'), " ").concat(data.units);
+              } : function (d) {
+                return "".concat(numeral_default()(d).format('0.0000a'));
+              };
+              var sankey = d3_sankey_circular_es_sankeyCircular().nodeId(function (d) {
+                return d.id;
+              }).nodeAlign(fixed).nodeWidth(50).nodePaddingRatio(0.7).circularLinkGap(15).size([graphSize.width, graphSize.height]);
+              g.sankey = sankey;
+              var graph = sankey(data);
+
+              var rootNode = lodash_default.a.find(graph.nodes, {
+                id: queryVariables.address
+              });
+
+              function getAllPaths(graph) {
+                var pathsFromRootToNodes = [];
+
+                function addSourceNodeToPath(node, path) {
+                  if (node.id == rootNode.id || lodash_default.a.includes(path, node.id)) {
+                    if (!isDuplicate(pathsFromRootToNodes, path)) {
+                      pathsFromRootToNodes.push(_toConsumableArray(path));
+                    }
+                  } else if (node.sourceLinks.length == 0) {
+                    path.push(node.id);
+
+                    if (!isDuplicate(pathsFromRootToNodes, path)) {
+                      pathsFromRootToNodes.push(_toConsumableArray(path));
+                    }
+                  } else {
+                    path.push(node.id);
+
+                    if (!isDuplicate(pathsFromRootToNodes, path)) {
+                      pathsFromRootToNodes.push(_toConsumableArray(path));
+                    }
+
+                    lodash_default.a.forEach(node.sourceLinks, function (l) {
+                      addSourceNodeToPath(l.target, _toConsumableArray(path));
+                    });
+                  }
+                }
+
+                lodash_default.a.forEach(rootNode.sourceLinks, function (l) {
+                  var path = [rootNode.id];
+                  addSourceNodeToPath(l.target, path);
+                });
+
+                var pathsFromNodesToRoot = [];
+
+                function addTargetNodeToPath(node, path) {
+                  if (node.id == rootNode.id || lodash_default.a.includes(path, node.id)) {
+                    if (!isDuplicate(pathsFromNodesToRoot, _toConsumableArray(path).reverse())) {
+                      pathsFromNodesToRoot.push(_toConsumableArray(path).reverse());
+                    }
+                  } else if (node.targetLinks.length == 0) {
+                    path.push(node.id);
+
+                    if (!isDuplicate(pathsFromNodesToRoot, _toConsumableArray(path).reverse())) {
+                      pathsFromNodesToRoot.push(_toConsumableArray(path).reverse());
+                    }
+                  } else {
+                    path.push(node.id);
+
+                    if (!isDuplicate(pathsFromNodesToRoot, _toConsumableArray(path).reverse())) {
+                      pathsFromNodesToRoot.push(_toConsumableArray(path).reverse());
+                    }
+
+                    lodash_default.a.forEach(node.targetLinks, function (l) {
+                      var pathCopy = _toConsumableArray(path);
+
+                      addTargetNodeToPath(l.source, pathCopy);
+                    });
+                  }
+                }
+
+                lodash_default.a.forEach(rootNode.targetLinks, function (l) {
+                  var path = [rootNode.id];
+                  addTargetNodeToPath(l.source, path);
+                });
+
+                return lodash_default.a.concat(pathsFromRootToNodes, pathsFromNodesToRoot);
+              }
+
+              var allPaths = getAllPaths(graph);
+
+              function isDuplicate(arrays, arr) {
+                return lodash_default.a.some(arrays, function (a) {
+                  return lodash_default.a.isEqual(arr, a);
+                });
+              }
+
+              function getPaths(nodeId, allPaths) {
+                var toNode = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+                var paths = [];
+
+                lodash_default.a.forEach(allPaths, function (p) {
+                  var direction = toNode ? p.length - 1 : 0;
+
+                  if (lodash_default.a.indexOf(p, nodeId) == direction) {
+                    paths.push(p);
+                  }
+                });
+
+                return paths;
+              }
+
+              function getDataToHighlight(nodes, allPaths) {
+                var dataToHighlight = {};
+
+                lodash_default.a.forEach(nodes, function (n) {
+                  // что подсвечивать: от рутового или до или все вместе
+                  var paths = lodash_default.a.concat(getPaths(n.id, allPaths), getPaths(n.id, allPaths, false));
+
+                  var nodesToHighlight = lodash_default.a.uniq(lodash_default.a.flattenDeep(paths));
+
+                  var linksToHighlight = [];
+
+                  lodash_default.a.forEach(paths, function (p) {
+                    for (var i = 0; i < p.length - 1; i++) {
+                      var couple = [p[i], p[i + 1]];
+
+                      if (!isDuplicate(linksToHighlight, couple)) {
+                        linksToHighlight.push(couple);
+                      }
+                    }
+                  });
+
+                  dataToHighlight[n.id] = {
+                    nodesToHighlight: nodesToHighlight,
+                    linksToHighlight: linksToHighlight
+                  };
+                });
+
+                return dataToHighlight;
+              }
+
+              var dataToHighlight = getDataToHighlight(graph.nodes, allPaths);
+              var rootG = svg.append('g').attr('class', 'root-g');
+              rootG.append('rect').attr('class', 'divider').attr('x', rootNode.x0).attr('y', -10000).attr('height', 20000).attr('width', rootNode.x1 - rootNode.x0).attr('fill', 'silver').attr('opacity', 0.5);
+              var linkG = rootG.append('g').attr('class', 'links').attr('fill', 'none').attr('stroke-opacity', linkOpacity).selectAll('path');
+              var nodeG = rootG.append('g').attr('class', 'nodes').attr('font-family', 'sans-serif').attr('font-size', fontSize).selectAll('g');
+              var node = nodeG.data(graph.nodes).enter().append('g');
+              var tooltip = src_select('.tooltip').empty() ? src_select('body').append('div').attr('class', options.theme == 'dark' ? 'tooltip tooltip--dark' : 'tooltip') : src_select('.tooltip');
+              node.append('rect').attr('x', function (d) {
+                return d.x0;
+              }).attr('y', function (d) {
+                return d.y1 - d.y0 < 1 ? d.y0 - 0.5 : d.y0;
+              }).attr('height', function (d) {
+                return d.y1 - d.y0 < 1 ? 1 : d.y1 - d.y0;
+              }).attr('width', function (d) {
+                return d.x1 - d.x0;
+              }).attr('fill', color).attr('stroke', strokeColor).attr('stroke-width', 1).on('mouseover', nodeMouseOver).on('mousemove', nodeMouseMove).on('mouseout', nodeMouseOut).on('contextmenu', nodeContextMenu);
+              node.append('text').attr('x', function (d) {
+                return (d.x0 + d.x1) / 2;
+              }).attr('y', function (d) {
+                return d.y0 - 4;
+              }).attr('text-anchor', 'middle').attr('fill', textColor).attr('class', function (d) {
+                d.isHidden = false;
+                return d.label ? 'annotation' : 'address';
+              }).text(function (d) {
+                return d.label || lodash_default.a.truncate(d.id, {
+                  length: 15,
+                  separator: '...'
+                });
+              }).on('mouseover', nodeMouseOver).on('mousemove', nodeMouseMove).on('mouseout', nodeMouseOut).on('contextmenu', nodeContextMenu);
+              var link = linkG.data(graph.links).enter().append('g');
+
+              if (edgeColor === 'path') {
+                var gradient = link.append('linearGradient').attr('id', function (d) {
+                  return (d.uid = uid('link')).id;
+                }).attr('gradientUnits', 'userSpaceOnUse').attr('x1', function (d) {
+                  return d.source.x1;
+                }).attr('x2', function (d) {
+                  return d.target.x0;
+                });
+                gradient.append('stop').attr('offset', '0%').attr('stop-color', function (d) {
+                  return color(d.source);
+                });
+                gradient.append('stop').attr('offset', '100%').attr('stop-color', function (d) {
+                  return color(d.target);
+                });
+              }
+
+              link.append('path').attr('class', 'sankey-link').attr('d', function (link) {
+                return link.path;
+              }).attr('stroke', function (d) {
+                return edgeColor === 'none' ? '#aaa' : edgeColor === 'path' ? d.uid : edgeColor === 'input' ? color(d.source) : color(d.target);
+              }).attr('stroke-width', function (d) {
+                return Math.max(1, d.width);
+              }).attr('opacity', 1).on('mouseover', linkMouseOver).on('mousemove', linkMouseMove).on('mouseout', linkMouseOut);
+              var arrows = dist["pathArrows"]().arrowLength(10).gapLength(150).arrowHeadSize(4).path(function (link) {
+                return link.path;
+              });
+              var arrowsG = linkG.data(graph.links).enter().append('g').attr('class', 'g-arrow').call(arrows);
+              arrowsG.select('path').style('stroke', strokeColor);
+              arrowsG.selectAll('.arrow-head').style('fill', strokeColor);
+
+              function highlightNode(node, id) {
+                // isHidden, isHighlighted, isDarken,
+                if (lodash_default.a.includes(dataToHighlight[id].nodesToHighlight, node.id)) {
+                  node.isHighlighted = true;
+                } else {
+                  node.isDarken = true;
+                }
+              }
+
+              function highlightLinks(link, id) {
+                var highlight = lodash_default.a.some(dataToHighlight[id].linksToHighlight, function (couple) {
+                  return link.source.id == couple[0] && link.target.id == couple[1];
+                });
+
+                if (highlight) {
+                  link.isHighlighted = true;
+                } else {
+                  link.isDarken = true;
+                }
+              }
+
+              function getOpacity(elem, type) {
+                var opacity;
+
+                switch (type) {
+                  case 'node':
+                    opacity = elem.isHighlighted ? 1 : elem.isDarken ? 0.3 : 1;
+                    break;
+
+                  case 'text':
+                    opacity = elem.isHighlighted ? 1 : elem.isHidden ? 0 : elem.isDarken ? 0.3 : 1;
+                    break;
+
+                  case 'link':
+                    opacity = elem.isHighlighted ? 1 : elem.isDarken ? 0.3 : 1;
+                    break;
+
+                  default:
+                    break;
+                }
+
+                return opacity;
+              }
+
+              function nodeMouseOver(e, d) {
+                var thisId = d.id;
+                node.selectAll('rect').style('opacity', function (d) {
+                  highlightNode(d, thisId);
+                  return getOpacity(d, 'node');
+                });
+                src_selectAll('.sankey-link').style('opacity', function (l) {
+                  highlightLinks(l, thisId);
+                  return getOpacity(l, 'link');
+                });
+                node.selectAll('text').style('opacity', function (d) {
+                  return getOpacity(d, 'text');
+                });
+                var income = 0;
+
+                lodash_default.a.each(d.targetLinks, function (l) {
+                  income += l.amount;
+                });
+
+                var outcome = 0;
+
+                lodash_default.a.each(d.sourceLinks, function (l) {
+                  outcome += l.amount;
+                });
+
+                tooltip.style('visibility', 'visible').html("<ul>\n\t\t\t\t\t  ".concat(income != 0 ? "<li>Income: ".concat(format(income), "</li>") : '', "\n\t\t\t\t\t  ").concat(outcome != 0 ? "<li>Outcome: ".concat(format(outcome), "</li>") : '', "\n\t\t\t\t\t  <li>").concat(d.label || d.id, "</li>\n\t\t\t\t  </ul>"));
+              }
+
+              function nodeMouseMove(e, d) {
+                var bodyWidth = src_select('body').style('width').slice(0, -2);
+                var tooltipheight = e.pageY - tooltip.style('height').slice(0, -2) - 10;
+                var tooltipWidth = tooltip.style('width').slice(0, -2);
+                var tooltipX = e.pageX < tooltipWidth / 2 ? 0 : e.pageX + tooltipWidth / 2 > bodyWidth ? bodyWidth - tooltipWidth : e.pageX - tooltipWidth / 2;
+                tooltip.style('top', tooltipheight + 'px').style('left', tooltipX + 'px');
+              }
+
+              function nodeMouseOut(e, d) {
+                node.selectAll('rect').style('opacity', function (d) {
+                  d.isHighlighted = false;
+                  d.isDarken = false;
+                  return getOpacity(d, 'node');
+                });
+                link.selectAll('.sankey-link').style('opacity', function (l) {
+                  l.isHighlighted = false;
+                  l.isDarken = false;
+                  return getOpacity(d, 'link');
+                });
+                node.selectAll('text').style('opacity', function (d) {
+                  return getOpacity(d, 'text');
+                });
+                tooltip.style('visibility', 'hidden');
+              }
+
+              function nodeContextMenu(e, d) {
+                e.preventDefault();
+                var pathname = window.location.pathname.slice(1);
+                window.open("".concat(window.location.origin, "/").concat(pathname.slice(0, pathname.indexOf('/')), "/address/").concat(d.id), '_blank');
+              }
+
+              function linkMouseOver(e, l) {
+                var source = l.source.id;
+                var target = l.target.id;
+                link.selectAll('.sankey-link').style('opacity', function (l) {
+                  if (l.source.id == source && l.target.id == target) {
+                    l.isHighlighted = true;
+                  } else {
+                    l.isDarken = true;
+                  }
+
+                  return getOpacity(l, 'link');
+                });
+                node.selectAll('rect').style('opacity', function (d) {
+                  if (d.id == source || d.id == target) {
+                    d.isHighlighted = true;
+                  } else {
+                    d.isDarken = true;
+                  }
+
+                  return getOpacity(d, 'node');
+                });
+                node.selectAll('text').style('opacity', function (d) {
+                  return getOpacity(d, 'text');
+                });
+                tooltip.style('visibility', 'visible').html("<ul>\n\t\t\t\t\t  <li>Amount: ".concat(format(l.amount), "</li>\n\t\t\t\t\t  <li>From:</li>\n\t\t\t\t\t  <li>").concat(l.source.label || l.source.id, "</li>\n\t\t\t\t\t  <li>To:</li>\n\t\t\t\t\t  <li>").concat(l.target.label || l.target.id, "</li>\n\t\t\t\t\t  <li>Count of transfers: ").concat(l.countOfTransfers, "</li>\n\t\t\t\t  </ul>"));
+              }
+
+              function linkMouseMove(e, l) {
+                var bodyWidth = src_select('body').style('width').slice(0, -2);
+                var tooltipheight = e.pageY - tooltip.style('height').slice(0, -2) - 10;
+                var tooltipWidth = tooltip.style('width').slice(0, -2);
+                var tooltipX = e.pageX < tooltipWidth / 2 ? 0 : e.pageX + tooltipWidth / 2 > bodyWidth ? bodyWidth - tooltipWidth : e.pageX - tooltipWidth / 2;
+                tooltip.style('top', tooltipheight + 'px').style('left', tooltipX + 'px');
+              }
+
+              function linkMouseOut(e, l) {
+                node.selectAll('rect').style('opacity', function (d) {
+                  d.isHighlighted = false;
+                  d.isDarken = false;
+                  return getOpacity(d, 'node');
+                });
+                link.selectAll('.sankey-link').style('opacity', function (l) {
+                  l.isHighlighted = false;
+                  l.isDarken = false;
+                  return getOpacity(l, 'link');
+                });
+                node.selectAll('text').style('opacity', function (d) {
+                  return getOpacity(d, 'text');
+                });
+                tooltip.style('visibility', 'hidden');
+              }
+
+              var zoom = d3_zoom_src_zoom().on('zoom', function (e) {
+                rootG.select('.nodes').attr('font-size', fontSize / e.transform.k);
+
+                if (fontSize / e.transform.k > 36) {
+                  node.selectAll('.address').style('opacity', function (d) {
+                    d.isHidden = true;
+                    return getOpacity(d, 'text');
+                  });
+                } else {
+                  node.selectAll('.address').style('opacity', function (d) {
+                    d.isHidden = false;
+                    return getOpacity(d, 'text');
+                  });
+                }
+
+                rootG.select('.divider').attr('y', function (d) {
+                  return -10000 / e.transform.k;
+                }).attr('height', 20000 / e.transform.k);
+                rootG.attr('transform', e.transform);
+              }).on('start', function (e) {
+                if (e.sourceEvent && e.sourceEvent.type == 'mousedown') {
+                  svg.attr('cursor', 'move');
+                }
+              }).on('end', function (e) {
+                if (e.sourceEvent && e.sourceEvent.type == 'mouseup') {
+                  svg.attr('cursor', 'default');
+                }
+              });
+              var initScale = Math.min(width / graphSize.width, height / graphSize.height) * 3 / 4;
+              svg.call(zoom).call(zoom.transform, transform_identity.translate((width - graphSize.width * initScale) / 2, 120).scale(initScale)).on('dblclick.zoom', null);
+              var chart = svg.node();
+              $("#".concat(selector)).html(chart);
+            };
+
+            g.render();
+            return _context.abrupt("return", g);
+
+          case 30:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return _sankeyRenderer.apply(this, arguments);
+}
+
 window.sankeyRenderer = sankeyRenderer;
 
 /***/ }),
 
-/***/ 95:
+/***/ 96:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26510,7 +27325,7 @@ function stronglyConnectedComponents(adjList) {
 
 /***/ }),
 
-/***/ 96:
+/***/ 97:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -26521,9 +27336,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = pathArrows;
 
-var _d3Selection = __webpack_require__(97);
+var _d3Selection = __webpack_require__(98);
 
-var _d3Array = __webpack_require__(98);
+var _d3Array = __webpack_require__(99);
 
 // Function that appends a path to selection that has sankey path data attached
 // The path is formatted as dash array, and triangle paths to create arrows along the path
@@ -26627,7 +27442,7 @@ function pathArrows() {
 
 /***/ }),
 
-/***/ 97:
+/***/ 98:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27779,7 +28594,7 @@ Local.prototype = local.prototype = {
 
 /***/ }),
 
-/***/ 98:
+/***/ 99:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
