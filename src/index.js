@@ -14,6 +14,7 @@ class SankeyPlugin {
       'https://cdn.jsdelivr.net/npm/@bitquery/ide-graph@2.0.1/dist/sankeyRenderer.js',
       'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'
     ]
+    this.rendererName = 'sankeyRenderer'
   }
   supportsModel(model) {
     for (let key in model) {
@@ -65,6 +66,7 @@ class GraphPlugin {
       'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js',
       'https://kit.fontawesome.com/fcc9f09153.js'
     ]
+    this.rendererName = 'graphRenderer'
   }
   supportsModel(model) {
     for (let key in model) {
