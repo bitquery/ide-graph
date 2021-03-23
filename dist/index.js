@@ -77457,6 +77457,7 @@ var src_SankeyPlugin = /*#__PURE__*/function () {
     this.editor = reactComponents_SankeyEditor;
     this.renderer = sankeyRenderer["default"];
     this.dependencies = ['https://cdn.jsdelivr.net/npm/@bitquery/ide-graph@2.0.1/dist/sankeyRenderer.js', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js'];
+    this.rendererName = 'sankeyRenderer';
   }
 
   _createClass(SankeyPlugin, [{
@@ -77505,6 +77506,7 @@ var src_GraphPlugin = /*#__PURE__*/function () {
     this.editor = reactComponents_GraphEditor;
     this.renderer = graphRenderer["default"];
     this.dependencies = ['https://cdn.jsdelivr.net/npm/@bitquery/ide-graph@2.0.1/dist/graphRenderer.js', 'https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js', 'https://kit.fontawesome.com/fcc9f09153.js'];
+    this.rendererName = 'graphRenderer';
   }
 
   _createClass(GraphPlugin, [{
