@@ -77383,12 +77383,17 @@ function checkAllProperties(props, model) {
     if (item.selectionSet) {
       item.selectionSet.selections.forEach(function (i) {
         var start = pre ? pre + '.' : '';
-        availableProps.add(start + item.name.value);
-        addProp(start + item.name.value, i);
+
+        if (item.name) {
+          availableProps.add(start + item.name.value);
+          addProp(start + item.name.value, i);
+        }
       });
     } else {
-      var start = pre ? pre + '.' : '';
-      availableProps.add(start + item.name.value);
+      if (item.name) {
+        var start = pre ? pre + '.' : '';
+        availableProps.add(start + item.name.value);
+      }
     }
   }
 

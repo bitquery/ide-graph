@@ -4,12 +4,16 @@ export default function checkAllProperties(props, model) {
     if (item.selectionSet) {
       item.selectionSet.selections.forEach((i) => {
 				const start = pre ? pre + '.' : ''
-        availableProps.add(start + item.name.value)
-        addProp(start + item.name.value, i)
+        if (item.name) {
+          availableProps.add(start + item.name.value)
+          addProp(start + item.name.value, i)
+        }
       })
     } else {
-			const start = pre ? pre + '.' : ''
-      availableProps.add(start + item.name.value)
+      if (item.name) {
+        const start = pre ? pre + '.' : ''
+        availableProps.add(start + item.name.value)
+      }
     }
   }
   if (model.selectionSet) {
