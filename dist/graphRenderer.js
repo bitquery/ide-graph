@@ -91,7 +91,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 49);
+/******/ 	return __webpack_require__(__webpack_require__.s = 50);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -113,14 +113,15 @@ return /******/ (function(modules) { // webpackBootstrap
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.20';
+  var VERSION = '4.17.21';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
 
   /** Error message constants. */
   var CORE_ERROR_TEXT = 'Unsupported core-js use. Try https://npms.io/search?q=ponyfill.',
-      FUNC_ERROR_TEXT = 'Expected a function';
+      FUNC_ERROR_TEXT = 'Expected a function',
+      INVALID_TEMPL_VAR_ERROR_TEXT = 'Invalid `variable` option passed into `_.template`';
 
   /** Used to stand-in for `undefined` hash values. */
   var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -253,10 +254,11 @@ return /******/ (function(modules) { // webpackBootstrap
   var reRegExpChar = /[\\^$.*+?()[\]{}|]/g,
       reHasRegExpChar = RegExp(reRegExpChar.source);
 
-  /** Used to match leading and trailing whitespace. */
-  var reTrim = /^\s+|\s+$/g,
-      reTrimStart = /^\s+/,
-      reTrimEnd = /\s+$/;
+  /** Used to match leading whitespace. */
+  var reTrimStart = /^\s+/;
+
+  /** Used to match a single whitespace character. */
+  var reWhitespace = /\s/;
 
   /** Used to match wrap detail comments. */
   var reWrapComment = /\{(?:\n\/\* \[wrapped with .+\] \*\/)?\n?/,
@@ -265,6 +267,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
   /** Used to match words composed of alphanumeric characters. */
   var reAsciiWord = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
+
+  /**
+   * Used to validate the `validate` option in `_.template` variable.
+   *
+   * Forbids characters which could potentially change the meaning of the function argument definition:
+   * - "()," (modification of function parameters)
+   * - "=" (default value)
+   * - "[]{}" (destructuring of function parameters)
+   * - "/" (beginning of a comment)
+   * - whitespace
+   */
+  var reForbiddenIdentifierChars = /[()=,{}\[\]\/\s]/;
 
   /** Used to match backslashes in property paths. */
   var reEscapeChar = /\\(\\)?/g;
@@ -1095,6 +1109,19 @@ return /******/ (function(modules) { // webpackBootstrap
   }
 
   /**
+   * The base implementation of `_.trim`.
+   *
+   * @private
+   * @param {string} string The string to trim.
+   * @returns {string} Returns the trimmed string.
+   */
+  function baseTrim(string) {
+    return string
+      ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '')
+      : string;
+  }
+
+  /**
    * The base implementation of `_.unary` without support for storing metadata.
    *
    * @private
@@ -1425,6 +1452,21 @@ return /******/ (function(modules) { // webpackBootstrap
     return hasUnicode(string)
       ? unicodeToArray(string)
       : asciiToArray(string);
+  }
+
+  /**
+   * Used by `_.trim` and `_.trimEnd` to get the index of the last non-whitespace
+   * character of `string`.
+   *
+   * @private
+   * @param {string} string The string to inspect.
+   * @returns {number} Returns the index of the last non-whitespace character.
+   */
+  function trimmedEndIndex(string) {
+    var index = string.length;
+
+    while (index-- && reWhitespace.test(string.charAt(index))) {}
+    return index;
   }
 
   /**
@@ -12595,7 +12637,7 @@ return /******/ (function(modules) { // webpackBootstrap
       if (typeof value != 'string') {
         return value === 0 ? value : +value;
       }
-      value = value.replace(reTrim, '');
+      value = baseTrim(value);
       var isBinary = reIsBinary.test(value);
       return (isBinary || reIsOctal.test(value))
         ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
@@ -14967,6 +15009,12 @@ return /******/ (function(modules) { // webpackBootstrap
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
+      // Throw an error if a forbidden character was found in `variable`, to prevent
+      // potential command injection attacks.
+      else if (reForbiddenIdentifierChars.test(variable)) {
+        throw new Error(INVALID_TEMPL_VAR_ERROR_TEXT);
+      }
+
       // Cleanup code by stripping empty strings.
       source = (isEvaluating ? source.replace(reEmptyStringLeading, '') : source)
         .replace(reEmptyStringMiddle, '$1')
@@ -15080,7 +15128,7 @@ return /******/ (function(modules) { // webpackBootstrap
     function trim(string, chars, guard) {
       string = toString(string);
       if (string && (guard || chars === undefined)) {
-        return string.replace(reTrim, '');
+        return baseTrim(string);
       }
       if (!string || !(chars = baseToString(chars))) {
         return string;
@@ -15115,7 +15163,7 @@ return /******/ (function(modules) { // webpackBootstrap
     function trimEnd(string, chars, guard) {
       string = toString(string);
       if (string && (guard || chars === undefined)) {
-        return string.replace(reTrimEnd, '');
+        return string.slice(0, trimmedEndIndex(string) + 1);
       }
       if (!string || !(chars = baseToString(chars))) {
         return string;
@@ -17253,11 +17301,11 @@ return /******/ (function(modules) { // webpackBootstrap
   else {}
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(44), __webpack_require__(45)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(45), __webpack_require__(46)(module)))
 
 /***/ }),
 
-/***/ 10:
+/***/ 11:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -77174,7 +77222,7 @@ exports["default"] = FloydWarshall;
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -77929,7 +77977,63 @@ try {
 
 /***/ }),
 
-/***/ 4:
+/***/ 45:
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+
+/***/ 46:
+/***/ (function(module, exports) {
+
+module.exports = function(module) {
+	if (!module.webpackPolyfill) {
+		module.deprecate = function() {};
+		module.paths = [];
+		// module.parent = undefined by default
+		if (!module.children) module.children = [];
+		Object.defineProperty(module, "loaded", {
+			enumerable: true,
+			get: function() {
+				return module.l;
+			}
+		});
+		Object.defineProperty(module, "id", {
+			enumerable: true,
+			get: function() {
+				return module.i;
+			}
+		});
+		module.webpackPolyfill = 1;
+	}
+	return module;
+};
+
+
+/***/ }),
+
+/***/ 5:
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! @preserve
@@ -78949,63 +79053,7 @@ return numeral;
 
 /***/ }),
 
-/***/ 44:
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 45:
-/***/ (function(module, exports) {
-
-module.exports = function(module) {
-	if (!module.webpackPolyfill) {
-		module.deprecate = function() {};
-		module.paths = [];
-		// module.parent = undefined by default
-		if (!module.children) module.children = [];
-		Object.defineProperty(module, "loaded", {
-			enumerable: true,
-			get: function() {
-				return module.l;
-			}
-		});
-		Object.defineProperty(module, "id", {
-			enumerable: true,
-			get: function() {
-				return module.i;
-			}
-		});
-		module.webpackPolyfill = 1;
-	}
-	return module;
-};
-
-
-/***/ }),
-
-/***/ 49:
+/***/ 50:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79020,11 +79068,11 @@ var lodash = __webpack_require__(0);
 var lodash_default = /*#__PURE__*/__webpack_require__.n(lodash);
 
 // EXTERNAL MODULE: ./node_modules/numeral/numeral.js
-var numeral = __webpack_require__(4);
+var numeral = __webpack_require__(5);
 var numeral_default = /*#__PURE__*/__webpack_require__.n(numeral);
 
 // EXTERNAL MODULE: ./node_modules/vis/dist/vis.js
-var vis = __webpack_require__(10);
+var vis = __webpack_require__(11);
 
 // CONCATENATED MODULE: ./src/util/lightenOrDarkenColor.js
 function lightenOrDarkenColor(color, percent) {
@@ -79037,7 +79085,7 @@ function lightenOrDarkenColor(color, percent) {
   return "#".concat((0x1000000 + (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + (B < 255 ? B < 1 ? 0 : B : 255) * 0x100 + (G < 255 ? G < 1 ? 0 : G : 255)).toString(16).slice(1));
 }
 // EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
-var runtime = __webpack_require__(2);
+var runtime = __webpack_require__(3);
 var runtime_default = /*#__PURE__*/__webpack_require__.n(runtime);
 
 // CONCATENATED MODULE: ./src/reactComponents/graphRenderer.js
@@ -79060,7 +79108,7 @@ function graphRenderer(_x, _x2, _x3) {
 
 function _graphRenderer() {
   _graphRenderer = _asyncToGenerator( /*#__PURE__*/runtime_default.a.mark(function _callee(dataSource, options, selector) {
-    var g, jqContainer, value, data, json, values, queryVariables, currency, jqWrapper;
+    var g, jqContainer, value, data, json, values, queryVariables, currency;
     return runtime_default.a.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -79106,13 +79154,7 @@ function _graphRenderer() {
           case 19:
             queryVariables = _typeof(dataSource.variables) === 'object' ? dataSource.variables : JSON.parse(dataSource.variables);
             currency = values.inbound && values.inbound.length > 0 && values.inbound[0].currency.symbol || values.outbound && values.outbound.length > 0 && values.outbound[0].currency.symbol;
-            jqContainer.addClass('graph');
-
-            if (!jqContainer.parent().hasClass('wrapper')) {
-              jqContainer.wrap('<div class="wrapper" style="width:100%; height:100%;">');
-            }
-
-            jqWrapper = jqContainer.parent('.wrapper'); // a trick for the icons in the graph to be loaded
+            jqContainer.addClass('graph'); // a trick for the icons in the graph to be loaded
 
             jqContainer.append('<i class="fa fa-flag" style="visibility:hidden;position:absolute;"></i>');
             g.theme = options.theme || 'light';
@@ -79501,7 +79543,6 @@ function _graphRenderer() {
             };
 
             g.initGraph = function () {
-              jqWrapper.removeClass('initializing');
               g.setDataset(values);
               g.network = new vis["Network"](g.container, g.dataset, g.networkOptions);
               g.network.on('dragStart', function (params) {
@@ -79560,7 +79601,7 @@ function _graphRenderer() {
             g.initGraph();
             return _context.abrupt("return", g);
 
-          case 38:
+          case 36:
           case "end":
             return _context.stop();
         }

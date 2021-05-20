@@ -91,7 +91,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 48);
+/******/ 	return __webpack_require__(__webpack_require__.s = 49);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -113,14 +113,15 @@ return /******/ (function(modules) { // webpackBootstrap
   var undefined;
 
   /** Used as the semantic version number. */
-  var VERSION = '4.17.20';
+  var VERSION = '4.17.21';
 
   /** Used as the size to enable large array optimizations. */
   var LARGE_ARRAY_SIZE = 200;
 
   /** Error message constants. */
   var CORE_ERROR_TEXT = 'Unsupported core-js use. Try https://npms.io/search?q=ponyfill.',
-      FUNC_ERROR_TEXT = 'Expected a function';
+      FUNC_ERROR_TEXT = 'Expected a function',
+      INVALID_TEMPL_VAR_ERROR_TEXT = 'Invalid `variable` option passed into `_.template`';
 
   /** Used to stand-in for `undefined` hash values. */
   var HASH_UNDEFINED = '__lodash_hash_undefined__';
@@ -253,10 +254,11 @@ return /******/ (function(modules) { // webpackBootstrap
   var reRegExpChar = /[\\^$.*+?()[\]{}|]/g,
       reHasRegExpChar = RegExp(reRegExpChar.source);
 
-  /** Used to match leading and trailing whitespace. */
-  var reTrim = /^\s+|\s+$/g,
-      reTrimStart = /^\s+/,
-      reTrimEnd = /\s+$/;
+  /** Used to match leading whitespace. */
+  var reTrimStart = /^\s+/;
+
+  /** Used to match a single whitespace character. */
+  var reWhitespace = /\s/;
 
   /** Used to match wrap detail comments. */
   var reWrapComment = /\{(?:\n\/\* \[wrapped with .+\] \*\/)?\n?/,
@@ -265,6 +267,18 @@ return /******/ (function(modules) { // webpackBootstrap
 
   /** Used to match words composed of alphanumeric characters. */
   var reAsciiWord = /[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g;
+
+  /**
+   * Used to validate the `validate` option in `_.template` variable.
+   *
+   * Forbids characters which could potentially change the meaning of the function argument definition:
+   * - "()," (modification of function parameters)
+   * - "=" (default value)
+   * - "[]{}" (destructuring of function parameters)
+   * - "/" (beginning of a comment)
+   * - whitespace
+   */
+  var reForbiddenIdentifierChars = /[()=,{}\[\]\/\s]/;
 
   /** Used to match backslashes in property paths. */
   var reEscapeChar = /\\(\\)?/g;
@@ -1095,6 +1109,19 @@ return /******/ (function(modules) { // webpackBootstrap
   }
 
   /**
+   * The base implementation of `_.trim`.
+   *
+   * @private
+   * @param {string} string The string to trim.
+   * @returns {string} Returns the trimmed string.
+   */
+  function baseTrim(string) {
+    return string
+      ? string.slice(0, trimmedEndIndex(string) + 1).replace(reTrimStart, '')
+      : string;
+  }
+
+  /**
    * The base implementation of `_.unary` without support for storing metadata.
    *
    * @private
@@ -1425,6 +1452,21 @@ return /******/ (function(modules) { // webpackBootstrap
     return hasUnicode(string)
       ? unicodeToArray(string)
       : asciiToArray(string);
+  }
+
+  /**
+   * Used by `_.trim` and `_.trimEnd` to get the index of the last non-whitespace
+   * character of `string`.
+   *
+   * @private
+   * @param {string} string The string to inspect.
+   * @returns {number} Returns the index of the last non-whitespace character.
+   */
+  function trimmedEndIndex(string) {
+    var index = string.length;
+
+    while (index-- && reWhitespace.test(string.charAt(index))) {}
+    return index;
   }
 
   /**
@@ -12595,7 +12637,7 @@ return /******/ (function(modules) { // webpackBootstrap
       if (typeof value != 'string') {
         return value === 0 ? value : +value;
       }
-      value = value.replace(reTrim, '');
+      value = baseTrim(value);
       var isBinary = reIsBinary.test(value);
       return (isBinary || reIsOctal.test(value))
         ? freeParseInt(value.slice(2), isBinary ? 2 : 8)
@@ -14967,6 +15009,12 @@ return /******/ (function(modules) { // webpackBootstrap
       if (!variable) {
         source = 'with (obj) {\n' + source + '\n}\n';
       }
+      // Throw an error if a forbidden character was found in `variable`, to prevent
+      // potential command injection attacks.
+      else if (reForbiddenIdentifierChars.test(variable)) {
+        throw new Error(INVALID_TEMPL_VAR_ERROR_TEXT);
+      }
+
       // Cleanup code by stripping empty strings.
       source = (isEvaluating ? source.replace(reEmptyStringLeading, '') : source)
         .replace(reEmptyStringMiddle, '$1')
@@ -15080,7 +15128,7 @@ return /******/ (function(modules) { // webpackBootstrap
     function trim(string, chars, guard) {
       string = toString(string);
       if (string && (guard || chars === undefined)) {
-        return string.replace(reTrim, '');
+        return baseTrim(string);
       }
       if (!string || !(chars = baseToString(chars))) {
         return string;
@@ -15115,7 +15163,7 @@ return /******/ (function(modules) { // webpackBootstrap
     function trimEnd(string, chars, guard) {
       string = toString(string);
       if (string && (guard || chars === undefined)) {
-        return string.replace(reTrimEnd, '');
+        return string.slice(0, trimmedEndIndex(string) + 1);
       }
       if (!string || !(chars = baseToString(chars))) {
         return string;
@@ -17253,11 +17301,704 @@ return /******/ (function(modules) { // webpackBootstrap
   else {}
 }.call(this));
 
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(44), __webpack_require__(45)(module)))
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(45), __webpack_require__(46)(module)))
 
 /***/ }),
 
-/***/ 2:
+/***/ 1:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+// ESM COMPAT FLAG
+__webpack_require__.r(__webpack_exports__);
+
+// EXPORTS
+__webpack_require__.d(__webpack_exports__, "bisect", function() { return /* reexport */ bisect; });
+__webpack_require__.d(__webpack_exports__, "bisectRight", function() { return /* reexport */ bisectRight; });
+__webpack_require__.d(__webpack_exports__, "bisectLeft", function() { return /* reexport */ bisectLeft; });
+__webpack_require__.d(__webpack_exports__, "ascending", function() { return /* reexport */ ascending; });
+__webpack_require__.d(__webpack_exports__, "bisector", function() { return /* reexport */ bisector; });
+__webpack_require__.d(__webpack_exports__, "cross", function() { return /* reexport */ cross; });
+__webpack_require__.d(__webpack_exports__, "descending", function() { return /* reexport */ descending; });
+__webpack_require__.d(__webpack_exports__, "deviation", function() { return /* reexport */ deviation; });
+__webpack_require__.d(__webpack_exports__, "extent", function() { return /* reexport */ extent; });
+__webpack_require__.d(__webpack_exports__, "histogram", function() { return /* reexport */ src_histogram; });
+__webpack_require__.d(__webpack_exports__, "thresholdFreedmanDiaconis", function() { return /* reexport */ freedmanDiaconis; });
+__webpack_require__.d(__webpack_exports__, "thresholdScott", function() { return /* reexport */ scott; });
+__webpack_require__.d(__webpack_exports__, "thresholdSturges", function() { return /* reexport */ sturges; });
+__webpack_require__.d(__webpack_exports__, "max", function() { return /* reexport */ src_max; });
+__webpack_require__.d(__webpack_exports__, "mean", function() { return /* reexport */ src_mean; });
+__webpack_require__.d(__webpack_exports__, "median", function() { return /* reexport */ median; });
+__webpack_require__.d(__webpack_exports__, "merge", function() { return /* reexport */ merge; });
+__webpack_require__.d(__webpack_exports__, "min", function() { return /* reexport */ src_min; });
+__webpack_require__.d(__webpack_exports__, "pairs", function() { return /* reexport */ pairs; });
+__webpack_require__.d(__webpack_exports__, "permute", function() { return /* reexport */ permute; });
+__webpack_require__.d(__webpack_exports__, "quantile", function() { return /* reexport */ quantile; });
+__webpack_require__.d(__webpack_exports__, "range", function() { return /* reexport */ range; });
+__webpack_require__.d(__webpack_exports__, "scan", function() { return /* reexport */ scan; });
+__webpack_require__.d(__webpack_exports__, "shuffle", function() { return /* reexport */ shuffle; });
+__webpack_require__.d(__webpack_exports__, "sum", function() { return /* reexport */ src_sum; });
+__webpack_require__.d(__webpack_exports__, "ticks", function() { return /* reexport */ ticks; });
+__webpack_require__.d(__webpack_exports__, "tickIncrement", function() { return /* reexport */ tickIncrement; });
+__webpack_require__.d(__webpack_exports__, "tickStep", function() { return /* reexport */ tickStep; });
+__webpack_require__.d(__webpack_exports__, "transpose", function() { return /* reexport */ src_transpose; });
+__webpack_require__.d(__webpack_exports__, "variance", function() { return /* reexport */ variance; });
+__webpack_require__.d(__webpack_exports__, "zip", function() { return /* reexport */ zip; });
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/ascending.js
+/* harmony default export */ var ascending = (function(a, b) {
+  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/bisector.js
+
+
+/* harmony default export */ var bisector = (function(compare) {
+  if (compare.length === 1) compare = ascendingComparator(compare);
+  return {
+    left: function(a, x, lo, hi) {
+      if (lo == null) lo = 0;
+      if (hi == null) hi = a.length;
+      while (lo < hi) {
+        var mid = lo + hi >>> 1;
+        if (compare(a[mid], x) < 0) lo = mid + 1;
+        else hi = mid;
+      }
+      return lo;
+    },
+    right: function(a, x, lo, hi) {
+      if (lo == null) lo = 0;
+      if (hi == null) hi = a.length;
+      while (lo < hi) {
+        var mid = lo + hi >>> 1;
+        if (compare(a[mid], x) > 0) hi = mid;
+        else lo = mid + 1;
+      }
+      return lo;
+    }
+  };
+});
+
+function ascendingComparator(f) {
+  return function(d, x) {
+    return ascending(f(d), x);
+  };
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/bisect.js
+
+
+
+var ascendingBisect = bisector(ascending);
+var bisectRight = ascendingBisect.right;
+var bisectLeft = ascendingBisect.left;
+/* harmony default export */ var bisect = (bisectRight);
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/pairs.js
+/* harmony default export */ var pairs = (function(array, f) {
+  if (f == null) f = pair;
+  var i = 0, n = array.length - 1, p = array[0], pairs = new Array(n < 0 ? 0 : n);
+  while (i < n) pairs[i] = f(p, p = array[++i]);
+  return pairs;
+});
+
+function pair(a, b) {
+  return [a, b];
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/cross.js
+
+
+/* harmony default export */ var cross = (function(values0, values1, reduce) {
+  var n0 = values0.length,
+      n1 = values1.length,
+      values = new Array(n0 * n1),
+      i0,
+      i1,
+      i,
+      value0;
+
+  if (reduce == null) reduce = pair;
+
+  for (i0 = i = 0; i0 < n0; ++i0) {
+    for (value0 = values0[i0], i1 = 0; i1 < n1; ++i1, ++i) {
+      values[i] = reduce(value0, values1[i1]);
+    }
+  }
+
+  return values;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/descending.js
+/* harmony default export */ var descending = (function(a, b) {
+  return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/number.js
+/* harmony default export */ var number = (function(x) {
+  return x === null ? NaN : +x;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/variance.js
+
+
+/* harmony default export */ var variance = (function(values, valueof) {
+  var n = values.length,
+      m = 0,
+      i = -1,
+      mean = 0,
+      value,
+      delta,
+      sum = 0;
+
+  if (valueof == null) {
+    while (++i < n) {
+      if (!isNaN(value = number(values[i]))) {
+        delta = value - mean;
+        mean += delta / ++m;
+        sum += delta * (value - mean);
+      }
+    }
+  }
+
+  else {
+    while (++i < n) {
+      if (!isNaN(value = number(valueof(values[i], i, values)))) {
+        delta = value - mean;
+        mean += delta / ++m;
+        sum += delta * (value - mean);
+      }
+    }
+  }
+
+  if (m > 1) return sum / (m - 1);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/deviation.js
+
+
+/* harmony default export */ var deviation = (function(array, f) {
+  var v = variance(array, f);
+  return v ? Math.sqrt(v) : v;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/extent.js
+/* harmony default export */ var extent = (function(values, valueof) {
+  var n = values.length,
+      i = -1,
+      value,
+      min,
+      max;
+
+  if (valueof == null) {
+    while (++i < n) { // Find the first comparable value.
+      if ((value = values[i]) != null && value >= value) {
+        min = max = value;
+        while (++i < n) { // Compare the remaining values.
+          if ((value = values[i]) != null) {
+            if (min > value) min = value;
+            if (max < value) max = value;
+          }
+        }
+      }
+    }
+  }
+
+  else {
+    while (++i < n) { // Find the first comparable value.
+      if ((value = valueof(values[i], i, values)) != null && value >= value) {
+        min = max = value;
+        while (++i < n) { // Compare the remaining values.
+          if ((value = valueof(values[i], i, values)) != null) {
+            if (min > value) min = value;
+            if (max < value) max = value;
+          }
+        }
+      }
+    }
+  }
+
+  return [min, max];
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/array.js
+var array_array = Array.prototype;
+
+var slice = array_array.slice;
+var map = array_array.map;
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/constant.js
+/* harmony default export */ var constant = (function(x) {
+  return function() {
+    return x;
+  };
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/identity.js
+/* harmony default export */ var identity = (function(x) {
+  return x;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/range.js
+/* harmony default export */ var range = (function(start, stop, step) {
+  start = +start, stop = +stop, step = (n = arguments.length) < 2 ? (stop = start, start = 0, 1) : n < 3 ? 1 : +step;
+
+  var i = -1,
+      n = Math.max(0, Math.ceil((stop - start) / step)) | 0,
+      range = new Array(n);
+
+  while (++i < n) {
+    range[i] = start + i * step;
+  }
+
+  return range;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/ticks.js
+var e10 = Math.sqrt(50),
+    e5 = Math.sqrt(10),
+    e2 = Math.sqrt(2);
+
+/* harmony default export */ var ticks = (function(start, stop, count) {
+  var reverse,
+      i = -1,
+      n,
+      ticks,
+      step;
+
+  stop = +stop, start = +start, count = +count;
+  if (start === stop && count > 0) return [start];
+  if (reverse = stop < start) n = start, start = stop, stop = n;
+  if ((step = tickIncrement(start, stop, count)) === 0 || !isFinite(step)) return [];
+
+  if (step > 0) {
+    start = Math.ceil(start / step);
+    stop = Math.floor(stop / step);
+    ticks = new Array(n = Math.ceil(stop - start + 1));
+    while (++i < n) ticks[i] = (start + i) * step;
+  } else {
+    start = Math.floor(start * step);
+    stop = Math.ceil(stop * step);
+    ticks = new Array(n = Math.ceil(start - stop + 1));
+    while (++i < n) ticks[i] = (start - i) / step;
+  }
+
+  if (reverse) ticks.reverse();
+
+  return ticks;
+});
+
+function tickIncrement(start, stop, count) {
+  var step = (stop - start) / Math.max(0, count),
+      power = Math.floor(Math.log(step) / Math.LN10),
+      error = step / Math.pow(10, power);
+  return power >= 0
+      ? (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1) * Math.pow(10, power)
+      : -Math.pow(10, -power) / (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1);
+}
+
+function tickStep(start, stop, count) {
+  var step0 = Math.abs(stop - start) / Math.max(0, count),
+      step1 = Math.pow(10, Math.floor(Math.log(step0) / Math.LN10)),
+      error = step0 / step1;
+  if (error >= e10) step1 *= 10;
+  else if (error >= e5) step1 *= 5;
+  else if (error >= e2) step1 *= 2;
+  return stop < start ? -step1 : step1;
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/threshold/sturges.js
+/* harmony default export */ var sturges = (function(values) {
+  return Math.ceil(Math.log(values.length) / Math.LN2) + 1;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/histogram.js
+
+
+
+
+
+
+
+
+
+/* harmony default export */ var src_histogram = (function() {
+  var value = identity,
+      domain = extent,
+      threshold = sturges;
+
+  function histogram(data) {
+    var i,
+        n = data.length,
+        x,
+        values = new Array(n);
+
+    for (i = 0; i < n; ++i) {
+      values[i] = value(data[i], i, data);
+    }
+
+    var xz = domain(values),
+        x0 = xz[0],
+        x1 = xz[1],
+        tz = threshold(values, x0, x1);
+
+    // Convert number of thresholds into uniform thresholds.
+    if (!Array.isArray(tz)) {
+      tz = tickStep(x0, x1, tz);
+      tz = range(Math.ceil(x0 / tz) * tz, x1, tz); // exclusive
+    }
+
+    // Remove any thresholds outside the domain.
+    var m = tz.length;
+    while (tz[0] <= x0) tz.shift(), --m;
+    while (tz[m - 1] > x1) tz.pop(), --m;
+
+    var bins = new Array(m + 1),
+        bin;
+
+    // Initialize bins.
+    for (i = 0; i <= m; ++i) {
+      bin = bins[i] = [];
+      bin.x0 = i > 0 ? tz[i - 1] : x0;
+      bin.x1 = i < m ? tz[i] : x1;
+    }
+
+    // Assign data to bins by value, ignoring any outside the domain.
+    for (i = 0; i < n; ++i) {
+      x = values[i];
+      if (x0 <= x && x <= x1) {
+        bins[bisect(tz, x, 0, m)].push(data[i]);
+      }
+    }
+
+    return bins;
+  }
+
+  histogram.value = function(_) {
+    return arguments.length ? (value = typeof _ === "function" ? _ : constant(_), histogram) : value;
+  };
+
+  histogram.domain = function(_) {
+    return arguments.length ? (domain = typeof _ === "function" ? _ : constant([_[0], _[1]]), histogram) : domain;
+  };
+
+  histogram.thresholds = function(_) {
+    return arguments.length ? (threshold = typeof _ === "function" ? _ : Array.isArray(_) ? constant(slice.call(_)) : constant(_), histogram) : threshold;
+  };
+
+  return histogram;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/quantile.js
+
+
+/* harmony default export */ var quantile = (function(values, p, valueof) {
+  if (valueof == null) valueof = number;
+  if (!(n = values.length)) return;
+  if ((p = +p) <= 0 || n < 2) return +valueof(values[0], 0, values);
+  if (p >= 1) return +valueof(values[n - 1], n - 1, values);
+  var n,
+      i = (n - 1) * p,
+      i0 = Math.floor(i),
+      value0 = +valueof(values[i0], i0, values),
+      value1 = +valueof(values[i0 + 1], i0 + 1, values);
+  return value0 + (value1 - value0) * (i - i0);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/threshold/freedmanDiaconis.js
+
+
+
+
+
+/* harmony default export */ var freedmanDiaconis = (function(values, min, max) {
+  values = map.call(values, number).sort(ascending);
+  return Math.ceil((max - min) / (2 * (quantile(values, 0.75) - quantile(values, 0.25)) * Math.pow(values.length, -1 / 3)));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/threshold/scott.js
+
+
+/* harmony default export */ var scott = (function(values, min, max) {
+  return Math.ceil((max - min) / (3.5 * deviation(values) * Math.pow(values.length, -1 / 3)));
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/max.js
+/* harmony default export */ var src_max = (function(values, valueof) {
+  var n = values.length,
+      i = -1,
+      value,
+      max;
+
+  if (valueof == null) {
+    while (++i < n) { // Find the first comparable value.
+      if ((value = values[i]) != null && value >= value) {
+        max = value;
+        while (++i < n) { // Compare the remaining values.
+          if ((value = values[i]) != null && value > max) {
+            max = value;
+          }
+        }
+      }
+    }
+  }
+
+  else {
+    while (++i < n) { // Find the first comparable value.
+      if ((value = valueof(values[i], i, values)) != null && value >= value) {
+        max = value;
+        while (++i < n) { // Compare the remaining values.
+          if ((value = valueof(values[i], i, values)) != null && value > max) {
+            max = value;
+          }
+        }
+      }
+    }
+  }
+
+  return max;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/mean.js
+
+
+/* harmony default export */ var src_mean = (function(values, valueof) {
+  var n = values.length,
+      m = n,
+      i = -1,
+      value,
+      sum = 0;
+
+  if (valueof == null) {
+    while (++i < n) {
+      if (!isNaN(value = number(values[i]))) sum += value;
+      else --m;
+    }
+  }
+
+  else {
+    while (++i < n) {
+      if (!isNaN(value = number(valueof(values[i], i, values)))) sum += value;
+      else --m;
+    }
+  }
+
+  if (m) return sum / m;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/median.js
+
+
+
+
+/* harmony default export */ var median = (function(values, valueof) {
+  var n = values.length,
+      i = -1,
+      value,
+      numbers = [];
+
+  if (valueof == null) {
+    while (++i < n) {
+      if (!isNaN(value = number(values[i]))) {
+        numbers.push(value);
+      }
+    }
+  }
+
+  else {
+    while (++i < n) {
+      if (!isNaN(value = number(valueof(values[i], i, values)))) {
+        numbers.push(value);
+      }
+    }
+  }
+
+  return quantile(numbers.sort(ascending), 0.5);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/merge.js
+/* harmony default export */ var merge = (function(arrays) {
+  var n = arrays.length,
+      m,
+      i = -1,
+      j = 0,
+      merged,
+      array;
+
+  while (++i < n) j += arrays[i].length;
+  merged = new Array(j);
+
+  while (--n >= 0) {
+    array = arrays[n];
+    m = array.length;
+    while (--m >= 0) {
+      merged[--j] = array[m];
+    }
+  }
+
+  return merged;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/min.js
+/* harmony default export */ var src_min = (function(values, valueof) {
+  var n = values.length,
+      i = -1,
+      value,
+      min;
+
+  if (valueof == null) {
+    while (++i < n) { // Find the first comparable value.
+      if ((value = values[i]) != null && value >= value) {
+        min = value;
+        while (++i < n) { // Compare the remaining values.
+          if ((value = values[i]) != null && min > value) {
+            min = value;
+          }
+        }
+      }
+    }
+  }
+
+  else {
+    while (++i < n) { // Find the first comparable value.
+      if ((value = valueof(values[i], i, values)) != null && value >= value) {
+        min = value;
+        while (++i < n) { // Compare the remaining values.
+          if ((value = valueof(values[i], i, values)) != null && min > value) {
+            min = value;
+          }
+        }
+      }
+    }
+  }
+
+  return min;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/permute.js
+/* harmony default export */ var permute = (function(array, indexes) {
+  var i = indexes.length, permutes = new Array(i);
+  while (i--) permutes[i] = array[indexes[i]];
+  return permutes;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/scan.js
+
+
+/* harmony default export */ var scan = (function(values, compare) {
+  if (!(n = values.length)) return;
+  var n,
+      i = 0,
+      j = 0,
+      xi,
+      xj = values[j];
+
+  if (compare == null) compare = ascending;
+
+  while (++i < n) {
+    if (compare(xi = values[i], xj) < 0 || compare(xj, xj) !== 0) {
+      xj = xi, j = i;
+    }
+  }
+
+  if (compare(xj, xj) === 0) return j;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/shuffle.js
+/* harmony default export */ var shuffle = (function(array, i0, i1) {
+  var m = (i1 == null ? array.length : i1) - (i0 = i0 == null ? 0 : +i0),
+      t,
+      i;
+
+  while (m) {
+    i = Math.random() * m-- | 0;
+    t = array[m + i0];
+    array[m + i0] = array[i + i0];
+    array[i + i0] = t;
+  }
+
+  return array;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/sum.js
+/* harmony default export */ var src_sum = (function(values, valueof) {
+  var n = values.length,
+      i = -1,
+      value,
+      sum = 0;
+
+  if (valueof == null) {
+    while (++i < n) {
+      if (value = +values[i]) sum += value; // Note: zero and null are equivalent.
+    }
+  }
+
+  else {
+    while (++i < n) {
+      if (value = +valueof(values[i], i, values)) sum += value;
+    }
+  }
+
+  return sum;
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/transpose.js
+
+
+/* harmony default export */ var src_transpose = (function(matrix) {
+  if (!(n = matrix.length)) return [];
+  for (var i = -1, m = src_min(matrix, transpose_length), transpose = new Array(m); ++i < m;) {
+    for (var j = -1, n, row = transpose[i] = new Array(n); ++j < n;) {
+      row[j] = matrix[j][i];
+    }
+  }
+  return transpose;
+});
+
+function transpose_length(d) {
+  return d.length;
+}
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/zip.js
+
+
+/* harmony default export */ var zip = (function() {
+  return src_transpose(arguments);
+});
+
+// CONCATENATED MODULE: ./node_modules/d3-array/src/index.js
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ 3:
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -18012,1027 +18753,7 @@ try {
 
 /***/ }),
 
-/***/ 4:
-/***/ (function(module, exports, __webpack_require__) {
-
-var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! @preserve
- * numeral.js
- * version : 2.0.6
- * author : Adam Draper
- * license : MIT
- * http://adamwdraper.github.com/Numeral-js/
- */
-
-(function (global, factory) {
-    if (true) {
-        !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
-				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
-				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
-				__WEBPACK_AMD_DEFINE_FACTORY__),
-				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-    } else {}
-}(this, function () {
-    /************************************
-        Variables
-    ************************************/
-
-    var numeral,
-        _,
-        VERSION = '2.0.6',
-        formats = {},
-        locales = {},
-        defaults = {
-            currentLocale: 'en',
-            zeroFormat: null,
-            nullFormat: null,
-            defaultFormat: '0,0',
-            scalePercentBy100: true
-        },
-        options = {
-            currentLocale: defaults.currentLocale,
-            zeroFormat: defaults.zeroFormat,
-            nullFormat: defaults.nullFormat,
-            defaultFormat: defaults.defaultFormat,
-            scalePercentBy100: defaults.scalePercentBy100
-        };
-
-
-    /************************************
-        Constructors
-    ************************************/
-
-    // Numeral prototype object
-    function Numeral(input, number) {
-        this._input = input;
-
-        this._value = number;
-    }
-
-    numeral = function(input) {
-        var value,
-            kind,
-            unformatFunction,
-            regexp;
-
-        if (numeral.isNumeral(input)) {
-            value = input.value();
-        } else if (input === 0 || typeof input === 'undefined') {
-            value = 0;
-        } else if (input === null || _.isNaN(input)) {
-            value = null;
-        } else if (typeof input === 'string') {
-            if (options.zeroFormat && input === options.zeroFormat) {
-                value = 0;
-            } else if (options.nullFormat && input === options.nullFormat || !input.replace(/[^0-9]+/g, '').length) {
-                value = null;
-            } else {
-                for (kind in formats) {
-                    regexp = typeof formats[kind].regexps.unformat === 'function' ? formats[kind].regexps.unformat() : formats[kind].regexps.unformat;
-
-                    if (regexp && input.match(regexp)) {
-                        unformatFunction = formats[kind].unformat;
-
-                        break;
-                    }
-                }
-
-                unformatFunction = unformatFunction || numeral._.stringToNumber;
-
-                value = unformatFunction(input);
-            }
-        } else {
-            value = Number(input)|| null;
-        }
-
-        return new Numeral(input, value);
-    };
-
-    // version number
-    numeral.version = VERSION;
-
-    // compare numeral object
-    numeral.isNumeral = function(obj) {
-        return obj instanceof Numeral;
-    };
-
-    // helper functions
-    numeral._ = _ = {
-        // formats numbers separators, decimals places, signs, abbreviations
-        numberToFormat: function(value, format, roundingFunction) {
-            var locale = locales[numeral.options.currentLocale],
-                negP = false,
-                optDec = false,
-                leadingCount = 0,
-                abbr = '',
-                trillion = 1000000000000,
-                billion = 1000000000,
-                million = 1000000,
-                thousand = 1000,
-                decimal = '',
-                neg = false,
-                abbrForce, // force abbreviation
-                abs,
-                min,
-                max,
-                power,
-                int,
-                precision,
-                signed,
-                thousands,
-                output;
-
-            // make sure we never format a null value
-            value = value || 0;
-
-            abs = Math.abs(value);
-
-            // see if we should use parentheses for negative number or if we should prefix with a sign
-            // if both are present we default to parentheses
-            if (numeral._.includes(format, '(')) {
-                negP = true;
-                format = format.replace(/[\(|\)]/g, '');
-            } else if (numeral._.includes(format, '+') || numeral._.includes(format, '-')) {
-                signed = numeral._.includes(format, '+') ? format.indexOf('+') : value < 0 ? format.indexOf('-') : -1;
-                format = format.replace(/[\+|\-]/g, '');
-            }
-
-            // see if abbreviation is wanted
-            if (numeral._.includes(format, 'a')) {
-                abbrForce = format.match(/a(k|m|b|t)?/);
-
-                abbrForce = abbrForce ? abbrForce[1] : false;
-
-                // check for space before abbreviation
-                if (numeral._.includes(format, ' a')) {
-                    abbr = ' ';
-                }
-
-                format = format.replace(new RegExp(abbr + 'a[kmbt]?'), '');
-
-                if (abs >= trillion && !abbrForce || abbrForce === 't') {
-                    // trillion
-                    abbr += locale.abbreviations.trillion;
-                    value = value / trillion;
-                } else if (abs < trillion && abs >= billion && !abbrForce || abbrForce === 'b') {
-                    // billion
-                    abbr += locale.abbreviations.billion;
-                    value = value / billion;
-                } else if (abs < billion && abs >= million && !abbrForce || abbrForce === 'm') {
-                    // million
-                    abbr += locale.abbreviations.million;
-                    value = value / million;
-                } else if (abs < million && abs >= thousand && !abbrForce || abbrForce === 'k') {
-                    // thousand
-                    abbr += locale.abbreviations.thousand;
-                    value = value / thousand;
-                }
-            }
-
-            // check for optional decimals
-            if (numeral._.includes(format, '[.]')) {
-                optDec = true;
-                format = format.replace('[.]', '.');
-            }
-
-            // break number and format
-            int = value.toString().split('.')[0];
-            precision = format.split('.')[1];
-            thousands = format.indexOf(',');
-            leadingCount = (format.split('.')[0].split(',')[0].match(/0/g) || []).length;
-
-            if (precision) {
-                if (numeral._.includes(precision, '[')) {
-                    precision = precision.replace(']', '');
-                    precision = precision.split('[');
-                    decimal = numeral._.toFixed(value, (precision[0].length + precision[1].length), roundingFunction, precision[1].length);
-                } else {
-                    decimal = numeral._.toFixed(value, precision.length, roundingFunction);
-                }
-
-                int = decimal.split('.')[0];
-
-                if (numeral._.includes(decimal, '.')) {
-                    decimal = locale.delimiters.decimal + decimal.split('.')[1];
-                } else {
-                    decimal = '';
-                }
-
-                if (optDec && Number(decimal.slice(1)) === 0) {
-                    decimal = '';
-                }
-            } else {
-                int = numeral._.toFixed(value, 0, roundingFunction);
-            }
-
-            // check abbreviation again after rounding
-            if (abbr && !abbrForce && Number(int) >= 1000 && abbr !== locale.abbreviations.trillion) {
-                int = String(Number(int) / 1000);
-
-                switch (abbr) {
-                    case locale.abbreviations.thousand:
-                        abbr = locale.abbreviations.million;
-                        break;
-                    case locale.abbreviations.million:
-                        abbr = locale.abbreviations.billion;
-                        break;
-                    case locale.abbreviations.billion:
-                        abbr = locale.abbreviations.trillion;
-                        break;
-                }
-            }
-
-
-            // format number
-            if (numeral._.includes(int, '-')) {
-                int = int.slice(1);
-                neg = true;
-            }
-
-            if (int.length < leadingCount) {
-                for (var i = leadingCount - int.length; i > 0; i--) {
-                    int = '0' + int;
-                }
-            }
-
-            if (thousands > -1) {
-                int = int.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + locale.delimiters.thousands);
-            }
-
-            if (format.indexOf('.') === 0) {
-                int = '';
-            }
-
-            output = int + decimal + (abbr ? abbr : '');
-
-            if (negP) {
-                output = (negP && neg ? '(' : '') + output + (negP && neg ? ')' : '');
-            } else {
-                if (signed >= 0) {
-                    output = signed === 0 ? (neg ? '-' : '+') + output : output + (neg ? '-' : '+');
-                } else if (neg) {
-                    output = '-' + output;
-                }
-            }
-
-            return output;
-        },
-        // unformats numbers separators, decimals places, signs, abbreviations
-        stringToNumber: function(string) {
-            var locale = locales[options.currentLocale],
-                stringOriginal = string,
-                abbreviations = {
-                    thousand: 3,
-                    million: 6,
-                    billion: 9,
-                    trillion: 12
-                },
-                abbreviation,
-                value,
-                i,
-                regexp;
-
-            if (options.zeroFormat && string === options.zeroFormat) {
-                value = 0;
-            } else if (options.nullFormat && string === options.nullFormat || !string.replace(/[^0-9]+/g, '').length) {
-                value = null;
-            } else {
-                value = 1;
-
-                if (locale.delimiters.decimal !== '.') {
-                    string = string.replace(/\./g, '').replace(locale.delimiters.decimal, '.');
-                }
-
-                for (abbreviation in abbreviations) {
-                    regexp = new RegExp('[^a-zA-Z]' + locale.abbreviations[abbreviation] + '(?:\\)|(\\' + locale.currency.symbol + ')?(?:\\))?)?$');
-
-                    if (stringOriginal.match(regexp)) {
-                        value *= Math.pow(10, abbreviations[abbreviation]);
-                        break;
-                    }
-                }
-
-                // check for negative number
-                value *= (string.split('-').length + Math.min(string.split('(').length - 1, string.split(')').length - 1)) % 2 ? 1 : -1;
-
-                // remove non numbers
-                string = string.replace(/[^0-9\.]+/g, '');
-
-                value *= Number(string);
-            }
-
-            return value;
-        },
-        isNaN: function(value) {
-            return typeof value === 'number' && isNaN(value);
-        },
-        includes: function(string, search) {
-            return string.indexOf(search) !== -1;
-        },
-        insert: function(string, subString, start) {
-            return string.slice(0, start) + subString + string.slice(start);
-        },
-        reduce: function(array, callback /*, initialValue*/) {
-            if (this === null) {
-                throw new TypeError('Array.prototype.reduce called on null or undefined');
-            }
-
-            if (typeof callback !== 'function') {
-                throw new TypeError(callback + ' is not a function');
-            }
-
-            var t = Object(array),
-                len = t.length >>> 0,
-                k = 0,
-                value;
-
-            if (arguments.length === 3) {
-                value = arguments[2];
-            } else {
-                while (k < len && !(k in t)) {
-                    k++;
-                }
-
-                if (k >= len) {
-                    throw new TypeError('Reduce of empty array with no initial value');
-                }
-
-                value = t[k++];
-            }
-            for (; k < len; k++) {
-                if (k in t) {
-                    value = callback(value, t[k], k, t);
-                }
-            }
-            return value;
-        },
-        /**
-         * Computes the multiplier necessary to make x >= 1,
-         * effectively eliminating miscalculations caused by
-         * finite precision.
-         */
-        multiplier: function (x) {
-            var parts = x.toString().split('.');
-
-            return parts.length < 2 ? 1 : Math.pow(10, parts[1].length);
-        },
-        /**
-         * Given a variable number of arguments, returns the maximum
-         * multiplier that must be used to normalize an operation involving
-         * all of them.
-         */
-        correctionFactor: function () {
-            var args = Array.prototype.slice.call(arguments);
-
-            return args.reduce(function(accum, next) {
-                var mn = _.multiplier(next);
-                return accum > mn ? accum : mn;
-            }, 1);
-        },
-        /**
-         * Implementation of toFixed() that treats floats more like decimals
-         *
-         * Fixes binary rounding issues (eg. (0.615).toFixed(2) === '0.61') that present
-         * problems for accounting- and finance-related software.
-         */
-        toFixed: function(value, maxDecimals, roundingFunction, optionals) {
-            var splitValue = value.toString().split('.'),
-                minDecimals = maxDecimals - (optionals || 0),
-                boundedPrecision,
-                optionalsRegExp,
-                power,
-                output;
-
-            // Use the smallest precision value possible to avoid errors from floating point representation
-            if (splitValue.length === 2) {
-              boundedPrecision = Math.min(Math.max(splitValue[1].length, minDecimals), maxDecimals);
-            } else {
-              boundedPrecision = minDecimals;
-            }
-
-            power = Math.pow(10, boundedPrecision);
-
-            // Multiply up by precision, round accurately, then divide and use native toFixed():
-            output = (roundingFunction(value + 'e+' + boundedPrecision) / power).toFixed(boundedPrecision);
-
-            if (optionals > maxDecimals - boundedPrecision) {
-                optionalsRegExp = new RegExp('\\.?0{1,' + (optionals - (maxDecimals - boundedPrecision)) + '}$');
-                output = output.replace(optionalsRegExp, '');
-            }
-
-            return output;
-        }
-    };
-
-    // avaliable options
-    numeral.options = options;
-
-    // avaliable formats
-    numeral.formats = formats;
-
-    // avaliable formats
-    numeral.locales = locales;
-
-    // This function sets the current locale.  If
-    // no arguments are passed in, it will simply return the current global
-    // locale key.
-    numeral.locale = function(key) {
-        if (key) {
-            options.currentLocale = key.toLowerCase();
-        }
-
-        return options.currentLocale;
-    };
-
-    // This function provides access to the loaded locale data.  If
-    // no arguments are passed in, it will simply return the current
-    // global locale object.
-    numeral.localeData = function(key) {
-        if (!key) {
-            return locales[options.currentLocale];
-        }
-
-        key = key.toLowerCase();
-
-        if (!locales[key]) {
-            throw new Error('Unknown locale : ' + key);
-        }
-
-        return locales[key];
-    };
-
-    numeral.reset = function() {
-        for (var property in defaults) {
-            options[property] = defaults[property];
-        }
-    };
-
-    numeral.zeroFormat = function(format) {
-        options.zeroFormat = typeof(format) === 'string' ? format : null;
-    };
-
-    numeral.nullFormat = function (format) {
-        options.nullFormat = typeof(format) === 'string' ? format : null;
-    };
-
-    numeral.defaultFormat = function(format) {
-        options.defaultFormat = typeof(format) === 'string' ? format : '0.0';
-    };
-
-    numeral.register = function(type, name, format) {
-        name = name.toLowerCase();
-
-        if (this[type + 's'][name]) {
-            throw new TypeError(name + ' ' + type + ' already registered.');
-        }
-
-        this[type + 's'][name] = format;
-
-        return format;
-    };
-
-
-    numeral.validate = function(val, culture) {
-        var _decimalSep,
-            _thousandSep,
-            _currSymbol,
-            _valArray,
-            _abbrObj,
-            _thousandRegEx,
-            localeData,
-            temp;
-
-        //coerce val to string
-        if (typeof val !== 'string') {
-            val += '';
-
-            if (console.warn) {
-                console.warn('Numeral.js: Value is not string. It has been co-erced to: ', val);
-            }
-        }
-
-        //trim whitespaces from either sides
-        val = val.trim();
-
-        //if val is just digits return true
-        if (!!val.match(/^\d+$/)) {
-            return true;
-        }
-
-        //if val is empty return false
-        if (val === '') {
-            return false;
-        }
-
-        //get the decimal and thousands separator from numeral.localeData
-        try {
-            //check if the culture is understood by numeral. if not, default it to current locale
-            localeData = numeral.localeData(culture);
-        } catch (e) {
-            localeData = numeral.localeData(numeral.locale());
-        }
-
-        //setup the delimiters and currency symbol based on culture/locale
-        _currSymbol = localeData.currency.symbol;
-        _abbrObj = localeData.abbreviations;
-        _decimalSep = localeData.delimiters.decimal;
-        if (localeData.delimiters.thousands === '.') {
-            _thousandSep = '\\.';
-        } else {
-            _thousandSep = localeData.delimiters.thousands;
-        }
-
-        // validating currency symbol
-        temp = val.match(/^[^\d]+/);
-        if (temp !== null) {
-            val = val.substr(1);
-            if (temp[0] !== _currSymbol) {
-                return false;
-            }
-        }
-
-        //validating abbreviation symbol
-        temp = val.match(/[^\d]+$/);
-        if (temp !== null) {
-            val = val.slice(0, -1);
-            if (temp[0] !== _abbrObj.thousand && temp[0] !== _abbrObj.million && temp[0] !== _abbrObj.billion && temp[0] !== _abbrObj.trillion) {
-                return false;
-            }
-        }
-
-        _thousandRegEx = new RegExp(_thousandSep + '{2}');
-
-        if (!val.match(/[^\d.,]/g)) {
-            _valArray = val.split(_decimalSep);
-            if (_valArray.length > 2) {
-                return false;
-            } else {
-                if (_valArray.length < 2) {
-                    return ( !! _valArray[0].match(/^\d+.*\d$/) && !_valArray[0].match(_thousandRegEx));
-                } else {
-                    if (_valArray[0].length === 1) {
-                        return ( !! _valArray[0].match(/^\d+$/) && !_valArray[0].match(_thousandRegEx) && !! _valArray[1].match(/^\d+$/));
-                    } else {
-                        return ( !! _valArray[0].match(/^\d+.*\d$/) && !_valArray[0].match(_thousandRegEx) && !! _valArray[1].match(/^\d+$/));
-                    }
-                }
-            }
-        }
-
-        return false;
-    };
-
-
-    /************************************
-        Numeral Prototype
-    ************************************/
-
-    numeral.fn = Numeral.prototype = {
-        clone: function() {
-            return numeral(this);
-        },
-        format: function(inputString, roundingFunction) {
-            var value = this._value,
-                format = inputString || options.defaultFormat,
-                kind,
-                output,
-                formatFunction;
-
-            // make sure we have a roundingFunction
-            roundingFunction = roundingFunction || Math.round;
-
-            // format based on value
-            if (value === 0 && options.zeroFormat !== null) {
-                output = options.zeroFormat;
-            } else if (value === null && options.nullFormat !== null) {
-                output = options.nullFormat;
-            } else {
-                for (kind in formats) {
-                    if (format.match(formats[kind].regexps.format)) {
-                        formatFunction = formats[kind].format;
-
-                        break;
-                    }
-                }
-
-                formatFunction = formatFunction || numeral._.numberToFormat;
-
-                output = formatFunction(value, format, roundingFunction);
-            }
-
-            return output;
-        },
-        value: function() {
-            return this._value;
-        },
-        input: function() {
-            return this._input;
-        },
-        set: function(value) {
-            this._value = Number(value);
-
-            return this;
-        },
-        add: function(value) {
-            var corrFactor = _.correctionFactor.call(null, this._value, value);
-
-            function cback(accum, curr, currI, O) {
-                return accum + Math.round(corrFactor * curr);
-            }
-
-            this._value = _.reduce([this._value, value], cback, 0) / corrFactor;
-
-            return this;
-        },
-        subtract: function(value) {
-            var corrFactor = _.correctionFactor.call(null, this._value, value);
-
-            function cback(accum, curr, currI, O) {
-                return accum - Math.round(corrFactor * curr);
-            }
-
-            this._value = _.reduce([value], cback, Math.round(this._value * corrFactor)) / corrFactor;
-
-            return this;
-        },
-        multiply: function(value) {
-            function cback(accum, curr, currI, O) {
-                var corrFactor = _.correctionFactor(accum, curr);
-                return Math.round(accum * corrFactor) * Math.round(curr * corrFactor) / Math.round(corrFactor * corrFactor);
-            }
-
-            this._value = _.reduce([this._value, value], cback, 1);
-
-            return this;
-        },
-        divide: function(value) {
-            function cback(accum, curr, currI, O) {
-                var corrFactor = _.correctionFactor(accum, curr);
-                return Math.round(accum * corrFactor) / Math.round(curr * corrFactor);
-            }
-
-            this._value = _.reduce([this._value, value], cback);
-
-            return this;
-        },
-        difference: function(value) {
-            return Math.abs(numeral(this._value).subtract(value).value());
-        }
-    };
-
-    /************************************
-        Default Locale && Format
-    ************************************/
-
-    numeral.register('locale', 'en', {
-        delimiters: {
-            thousands: ',',
-            decimal: '.'
-        },
-        abbreviations: {
-            thousand: 'k',
-            million: 'm',
-            billion: 'b',
-            trillion: 't'
-        },
-        ordinal: function(number) {
-            var b = number % 10;
-            return (~~(number % 100 / 10) === 1) ? 'th' :
-                (b === 1) ? 'st' :
-                (b === 2) ? 'nd' :
-                (b === 3) ? 'rd' : 'th';
-        },
-        currency: {
-            symbol: '$'
-        }
-    });
-
-    
-
-(function() {
-        numeral.register('format', 'bps', {
-            regexps: {
-                format: /(BPS)/,
-                unformat: /(BPS)/
-            },
-            format: function(value, format, roundingFunction) {
-                var space = numeral._.includes(format, ' BPS') ? ' ' : '',
-                    output;
-
-                value = value * 10000;
-
-                // check for space before BPS
-                format = format.replace(/\s?BPS/, '');
-
-                output = numeral._.numberToFormat(value, format, roundingFunction);
-
-                if (numeral._.includes(output, ')')) {
-                    output = output.split('');
-
-                    output.splice(-1, 0, space + 'BPS');
-
-                    output = output.join('');
-                } else {
-                    output = output + space + 'BPS';
-                }
-
-                return output;
-            },
-            unformat: function(string) {
-                return +(numeral._.stringToNumber(string) * 0.0001).toFixed(15);
-            }
-        });
-})();
-
-
-(function() {
-        var decimal = {
-            base: 1000,
-            suffixes: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
-        },
-        binary = {
-            base: 1024,
-            suffixes: ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
-        };
-
-    var allSuffixes =  decimal.suffixes.concat(binary.suffixes.filter(function (item) {
-            return decimal.suffixes.indexOf(item) < 0;
-        }));
-        var unformatRegex = allSuffixes.join('|');
-        // Allow support for BPS (http://www.investopedia.com/terms/b/basispoint.asp)
-        unformatRegex = '(' + unformatRegex.replace('B', 'B(?!PS)') + ')';
-
-    numeral.register('format', 'bytes', {
-        regexps: {
-            format: /([0\s]i?b)/,
-            unformat: new RegExp(unformatRegex)
-        },
-        format: function(value, format, roundingFunction) {
-            var output,
-                bytes = numeral._.includes(format, 'ib') ? binary : decimal,
-                suffix = numeral._.includes(format, ' b') || numeral._.includes(format, ' ib') ? ' ' : '',
-                power,
-                min,
-                max;
-
-            // check for space before
-            format = format.replace(/\s?i?b/, '');
-
-            for (power = 0; power <= bytes.suffixes.length; power++) {
-                min = Math.pow(bytes.base, power);
-                max = Math.pow(bytes.base, power + 1);
-
-                if (value === null || value === 0 || value >= min && value < max) {
-                    suffix += bytes.suffixes[power];
-
-                    if (min > 0) {
-                        value = value / min;
-                    }
-
-                    break;
-                }
-            }
-
-            output = numeral._.numberToFormat(value, format, roundingFunction);
-
-            return output + suffix;
-        },
-        unformat: function(string) {
-            var value = numeral._.stringToNumber(string),
-                power,
-                bytesMultiplier;
-
-            if (value) {
-                for (power = decimal.suffixes.length - 1; power >= 0; power--) {
-                    if (numeral._.includes(string, decimal.suffixes[power])) {
-                        bytesMultiplier = Math.pow(decimal.base, power);
-
-                        break;
-                    }
-
-                    if (numeral._.includes(string, binary.suffixes[power])) {
-                        bytesMultiplier = Math.pow(binary.base, power);
-
-                        break;
-                    }
-                }
-
-                value *= (bytesMultiplier || 1);
-            }
-
-            return value;
-        }
-    });
-})();
-
-
-(function() {
-        numeral.register('format', 'currency', {
-        regexps: {
-            format: /(\$)/
-        },
-        format: function(value, format, roundingFunction) {
-            var locale = numeral.locales[numeral.options.currentLocale],
-                symbols = {
-                    before: format.match(/^([\+|\-|\(|\s|\$]*)/)[0],
-                    after: format.match(/([\+|\-|\)|\s|\$]*)$/)[0]
-                },
-                output,
-                symbol,
-                i;
-
-            // strip format of spaces and $
-            format = format.replace(/\s?\$\s?/, '');
-
-            // format the number
-            output = numeral._.numberToFormat(value, format, roundingFunction);
-
-            // update the before and after based on value
-            if (value >= 0) {
-                symbols.before = symbols.before.replace(/[\-\(]/, '');
-                symbols.after = symbols.after.replace(/[\-\)]/, '');
-            } else if (value < 0 && (!numeral._.includes(symbols.before, '-') && !numeral._.includes(symbols.before, '('))) {
-                symbols.before = '-' + symbols.before;
-            }
-
-            // loop through each before symbol
-            for (i = 0; i < symbols.before.length; i++) {
-                symbol = symbols.before[i];
-
-                switch (symbol) {
-                    case '$':
-                        output = numeral._.insert(output, locale.currency.symbol, i);
-                        break;
-                    case ' ':
-                        output = numeral._.insert(output, ' ', i + locale.currency.symbol.length - 1);
-                        break;
-                }
-            }
-
-            // loop through each after symbol
-            for (i = symbols.after.length - 1; i >= 0; i--) {
-                symbol = symbols.after[i];
-
-                switch (symbol) {
-                    case '$':
-                        output = i === symbols.after.length - 1 ? output + locale.currency.symbol : numeral._.insert(output, locale.currency.symbol, -(symbols.after.length - (1 + i)));
-                        break;
-                    case ' ':
-                        output = i === symbols.after.length - 1 ? output + ' ' : numeral._.insert(output, ' ', -(symbols.after.length - (1 + i) + locale.currency.symbol.length - 1));
-                        break;
-                }
-            }
-
-
-            return output;
-        }
-    });
-})();
-
-
-(function() {
-        numeral.register('format', 'exponential', {
-        regexps: {
-            format: /(e\+|e-)/,
-            unformat: /(e\+|e-)/
-        },
-        format: function(value, format, roundingFunction) {
-            var output,
-                exponential = typeof value === 'number' && !numeral._.isNaN(value) ? value.toExponential() : '0e+0',
-                parts = exponential.split('e');
-
-            format = format.replace(/e[\+|\-]{1}0/, '');
-
-            output = numeral._.numberToFormat(Number(parts[0]), format, roundingFunction);
-
-            return output + 'e' + parts[1];
-        },
-        unformat: function(string) {
-            var parts = numeral._.includes(string, 'e+') ? string.split('e+') : string.split('e-'),
-                value = Number(parts[0]),
-                power = Number(parts[1]);
-
-            power = numeral._.includes(string, 'e-') ? power *= -1 : power;
-
-            function cback(accum, curr, currI, O) {
-                var corrFactor = numeral._.correctionFactor(accum, curr),
-                    num = (accum * corrFactor) * (curr * corrFactor) / (corrFactor * corrFactor);
-                return num;
-            }
-
-            return numeral._.reduce([value, Math.pow(10, power)], cback, 1);
-        }
-    });
-})();
-
-
-(function() {
-        numeral.register('format', 'ordinal', {
-        regexps: {
-            format: /(o)/
-        },
-        format: function(value, format, roundingFunction) {
-            var locale = numeral.locales[numeral.options.currentLocale],
-                output,
-                ordinal = numeral._.includes(format, ' o') ? ' ' : '';
-
-            // check for space before
-            format = format.replace(/\s?o/, '');
-
-            ordinal += locale.ordinal(value);
-
-            output = numeral._.numberToFormat(value, format, roundingFunction);
-
-            return output + ordinal;
-        }
-    });
-})();
-
-
-(function() {
-        numeral.register('format', 'percentage', {
-        regexps: {
-            format: /(%)/,
-            unformat: /(%)/
-        },
-        format: function(value, format, roundingFunction) {
-            var space = numeral._.includes(format, ' %') ? ' ' : '',
-                output;
-
-            if (numeral.options.scalePercentBy100) {
-                value = value * 100;
-            }
-
-            // check for space before %
-            format = format.replace(/\s?\%/, '');
-
-            output = numeral._.numberToFormat(value, format, roundingFunction);
-
-            if (numeral._.includes(output, ')')) {
-                output = output.split('');
-
-                output.splice(-1, 0, space + '%');
-
-                output = output.join('');
-            } else {
-                output = output + space + '%';
-            }
-
-            return output;
-        },
-        unformat: function(string) {
-            var number = numeral._.stringToNumber(string);
-            if (numeral.options.scalePercentBy100) {
-                return number * 0.01;
-            }
-            return number;
-        }
-    });
-})();
-
-
-(function() {
-        numeral.register('format', 'time', {
-        regexps: {
-            format: /(:)/,
-            unformat: /(:)/
-        },
-        format: function(value, format, roundingFunction) {
-            var hours = Math.floor(value / 60 / 60),
-                minutes = Math.floor((value - (hours * 60 * 60)) / 60),
-                seconds = Math.round(value - (hours * 60 * 60) - (minutes * 60));
-
-            return hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
-        },
-        unformat: function(string) {
-            var timeArray = string.split(':'),
-                seconds = 0;
-
-            // turn hours and minutes into seconds and add them all up
-            if (timeArray.length === 3) {
-                // hours
-                seconds = seconds + (Number(timeArray[0]) * 60 * 60);
-                // minutes
-                seconds = seconds + (Number(timeArray[1]) * 60);
-                // seconds
-                seconds = seconds + Number(timeArray[2]);
-            } else if (timeArray.length === 2) {
-                // minutes
-                seconds = seconds + (Number(timeArray[0]) * 60);
-                // seconds
-                seconds = seconds + Number(timeArray[1]);
-            }
-            return Number(seconds);
-        }
-    });
-})();
-
-return numeral;
-}));
-
-
-/***/ }),
-
-/***/ 44:
+/***/ 45:
 /***/ (function(module, exports) {
 
 var g;
@@ -19059,7 +18780,7 @@ module.exports = g;
 
 /***/ }),
 
-/***/ 45:
+/***/ 46:
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -19088,10 +18809,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ 46:
+/***/ 47:
 /***/ (function(module, exports, __webpack_require__) {
 
-var tarjan = __webpack_require__(96);
+var tarjan = __webpack_require__(97);
 
 module.exports = function findCircuits(edges, cb) {
     var circuits = []; // Output
@@ -19154,7 +18875,7 @@ module.exports = function findCircuits(edges, cb) {
     function output(start, stack) {
         var cycle = [].concat(stack).concat(start);
         if(cb) {
-            cb(circuit);
+            cb(cycle);
         } else {
             circuits.push(cycle);
         }
@@ -19163,7 +18884,7 @@ module.exports = function findCircuits(edges, cb) {
     function subgraph(minId) {
       // Remove edges with indice smaller than minId
         for(var i = 0; i < edges.length; i++) {
-            if(i < minId) edges[i] = [];
+            if(i < minId || !edges[i]) edges[i] = [];
             edges[i] = edges[i].filter(function(i) {
                 return i >= minId;
             });
@@ -19251,7 +18972,7 @@ module.exports = function findCircuits(edges, cb) {
 
 /***/ }),
 
-/***/ 47:
+/***/ 48:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -19261,7 +18982,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _pathArrows = __webpack_require__(97);
+var _pathArrows = __webpack_require__(98);
 
 Object.defineProperty(exports, "pathArrows", {
   enumerable: true,
@@ -19274,7 +18995,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 /***/ }),
 
-/***/ 48:
+/***/ 49:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -19289,12 +19010,12 @@ var lodash = __webpack_require__(0);
 var lodash_default = /*#__PURE__*/__webpack_require__.n(lodash);
 
 // EXTERNAL MODULE: ./node_modules/numeral/numeral.js
-var numeral = __webpack_require__(4);
+var numeral = __webpack_require__(5);
 var numeral_default = /*#__PURE__*/__webpack_require__.n(numeral);
 
 // CONCATENATED MODULE: ./node_modules/d3/dist/package.js
 var package_name = "d3";
-var version = "6.2.0";
+var version = "6.7.0";
 var description = "Data-Driven Documents";
 var keywords = ["dom","visualization","svg","animation","canvas"];
 var homepage = "https://d3js.org";
@@ -22485,7 +22206,7 @@ var MODE_DRAG = {name: "drag"},
     MODE_HANDLE = {name: "handle"},
     MODE_CENTER = {name: "center"};
 
-const {abs, max: brush_max, min: brush_min} = Math;
+const {abs, max, min} = Math;
 
 function number1(e) {
   return [+e[0], +e[1]];
@@ -22838,11 +22559,11 @@ function brush_brush(dim) {
       if (selection) moving = true;
       const pts = [points[0], points[1] || points[0]];
       state.selection = selection = [[
-          w0 = dim === Y ? W : brush_min(pts[0][0], pts[1][0]),
-          n0 = dim === X ? N : brush_min(pts[0][1], pts[1][1])
+          w0 = dim === Y ? W : min(pts[0][0], pts[1][0]),
+          n0 = dim === X ? N : min(pts[0][1], pts[1][1])
         ], [
-          e0 = dim === Y ? E : brush_max(pts[0][0], pts[1][0]),
-          s0 = dim === X ? S : brush_max(pts[0][1], pts[1][1])
+          e0 = dim === Y ? E : max(pts[0][0], pts[1][0]),
+          s0 = dim === X ? S : max(pts[0][1], pts[1][1])
         ]];
       if (points.length > 1) move();
     } else {
@@ -22912,25 +22633,25 @@ function brush_brush(dim) {
       switch (mode) {
         case MODE_SPACE:
         case MODE_DRAG: {
-          if (signX) dx = brush_max(W - w0, brush_min(E - e0, dx)), w1 = w0 + dx, e1 = e0 + dx;
-          if (signY) dy = brush_max(N - n0, brush_min(S - s0, dy)), n1 = n0 + dy, s1 = s0 + dy;
+          if (signX) dx = max(W - w0, min(E - e0, dx)), w1 = w0 + dx, e1 = e0 + dx;
+          if (signY) dy = max(N - n0, min(S - s0, dy)), n1 = n0 + dy, s1 = s0 + dy;
           break;
         }
         case MODE_HANDLE: {
           if (points[1]) {
-            if (signX) w1 = brush_max(W, brush_min(E, points[0][0])), e1 = brush_max(W, brush_min(E, points[1][0])), signX = 1;
-            if (signY) n1 = brush_max(N, brush_min(S, points[0][1])), s1 = brush_max(N, brush_min(S, points[1][1])), signY = 1;
+            if (signX) w1 = max(W, min(E, points[0][0])), e1 = max(W, min(E, points[1][0])), signX = 1;
+            if (signY) n1 = max(N, min(S, points[0][1])), s1 = max(N, min(S, points[1][1])), signY = 1;
           } else {
-            if (signX < 0) dx = brush_max(W - w0, brush_min(E - w0, dx)), w1 = w0 + dx, e1 = e0;
-            else if (signX > 0) dx = brush_max(W - e0, brush_min(E - e0, dx)), w1 = w0, e1 = e0 + dx;
-            if (signY < 0) dy = brush_max(N - n0, brush_min(S - n0, dy)), n1 = n0 + dy, s1 = s0;
-            else if (signY > 0) dy = brush_max(N - s0, brush_min(S - s0, dy)), n1 = n0, s1 = s0 + dy;
+            if (signX < 0) dx = max(W - w0, min(E - w0, dx)), w1 = w0 + dx, e1 = e0;
+            else if (signX > 0) dx = max(W - e0, min(E - e0, dx)), w1 = w0, e1 = e0 + dx;
+            if (signY < 0) dy = max(N - n0, min(S - n0, dy)), n1 = n0 + dy, s1 = s0;
+            else if (signY > 0) dy = max(N - s0, min(S - s0, dy)), n1 = n0, s1 = s0 + dy;
           }
           break;
         }
         case MODE_CENTER: {
-          if (signX) w1 = brush_max(W, brush_min(E, w0 - dx * signX)), e1 = brush_max(W, brush_min(E, e0 + dx * signX));
-          if (signY) n1 = brush_max(N, brush_min(S, n0 - dy * signY)), s1 = brush_max(N, brush_min(S, s0 + dy * signY));
+          if (signX) w1 = max(W, min(E, w0 - dx * signX)), e1 = max(W, min(E, e0 + dx * signX));
+          if (signY) n1 = max(N, min(S, n0 - dy * signY)), s1 = max(N, min(S, s0 + dy * signY));
           break;
         }
       }
@@ -23932,662 +23653,15 @@ function defaultConstrain(transform, extent, translateExtent) {
 
 
 
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/ascending.js
-/* harmony default export */ var src_ascending = (function(a, b) {
-  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/bisector.js
-
-
-/* harmony default export */ var bisector = (function(compare) {
-  if (compare.length === 1) compare = ascendingComparator(compare);
-  return {
-    left: function(a, x, lo, hi) {
-      if (lo == null) lo = 0;
-      if (hi == null) hi = a.length;
-      while (lo < hi) {
-        var mid = lo + hi >>> 1;
-        if (compare(a[mid], x) < 0) lo = mid + 1;
-        else hi = mid;
-      }
-      return lo;
-    },
-    right: function(a, x, lo, hi) {
-      if (lo == null) lo = 0;
-      if (hi == null) hi = a.length;
-      while (lo < hi) {
-        var mid = lo + hi >>> 1;
-        if (compare(a[mid], x) > 0) hi = mid;
-        else lo = mid + 1;
-      }
-      return lo;
-    }
-  };
-});
-
-function ascendingComparator(f) {
-  return function(d, x) {
-    return src_ascending(f(d), x);
-  };
-}
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/bisect.js
-
-
-
-var ascendingBisect = bisector(src_ascending);
-var bisectRight = ascendingBisect.right;
-var bisectLeft = ascendingBisect.left;
-/* harmony default export */ var bisect = (bisectRight);
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/pairs.js
-/* harmony default export */ var pairs = (function(array, f) {
-  if (f == null) f = pair;
-  var i = 0, n = array.length - 1, p = array[0], pairs = new Array(n < 0 ? 0 : n);
-  while (i < n) pairs[i] = f(p, p = array[++i]);
-  return pairs;
-});
-
-function pair(a, b) {
-  return [a, b];
-}
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/cross.js
-
-
-/* harmony default export */ var cross = (function(values0, values1, reduce) {
-  var n0 = values0.length,
-      n1 = values1.length,
-      values = new Array(n0 * n1),
-      i0,
-      i1,
-      i,
-      value0;
-
-  if (reduce == null) reduce = pair;
-
-  for (i0 = i = 0; i0 < n0; ++i0) {
-    for (value0 = values0[i0], i1 = 0; i1 < n1; ++i1, ++i) {
-      values[i] = reduce(value0, values1[i1]);
-    }
-  }
-
-  return values;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/descending.js
-/* harmony default export */ var descending = (function(a, b) {
-  return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/number.js
-/* harmony default export */ var src_number = (function(x) {
-  return x === null ? NaN : +x;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/variance.js
-
-
-/* harmony default export */ var variance = (function(values, valueof) {
-  var n = values.length,
-      m = 0,
-      i = -1,
-      mean = 0,
-      value,
-      delta,
-      sum = 0;
-
-  if (valueof == null) {
-    while (++i < n) {
-      if (!isNaN(value = src_number(values[i]))) {
-        delta = value - mean;
-        mean += delta / ++m;
-        sum += delta * (value - mean);
-      }
-    }
-  }
-
-  else {
-    while (++i < n) {
-      if (!isNaN(value = src_number(valueof(values[i], i, values)))) {
-        delta = value - mean;
-        mean += delta / ++m;
-        sum += delta * (value - mean);
-      }
-    }
-  }
-
-  if (m > 1) return sum / (m - 1);
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/deviation.js
-
-
-/* harmony default export */ var deviation = (function(array, f) {
-  var v = variance(array, f);
-  return v ? Math.sqrt(v) : v;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/extent.js
-/* harmony default export */ var src_extent = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      min,
-      max;
-
-  if (valueof == null) {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = values[i]) != null && value >= value) {
-        min = max = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = values[i]) != null) {
-            if (min > value) min = value;
-            if (max < value) max = value;
-          }
-        }
-      }
-    }
-  }
-
-  else {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = valueof(values[i], i, values)) != null && value >= value) {
-        min = max = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = valueof(values[i], i, values)) != null) {
-            if (min > value) min = value;
-            if (max < value) max = value;
-          }
-        }
-      }
-    }
-  }
-
-  return [min, max];
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/array.js
-var array_array = Array.prototype;
-
-var slice = array_array.slice;
-var map = array_array.map;
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/constant.js
-/* harmony default export */ var d3_array_src_constant = (function(x) {
-  return function() {
-    return x;
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/identity.js
-/* harmony default export */ var src_identity = (function(x) {
-  return x;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/range.js
-/* harmony default export */ var src_range = (function(start, stop, step) {
-  start = +start, stop = +stop, step = (n = arguments.length) < 2 ? (stop = start, start = 0, 1) : n < 3 ? 1 : +step;
-
-  var i = -1,
-      n = Math.max(0, Math.ceil((stop - start) / step)) | 0,
-      range = new Array(n);
-
-  while (++i < n) {
-    range[i] = start + i * step;
-  }
-
-  return range;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/ticks.js
-var e10 = Math.sqrt(50),
-    e5 = Math.sqrt(10),
-    e2 = Math.sqrt(2);
-
-/* harmony default export */ var ticks = (function(start, stop, count) {
-  var reverse,
-      i = -1,
-      n,
-      ticks,
-      step;
-
-  stop = +stop, start = +start, count = +count;
-  if (start === stop && count > 0) return [start];
-  if (reverse = stop < start) n = start, start = stop, stop = n;
-  if ((step = tickIncrement(start, stop, count)) === 0 || !isFinite(step)) return [];
-
-  if (step > 0) {
-    start = Math.ceil(start / step);
-    stop = Math.floor(stop / step);
-    ticks = new Array(n = Math.ceil(stop - start + 1));
-    while (++i < n) ticks[i] = (start + i) * step;
-  } else {
-    start = Math.floor(start * step);
-    stop = Math.ceil(stop * step);
-    ticks = new Array(n = Math.ceil(start - stop + 1));
-    while (++i < n) ticks[i] = (start - i) / step;
-  }
-
-  if (reverse) ticks.reverse();
-
-  return ticks;
-});
-
-function tickIncrement(start, stop, count) {
-  var step = (stop - start) / Math.max(0, count),
-      power = Math.floor(Math.log(step) / Math.LN10),
-      error = step / Math.pow(10, power);
-  return power >= 0
-      ? (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1) * Math.pow(10, power)
-      : -Math.pow(10, -power) / (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1);
-}
-
-function tickStep(start, stop, count) {
-  var step0 = Math.abs(stop - start) / Math.max(0, count),
-      step1 = Math.pow(10, Math.floor(Math.log(step0) / Math.LN10)),
-      error = step0 / step1;
-  if (error >= e10) step1 *= 10;
-  else if (error >= e5) step1 *= 5;
-  else if (error >= e2) step1 *= 2;
-  return stop < start ? -step1 : step1;
-}
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/threshold/sturges.js
-/* harmony default export */ var sturges = (function(values) {
-  return Math.ceil(Math.log(values.length) / Math.LN2) + 1;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/histogram.js
-
-
-
-
-
-
-
-
-
-/* harmony default export */ var src_histogram = (function() {
-  var value = src_identity,
-      domain = src_extent,
-      threshold = sturges;
-
-  function histogram(data) {
-    var i,
-        n = data.length,
-        x,
-        values = new Array(n);
-
-    for (i = 0; i < n; ++i) {
-      values[i] = value(data[i], i, data);
-    }
-
-    var xz = domain(values),
-        x0 = xz[0],
-        x1 = xz[1],
-        tz = threshold(values, x0, x1);
-
-    // Convert number of thresholds into uniform thresholds.
-    if (!Array.isArray(tz)) {
-      tz = tickStep(x0, x1, tz);
-      tz = src_range(Math.ceil(x0 / tz) * tz, x1, tz); // exclusive
-    }
-
-    // Remove any thresholds outside the domain.
-    var m = tz.length;
-    while (tz[0] <= x0) tz.shift(), --m;
-    while (tz[m - 1] > x1) tz.pop(), --m;
-
-    var bins = new Array(m + 1),
-        bin;
-
-    // Initialize bins.
-    for (i = 0; i <= m; ++i) {
-      bin = bins[i] = [];
-      bin.x0 = i > 0 ? tz[i - 1] : x0;
-      bin.x1 = i < m ? tz[i] : x1;
-    }
-
-    // Assign data to bins by value, ignoring any outside the domain.
-    for (i = 0; i < n; ++i) {
-      x = values[i];
-      if (x0 <= x && x <= x1) {
-        bins[bisect(tz, x, 0, m)].push(data[i]);
-      }
-    }
-
-    return bins;
-  }
-
-  histogram.value = function(_) {
-    return arguments.length ? (value = typeof _ === "function" ? _ : d3_array_src_constant(_), histogram) : value;
-  };
-
-  histogram.domain = function(_) {
-    return arguments.length ? (domain = typeof _ === "function" ? _ : d3_array_src_constant([_[0], _[1]]), histogram) : domain;
-  };
-
-  histogram.thresholds = function(_) {
-    return arguments.length ? (threshold = typeof _ === "function" ? _ : Array.isArray(_) ? d3_array_src_constant(slice.call(_)) : d3_array_src_constant(_), histogram) : threshold;
-  };
-
-  return histogram;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/quantile.js
-
-
-/* harmony default export */ var quantile = (function(values, p, valueof) {
-  if (valueof == null) valueof = src_number;
-  if (!(n = values.length)) return;
-  if ((p = +p) <= 0 || n < 2) return +valueof(values[0], 0, values);
-  if (p >= 1) return +valueof(values[n - 1], n - 1, values);
-  var n,
-      i = (n - 1) * p,
-      i0 = Math.floor(i),
-      value0 = +valueof(values[i0], i0, values),
-      value1 = +valueof(values[i0 + 1], i0 + 1, values);
-  return value0 + (value1 - value0) * (i - i0);
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/threshold/freedmanDiaconis.js
-
-
-
-
-
-/* harmony default export */ var freedmanDiaconis = (function(values, min, max) {
-  values = map.call(values, src_number).sort(src_ascending);
-  return Math.ceil((max - min) / (2 * (quantile(values, 0.75) - quantile(values, 0.25)) * Math.pow(values.length, -1 / 3)));
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/threshold/scott.js
-
-
-/* harmony default export */ var scott = (function(values, min, max) {
-  return Math.ceil((max - min) / (3.5 * deviation(values) * Math.pow(values.length, -1 / 3)));
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/max.js
-/* harmony default export */ var src_max = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      max;
-
-  if (valueof == null) {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = values[i]) != null && value >= value) {
-        max = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = values[i]) != null && value > max) {
-            max = value;
-          }
-        }
-      }
-    }
-  }
-
-  else {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = valueof(values[i], i, values)) != null && value >= value) {
-        max = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = valueof(values[i], i, values)) != null && value > max) {
-            max = value;
-          }
-        }
-      }
-    }
-  }
-
-  return max;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/mean.js
-
-
-/* harmony default export */ var src_mean = (function(values, valueof) {
-  var n = values.length,
-      m = n,
-      i = -1,
-      value,
-      sum = 0;
-
-  if (valueof == null) {
-    while (++i < n) {
-      if (!isNaN(value = src_number(values[i]))) sum += value;
-      else --m;
-    }
-  }
-
-  else {
-    while (++i < n) {
-      if (!isNaN(value = src_number(valueof(values[i], i, values)))) sum += value;
-      else --m;
-    }
-  }
-
-  if (m) return sum / m;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/median.js
-
-
-
-
-/* harmony default export */ var median = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      numbers = [];
-
-  if (valueof == null) {
-    while (++i < n) {
-      if (!isNaN(value = src_number(values[i]))) {
-        numbers.push(value);
-      }
-    }
-  }
-
-  else {
-    while (++i < n) {
-      if (!isNaN(value = src_number(valueof(values[i], i, values)))) {
-        numbers.push(value);
-      }
-    }
-  }
-
-  return quantile(numbers.sort(src_ascending), 0.5);
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/merge.js
-/* harmony default export */ var src_merge = (function(arrays) {
-  var n = arrays.length,
-      m,
-      i = -1,
-      j = 0,
-      merged,
-      array;
-
-  while (++i < n) j += arrays[i].length;
-  merged = new Array(j);
-
-  while (--n >= 0) {
-    array = arrays[n];
-    m = array.length;
-    while (--m >= 0) {
-      merged[--j] = array[m];
-    }
-  }
-
-  return merged;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/min.js
-/* harmony default export */ var src_min = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      min;
-
-  if (valueof == null) {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = values[i]) != null && value >= value) {
-        min = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = values[i]) != null && min > value) {
-            min = value;
-          }
-        }
-      }
-    }
-  }
-
-  else {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = valueof(values[i], i, values)) != null && value >= value) {
-        min = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = valueof(values[i], i, values)) != null && min > value) {
-            min = value;
-          }
-        }
-      }
-    }
-  }
-
-  return min;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/permute.js
-/* harmony default export */ var permute = (function(array, indexes) {
-  var i = indexes.length, permutes = new Array(i);
-  while (i--) permutes[i] = array[indexes[i]];
-  return permutes;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/scan.js
-
-
-/* harmony default export */ var scan = (function(values, compare) {
-  if (!(n = values.length)) return;
-  var n,
-      i = 0,
-      j = 0,
-      xi,
-      xj = values[j];
-
-  if (compare == null) compare = src_ascending;
-
-  while (++i < n) {
-    if (compare(xi = values[i], xj) < 0 || compare(xj, xj) !== 0) {
-      xj = xi, j = i;
-    }
-  }
-
-  if (compare(xj, xj) === 0) return j;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/shuffle.js
-/* harmony default export */ var shuffle = (function(array, i0, i1) {
-  var m = (i1 == null ? array.length : i1) - (i0 = i0 == null ? 0 : +i0),
-      t,
-      i;
-
-  while (m) {
-    i = Math.random() * m-- | 0;
-    t = array[m + i0];
-    array[m + i0] = array[i + i0];
-    array[i + i0] = t;
-  }
-
-  return array;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/sum.js
-/* harmony default export */ var src_sum = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      sum = 0;
-
-  if (valueof == null) {
-    while (++i < n) {
-      if (value = +values[i]) sum += value; // Note: zero and null are equivalent.
-    }
-  }
-
-  else {
-    while (++i < n) {
-      if (value = +valueof(values[i], i, values)) sum += value;
-    }
-  }
-
-  return sum;
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/transpose.js
-
-
-/* harmony default export */ var src_transpose = (function(matrix) {
-  if (!(n = matrix.length)) return [];
-  for (var i = -1, m = src_min(matrix, transpose_length), transpose = new Array(m); ++i < m;) {
-    for (var j = -1, n, row = transpose[i] = new Array(n); ++j < n;) {
-      row[j] = matrix[j][i];
-    }
-  }
-  return transpose;
-});
-
-function transpose_length(d) {
-  return d.length;
-}
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/zip.js
-
-
-/* harmony default export */ var zip = (function() {
-  return src_transpose(arguments);
-});
-
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-array/src/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// EXTERNAL MODULE: ./node_modules/d3-array/src/index.js + 31 modules
+var src = __webpack_require__(1);
 
 // CONCATENATED MODULE: ./node_modules/d3-collection/src/map.js
 var map_prefix = "$";
 
 function map_Map() {}
 
-map_Map.prototype = map_map.prototype = {
+map_Map.prototype = map.prototype = {
   constructor: map_Map,
   has: function(key) {
     return (map_prefix + key) in this;
@@ -24635,7 +23709,7 @@ map_Map.prototype = map_map.prototype = {
   }
 };
 
-function map_map(object, f) {
+function map(object, f) {
   var map = new map_Map;
 
   // Copy constructor.
@@ -24657,7 +23731,7 @@ function map_map(object, f) {
   return map;
 }
 
-/* harmony default export */ var src_map = (map_map);
+/* harmony default export */ var src_map = (map);
 
 // CONCATENATED MODULE: ./node_modules/d3-collection/src/nest.js
 
@@ -24804,7 +23878,7 @@ function set_set(object, f) {
 
 
 
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-path/src/path.js
+// CONCATENATED MODULE: ./node_modules/d3-shape/node_modules/d3-path/src/path.js
 var pi = Math.PI,
     tau = 2 * pi,
     epsilon = 1e-6,
@@ -24936,17 +24010,17 @@ Path.prototype = path_path.prototype = {
 
 /* harmony default export */ var src_path = (path_path);
 
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/array.js
-var array_slice = Array.prototype.slice;
+// CONCATENATED MODULE: ./node_modules/d3-shape/src/array.js
+var slice = Array.prototype.slice;
 
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/constant.js
+// CONCATENATED MODULE: ./node_modules/d3-shape/src/constant.js
 /* harmony default export */ var d3_shape_src_constant = (function(x) {
   return function constant() {
     return x;
   };
 });
 
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/point.js
+// CONCATENATED MODULE: ./node_modules/d3-shape/src/point.js
 function point_x(p) {
   return p[0];
 }
@@ -24955,12 +24029,12 @@ function point_y(p) {
   return p[1];
 }
 
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/pointRadial.js
+// CONCATENATED MODULE: ./node_modules/d3-shape/src/pointRadial.js
 /* harmony default export */ var pointRadial = (function(x, y) {
   return [(y = +y) * Math.cos(x -= Math.PI / 2), y * Math.sin(x)];
 });
 
-// CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/node_modules/d3-shape/src/link/index.js
+// CONCATENATED MODULE: ./node_modules/d3-shape/src/link/index.js
 
 
 
@@ -24983,7 +24057,7 @@ function link_link(curve) {
       context = null;
 
   function link() {
-    var buffer, argv = array_slice.call(arguments), s = source.apply(this, argv), t = target.apply(this, argv);
+    var buffer, argv = slice.call(arguments), s = source.apply(this, argv), t = target.apply(this, argv);
     if (!context) context = buffer = src_path();
     curve(context, +x.apply(this, (argv[0] = s, argv)), +y.apply(this, argv), +x.apply(this, (argv[0] = t, argv)), +y.apply(this, argv));
     if (buffer) return context = null, buffer + "" || null;
@@ -25047,7 +24121,7 @@ function linkRadial() {
 }
 
 // EXTERNAL MODULE: ./node_modules/elementary-circuits-directed-graph/johnson.js
-var johnson = __webpack_require__(46);
+var johnson = __webpack_require__(47);
 var johnson_default = /*#__PURE__*/__webpack_require__.n(johnson);
 
 // CONCATENATED MODULE: ./node_modules/@bitquery/d3-sankey-circular/dist/d3-sankey-circular.es.js
@@ -25078,7 +24152,7 @@ function justify(node, n) {
 
 // The depth of a node when the nodeAlign (align) is set to 'center'
 function center(node) {
-  return node.targetLinks.length ? node.depth : node.sourceLinks.length ? src_min(node.sourceLinks, targetDepth) - 1 : 0;
+  return node.targetLinks.length ? node.depth : node.sourceLinks.length ? Object(src["min"])(node.sourceLinks, targetDepth) - 1 : 0;
 }
 
 function fixed(node, n, minDepth) {
@@ -25384,7 +24458,7 @@ function d3_sankey_circular_es_sankeyCircular () {
   function computeNodeValues(graph) {
     graph.nodes.forEach(function (node) {
       node.partOfCycle = false;
-      node.value = Math.max(src_sum(node.sourceLinks, d3_sankey_circular_es_value), src_sum(node.targetLinks, d3_sankey_circular_es_value));
+      node.value = Math.max(Object(src["sum"])(node.sourceLinks, d3_sankey_circular_es_value), Object(src["sum"])(node.targetLinks, d3_sankey_circular_es_value));
       node.sourceLinks.forEach(function (link) {
         if (link.circular) {
           node.partOfCycle = true;
@@ -25406,7 +24480,7 @@ function d3_sankey_circular_es_sankeyCircular () {
         totalRightLinksWidth = 0,
         totalLeftLinksWidth = 0;
 
-    var maxColumn = src_max(graph.nodes, function (node) {
+    var maxColumn = Object(src["max"])(graph.nodes, function (node) {
       return node.column;
     });
 
@@ -25444,7 +24518,7 @@ function d3_sankey_circular_es_sankeyCircular () {
 
   // Update the x0, y0, x1 and y1 for the sankeyCircular, to allow space for any circular links
   function scaleSankeySize(graph, margin) {
-    var maxColumn = src_max(graph.nodes, function (node) {
+    var maxColumn = Object(src["max"])(graph.nodes, function (node) {
       return node.column;
     });
 
@@ -25513,7 +24587,7 @@ function d3_sankey_circular_es_sankeyCircular () {
   function computeNodeBreadths(graph, iterations, id) {
     var columns = src_nest().key(function (d) {
       return d.column;
-    }).sortKeys(src_ascending).entries(graph.nodes).map(function (d) {
+    }).sortKeys(src["ascending"]).entries(graph.nodes).map(function (d) {
       return d.values;
     });
 
@@ -25536,8 +24610,8 @@ function d3_sankey_circular_es_sankeyCircular () {
         py = padding;
       }
 
-      var ky = src_min(columns, function (nodes) {
-        return (y1 - y0 - (nodes.length - 1) * py) / src_sum(nodes, d3_sankey_circular_es_value);
+      var ky = Object(src["min"])(columns, function (nodes) {
+        return (y1 - y0 - (nodes.length - 1) * py) / Object(src["sum"])(nodes, d3_sankey_circular_es_value);
       });
 
       //calculate the widths of the links
@@ -25617,8 +24691,8 @@ function d3_sankey_circular_es_sankeyCircular () {
             } else {
               var avg = 0;
 
-              var avgTargetY = src_mean(node.sourceLinks, linkTargetCenter);
-              var avgSourceY = src_mean(node.targetLinks, linkSourceCenter);
+              var avgTargetY = Object(src["mean"])(node.sourceLinks, linkTargetCenter);
+              var avgSourceY = Object(src["mean"])(node.targetLinks, linkSourceCenter);
 
               if (avgTargetY && avgSourceY) {
                 avg = (avgTargetY + avgSourceY) / 2;
@@ -25912,7 +24986,7 @@ function addCircularPathData(graph, circularLinkGap, y1, id) {
   var buffer = 5;
   //var verticalMargin = 25
 
-  var minY = src_min(graph.links, function (link) {
+  var minY = Object(src["min"])(graph.links, function (link) {
     return link.source.y0;
   });
 
@@ -26528,10 +25602,10 @@ function fillHeight(graph, y0, y1) {
   });
 
   if (top == false || bottom == false) {
-    var minY0 = src_min(nodes, function (node) {
+    var minY0 = Object(src["min"])(nodes, function (node) {
       return node.y0;
     });
-    var maxY1 = src_max(nodes, function (node) {
+    var maxY1 = Object(src["max"])(nodes, function (node) {
       return node.y1;
     });
     var currentHeight = maxY1 - minY0;
@@ -26555,7 +25629,7 @@ function fillHeight(graph, y0, y1) {
 
 
 // EXTERNAL MODULE: ./node_modules/d3-path-arrows/dist/index.js
-var dist = __webpack_require__(47);
+var dist = __webpack_require__(48);
 
 // CONCATENATED MODULE: ./src/util/uid.js
 var count = 0;
@@ -26572,7 +25646,7 @@ Id.prototype.toString = function () {
   return 'url(' + this.href + ')';
 };
 // EXTERNAL MODULE: ./node_modules/regenerator-runtime/runtime.js
-var runtime = __webpack_require__(2);
+var runtime = __webpack_require__(3);
 var runtime_default = /*#__PURE__*/__webpack_require__.n(runtime);
 
 // CONCATENATED MODULE: ./src/reactComponents/sankeyRenderer.js
@@ -26582,7 +25656,7 @@ function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread n
 
 function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
@@ -27203,7 +26277,1027 @@ window.sankeyRenderer = sankeyRenderer;
 
 /***/ }),
 
-/***/ 96:
+/***/ 5:
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*! @preserve
+ * numeral.js
+ * version : 2.0.6
+ * author : Adam Draper
+ * license : MIT
+ * http://adamwdraper.github.com/Numeral-js/
+ */
+
+(function (global, factory) {
+    if (true) {
+        !(__WEBPACK_AMD_DEFINE_FACTORY__ = (factory),
+				__WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ?
+				(__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) :
+				__WEBPACK_AMD_DEFINE_FACTORY__),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+    } else {}
+}(this, function () {
+    /************************************
+        Variables
+    ************************************/
+
+    var numeral,
+        _,
+        VERSION = '2.0.6',
+        formats = {},
+        locales = {},
+        defaults = {
+            currentLocale: 'en',
+            zeroFormat: null,
+            nullFormat: null,
+            defaultFormat: '0,0',
+            scalePercentBy100: true
+        },
+        options = {
+            currentLocale: defaults.currentLocale,
+            zeroFormat: defaults.zeroFormat,
+            nullFormat: defaults.nullFormat,
+            defaultFormat: defaults.defaultFormat,
+            scalePercentBy100: defaults.scalePercentBy100
+        };
+
+
+    /************************************
+        Constructors
+    ************************************/
+
+    // Numeral prototype object
+    function Numeral(input, number) {
+        this._input = input;
+
+        this._value = number;
+    }
+
+    numeral = function(input) {
+        var value,
+            kind,
+            unformatFunction,
+            regexp;
+
+        if (numeral.isNumeral(input)) {
+            value = input.value();
+        } else if (input === 0 || typeof input === 'undefined') {
+            value = 0;
+        } else if (input === null || _.isNaN(input)) {
+            value = null;
+        } else if (typeof input === 'string') {
+            if (options.zeroFormat && input === options.zeroFormat) {
+                value = 0;
+            } else if (options.nullFormat && input === options.nullFormat || !input.replace(/[^0-9]+/g, '').length) {
+                value = null;
+            } else {
+                for (kind in formats) {
+                    regexp = typeof formats[kind].regexps.unformat === 'function' ? formats[kind].regexps.unformat() : formats[kind].regexps.unformat;
+
+                    if (regexp && input.match(regexp)) {
+                        unformatFunction = formats[kind].unformat;
+
+                        break;
+                    }
+                }
+
+                unformatFunction = unformatFunction || numeral._.stringToNumber;
+
+                value = unformatFunction(input);
+            }
+        } else {
+            value = Number(input)|| null;
+        }
+
+        return new Numeral(input, value);
+    };
+
+    // version number
+    numeral.version = VERSION;
+
+    // compare numeral object
+    numeral.isNumeral = function(obj) {
+        return obj instanceof Numeral;
+    };
+
+    // helper functions
+    numeral._ = _ = {
+        // formats numbers separators, decimals places, signs, abbreviations
+        numberToFormat: function(value, format, roundingFunction) {
+            var locale = locales[numeral.options.currentLocale],
+                negP = false,
+                optDec = false,
+                leadingCount = 0,
+                abbr = '',
+                trillion = 1000000000000,
+                billion = 1000000000,
+                million = 1000000,
+                thousand = 1000,
+                decimal = '',
+                neg = false,
+                abbrForce, // force abbreviation
+                abs,
+                min,
+                max,
+                power,
+                int,
+                precision,
+                signed,
+                thousands,
+                output;
+
+            // make sure we never format a null value
+            value = value || 0;
+
+            abs = Math.abs(value);
+
+            // see if we should use parentheses for negative number or if we should prefix with a sign
+            // if both are present we default to parentheses
+            if (numeral._.includes(format, '(')) {
+                negP = true;
+                format = format.replace(/[\(|\)]/g, '');
+            } else if (numeral._.includes(format, '+') || numeral._.includes(format, '-')) {
+                signed = numeral._.includes(format, '+') ? format.indexOf('+') : value < 0 ? format.indexOf('-') : -1;
+                format = format.replace(/[\+|\-]/g, '');
+            }
+
+            // see if abbreviation is wanted
+            if (numeral._.includes(format, 'a')) {
+                abbrForce = format.match(/a(k|m|b|t)?/);
+
+                abbrForce = abbrForce ? abbrForce[1] : false;
+
+                // check for space before abbreviation
+                if (numeral._.includes(format, ' a')) {
+                    abbr = ' ';
+                }
+
+                format = format.replace(new RegExp(abbr + 'a[kmbt]?'), '');
+
+                if (abs >= trillion && !abbrForce || abbrForce === 't') {
+                    // trillion
+                    abbr += locale.abbreviations.trillion;
+                    value = value / trillion;
+                } else if (abs < trillion && abs >= billion && !abbrForce || abbrForce === 'b') {
+                    // billion
+                    abbr += locale.abbreviations.billion;
+                    value = value / billion;
+                } else if (abs < billion && abs >= million && !abbrForce || abbrForce === 'm') {
+                    // million
+                    abbr += locale.abbreviations.million;
+                    value = value / million;
+                } else if (abs < million && abs >= thousand && !abbrForce || abbrForce === 'k') {
+                    // thousand
+                    abbr += locale.abbreviations.thousand;
+                    value = value / thousand;
+                }
+            }
+
+            // check for optional decimals
+            if (numeral._.includes(format, '[.]')) {
+                optDec = true;
+                format = format.replace('[.]', '.');
+            }
+
+            // break number and format
+            int = value.toString().split('.')[0];
+            precision = format.split('.')[1];
+            thousands = format.indexOf(',');
+            leadingCount = (format.split('.')[0].split(',')[0].match(/0/g) || []).length;
+
+            if (precision) {
+                if (numeral._.includes(precision, '[')) {
+                    precision = precision.replace(']', '');
+                    precision = precision.split('[');
+                    decimal = numeral._.toFixed(value, (precision[0].length + precision[1].length), roundingFunction, precision[1].length);
+                } else {
+                    decimal = numeral._.toFixed(value, precision.length, roundingFunction);
+                }
+
+                int = decimal.split('.')[0];
+
+                if (numeral._.includes(decimal, '.')) {
+                    decimal = locale.delimiters.decimal + decimal.split('.')[1];
+                } else {
+                    decimal = '';
+                }
+
+                if (optDec && Number(decimal.slice(1)) === 0) {
+                    decimal = '';
+                }
+            } else {
+                int = numeral._.toFixed(value, 0, roundingFunction);
+            }
+
+            // check abbreviation again after rounding
+            if (abbr && !abbrForce && Number(int) >= 1000 && abbr !== locale.abbreviations.trillion) {
+                int = String(Number(int) / 1000);
+
+                switch (abbr) {
+                    case locale.abbreviations.thousand:
+                        abbr = locale.abbreviations.million;
+                        break;
+                    case locale.abbreviations.million:
+                        abbr = locale.abbreviations.billion;
+                        break;
+                    case locale.abbreviations.billion:
+                        abbr = locale.abbreviations.trillion;
+                        break;
+                }
+            }
+
+
+            // format number
+            if (numeral._.includes(int, '-')) {
+                int = int.slice(1);
+                neg = true;
+            }
+
+            if (int.length < leadingCount) {
+                for (var i = leadingCount - int.length; i > 0; i--) {
+                    int = '0' + int;
+                }
+            }
+
+            if (thousands > -1) {
+                int = int.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1' + locale.delimiters.thousands);
+            }
+
+            if (format.indexOf('.') === 0) {
+                int = '';
+            }
+
+            output = int + decimal + (abbr ? abbr : '');
+
+            if (negP) {
+                output = (negP && neg ? '(' : '') + output + (negP && neg ? ')' : '');
+            } else {
+                if (signed >= 0) {
+                    output = signed === 0 ? (neg ? '-' : '+') + output : output + (neg ? '-' : '+');
+                } else if (neg) {
+                    output = '-' + output;
+                }
+            }
+
+            return output;
+        },
+        // unformats numbers separators, decimals places, signs, abbreviations
+        stringToNumber: function(string) {
+            var locale = locales[options.currentLocale],
+                stringOriginal = string,
+                abbreviations = {
+                    thousand: 3,
+                    million: 6,
+                    billion: 9,
+                    trillion: 12
+                },
+                abbreviation,
+                value,
+                i,
+                regexp;
+
+            if (options.zeroFormat && string === options.zeroFormat) {
+                value = 0;
+            } else if (options.nullFormat && string === options.nullFormat || !string.replace(/[^0-9]+/g, '').length) {
+                value = null;
+            } else {
+                value = 1;
+
+                if (locale.delimiters.decimal !== '.') {
+                    string = string.replace(/\./g, '').replace(locale.delimiters.decimal, '.');
+                }
+
+                for (abbreviation in abbreviations) {
+                    regexp = new RegExp('[^a-zA-Z]' + locale.abbreviations[abbreviation] + '(?:\\)|(\\' + locale.currency.symbol + ')?(?:\\))?)?$');
+
+                    if (stringOriginal.match(regexp)) {
+                        value *= Math.pow(10, abbreviations[abbreviation]);
+                        break;
+                    }
+                }
+
+                // check for negative number
+                value *= (string.split('-').length + Math.min(string.split('(').length - 1, string.split(')').length - 1)) % 2 ? 1 : -1;
+
+                // remove non numbers
+                string = string.replace(/[^0-9\.]+/g, '');
+
+                value *= Number(string);
+            }
+
+            return value;
+        },
+        isNaN: function(value) {
+            return typeof value === 'number' && isNaN(value);
+        },
+        includes: function(string, search) {
+            return string.indexOf(search) !== -1;
+        },
+        insert: function(string, subString, start) {
+            return string.slice(0, start) + subString + string.slice(start);
+        },
+        reduce: function(array, callback /*, initialValue*/) {
+            if (this === null) {
+                throw new TypeError('Array.prototype.reduce called on null or undefined');
+            }
+
+            if (typeof callback !== 'function') {
+                throw new TypeError(callback + ' is not a function');
+            }
+
+            var t = Object(array),
+                len = t.length >>> 0,
+                k = 0,
+                value;
+
+            if (arguments.length === 3) {
+                value = arguments[2];
+            } else {
+                while (k < len && !(k in t)) {
+                    k++;
+                }
+
+                if (k >= len) {
+                    throw new TypeError('Reduce of empty array with no initial value');
+                }
+
+                value = t[k++];
+            }
+            for (; k < len; k++) {
+                if (k in t) {
+                    value = callback(value, t[k], k, t);
+                }
+            }
+            return value;
+        },
+        /**
+         * Computes the multiplier necessary to make x >= 1,
+         * effectively eliminating miscalculations caused by
+         * finite precision.
+         */
+        multiplier: function (x) {
+            var parts = x.toString().split('.');
+
+            return parts.length < 2 ? 1 : Math.pow(10, parts[1].length);
+        },
+        /**
+         * Given a variable number of arguments, returns the maximum
+         * multiplier that must be used to normalize an operation involving
+         * all of them.
+         */
+        correctionFactor: function () {
+            var args = Array.prototype.slice.call(arguments);
+
+            return args.reduce(function(accum, next) {
+                var mn = _.multiplier(next);
+                return accum > mn ? accum : mn;
+            }, 1);
+        },
+        /**
+         * Implementation of toFixed() that treats floats more like decimals
+         *
+         * Fixes binary rounding issues (eg. (0.615).toFixed(2) === '0.61') that present
+         * problems for accounting- and finance-related software.
+         */
+        toFixed: function(value, maxDecimals, roundingFunction, optionals) {
+            var splitValue = value.toString().split('.'),
+                minDecimals = maxDecimals - (optionals || 0),
+                boundedPrecision,
+                optionalsRegExp,
+                power,
+                output;
+
+            // Use the smallest precision value possible to avoid errors from floating point representation
+            if (splitValue.length === 2) {
+              boundedPrecision = Math.min(Math.max(splitValue[1].length, minDecimals), maxDecimals);
+            } else {
+              boundedPrecision = minDecimals;
+            }
+
+            power = Math.pow(10, boundedPrecision);
+
+            // Multiply up by precision, round accurately, then divide and use native toFixed():
+            output = (roundingFunction(value + 'e+' + boundedPrecision) / power).toFixed(boundedPrecision);
+
+            if (optionals > maxDecimals - boundedPrecision) {
+                optionalsRegExp = new RegExp('\\.?0{1,' + (optionals - (maxDecimals - boundedPrecision)) + '}$');
+                output = output.replace(optionalsRegExp, '');
+            }
+
+            return output;
+        }
+    };
+
+    // avaliable options
+    numeral.options = options;
+
+    // avaliable formats
+    numeral.formats = formats;
+
+    // avaliable formats
+    numeral.locales = locales;
+
+    // This function sets the current locale.  If
+    // no arguments are passed in, it will simply return the current global
+    // locale key.
+    numeral.locale = function(key) {
+        if (key) {
+            options.currentLocale = key.toLowerCase();
+        }
+
+        return options.currentLocale;
+    };
+
+    // This function provides access to the loaded locale data.  If
+    // no arguments are passed in, it will simply return the current
+    // global locale object.
+    numeral.localeData = function(key) {
+        if (!key) {
+            return locales[options.currentLocale];
+        }
+
+        key = key.toLowerCase();
+
+        if (!locales[key]) {
+            throw new Error('Unknown locale : ' + key);
+        }
+
+        return locales[key];
+    };
+
+    numeral.reset = function() {
+        for (var property in defaults) {
+            options[property] = defaults[property];
+        }
+    };
+
+    numeral.zeroFormat = function(format) {
+        options.zeroFormat = typeof(format) === 'string' ? format : null;
+    };
+
+    numeral.nullFormat = function (format) {
+        options.nullFormat = typeof(format) === 'string' ? format : null;
+    };
+
+    numeral.defaultFormat = function(format) {
+        options.defaultFormat = typeof(format) === 'string' ? format : '0.0';
+    };
+
+    numeral.register = function(type, name, format) {
+        name = name.toLowerCase();
+
+        if (this[type + 's'][name]) {
+            throw new TypeError(name + ' ' + type + ' already registered.');
+        }
+
+        this[type + 's'][name] = format;
+
+        return format;
+    };
+
+
+    numeral.validate = function(val, culture) {
+        var _decimalSep,
+            _thousandSep,
+            _currSymbol,
+            _valArray,
+            _abbrObj,
+            _thousandRegEx,
+            localeData,
+            temp;
+
+        //coerce val to string
+        if (typeof val !== 'string') {
+            val += '';
+
+            if (console.warn) {
+                console.warn('Numeral.js: Value is not string. It has been co-erced to: ', val);
+            }
+        }
+
+        //trim whitespaces from either sides
+        val = val.trim();
+
+        //if val is just digits return true
+        if (!!val.match(/^\d+$/)) {
+            return true;
+        }
+
+        //if val is empty return false
+        if (val === '') {
+            return false;
+        }
+
+        //get the decimal and thousands separator from numeral.localeData
+        try {
+            //check if the culture is understood by numeral. if not, default it to current locale
+            localeData = numeral.localeData(culture);
+        } catch (e) {
+            localeData = numeral.localeData(numeral.locale());
+        }
+
+        //setup the delimiters and currency symbol based on culture/locale
+        _currSymbol = localeData.currency.symbol;
+        _abbrObj = localeData.abbreviations;
+        _decimalSep = localeData.delimiters.decimal;
+        if (localeData.delimiters.thousands === '.') {
+            _thousandSep = '\\.';
+        } else {
+            _thousandSep = localeData.delimiters.thousands;
+        }
+
+        // validating currency symbol
+        temp = val.match(/^[^\d]+/);
+        if (temp !== null) {
+            val = val.substr(1);
+            if (temp[0] !== _currSymbol) {
+                return false;
+            }
+        }
+
+        //validating abbreviation symbol
+        temp = val.match(/[^\d]+$/);
+        if (temp !== null) {
+            val = val.slice(0, -1);
+            if (temp[0] !== _abbrObj.thousand && temp[0] !== _abbrObj.million && temp[0] !== _abbrObj.billion && temp[0] !== _abbrObj.trillion) {
+                return false;
+            }
+        }
+
+        _thousandRegEx = new RegExp(_thousandSep + '{2}');
+
+        if (!val.match(/[^\d.,]/g)) {
+            _valArray = val.split(_decimalSep);
+            if (_valArray.length > 2) {
+                return false;
+            } else {
+                if (_valArray.length < 2) {
+                    return ( !! _valArray[0].match(/^\d+.*\d$/) && !_valArray[0].match(_thousandRegEx));
+                } else {
+                    if (_valArray[0].length === 1) {
+                        return ( !! _valArray[0].match(/^\d+$/) && !_valArray[0].match(_thousandRegEx) && !! _valArray[1].match(/^\d+$/));
+                    } else {
+                        return ( !! _valArray[0].match(/^\d+.*\d$/) && !_valArray[0].match(_thousandRegEx) && !! _valArray[1].match(/^\d+$/));
+                    }
+                }
+            }
+        }
+
+        return false;
+    };
+
+
+    /************************************
+        Numeral Prototype
+    ************************************/
+
+    numeral.fn = Numeral.prototype = {
+        clone: function() {
+            return numeral(this);
+        },
+        format: function(inputString, roundingFunction) {
+            var value = this._value,
+                format = inputString || options.defaultFormat,
+                kind,
+                output,
+                formatFunction;
+
+            // make sure we have a roundingFunction
+            roundingFunction = roundingFunction || Math.round;
+
+            // format based on value
+            if (value === 0 && options.zeroFormat !== null) {
+                output = options.zeroFormat;
+            } else if (value === null && options.nullFormat !== null) {
+                output = options.nullFormat;
+            } else {
+                for (kind in formats) {
+                    if (format.match(formats[kind].regexps.format)) {
+                        formatFunction = formats[kind].format;
+
+                        break;
+                    }
+                }
+
+                formatFunction = formatFunction || numeral._.numberToFormat;
+
+                output = formatFunction(value, format, roundingFunction);
+            }
+
+            return output;
+        },
+        value: function() {
+            return this._value;
+        },
+        input: function() {
+            return this._input;
+        },
+        set: function(value) {
+            this._value = Number(value);
+
+            return this;
+        },
+        add: function(value) {
+            var corrFactor = _.correctionFactor.call(null, this._value, value);
+
+            function cback(accum, curr, currI, O) {
+                return accum + Math.round(corrFactor * curr);
+            }
+
+            this._value = _.reduce([this._value, value], cback, 0) / corrFactor;
+
+            return this;
+        },
+        subtract: function(value) {
+            var corrFactor = _.correctionFactor.call(null, this._value, value);
+
+            function cback(accum, curr, currI, O) {
+                return accum - Math.round(corrFactor * curr);
+            }
+
+            this._value = _.reduce([value], cback, Math.round(this._value * corrFactor)) / corrFactor;
+
+            return this;
+        },
+        multiply: function(value) {
+            function cback(accum, curr, currI, O) {
+                var corrFactor = _.correctionFactor(accum, curr);
+                return Math.round(accum * corrFactor) * Math.round(curr * corrFactor) / Math.round(corrFactor * corrFactor);
+            }
+
+            this._value = _.reduce([this._value, value], cback, 1);
+
+            return this;
+        },
+        divide: function(value) {
+            function cback(accum, curr, currI, O) {
+                var corrFactor = _.correctionFactor(accum, curr);
+                return Math.round(accum * corrFactor) / Math.round(curr * corrFactor);
+            }
+
+            this._value = _.reduce([this._value, value], cback);
+
+            return this;
+        },
+        difference: function(value) {
+            return Math.abs(numeral(this._value).subtract(value).value());
+        }
+    };
+
+    /************************************
+        Default Locale && Format
+    ************************************/
+
+    numeral.register('locale', 'en', {
+        delimiters: {
+            thousands: ',',
+            decimal: '.'
+        },
+        abbreviations: {
+            thousand: 'k',
+            million: 'm',
+            billion: 'b',
+            trillion: 't'
+        },
+        ordinal: function(number) {
+            var b = number % 10;
+            return (~~(number % 100 / 10) === 1) ? 'th' :
+                (b === 1) ? 'st' :
+                (b === 2) ? 'nd' :
+                (b === 3) ? 'rd' : 'th';
+        },
+        currency: {
+            symbol: '$'
+        }
+    });
+
+    
+
+(function() {
+        numeral.register('format', 'bps', {
+            regexps: {
+                format: /(BPS)/,
+                unformat: /(BPS)/
+            },
+            format: function(value, format, roundingFunction) {
+                var space = numeral._.includes(format, ' BPS') ? ' ' : '',
+                    output;
+
+                value = value * 10000;
+
+                // check for space before BPS
+                format = format.replace(/\s?BPS/, '');
+
+                output = numeral._.numberToFormat(value, format, roundingFunction);
+
+                if (numeral._.includes(output, ')')) {
+                    output = output.split('');
+
+                    output.splice(-1, 0, space + 'BPS');
+
+                    output = output.join('');
+                } else {
+                    output = output + space + 'BPS';
+                }
+
+                return output;
+            },
+            unformat: function(string) {
+                return +(numeral._.stringToNumber(string) * 0.0001).toFixed(15);
+            }
+        });
+})();
+
+
+(function() {
+        var decimal = {
+            base: 1000,
+            suffixes: ['B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
+        },
+        binary = {
+            base: 1024,
+            suffixes: ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB']
+        };
+
+    var allSuffixes =  decimal.suffixes.concat(binary.suffixes.filter(function (item) {
+            return decimal.suffixes.indexOf(item) < 0;
+        }));
+        var unformatRegex = allSuffixes.join('|');
+        // Allow support for BPS (http://www.investopedia.com/terms/b/basispoint.asp)
+        unformatRegex = '(' + unformatRegex.replace('B', 'B(?!PS)') + ')';
+
+    numeral.register('format', 'bytes', {
+        regexps: {
+            format: /([0\s]i?b)/,
+            unformat: new RegExp(unformatRegex)
+        },
+        format: function(value, format, roundingFunction) {
+            var output,
+                bytes = numeral._.includes(format, 'ib') ? binary : decimal,
+                suffix = numeral._.includes(format, ' b') || numeral._.includes(format, ' ib') ? ' ' : '',
+                power,
+                min,
+                max;
+
+            // check for space before
+            format = format.replace(/\s?i?b/, '');
+
+            for (power = 0; power <= bytes.suffixes.length; power++) {
+                min = Math.pow(bytes.base, power);
+                max = Math.pow(bytes.base, power + 1);
+
+                if (value === null || value === 0 || value >= min && value < max) {
+                    suffix += bytes.suffixes[power];
+
+                    if (min > 0) {
+                        value = value / min;
+                    }
+
+                    break;
+                }
+            }
+
+            output = numeral._.numberToFormat(value, format, roundingFunction);
+
+            return output + suffix;
+        },
+        unformat: function(string) {
+            var value = numeral._.stringToNumber(string),
+                power,
+                bytesMultiplier;
+
+            if (value) {
+                for (power = decimal.suffixes.length - 1; power >= 0; power--) {
+                    if (numeral._.includes(string, decimal.suffixes[power])) {
+                        bytesMultiplier = Math.pow(decimal.base, power);
+
+                        break;
+                    }
+
+                    if (numeral._.includes(string, binary.suffixes[power])) {
+                        bytesMultiplier = Math.pow(binary.base, power);
+
+                        break;
+                    }
+                }
+
+                value *= (bytesMultiplier || 1);
+            }
+
+            return value;
+        }
+    });
+})();
+
+
+(function() {
+        numeral.register('format', 'currency', {
+        regexps: {
+            format: /(\$)/
+        },
+        format: function(value, format, roundingFunction) {
+            var locale = numeral.locales[numeral.options.currentLocale],
+                symbols = {
+                    before: format.match(/^([\+|\-|\(|\s|\$]*)/)[0],
+                    after: format.match(/([\+|\-|\)|\s|\$]*)$/)[0]
+                },
+                output,
+                symbol,
+                i;
+
+            // strip format of spaces and $
+            format = format.replace(/\s?\$\s?/, '');
+
+            // format the number
+            output = numeral._.numberToFormat(value, format, roundingFunction);
+
+            // update the before and after based on value
+            if (value >= 0) {
+                symbols.before = symbols.before.replace(/[\-\(]/, '');
+                symbols.after = symbols.after.replace(/[\-\)]/, '');
+            } else if (value < 0 && (!numeral._.includes(symbols.before, '-') && !numeral._.includes(symbols.before, '('))) {
+                symbols.before = '-' + symbols.before;
+            }
+
+            // loop through each before symbol
+            for (i = 0; i < symbols.before.length; i++) {
+                symbol = symbols.before[i];
+
+                switch (symbol) {
+                    case '$':
+                        output = numeral._.insert(output, locale.currency.symbol, i);
+                        break;
+                    case ' ':
+                        output = numeral._.insert(output, ' ', i + locale.currency.symbol.length - 1);
+                        break;
+                }
+            }
+
+            // loop through each after symbol
+            for (i = symbols.after.length - 1; i >= 0; i--) {
+                symbol = symbols.after[i];
+
+                switch (symbol) {
+                    case '$':
+                        output = i === symbols.after.length - 1 ? output + locale.currency.symbol : numeral._.insert(output, locale.currency.symbol, -(symbols.after.length - (1 + i)));
+                        break;
+                    case ' ':
+                        output = i === symbols.after.length - 1 ? output + ' ' : numeral._.insert(output, ' ', -(symbols.after.length - (1 + i) + locale.currency.symbol.length - 1));
+                        break;
+                }
+            }
+
+
+            return output;
+        }
+    });
+})();
+
+
+(function() {
+        numeral.register('format', 'exponential', {
+        regexps: {
+            format: /(e\+|e-)/,
+            unformat: /(e\+|e-)/
+        },
+        format: function(value, format, roundingFunction) {
+            var output,
+                exponential = typeof value === 'number' && !numeral._.isNaN(value) ? value.toExponential() : '0e+0',
+                parts = exponential.split('e');
+
+            format = format.replace(/e[\+|\-]{1}0/, '');
+
+            output = numeral._.numberToFormat(Number(parts[0]), format, roundingFunction);
+
+            return output + 'e' + parts[1];
+        },
+        unformat: function(string) {
+            var parts = numeral._.includes(string, 'e+') ? string.split('e+') : string.split('e-'),
+                value = Number(parts[0]),
+                power = Number(parts[1]);
+
+            power = numeral._.includes(string, 'e-') ? power *= -1 : power;
+
+            function cback(accum, curr, currI, O) {
+                var corrFactor = numeral._.correctionFactor(accum, curr),
+                    num = (accum * corrFactor) * (curr * corrFactor) / (corrFactor * corrFactor);
+                return num;
+            }
+
+            return numeral._.reduce([value, Math.pow(10, power)], cback, 1);
+        }
+    });
+})();
+
+
+(function() {
+        numeral.register('format', 'ordinal', {
+        regexps: {
+            format: /(o)/
+        },
+        format: function(value, format, roundingFunction) {
+            var locale = numeral.locales[numeral.options.currentLocale],
+                output,
+                ordinal = numeral._.includes(format, ' o') ? ' ' : '';
+
+            // check for space before
+            format = format.replace(/\s?o/, '');
+
+            ordinal += locale.ordinal(value);
+
+            output = numeral._.numberToFormat(value, format, roundingFunction);
+
+            return output + ordinal;
+        }
+    });
+})();
+
+
+(function() {
+        numeral.register('format', 'percentage', {
+        regexps: {
+            format: /(%)/,
+            unformat: /(%)/
+        },
+        format: function(value, format, roundingFunction) {
+            var space = numeral._.includes(format, ' %') ? ' ' : '',
+                output;
+
+            if (numeral.options.scalePercentBy100) {
+                value = value * 100;
+            }
+
+            // check for space before %
+            format = format.replace(/\s?\%/, '');
+
+            output = numeral._.numberToFormat(value, format, roundingFunction);
+
+            if (numeral._.includes(output, ')')) {
+                output = output.split('');
+
+                output.splice(-1, 0, space + '%');
+
+                output = output.join('');
+            } else {
+                output = output + space + '%';
+            }
+
+            return output;
+        },
+        unformat: function(string) {
+            var number = numeral._.stringToNumber(string);
+            if (numeral.options.scalePercentBy100) {
+                return number * 0.01;
+            }
+            return number;
+        }
+    });
+})();
+
+
+(function() {
+        numeral.register('format', 'time', {
+        regexps: {
+            format: /(:)/,
+            unformat: /(:)/
+        },
+        format: function(value, format, roundingFunction) {
+            var hours = Math.floor(value / 60 / 60),
+                minutes = Math.floor((value - (hours * 60 * 60)) / 60),
+                seconds = Math.round(value - (hours * 60 * 60) - (minutes * 60));
+
+            return hours + ':' + (minutes < 10 ? '0' + minutes : minutes) + ':' + (seconds < 10 ? '0' + seconds : seconds);
+        },
+        unformat: function(string) {
+            var timeArray = string.split(':'),
+                seconds = 0;
+
+            // turn hours and minutes into seconds and add them all up
+            if (timeArray.length === 3) {
+                // hours
+                seconds = seconds + (Number(timeArray[0]) * 60 * 60);
+                // minutes
+                seconds = seconds + (Number(timeArray[1]) * 60);
+                // seconds
+                seconds = seconds + Number(timeArray[2]);
+            } else if (timeArray.length === 2) {
+                // minutes
+                seconds = seconds + (Number(timeArray[0]) * 60);
+                // seconds
+                seconds = seconds + Number(timeArray[1]);
+            }
+            return Number(seconds);
+        }
+    });
+})();
+
+return numeral;
+}));
+
+
+/***/ }),
+
+/***/ 97:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27325,7 +27419,7 @@ function stronglyConnectedComponents(adjList) {
 
 /***/ }),
 
-/***/ 97:
+/***/ 98:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27336,9 +27430,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = pathArrows;
 
-var _d3Selection = __webpack_require__(98);
+var _d3Selection = __webpack_require__(99);
 
-var _d3Array = __webpack_require__(99);
+var _d3Array = __webpack_require__(1);
 
 // Function that appends a path to selection that has sankey path data attached
 // The path is formatted as dash array, and triangle paths to create arrows along the path
@@ -27442,7 +27536,7 @@ function pathArrows() {
 
 /***/ }),
 
-/***/ 98:
+/***/ 99:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -28572,699 +28666,6 @@ Local.prototype = local.prototype = {
 });
 
 // CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-selection/src/index.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-
-/***/ 99:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-// ESM COMPAT FLAG
-__webpack_require__.r(__webpack_exports__);
-
-// EXPORTS
-__webpack_require__.d(__webpack_exports__, "bisect", function() { return /* reexport */ bisect; });
-__webpack_require__.d(__webpack_exports__, "bisectRight", function() { return /* reexport */ bisectRight; });
-__webpack_require__.d(__webpack_exports__, "bisectLeft", function() { return /* reexport */ bisectLeft; });
-__webpack_require__.d(__webpack_exports__, "ascending", function() { return /* reexport */ ascending; });
-__webpack_require__.d(__webpack_exports__, "bisector", function() { return /* reexport */ bisector; });
-__webpack_require__.d(__webpack_exports__, "cross", function() { return /* reexport */ cross; });
-__webpack_require__.d(__webpack_exports__, "descending", function() { return /* reexport */ descending; });
-__webpack_require__.d(__webpack_exports__, "deviation", function() { return /* reexport */ deviation; });
-__webpack_require__.d(__webpack_exports__, "extent", function() { return /* reexport */ extent; });
-__webpack_require__.d(__webpack_exports__, "histogram", function() { return /* reexport */ src_histogram; });
-__webpack_require__.d(__webpack_exports__, "thresholdFreedmanDiaconis", function() { return /* reexport */ freedmanDiaconis; });
-__webpack_require__.d(__webpack_exports__, "thresholdScott", function() { return /* reexport */ scott; });
-__webpack_require__.d(__webpack_exports__, "thresholdSturges", function() { return /* reexport */ sturges; });
-__webpack_require__.d(__webpack_exports__, "max", function() { return /* reexport */ src_max; });
-__webpack_require__.d(__webpack_exports__, "mean", function() { return /* reexport */ src_mean; });
-__webpack_require__.d(__webpack_exports__, "median", function() { return /* reexport */ median; });
-__webpack_require__.d(__webpack_exports__, "merge", function() { return /* reexport */ merge; });
-__webpack_require__.d(__webpack_exports__, "min", function() { return /* reexport */ src_min; });
-__webpack_require__.d(__webpack_exports__, "pairs", function() { return /* reexport */ pairs; });
-__webpack_require__.d(__webpack_exports__, "permute", function() { return /* reexport */ permute; });
-__webpack_require__.d(__webpack_exports__, "quantile", function() { return /* reexport */ quantile; });
-__webpack_require__.d(__webpack_exports__, "range", function() { return /* reexport */ range; });
-__webpack_require__.d(__webpack_exports__, "scan", function() { return /* reexport */ scan; });
-__webpack_require__.d(__webpack_exports__, "shuffle", function() { return /* reexport */ shuffle; });
-__webpack_require__.d(__webpack_exports__, "sum", function() { return /* reexport */ src_sum; });
-__webpack_require__.d(__webpack_exports__, "ticks", function() { return /* reexport */ ticks; });
-__webpack_require__.d(__webpack_exports__, "tickIncrement", function() { return /* reexport */ tickIncrement; });
-__webpack_require__.d(__webpack_exports__, "tickStep", function() { return /* reexport */ tickStep; });
-__webpack_require__.d(__webpack_exports__, "transpose", function() { return /* reexport */ src_transpose; });
-__webpack_require__.d(__webpack_exports__, "variance", function() { return /* reexport */ variance; });
-__webpack_require__.d(__webpack_exports__, "zip", function() { return /* reexport */ zip; });
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/ascending.js
-/* harmony default export */ var ascending = (function(a, b) {
-  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/bisector.js
-
-
-/* harmony default export */ var bisector = (function(compare) {
-  if (compare.length === 1) compare = ascendingComparator(compare);
-  return {
-    left: function(a, x, lo, hi) {
-      if (lo == null) lo = 0;
-      if (hi == null) hi = a.length;
-      while (lo < hi) {
-        var mid = lo + hi >>> 1;
-        if (compare(a[mid], x) < 0) lo = mid + 1;
-        else hi = mid;
-      }
-      return lo;
-    },
-    right: function(a, x, lo, hi) {
-      if (lo == null) lo = 0;
-      if (hi == null) hi = a.length;
-      while (lo < hi) {
-        var mid = lo + hi >>> 1;
-        if (compare(a[mid], x) > 0) hi = mid;
-        else lo = mid + 1;
-      }
-      return lo;
-    }
-  };
-});
-
-function ascendingComparator(f) {
-  return function(d, x) {
-    return ascending(f(d), x);
-  };
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/bisect.js
-
-
-
-var ascendingBisect = bisector(ascending);
-var bisectRight = ascendingBisect.right;
-var bisectLeft = ascendingBisect.left;
-/* harmony default export */ var bisect = (bisectRight);
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/pairs.js
-/* harmony default export */ var pairs = (function(array, f) {
-  if (f == null) f = pair;
-  var i = 0, n = array.length - 1, p = array[0], pairs = new Array(n < 0 ? 0 : n);
-  while (i < n) pairs[i] = f(p, p = array[++i]);
-  return pairs;
-});
-
-function pair(a, b) {
-  return [a, b];
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/cross.js
-
-
-/* harmony default export */ var cross = (function(values0, values1, reduce) {
-  var n0 = values0.length,
-      n1 = values1.length,
-      values = new Array(n0 * n1),
-      i0,
-      i1,
-      i,
-      value0;
-
-  if (reduce == null) reduce = pair;
-
-  for (i0 = i = 0; i0 < n0; ++i0) {
-    for (value0 = values0[i0], i1 = 0; i1 < n1; ++i1, ++i) {
-      values[i] = reduce(value0, values1[i1]);
-    }
-  }
-
-  return values;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/descending.js
-/* harmony default export */ var descending = (function(a, b) {
-  return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/number.js
-/* harmony default export */ var number = (function(x) {
-  return x === null ? NaN : +x;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/variance.js
-
-
-/* harmony default export */ var variance = (function(values, valueof) {
-  var n = values.length,
-      m = 0,
-      i = -1,
-      mean = 0,
-      value,
-      delta,
-      sum = 0;
-
-  if (valueof == null) {
-    while (++i < n) {
-      if (!isNaN(value = number(values[i]))) {
-        delta = value - mean;
-        mean += delta / ++m;
-        sum += delta * (value - mean);
-      }
-    }
-  }
-
-  else {
-    while (++i < n) {
-      if (!isNaN(value = number(valueof(values[i], i, values)))) {
-        delta = value - mean;
-        mean += delta / ++m;
-        sum += delta * (value - mean);
-      }
-    }
-  }
-
-  if (m > 1) return sum / (m - 1);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/deviation.js
-
-
-/* harmony default export */ var deviation = (function(array, f) {
-  var v = variance(array, f);
-  return v ? Math.sqrt(v) : v;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/extent.js
-/* harmony default export */ var extent = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      min,
-      max;
-
-  if (valueof == null) {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = values[i]) != null && value >= value) {
-        min = max = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = values[i]) != null) {
-            if (min > value) min = value;
-            if (max < value) max = value;
-          }
-        }
-      }
-    }
-  }
-
-  else {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = valueof(values[i], i, values)) != null && value >= value) {
-        min = max = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = valueof(values[i], i, values)) != null) {
-            if (min > value) min = value;
-            if (max < value) max = value;
-          }
-        }
-      }
-    }
-  }
-
-  return [min, max];
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/array.js
-var array_array = Array.prototype;
-
-var slice = array_array.slice;
-var map = array_array.map;
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/constant.js
-/* harmony default export */ var constant = (function(x) {
-  return function() {
-    return x;
-  };
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/identity.js
-/* harmony default export */ var identity = (function(x) {
-  return x;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/range.js
-/* harmony default export */ var range = (function(start, stop, step) {
-  start = +start, stop = +stop, step = (n = arguments.length) < 2 ? (stop = start, start = 0, 1) : n < 3 ? 1 : +step;
-
-  var i = -1,
-      n = Math.max(0, Math.ceil((stop - start) / step)) | 0,
-      range = new Array(n);
-
-  while (++i < n) {
-    range[i] = start + i * step;
-  }
-
-  return range;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/ticks.js
-var e10 = Math.sqrt(50),
-    e5 = Math.sqrt(10),
-    e2 = Math.sqrt(2);
-
-/* harmony default export */ var ticks = (function(start, stop, count) {
-  var reverse,
-      i = -1,
-      n,
-      ticks,
-      step;
-
-  stop = +stop, start = +start, count = +count;
-  if (start === stop && count > 0) return [start];
-  if (reverse = stop < start) n = start, start = stop, stop = n;
-  if ((step = tickIncrement(start, stop, count)) === 0 || !isFinite(step)) return [];
-
-  if (step > 0) {
-    start = Math.ceil(start / step);
-    stop = Math.floor(stop / step);
-    ticks = new Array(n = Math.ceil(stop - start + 1));
-    while (++i < n) ticks[i] = (start + i) * step;
-  } else {
-    start = Math.floor(start * step);
-    stop = Math.ceil(stop * step);
-    ticks = new Array(n = Math.ceil(start - stop + 1));
-    while (++i < n) ticks[i] = (start - i) / step;
-  }
-
-  if (reverse) ticks.reverse();
-
-  return ticks;
-});
-
-function tickIncrement(start, stop, count) {
-  var step = (stop - start) / Math.max(0, count),
-      power = Math.floor(Math.log(step) / Math.LN10),
-      error = step / Math.pow(10, power);
-  return power >= 0
-      ? (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1) * Math.pow(10, power)
-      : -Math.pow(10, -power) / (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1);
-}
-
-function tickStep(start, stop, count) {
-  var step0 = Math.abs(stop - start) / Math.max(0, count),
-      step1 = Math.pow(10, Math.floor(Math.log(step0) / Math.LN10)),
-      error = step0 / step1;
-  if (error >= e10) step1 *= 10;
-  else if (error >= e5) step1 *= 5;
-  else if (error >= e2) step1 *= 2;
-  return stop < start ? -step1 : step1;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/threshold/sturges.js
-/* harmony default export */ var sturges = (function(values) {
-  return Math.ceil(Math.log(values.length) / Math.LN2) + 1;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/histogram.js
-
-
-
-
-
-
-
-
-
-/* harmony default export */ var src_histogram = (function() {
-  var value = identity,
-      domain = extent,
-      threshold = sturges;
-
-  function histogram(data) {
-    var i,
-        n = data.length,
-        x,
-        values = new Array(n);
-
-    for (i = 0; i < n; ++i) {
-      values[i] = value(data[i], i, data);
-    }
-
-    var xz = domain(values),
-        x0 = xz[0],
-        x1 = xz[1],
-        tz = threshold(values, x0, x1);
-
-    // Convert number of thresholds into uniform thresholds.
-    if (!Array.isArray(tz)) {
-      tz = tickStep(x0, x1, tz);
-      tz = range(Math.ceil(x0 / tz) * tz, x1, tz); // exclusive
-    }
-
-    // Remove any thresholds outside the domain.
-    var m = tz.length;
-    while (tz[0] <= x0) tz.shift(), --m;
-    while (tz[m - 1] > x1) tz.pop(), --m;
-
-    var bins = new Array(m + 1),
-        bin;
-
-    // Initialize bins.
-    for (i = 0; i <= m; ++i) {
-      bin = bins[i] = [];
-      bin.x0 = i > 0 ? tz[i - 1] : x0;
-      bin.x1 = i < m ? tz[i] : x1;
-    }
-
-    // Assign data to bins by value, ignoring any outside the domain.
-    for (i = 0; i < n; ++i) {
-      x = values[i];
-      if (x0 <= x && x <= x1) {
-        bins[bisect(tz, x, 0, m)].push(data[i]);
-      }
-    }
-
-    return bins;
-  }
-
-  histogram.value = function(_) {
-    return arguments.length ? (value = typeof _ === "function" ? _ : constant(_), histogram) : value;
-  };
-
-  histogram.domain = function(_) {
-    return arguments.length ? (domain = typeof _ === "function" ? _ : constant([_[0], _[1]]), histogram) : domain;
-  };
-
-  histogram.thresholds = function(_) {
-    return arguments.length ? (threshold = typeof _ === "function" ? _ : Array.isArray(_) ? constant(slice.call(_)) : constant(_), histogram) : threshold;
-  };
-
-  return histogram;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/quantile.js
-
-
-/* harmony default export */ var quantile = (function(values, p, valueof) {
-  if (valueof == null) valueof = number;
-  if (!(n = values.length)) return;
-  if ((p = +p) <= 0 || n < 2) return +valueof(values[0], 0, values);
-  if (p >= 1) return +valueof(values[n - 1], n - 1, values);
-  var n,
-      i = (n - 1) * p,
-      i0 = Math.floor(i),
-      value0 = +valueof(values[i0], i0, values),
-      value1 = +valueof(values[i0 + 1], i0 + 1, values);
-  return value0 + (value1 - value0) * (i - i0);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/threshold/freedmanDiaconis.js
-
-
-
-
-
-/* harmony default export */ var freedmanDiaconis = (function(values, min, max) {
-  values = map.call(values, number).sort(ascending);
-  return Math.ceil((max - min) / (2 * (quantile(values, 0.75) - quantile(values, 0.25)) * Math.pow(values.length, -1 / 3)));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/threshold/scott.js
-
-
-/* harmony default export */ var scott = (function(values, min, max) {
-  return Math.ceil((max - min) / (3.5 * deviation(values) * Math.pow(values.length, -1 / 3)));
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/max.js
-/* harmony default export */ var src_max = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      max;
-
-  if (valueof == null) {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = values[i]) != null && value >= value) {
-        max = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = values[i]) != null && value > max) {
-            max = value;
-          }
-        }
-      }
-    }
-  }
-
-  else {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = valueof(values[i], i, values)) != null && value >= value) {
-        max = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = valueof(values[i], i, values)) != null && value > max) {
-            max = value;
-          }
-        }
-      }
-    }
-  }
-
-  return max;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/mean.js
-
-
-/* harmony default export */ var src_mean = (function(values, valueof) {
-  var n = values.length,
-      m = n,
-      i = -1,
-      value,
-      sum = 0;
-
-  if (valueof == null) {
-    while (++i < n) {
-      if (!isNaN(value = number(values[i]))) sum += value;
-      else --m;
-    }
-  }
-
-  else {
-    while (++i < n) {
-      if (!isNaN(value = number(valueof(values[i], i, values)))) sum += value;
-      else --m;
-    }
-  }
-
-  if (m) return sum / m;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/median.js
-
-
-
-
-/* harmony default export */ var median = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      numbers = [];
-
-  if (valueof == null) {
-    while (++i < n) {
-      if (!isNaN(value = number(values[i]))) {
-        numbers.push(value);
-      }
-    }
-  }
-
-  else {
-    while (++i < n) {
-      if (!isNaN(value = number(valueof(values[i], i, values)))) {
-        numbers.push(value);
-      }
-    }
-  }
-
-  return quantile(numbers.sort(ascending), 0.5);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/merge.js
-/* harmony default export */ var merge = (function(arrays) {
-  var n = arrays.length,
-      m,
-      i = -1,
-      j = 0,
-      merged,
-      array;
-
-  while (++i < n) j += arrays[i].length;
-  merged = new Array(j);
-
-  while (--n >= 0) {
-    array = arrays[n];
-    m = array.length;
-    while (--m >= 0) {
-      merged[--j] = array[m];
-    }
-  }
-
-  return merged;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/min.js
-/* harmony default export */ var src_min = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      min;
-
-  if (valueof == null) {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = values[i]) != null && value >= value) {
-        min = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = values[i]) != null && min > value) {
-            min = value;
-          }
-        }
-      }
-    }
-  }
-
-  else {
-    while (++i < n) { // Find the first comparable value.
-      if ((value = valueof(values[i], i, values)) != null && value >= value) {
-        min = value;
-        while (++i < n) { // Compare the remaining values.
-          if ((value = valueof(values[i], i, values)) != null && min > value) {
-            min = value;
-          }
-        }
-      }
-    }
-  }
-
-  return min;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/permute.js
-/* harmony default export */ var permute = (function(array, indexes) {
-  var i = indexes.length, permutes = new Array(i);
-  while (i--) permutes[i] = array[indexes[i]];
-  return permutes;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/scan.js
-
-
-/* harmony default export */ var scan = (function(values, compare) {
-  if (!(n = values.length)) return;
-  var n,
-      i = 0,
-      j = 0,
-      xi,
-      xj = values[j];
-
-  if (compare == null) compare = ascending;
-
-  while (++i < n) {
-    if (compare(xi = values[i], xj) < 0 || compare(xj, xj) !== 0) {
-      xj = xi, j = i;
-    }
-  }
-
-  if (compare(xj, xj) === 0) return j;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/shuffle.js
-/* harmony default export */ var shuffle = (function(array, i0, i1) {
-  var m = (i1 == null ? array.length : i1) - (i0 = i0 == null ? 0 : +i0),
-      t,
-      i;
-
-  while (m) {
-    i = Math.random() * m-- | 0;
-    t = array[m + i0];
-    array[m + i0] = array[i + i0];
-    array[i + i0] = t;
-  }
-
-  return array;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/sum.js
-/* harmony default export */ var src_sum = (function(values, valueof) {
-  var n = values.length,
-      i = -1,
-      value,
-      sum = 0;
-
-  if (valueof == null) {
-    while (++i < n) {
-      if (value = +values[i]) sum += value; // Note: zero and null are equivalent.
-    }
-  }
-
-  else {
-    while (++i < n) {
-      if (value = +valueof(values[i], i, values)) sum += value;
-    }
-  }
-
-  return sum;
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/transpose.js
-
-
-/* harmony default export */ var src_transpose = (function(matrix) {
-  if (!(n = matrix.length)) return [];
-  for (var i = -1, m = src_min(matrix, transpose_length), transpose = new Array(m); ++i < m;) {
-    for (var j = -1, n, row = transpose[i] = new Array(n); ++j < n;) {
-      row[j] = matrix[j][i];
-    }
-  }
-  return transpose;
-});
-
-function transpose_length(d) {
-  return d.length;
-}
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/zip.js
-
-
-/* harmony default export */ var zip = (function() {
-  return src_transpose(arguments);
-});
-
-// CONCATENATED MODULE: ./node_modules/d3-path-arrows/node_modules/d3-array/src/index.js
-
-
-
-
-
-
-
-
-
 
 
 

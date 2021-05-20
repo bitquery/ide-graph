@@ -42,10 +42,6 @@ export default async function graphRenderer(dataSource, options, selector) {
 		values.outbound[0].currency.symbol)
   
 	jqContainer.addClass('graph')
-	if (!jqContainer.parent().hasClass('wrapper')) {
-	  jqContainer.wrap('<div class="wrapper" style="width:100%; height:100%;">')
-	}
-	const jqWrapper = jqContainer.parent('.wrapper')
   
 	// a trick for the icons in the graph to be loaded
 	jqContainer.append(
@@ -481,7 +477,6 @@ export default async function graphRenderer(dataSource, options, selector) {
 	}
   
 	g.initGraph = () => {
-	  jqWrapper.removeClass('initializing')
 	  g.setDataset(values)
   
 	  g.network = new Network(g.container, g.dataset, g.networkOptions)
