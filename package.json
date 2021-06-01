@@ -45,8 +45,8 @@
     "workbox-webpack-plugin": "^5.1.4"
   },
   "peerDependencies": {
-    "react": "^16.8.0",
-    "react-dom": "^16.8.0"
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "dependencies": {
     "@bitquery/d3-sankey-circular": "^0.35.0",
